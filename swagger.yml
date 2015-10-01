@@ -14,7 +14,9 @@ paths:
     get:
       summary: List all API Keys belonging to the authenticated user
       description: |
-        https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html
+        The API Keys feature allows customers to be able to generate an API Key 
+        credential which can be used for authentication with the SendGrid v3 Web 
+        API or the Mail API Endpoint
       tags:
         - APIKeys
       responses:
@@ -23,8 +25,39 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/APIKeys'
-              
+              $ref: '#/definitions/APIKeys'         
+  /groups:
+    get:
+      summary: Retrieve all suppression groups associated with the user
+      description: |
+        Groups are specific types of email you would like your recipients to be able 
+        to unsubscribe from or subscribe to. For example: Daily Newsletters, Invoices, 
+        System Alerts.
+      tags:
+        - ASMGroups
+      responses:
+        '200':
+          description: An array of suppression groups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ASMGroups'
+  
+  /groups/{group_id}:
+    get:
+      summary: Get information on a single suppression group.
+      parameters:
+        - name: group_id
+          in: path
+          description: ID of the suppression group
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: A single supression group
+          schema:
+            $ref: '#/definitions/ASMGroups' 
+
 definitions:
   APIKeys:
     type: object
@@ -35,4 +68,20 @@ definitions:
       api_key_id:
         type: string
         description: The unique API Key ID
+    title: result
+  ASMGroups:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique ID.
+      name:
+        type: string
+        description: The name of the suppression group
+      description:
+        type: string
+        description: A description of the suppression group
+      unsubscribes:
+        type: integer
+        description: The number of accounts unsubscribed from this group
     title: result
