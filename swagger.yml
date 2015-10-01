@@ -1,0 +1,38 @@
+swagger: '2.0'
+info:
+  title: SendGrid Web API
+  description: API access to SendGrid.com
+  version: 3.0.0
+host: api.sendgrid.com
+schemes:
+  - https
+basePath: /v3
+produces:
+  - application/json
+paths:
+  /api_keys:
+    get:
+      summary: List all API Keys belonging to the authenticated user
+      description: |
+        https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html
+      tags:
+        - APIKeys
+      responses:
+        '200':
+          description: An array of apikeys
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/APIKeys'
+              
+definitions:
+  APIKeys:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the API Key.
+      api_key_id:
+        type: string
+        description: The unique API Key ID
+    title: result
