@@ -2,15 +2,30 @@ swagger: '2.0'
 info:
   title: SendGrid Web API
   description: API access to SendGrid.com
-  version: 3.0.0
+  version: 0.0.1
+  contact:
+    name: "Elmer Thomas"
+    email: "elmer.thomas@sendgrid.com"
+    url: "https://www.sendgrid.com"
+  license:
+    name: "MIT"
+    url: "http://opensource.org/licenses/MIT"
 host: api.sendgrid.com
 schemes:
   - https
-basePath: /v3
+consumes:
+  - application/json
 produces:
   - application/json
+security:
+  - APIKey: []
+securityDefinitions:
+  APIKey:
+    type: apiKey
+    name: Authorization
+    in: header
 paths:
-  /api_keys:
+  /v3/api_keys:
     get:
       summary: List all API Keys belonging to the authenticated user
       description: |
@@ -23,10 +38,22 @@ paths:
         '200':
           description: An array of apikeys
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/APIKeys'         
-  /groups:
+            type: object
+            properties:
+              result:
+                type: array
+                items:
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the API Key.
+                    api_key_id:
+                      type: string
+                      description: The unique API Key ID  
+                  example:
+                    name: "A New Hope"   
+                    api_key_id: "xxxxxxxx" 
+  /v3/asm/groups:
     get:
       summary: Retrieve all suppression groups associated with the user
       description: |
@@ -39,11 +66,35 @@ paths:
         '200':
           description: An array of suppression groups
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ASMGroups'
+            type: object
+            properties:
+              result:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      description: Unique ID.
+                    name:
+                      type: string
+                      description: The name of the suppression group
+                    description:
+                      type: string
+                      description: A description of the suppression group
+                    unsubscribes:
+                      type: integer
+                      description: The number of accounts unsubscribed from this group
+                  example:
+                    id: 100
+                    name: Newsletters
+                    description: Our monthly newsletter
+                    unsubscribes: 400
+                    id: 101
+                    name: Alerts
+                    description: Emails triggered by user-defined rules.
+                    unsubscribes: 1
   
-  /groups/{group_id}:
+  /v3/asm/groups/{group_id}:
     get:
       summary: Get information on a single suppression group.
       parameters:
@@ -56,32 +107,136 @@ paths:
         '200':
           description: A single supression group
           schema:
-            $ref: '#/definitions/ASMGroups' 
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Unique ID.
+              name:
+                type: string
+                description: The name of the suppression group
+              description:
+                type: string
+                description: A description of the suppression group
+              unsubscribes:
+                type: integer
+                description: The number of accounts unsubscribed from this group
+            example:
+              id: 100
+              name: Newsletters
+              description: Our monthly newsletter
+              unsubscribes: 400
 
-definitions:
-  APIKeys:
-    type: object
-    properties:
-      name:
-        type: string
-        description: The name of the API Key.
-      api_key_id:
-        type: string
-        description: The unique API Key ID
-    title: result
-  ASMGroups:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: Unique ID.
-      name:
-        type: string
-        description: The name of the suppression group
-      description:
-        type: string
-        description: A description of the suppression group
-      unsubscribes:
-        type: integer
-        description: The number of accounts unsubscribed from this group
-    title: result
+  /v3/asm/groups/{group_id}/supressions:
+    get:
+      summary: Get suppressed addresses for a given group
+      parameters:
+        - name: group_id
+          in: path
+          description: ID of the suppression group
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: All suppressed addresses for a given group
+          schema:
+            type: object
+            properties:
+              recipient_emails:
+                type: array
+                items:
+                  type: string
+                  description: Array of comma separated suppressed email addresses
+    post:
+      summary: |
+        Add recipient addresses to the suppressions list for a given group. 
+        If the group has been deleted, this request will add the address to 
+        the global suppression.
+      parameters:
+        - name: group_id
+          in: path
+          description: ID of the suppression group
+          required: true
+          type: integer
+        - name: receipient_emails
+          in: body
+          description: Array of emails to be suppressed
+          schema:
+            type: object
+            properties:
+              recipient_emails:
+                type: array
+                items:
+                  type: string
+                  description: Comma separated email addresses to suppress
+      responses:
+        '201':
+          description: All suppressed addresses that you posted
+          schema:
+            type: object
+            properties:
+              recipient_emails:
+                type: array
+                items:
+                  type: string
+                  description: Comma separated email addresses you posted
+
+
+  /v3/asm/groups/supressions/{email_address}:
+    get:
+      summary: Get suppression groups associated with a given recipient address
+      parameters:
+        - name: email_address
+          in: path
+          description: Email address
+          required: true
+          type: string
+      responses:
+        '200':
+          description: All suppression groups associated with that email address
+          schema:
+            type: object
+            properties:
+              suppressions:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      description: ID of the suppression group
+                    name:
+                      type: string
+                      description: Name of the suppression group
+                    description:
+                      type: string
+                      description: Description of the suppression group
+                    suppressed:
+                      type: boolean
+                      description: Whether or not this email is suppressed within this group
+                  example:
+                    id: 1
+                    name: "Weekly Newsletter"
+                    description: "The weekly newsletter"
+                    suppressed: false
+                    id: 4
+                    name: "Special Offers"
+                    description: "Special offers and coupons"
+                    suppressed: false
+
+  /v3/asm/groups/{group_id}/supressions/{email_address}:                    
+    delete:
+      description: Delete a recipient email from the suppressions list for a group.
+      parameters:
+        - name: group_id
+          in: path
+          description: ID of the suppression group to remove the email from
+          required: true
+          type: integer
+        - name: email_address
+          in: path
+          description: Email address you want to remove from the suppression group
+          required: true
+          type: string
+      responses:
+        204:
+          description: Email deleted
