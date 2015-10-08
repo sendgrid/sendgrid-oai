@@ -17,16 +17,16 @@ consumes:
   - application/json
 produces:
   - application/json
-security:
-  - APIKey: []
 securityDefinitions:
-  APIKey:
+  Bearer:
     type: apiKey
     name: Authorization
     in: header
 paths:
   /v3/api_keys:
     get:
+      security:
+        - Bearer: []
       summary: List all API Keys belonging to the authenticated user
       description: |
         The API Keys feature allows customers to be able to generate an API Key 
@@ -55,6 +55,8 @@ paths:
                     api_key_id: "xxxxxxxx" 
   /v3/asm/groups:
     get:
+      security:
+        - Bearer: []
       summary: Retrieve all suppression groups associated with the user
       description: |
         Groups are specific types of email you would like your recipients to be able 
@@ -96,6 +98,8 @@ paths:
   
   /v3/asm/groups/{group_id}:
     get:
+      security:
+        - Bearer: []
       summary: Get information on a single suppression group.
       parameters:
         - name: group_id
@@ -129,6 +133,8 @@ paths:
 
   /v3/asm/groups/{group_id}/supressions:
     get:
+      security:
+        - Bearer: []
       summary: Get suppressed addresses for a given group
       parameters:
         - name: group_id
@@ -148,6 +154,8 @@ paths:
                   type: string
                   description: Array of comma separated suppressed email addresses
     post:
+      security:
+        - Bearer: []
       summary: |
         Add recipient addresses to the suppressions list for a given group. 
         If the group has been deleted, this request will add the address to 
@@ -184,6 +192,8 @@ paths:
 
   /v3/asm/groups/supressions/{email_address}:
     get:
+      security:
+        - Bearer: []
       summary: Get suppression groups associated with a given recipient address
       parameters:
         - name: email_address
@@ -225,6 +235,8 @@ paths:
 
   /v3/asm/groups/{group_id}/supressions/{email_address}:                    
     delete:
+      security:
+        - Bearer: []
       description: Delete a recipient email from the suppressions list for a group.
       parameters:
         - name: group_id
