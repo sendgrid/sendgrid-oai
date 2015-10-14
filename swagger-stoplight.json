@@ -1,0 +1,1802 @@
+{
+  "basePath": "/v3",
+  "definitions": {
+  },
+  "host": "https://api.sendgrid.com",
+  "info": {
+    "description": "",
+    "title": "V3 Public",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api_keys": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "result": [
+                  {
+                    "api_key_id": "gRYlutQnRziqr0bV9K-P4Q",
+                    "name": "feeee"
+                  },
+                  {
+                    "api_key_id": "rGiBpL3CT6q5_PPMqzCHOg",
+                    "name": "stoplight"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "properties": {
+                "result": {
+                  "items": {
+                    "properties": {
+                      "api_key_id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ],
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "",
+            "in": "formData",
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "api_key": "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",
+                "api_key_id": "gRYlutQnRziqr0bV9K-P4Q",
+                "name": "feeee"
+              }
+            },
+            "schema": {
+              "properties": {
+                "api_key": {
+                  "type": "string"
+                },
+                "api_key_id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      }
+    },
+    "/asm/groups": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": [
+                {
+                  "description": "bar",
+                  "id": 113,
+                  "is_default": false,
+                  "last_email_sent_at": null,
+                  "name": "foo",
+                  "unsubscribes": 0
+                },
+                {
+                  "description": "bar",
+                  "id": 114,
+                  "is_default": false,
+                  "last_email_sent_at": null,
+                  "name": "oiwenfoiwenfiowenf inowef owie",
+                  "unsubscribes": 0
+                },
+                {
+                  "description": "bar",
+                  "id": 115,
+                  "is_default": false,
+                  "last_email_sent_at": null,
+                  "name": "oiwenfoiwenfiowenf inowef owie",
+                  "unsubscribes": 0
+                },
+                {
+                  "description": "bar",
+                  "id": 116,
+                  "is_default": false,
+                  "last_email_sent_at": null,
+                  "name": "foo2",
+                  "unsubscribes": 0
+                },
+                {
+                  "description": "bar",
+                  "id": 117,
+                  "is_default": false,
+                  "last_email_sent_at": null,
+                  "name": "this is a long group name holy",
+                  "unsubscribes": 0
+                },
+                {
+                  "description": "bar",
+                  "id": 118,
+                  "is_default": false,
+                  "last_email_sent_at": null,
+                  "name": "this is a long group name holy",
+                  "unsubscribes": 0
+                },
+                {
+                  "description": "wfeef",
+                  "id": 121,
+                  "is_default": false,
+                  "last_email_sent_at": null,
+                  "name": "fwef",
+                  "unsubscribes": 0
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "number"
+                  },
+                  "is_default": {
+                    "type": "boolean"
+                  },
+                  "last_email_sent_at": {
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "unsubscribes": {
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ],
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "",
+            "in": "formData",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "is_default",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "description": "wfeef",
+                "id": 121,
+                "is_default": false,
+                "last_email_sent_at": null,
+                "name": "fwef"
+              }
+            },
+            "schema": {
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "number"
+                },
+                "is_default": {
+                  "type": "boolean"
+                },
+                "last_email_sent_at": {
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      }
+    },
+    "/asm/groups/{param1}": {
+      "delete": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "properties": {
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+        {
+          "description": "",
+          "in": "path",
+          "name": "param1",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/devices/stats": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "aggregated_by",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "start_date",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "end_date",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/ips": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/mail_settings": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "result": [
+                  {
+                    "description": "Address / domains that should never have email suppressed.",
+                    "enabled": false,
+                    "name": "address_whitelist",
+                    "title": "Address Whitelist"
+                  },
+                  {
+                    "description": "Automatically BCC an address for every e-mail sent.",
+                    "enabled": false,
+                    "name": "bcc",
+                    "title": "BCC"
+                  },
+                  {
+                    "description": "Allows you to automatically purge bounce records from SendGrid after a specified number of days.",
+                    "enabled": false,
+                    "name": "bounce_purge",
+                    "title": "Bounce Purge"
+                  },
+                  {
+                    "description": "Controls notifications for events, such as bounces, clicks, and opens.",
+                    "enabled": false,
+                    "name": "event_notify",
+                    "title": "Event Notification"
+                  },
+                  {
+                    "description": "Allows you to add a custom footer to outgoing email.",
+                    "enabled": false,
+                    "name": "footer",
+                    "title": "Footer"
+                  },
+                  {
+                    "description": "Allows you to forward bounces to a specific email address.",
+                    "enabled": false,
+                    "name": "forward_bounce",
+                    "title": "Forward Bounce"
+                  },
+                  {
+                    "description": "Allows for a copy of spam reports to be forwarded to an email address.",
+                    "enabled": false,
+                    "name": "forward_spam",
+                    "title": "Forward Spam"
+                  },
+                  {
+                    "description": "Allows you to customize your outgoing HTML emails.",
+                    "enabled": false,
+                    "name": "template",
+                    "title": "Legacy Email Template"
+                  },
+                  {
+                    "description": "Convert your plain text emails to HTML.",
+                    "enabled": false,
+                    "name": "plain_content",
+                    "title": "Plain Content"
+                  },
+                  {
+                    "description": "Check outbound messages for spam content.",
+                    "enabled": false,
+                    "name": "spam_check",
+                    "title": "Spam Checker"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "properties": {
+                "result": {
+                  "items": {
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "enabled": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/mail_settings/address_whitelist": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "enabled": false,
+                "list": [
+                ]
+              }
+            },
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "list": {
+                  "items": {
+                    "properties": {
+                    }
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ],
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "",
+            "in": "formData",
+            "name": "list",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "enabled",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "enabled": false,
+                "list": [
+                ]
+              }
+            },
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "list": {
+                  "items": {
+                    "properties": {
+                    }
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      }
+    },
+    "/mail_settings/bcc": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "email": "",
+                "enabled": false
+              }
+            },
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ],
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "",
+            "in": "formData",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "enabled",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "email": "",
+                "enabled": false
+              }
+            },
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      }
+    },
+    "/mail_settings/bounce_purge": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "enabled": false,
+                "hard_bounces": null,
+                "soft_bounces": null
+              }
+            },
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "hard_bounces": {
+                },
+                "soft_bounces": {
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ],
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "",
+            "in": "formData",
+            "name": "enabled",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "body",
+            "name": "hard_bounces",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "body",
+            "name": "soft_bounces",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "enabled": false,
+                "hard_bounces": null,
+                "soft_bounces": null
+              }
+            },
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "hard_bounces": {
+                },
+                "soft_bounces": {
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      }
+    },
+    "/mail_settings/plain_content": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "enabled": false
+              }
+            },
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/partner_settings": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "result": [
+                  {
+                    "description": "Integrate SendGrid with your New Relic account to access your email statistics via the <a target=\"blank\" href=\"https://newrelic.com/sendgrid\">New Relic</a> Dashboard.",
+                    "enabled": false,
+                    "name": "new_relic",
+                    "title": "SendGrid for New Relic"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "properties": {
+                "result": {
+                  "items": {
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "enabled": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/stats": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "aggregated_by",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "start_date",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "end_date",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": [
+                {
+                  "date": "2015-10-02",
+                  "stats": [
+                    {
+                      "metrics": {
+                        "blocks": 0,
+                        "bounce_drops": 0,
+                        "bounces": 0,
+                        "clicks": 0,
+                        "deferred": 0,
+                        "delivered": 0,
+                        "invalid_emails": 0,
+                        "opens": 0,
+                        "processed": 0,
+                        "requests": 0,
+                        "spam_report_drops": 0,
+                        "spam_reports": 0,
+                        "unique_clicks": 0,
+                        "unique_opens": 0,
+                        "unsubscribe_drops": 0,
+                        "unsubscribes": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "date": "2015-10-03",
+                  "stats": [
+                    {
+                      "metrics": {
+                        "blocks": 0,
+                        "bounce_drops": 0,
+                        "bounces": 0,
+                        "clicks": 0,
+                        "deferred": 0,
+                        "delivered": 0,
+                        "invalid_emails": 0,
+                        "opens": 0,
+                        "processed": 0,
+                        "requests": 0,
+                        "spam_report_drops": 0,
+                        "spam_reports": 0,
+                        "unique_clicks": 0,
+                        "unique_opens": 0,
+                        "unsubscribe_drops": 0,
+                        "unsubscribes": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "date": "2015-10-04",
+                  "stats": [
+                    {
+                      "metrics": {
+                        "blocks": 0,
+                        "bounce_drops": 0,
+                        "bounces": 0,
+                        "clicks": 0,
+                        "deferred": 0,
+                        "delivered": 0,
+                        "invalid_emails": 0,
+                        "opens": 0,
+                        "processed": 0,
+                        "requests": 0,
+                        "spam_report_drops": 0,
+                        "spam_reports": 0,
+                        "unique_clicks": 0,
+                        "unique_opens": 0,
+                        "unsubscribe_drops": 0,
+                        "unsubscribes": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "date": "2015-10-05",
+                  "stats": [
+                    {
+                      "metrics": {
+                        "blocks": 0,
+                        "bounce_drops": 0,
+                        "bounces": 0,
+                        "clicks": 0,
+                        "deferred": 0,
+                        "delivered": 0,
+                        "invalid_emails": 0,
+                        "opens": 0,
+                        "processed": 0,
+                        "requests": 0,
+                        "spam_report_drops": 0,
+                        "spam_reports": 0,
+                        "unique_clicks": 0,
+                        "unique_opens": 0,
+                        "unsubscribe_drops": 0,
+                        "unsubscribes": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "date": "2015-10-06",
+                  "stats": [
+                    {
+                      "metrics": {
+                        "blocks": 0,
+                        "bounce_drops": 0,
+                        "bounces": 0,
+                        "clicks": 0,
+                        "deferred": 0,
+                        "delivered": 0,
+                        "invalid_emails": 0,
+                        "opens": 0,
+                        "processed": 0,
+                        "requests": 0,
+                        "spam_report_drops": 0,
+                        "spam_reports": 0,
+                        "unique_clicks": 0,
+                        "unique_opens": 0,
+                        "unsubscribe_drops": 0,
+                        "unsubscribes": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "date": "2015-10-07",
+                  "stats": [
+                    {
+                      "metrics": {
+                        "blocks": 0,
+                        "bounce_drops": 0,
+                        "bounces": 0,
+                        "clicks": 0,
+                        "deferred": 0,
+                        "delivered": 0,
+                        "invalid_emails": 0,
+                        "opens": 0,
+                        "processed": 0,
+                        "requests": 0,
+                        "spam_report_drops": 0,
+                        "spam_reports": 0,
+                        "unique_clicks": 0,
+                        "unique_opens": 0,
+                        "unsubscribe_drops": 0,
+                        "unsubscribes": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "date": "2015-10-08",
+                  "stats": [
+                    {
+                      "metrics": {
+                        "blocks": 0,
+                        "bounce_drops": 0,
+                        "bounces": 0,
+                        "clicks": 0,
+                        "deferred": 0,
+                        "delivered": 0,
+                        "invalid_emails": 0,
+                        "opens": 0,
+                        "processed": 0,
+                        "requests": 0,
+                        "spam_report_drops": 0,
+                        "spam_reports": 0,
+                        "unique_clicks": 0,
+                        "unique_opens": 0,
+                        "unsubscribe_drops": 0,
+                        "unsubscribes": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "properties": {
+                  "date": {
+                    "type": "string"
+                  },
+                  "stats": {
+                    "items": {
+                      "properties": {
+                        "metrics": {
+                          "properties": {
+                            "blocks": {
+                              "type": "number"
+                            },
+                            "bounce_drops": {
+                              "type": "number"
+                            },
+                            "bounces": {
+                              "type": "number"
+                            },
+                            "clicks": {
+                              "type": "number"
+                            },
+                            "deferred": {
+                              "type": "number"
+                            },
+                            "delivered": {
+                              "type": "number"
+                            },
+                            "invalid_emails": {
+                              "type": "number"
+                            },
+                            "opens": {
+                              "type": "number"
+                            },
+                            "processed": {
+                              "type": "number"
+                            },
+                            "requests": {
+                              "type": "number"
+                            },
+                            "spam_report_drops": {
+                              "type": "number"
+                            },
+                            "spam_reports": {
+                              "type": "number"
+                            },
+                            "unique_clicks": {
+                              "type": "number"
+                            },
+                            "unique_opens": {
+                              "type": "number"
+                            },
+                            "unsubscribe_drops": {
+                              "type": "number"
+                            },
+                            "unsubscribes": {
+                              "type": "number"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/subusers": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/suppression/bounces": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/suppression/bounces/{email}": {
+      "delete": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "properties": {
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+        {
+          "description": "",
+          "in": "path",
+          "name": "email",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/templates": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "templates": [
+                ]
+              }
+            },
+            "schema": {
+              "properties": {
+                "templates": {
+                  "items": {
+                    "properties": {
+                    }
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/tracking_settings/click": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "enable_text": false,
+                "enabled": true
+              }
+            },
+            "schema": {
+              "properties": {
+                "enable_text": {
+                  "type": "boolean"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/tracking_settings/open": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "enabled": true
+              }
+            },
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/user/account": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "reputation": 100,
+                "type": "free"
+              }
+            },
+            "schema": {
+              "properties": {
+                "reputation": {
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/user/profile": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "address": "194 E 2nd Street, Apt 4B",
+                "address2": "",
+                "city": "New York City",
+                "company": "Evario",
+                "country": "US",
+                "first_name": "Marc",
+                "last_name": "MacLeod",
+                "phone": "2404182338",
+                "state": "NY",
+                "website": "http://getthisthat.com",
+                "zip": "10009"
+              }
+            },
+            "schema": {
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "address2": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "website": {
+                  "type": "string"
+                },
+                "zip": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ],
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "",
+            "in": "formData",
+            "name": "company",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "address",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "address2",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "zip",
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "formData",
+            "name": "website",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "address": "194 E 2nd Street, Apt 4B",
+                "address2": "",
+                "city": "New York City",
+                "company": "Evario",
+                "country": "US",
+                "first_name": "Marc",
+                "last_name": "MacLeod",
+                "phone": "2404182338",
+                "state": "NY",
+                "website": "http://getthisthat.com",
+                "zip": "10009"
+              }
+            },
+            "schema": {
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "address2": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "website": {
+                  "type": "string"
+                },
+                "zip": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      }
+    },
+    "/whitelabel/domains": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/whitelabel/ips": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    },
+    "/whitelabel/links": {
+      "get": {
+        "consumes": [
+          null
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "summary": ""
+      },
+      "parameters": [
+      ]
+    }
+  },
+  "swagger": "2.0"
+}
