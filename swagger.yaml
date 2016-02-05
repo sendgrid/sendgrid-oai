@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: '3.0'
-  title: Web API v3 - Officially Documented Only
+  title: DX - Web API v3 - Officially Documented Only
   description: "# The SendGrid Web API V3 Documentation\n\nThis is the entirety of the documented v3 endpoints. We have updated all the descriptions, parameters, requests, and responses.\n\n## Authentication \n\nEvery endpoint requires Authentication in the form of an Authorization Header:\n\nAuthorization: Bearer API_KEY\n\n"
 paths:
   /partner_settings/sendwithus:
@@ -41,61 +41,6 @@ paths:
       operationId: Update SendWithUs Settings
       summary: ''
       description: ''
-  '/templates/{template_id}/versions/{version_id}':
-    parameters: []
-    get:
-      responses: {}
-      parameters: []
-      consumes:
-        - application/json
-      produces: []
-      operationId: Retrieve a specific version of a template.
-      summary: ''
-      description: ''
-      security:
-        - {}
-    delete:
-      responses: {}
-      parameters: []
-      consumes:
-        - application/json
-      produces: []
-      operationId: Delete a version.
-      summary: ''
-      description: ''
-      security:
-        - {}
-    patch:
-      responses: {}
-      parameters:
-        - type: string
-          name: active
-          in: formData
-          description: ''
-        - type: string
-          name: name
-          in: formData
-          description: ''
-        - type: string
-          name: html_content
-          in: formData
-          description: ''
-        - type: string
-          name: plain_content
-          in: formData
-          description: ''
-        - type: string
-          name: subject
-          in: formData
-          description: ''
-      consumes:
-        - application/json
-      produces: []
-      operationId: Edit a version
-      summary: ''
-      description: ''
-      security:
-        - {}
   /subusers/stats:
     parameters: []
     get:
@@ -1101,7 +1046,7 @@ paths:
       consumes:
         - application/json
       produces: []
-      operationId: Delete a Domain
+      operationId: Delete a domain whitelabel.
       summary: ''
       description: |-
         **This endpoint allows you to delete a domain whitelabel.**
@@ -1121,60 +1066,7 @@ paths:
         '200':
           description: ''
           schema:
-            title: Retrieve a Domain response
-            type: object
-            properties:
-              id:
-                type: integer
-                description: The ID of the domain whitelabel.
-              domain:
-                type: string
-                description: The domain that this whitelabel was created for.
-              subdomain:
-                type: string
-                description: The subdomain used for this whitelabel.
-              username:
-                type: string
-                description: The username of the account that this whitelabel is associated with.
-              user_id:
-                type: integer
-                description: The ID of the user that this whitelabel is associated with.
-              ips:
-                type: array
-                description: The IPs that are included in the SPF record for this domain whitelabel.
-                items:
-                  type: string
-              custom_spf:
-                type: boolean
-                description: Indicates if this domain whitelabel uses custom SPF.
-              default:
-                type: boolean
-                description: Indicates if this is the default whitelabel.
-              legacy:
-                type: boolean
-                description: Indicates if this whitelabel was created using the legacy whitelabel tool.
-              automatic_security:
-                type: boolean
-                description: Indicates if this domain whitelabel uses automatic security.
-              valid:
-                type: boolean
-                description: Indicates if this is a valid whitelabel or not.
-              dns:
-                type: object
-                properties: {}
-            required:
-              - id
-              - domain
-              - subdomain
-              - username
-              - user_id
-              - ips
-              - custom_spf
-              - default
-              - legacy
-              - automatic_security
-              - valid
-              - dns
+            $ref: '#/definitions/whitelabel::domain'
       parameters:
         - type: integer
           description: "The ID of the domain you're whitelabeling."
@@ -1185,7 +1077,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: Retrieve a Domain
+      operationId: Retrieve a domain whitelabel.
       summary: ''
       description: |-
         **This endpoint allows you to retrieve a specific domain whitelabel.**
@@ -1227,7 +1119,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: Update a Domain
+      operationId: Update a domain whitelabel.
       summary: ''
       description: |-
         **This endpoint allows you to update the settings for a domain whitelabel.**
@@ -2812,19 +2704,6 @@ paths:
         - application/json
       produces: []
       operationId: Change the Enforced TLS settings
-      summary: ''
-      description: ''
-      security:
-        - {}
-  '/templates/{template_id}/versions/{version_id}/activate':
-    parameters: []
-    post:
-      responses: {}
-      parameters: []
-      consumes:
-        - application/json
-      produces: []
-      operationId: Activate a version.
       summary: ''
       description: ''
       security:
@@ -4709,41 +4588,150 @@ paths:
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       security:
         - {}
-  '/templates/{template_id}/versions':
+  '/templates/{template_id}/versions/{version_id}':
     parameters: []
-    post:
-      responses: {}
-      parameters:
-        - type: string
-          name: template_id
-          in: formData
+    patch:
+      responses:
+        '200':
           description: ''
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the template version.
+              updated_at:
+                type: string
+                description: The date and time that the template version was last updated.
+              Transactional Template Version:
+                $ref: '#/definitions/transactional_templates::versions'
+            required:
+              - id
+              - updated_at
+          examples:
+            application/json:
+              id: 5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f
+              template_id: d51480ca-ca3f-465c-bc3e-ceb71d73c38d
+              active: 1
+              name: version 1 name
+              html_content: '<%body%>'
+              plain_content: '<%body%>'
+              subject: '<%subject%>'
+              updated_at: '2014-03-19 18:56:33'
+      parameters:
         - type: string
           name: active
           in: formData
-          description: ''
+          description: Indicates if the template version is active.
         - type: string
           name: name
           in: formData
-          description: ''
+          description: The name of the template version.
         - type: string
           name: html_content
           in: formData
-          description: ''
+          description: The HTML content of the template version.
         - type: string
           name: plain_content
           in: formData
-          description: ''
+          description: The text/plain content of the template version.
         - type: string
           name: subject
           in: formData
+          description: The subject of the template version.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: Edit a transactional template version.
+      summary: ''
+      description: |-
+        **This endpoint allows you to edit a version of one of your transactional templates.**
+
+        Each transactional template can have multiple versions, each version with its own subject and content. Each user can have up to 300 versions across across all templates.
+
+        For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
+
+        ## URI Parameters
+        | URI Parameter | Type | Description |
+        |---|---|---|
+        | template_id | string | The ID of the original template |
+        | version_id | string | The ID of the template version |
+      security:
+        - {}
+    delete:
+      responses:
+        '204':
           description: ''
+          schema:
+            type: 'null'
+      parameters: []
       consumes:
         - application/json
       produces: []
-      operationId: Create a new version for a template
+      operationId: Delete a transactional template version.
       summary: ''
-      description: ''
+      description: |-
+        **This endpoint allows you to delete one of your transactional template versions.**
+
+        Each transactional template can have multiple versions, each version with its own subject and content. Each user can have up to 300 versions across across all templates.
+
+        For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
+
+        ## URI Parameters
+        | URI Parameter | Type | Description |
+        |---|---|---|
+        | template_id | string | The ID of the original template |
+        | version_id | string | The ID of the template version |
+      security:
+        - {}
+    get:
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the template version.
+              updated_at:
+                type: string
+                description: The date and time that the template version was last updated.
+              Transactional Template Version:
+                $ref: '#/definitions/transactional_templates::versions'
+            required:
+              - id
+              - updated_at
+          examples:
+            application/json:
+              id: 5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f
+              template_id: d51480ca-ca3f-465c-bc3e-ceb71d73c38d
+              active: 1
+              name: version 1 name
+              html_content: '<%body%>'
+              plain_content: '<%body%>'
+              subject: '<%subject%>'
+              updated_at: '2014-03-19 18:56:33'
+      parameters: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: Retrieve a specific transactional template version.
+      summary: ''
+      description: |-
+        **This endpoint allows you to retrieve a specific version of a template.**
+
+        Each transactional template can have multiple versions, each version with its own subject and content. Each user can have up to 300 versions across across all templates.
+
+        For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
+
+        ## URI Parameters
+        | URI Parameter | Type | Description |
+        |---|---|---|
+        | template_id | string | The ID of the original template |
+        | version_id | string |  The ID of the template version |
       security:
         - {}
   /contactdb/recipients/billable_count:
@@ -5692,33 +5680,43 @@ paths:
                 description: Indicates if this is a valid whitelabel.
               validation_resuts:
                 type: object
+                description: 'The individual DNS records that are checked when validating, including the reason for any invalid DNS records.'
                 properties:
                   mail_cname:
                     type: object
+                    description: The CNAME record for the domain whitelabel.
                     properties:
                       valid:
                         type: boolean
+                        description: Indicates if this DNS record is valid.
                       reason:
                         type: string
+                        description: The reason this record is invalid.
                   dkim1:
                     type: object
+                    description: A DNS record for this domain whitelabel.
                     properties:
                       valid:
                         type: boolean
+                        description: Indicates if the DNS record is valid.
                       reason:
                         type: 'null'
                   dkim2:
                     type: object
+                    description: A DNS record for this whitelabel.
                     properties:
                       valid:
                         type: boolean
+                        description: Indicates if the DNS record is valid.
                       reason:
                         type: 'null'
                   spf:
                     type: object
+                    description: The SPF record for the whitelabel.
                     properties:
                       valid:
                         type: boolean
+                        description: Indicates if the SPF record is valid.
                       reason:
                         type: 'null'
           examples:
@@ -5740,12 +5738,34 @@ paths:
                   reason: null
         '400':
           description: Unexpected error in API call. See HTTP response body for details.
+          schema:
+            type: object
+            properties: {}
+        '500':
+          description: ''
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: A message explaining the reason for the error.
+                  required:
+                    - message
+          examples:
+            application/json:
+              errors:
+                - message: internal error getting TXT
       parameters: []
       consumes:
         - application/json
       produces:
         - application/json
-      operationId: Validate Domain
+      operationId: Validate a domain whitelabel.
       summary: ''
       description: |-
         **This endpoint allows you to validate a domain whitelabel. If it fails, it will return an error message describing why the whitelabel could not be validated.**
@@ -7278,87 +7298,6 @@ paths:
       operationId: List all IPs
       summary: ''
       description: ''
-      security:
-        - {}
-  /whitelabel/domains/default:
-    parameters: []
-    get:
-      responses:
-        '200':
-          description: ''
-          schema:
-            title: Default Domain response
-            type: object
-            properties:
-              id:
-                type: integer
-                description: The ID of this domain whitelabel.
-              domain:
-                type: string
-                description: The domain that this whitelabel was created for.
-              subdomain:
-                type: string
-                description: The subdomain that was used to create this whitelabel.
-              username:
-                type: string
-                description: The username of the account that this whitelabel is associated with.
-              user_id:
-                type: integer
-                description: The user_id of the account that this whitelabel is associated with.
-              ips:
-                type: array
-                description: The IP address that are included in the SPF record of this domain whitelabel.
-                items:
-                  type: string
-              custom_spf:
-                type: boolean
-                description: Indicates if this whitelabel uses custom SPF.
-              default:
-                type: boolean
-                description: Indicates if this is the default whitelabel.
-              legacy:
-                type: boolean
-                description: Indicates if this whitelabel was created using the legacy whitelabel tool.
-              automatic_security:
-                type: boolean
-                description: Indicates if this whitelabel uses automatic security.
-              valid:
-                type: boolean
-                description: Indicates if this whitelabel is valid.
-              dns:
-                type: object
-                properties: {}
-            required:
-              - id
-              - domain
-              - subdomain
-              - username
-              - user_id
-              - ips
-              - custom_spf
-              - default
-              - legacy
-              - automatic_security
-              - valid
-              - dns
-      parameters: []
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      operationId: Default Domain
-      summary: ''
-      description: |-
-        **This endpoint allows you to retrieve the default whitelabel for a domain.**
-
-        A domain whitelabel allows you to remove the “via” or “sent on behalf of” message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-        For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-        ## URI Parameters
-        | URI Parameter   | Type   | Description  |
-        |---|---|---|
-        | domain | string  |The domain to find a default domain whitelabel for. |
       security:
         - {}
   /mail_settings:
@@ -9022,7 +8961,7 @@ paths:
       consumes:
         - application/json
       produces: []
-      operationId: Disassociate Domain
+      operationId: Disassociate a domain whitelabel from a given user.
       summary: |-
         Domain Whitelabels can be associated with subusers via parent accounts.  This functionality allows
         subusers to send mail
@@ -9046,89 +8985,7 @@ paths:
         '200':
           description: ''
           schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: The ID of the domain whitelabel.
-              domain:
-                type: string
-                description: The domain that this whitelabel was created for.
-              subdomain:
-                type: string
-                description: The subdomain that was used to create this whitelabel.
-              username:
-                type: string
-                description: The username of the account that this whitelabel is associated with.
-              user_id:
-                type: integer
-                description: The user_id of the account that this whitelabel is associated with.
-              ips:
-                type: array
-                description: The IPs that are included in the SPF record of this whitelabel.
-                items: {}
-              custom_spf:
-                type: boolean
-                description: Indicates if this whitelabel uses custom SPF.
-              default:
-                type: boolean
-                description: Indicates if this is the default whitelabel.
-              legacy:
-                type: boolean
-                description: Indicates if this whitelabel was created using the legacy whitelabel tool.
-              automatic_security:
-                type: boolean
-                description: Indicates if this whitelabel uses automated security.
-              valid:
-                type: boolean
-                description: Indicates if this is a valid whitelabel.
-              dns:
-                type: object
-                properties:
-                  mail_server:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
-                  subdomain_spf:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
-                  domain_spf:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
-                  dkim:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
+            $ref: '#/definitions/whitelabel:domain_spf'
           examples:
             application/json:
               id: 1
@@ -9168,7 +9025,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: List Associated Domain
+      operationId: List the domain whitelabel associated with the given user.
       summary: ''
       description: |-
         **This endpoint allows you to retrieve all of the whitelabels that have been assigned to a specific subuser.**
@@ -10008,100 +9865,10 @@ paths:
     parameters: []
     post:
       responses:
-        '200':
+        '201':
           description: ''
           schema:
-            type: object
-            properties:
-              id:
-                type: number
-                description: The ID of the domain whitelabel.
-              user_id:
-                type: number
-                description: The ID of the user that this whitelabel will be associated with.
-              subdomain:
-                type: string
-                description: The subdomain to use for this domain whitelabel.
-              domain:
-                type: string
-                description: The domain that this whitelabel is being created for.
-              username:
-                type: string
-                description: The username that this whitelabel will be associated with.
-              ips:
-                type: array
-                description: The IPs to be included in the custom SPF record for this domain whitelabel.
-                items:
-                  type: object
-                  properties: {}
-              custom_spf:
-                type: boolean
-                description: Indicates whether this domain whitelabel will use custom SPF.
-              default:
-                type: boolean
-                description: Indicates if this domain whitelabel is the default whitelabel.
-              legacy:
-                type: boolean
-                description: Indicates if this domain whitelabel was created using the legacy whitelabel tool.
-              automatic_security:
-                type: boolean
-                description: Indicates if this domain whitelabel uses automated security.
-              valid:
-                type: boolean
-                description: Indicates if this is a valid whitelabel.
-              dns:
-                type: object
-                description: The DNS records for this whitelabel that are used to authenticate the sending domain.
-                properties:
-                  mail_cname:
-                    type: object
-                    description: The CNAME for your sending domain that points to sendgrid.net.
-                    properties:
-                      valid:
-                        type: boolean
-                        description: Indicates if this is a valid CNAME.
-                      type:
-                        type: string
-                        description: The type of DNS record.
-                      host:
-                        type: string
-                        description: The domain that this CNAME is created for.
-                        format: hostname
-                      data:
-                        type: string
-                        description: The CNAME record.
-                  dkim1:
-                    type: object
-                    description: A DNS record.
-                    properties:
-                      valid:
-                        type: boolean
-                        description: Indicates if this is a valid DNS record.
-                      type:
-                        type: string
-                        description: The type of DNS record.
-                      host:
-                        type: string
-                        description: The domain that this DNS record was created for.
-                      data:
-                        type: string
-                        description: The DNS record.
-                  dkim2:
-                    type: object
-                    description: A DNS record.
-                    properties:
-                      valid:
-                        type: boolean
-                        description: Indicates if this is a valid DNS record.
-                      type:
-                        type: string
-                        description: The type of DNS record.
-                      host:
-                        type: string
-                        description: The domain that this DNS record was created for.
-                      data:
-                        type: string
-                        description: The DNS record.
+            $ref: '#/definitions/whitelabel::domain'
           examples:
             application/json:
               id: 302183
@@ -10171,7 +9938,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: Create a Domain
+      operationId: Create a domain whitelabel.
       summary: |-
         When creating a whitelabel for a subuser, there are two options available:
             Use the "username" parameter. This allows
@@ -10288,6 +10055,19 @@ paths:
                         data:
                           type: string
                           description: The DNS record.
+              required:
+                - id
+                - user_id
+                - subdomain
+                - domain
+                - username
+                - ips
+                - custom_spf
+                - default
+                - legacy
+                - automatic_security
+                - valid
+                - dns
           examples:
             application/json:
               - id: 1
@@ -10381,7 +10161,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: List all domains.
+      operationId: List all domain whitelabels.
       summary: ''
       description: |
         **This endpoint allows you to retrieve a list of all domain whitelabels you have created.**
@@ -10398,110 +10178,7 @@ paths:
         '200':
           description: ''
           schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: The ID of the domain whitelabel.
-              domain:
-                type: string
-                description: The domain that this whitelabel was created for.
-              subdomain:
-                type: string
-                description: The subdomain used to create this whitelabel.
-              username:
-                type: string
-                description: The username of the account that this whitelabel is associated with.
-              user_id:
-                type: integer
-                description: The user_id of the account that this whitelabel is associated with.
-              ips:
-                type: array
-                description: The IP addresses that are included in the SPF record for this whitelabel.
-                items: {}
-              custom_spf:
-                type: boolean
-                description: Indicates if this whitelabel uses custom SPF.
-              default:
-                type: boolean
-                description: Indicates if this is the default whitelabel.
-              legacy:
-                type: boolean
-                description: Indicates if this whitelabel was created using the legacy whitelabel tool.
-              automatic_security:
-                type: boolean
-                description: Indicates if this whitelabel uses automated security.
-              valid:
-                type: boolean
-                description: Indicates if this is a valid whitelabel.
-              dns:
-                type: object
-                description: The DNS records for this whitelabel.
-                properties:
-                  mail_server:
-                    type: object
-                    description: Designates which mail server is responsible for accepting messages from a domain.
-                    properties:
-                      host:
-                        type: string
-                        description: The domain sending the messages.
-                      type:
-                        type: string
-                        description: The type of DNS record.
-                      data:
-                        type: string
-                        description: The mail server responsible for accepting messages from the sending domain.
-                      valid:
-                        type: boolean
-                        description: Indicates if this is a valid DNS record.
-                  subdomain_spf:
-                    type: object
-                    description: The SPF record for the subdomain used to create this whitelabel.
-                    properties:
-                      host:
-                        type: string
-                        description: The domain that this SPF record will be used to authenticate.
-                      type:
-                        type: string
-                        description: The type of data in the SPF record.
-                      data:
-                        type: string
-                        description: The SPF record.
-                      valid:
-                        type: boolean
-                        description: Indicates if this SPF record is valid.
-                  domain_spf:
-                    type: object
-                    description: The SPF record for the sending domain.
-                    properties:
-                      host:
-                        type: string
-                        description: The root domain that this SPF record will be used to authenticate.
-                      type:
-                        type: string
-                        description: The type of data in the SPF record.
-                      data:
-                        type: string
-                        description: The SPF record.
-                      valid:
-                        type: boolean
-                        description: Indicates if this is a valid SPF record.
-                  dkim:
-                    type: object
-                    description: The DKIM record for messages sent using this whitelabel.
-                    properties:
-                      host:
-                        type: string
-                        description: The DNS labels for the DKIM signature.
-                      type:
-                        type: string
-                        description: The type of data in the DKIM record.
-                      data:
-                        type: string
-                        description: The DKIM record.
-                      valid:
-                        type: boolean
-                        description: Indicates if the DKIM record is valid.
+            $ref: '#/definitions/whitelabel:domain_spf'
           examples:
             application/json:
               id: 1
@@ -10546,7 +10223,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: Add an IP to a Domain
+      operationId: Add an IP to a domain whitelabel.
       summary: ''
       description: |-
         **This endpoint allows you to add an IP address to a domain whitelabel.**
@@ -10568,89 +10245,7 @@ paths:
         '201':
           description: ''
           schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: The ID of the domain whitelabel.
-              domain:
-                type: string
-                description: The domain that this whitelabel was created for.
-              subdomain:
-                type: string
-                description: The subdomain that was used to create this whitelabel.
-              username:
-                type: string
-                description: The username of the account that this whitelabel is associated with.
-              user_id:
-                type: integer
-                description: The user_id of the account that this whitelabel is associated with.
-              ips:
-                type: array
-                description: The IP addresses that are included in the SPF record for this whitelabel.
-                items: {}
-              custom_spf:
-                type: boolean
-                description: Indicates if this whitelabel uses custom SPF.
-              default:
-                type: boolean
-                description: Indicates if this is the default whitelabel.
-              legacy:
-                type: boolean
-                description: Indicates if this whitelabel was created using the legacy whitelabel tool.
-              automatic_security:
-                type: boolean
-                description: Indicates if this whitelabel uses automated security.
-              valid:
-                type: boolean
-                description: Indicates if this is a valid whitelabel.
-              dns:
-                type: object
-                properties:
-                  mail_server:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
-                  subdomain_spf:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
-                  domain_spf:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
-                  dkim:
-                    type: object
-                    properties:
-                      host:
-                        type: string
-                      type:
-                        type: string
-                      data:
-                        type: string
-                      valid:
-                        type: boolean
+            $ref: '#/definitions/whitelabel:domain_spf'
           examples:
             application/json:
               id: 1
@@ -10695,7 +10290,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: Associate Domain
+      operationId: Associate a domain whitelabel with a given user.
       summary: ''
       description: |-
         **This endpoint allows you to associate a specific domain whitelabel with a subuser.**
@@ -10712,9 +10307,9 @@ paths:
         | domain_id | integer   | ID of the domain whitelabel to associate with the subuser. |
       security:
         - {}
-  '/whitelabel/domains/{id}/ips/{ip}':
+  '/templates/{template_id}/versions/{version_id}/activate':
     parameters: []
-    delete:
+    post:
       responses:
         '200':
           description: ''
@@ -10722,107 +10317,56 @@ paths:
             type: object
             properties:
               id:
-                type: integer
-                description: The ID of the domain whitelabel.
-              domain:
                 type: string
-                description: The domain that the whitelabel was created for.
-              subdomain:
+                description: The ID of the template version.
+              updated_at:
                 type: string
-                description: The subdomain that was used to create the whitelabel.
-              username:
-                type: string
-                description: The username of the account that this whitelabel is associated with.
-              user_id:
-                type: integer
-                description: The user_id of the account that this whitelabel is associated with.
-              ips:
-                type: array
-                description: The IPs that are included in the SPF record for this whitelabel.
-                items: {}
-              custom_spf:
-                type: boolean
-                description: Indicates if this whitelabel uses custom SPF.
-              default:
-                type: boolean
-                description: Indicates if this is the default whitelabel.
-              legacy:
-                type: boolean
-                description: Indicates if this whitelabel was created using the legacy whitelabel tool.
-              automatic_security:
-                type: boolean
-                description: Indicates if this whitelabel uses automated security.
-              valid:
-                type: boolean
-                description: Indicates if this is a valid whitelabel.
-              dns:
-                type: object
-                description: The DNS records for this whitelabel.
-                properties:
-                  mail_server:
-                    type: object
-                    description: Designates which mail server is responsible for accepting messages from a domain.
-                    properties:
-                      host:
-                        type: string
-                        description: The domain sending the messages.
-                      type:
-                        type: string
-                        description: The type of DNS record.
-                      data:
-                        type: string
-                        description: The mail server responsible for accepting messages from the sending domain.
-                      valid:
-                        type: boolean
-                        description: Indicates if this is a valid DNS record.
-                  subdomain_spf:
-                    type: object
-                    description: The SPF record for the subdomain used to create this whitelabel.
-                    properties:
-                      host:
-                        type: string
-                        description: The domain that this SPF record will be used to authenticate.
-                      type:
-                        type: string
-                        description: The type of data in the SPF record.
-                      data:
-                        type: string
-                        description: The SPF record.
-                      valid:
-                        type: boolean
-                        description: Indicates if the SPF record is valid.
-                  domain_spf:
-                    type: object
-                    description: The SPF record for the sending domain.
-                    properties:
-                      host:
-                        type: string
-                        description: The root domain that this SPF record will be used to authenticate.
-                      type:
-                        type: string
-                        description: The type of data in the SPF record.
-                      data:
-                        type: string
-                        description: The SPF record.
-                      valid:
-                        type: boolean
-                        description: Indicates if this SPF record is valid.
-                  dkim:
-                    type: object
-                    description: The DKIM record for messages sent using this whitelabel.
-                    properties:
-                      host:
-                        type: string
-                        description: 'The DNS labels for the DKIM signature. '
-                      type:
-                        type: string
-                        description: The type of data in the DKIM record.
-                      data:
-                        type: string
-                        description: The DKIM record.
-                      valid:
-                        type: boolean
-                        description: Indicates if the DKIM record is valid.
+                description: The date and time that the version was last updated.
+              Transactional Template Version:
+                $ref: '#/definitions/transactional_templates::versions'
+            required:
+              - id
+              - updated_at
+          examples:
+            application/json:
+              id: 8aefe0ee-f12b-4575-b5b7-c97e21cb36f3
+              template_id: e3a61852-1acb-4b32-a1bc-b44b3814ab78
+              active: 1
+              name: example_version_name
+              html_content: '<%body%>'
+              plain_content: '<%body%>'
+              subject: '<%subject%>'
+              updated_at: '2014-06-12 11:33:00'
+      parameters: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: Activate a transactional template version.
+      summary: ''
+      description: |-
+        **This endpoint allows you to activate a version of one of your templates.**
+
+        Each transactional template can have multiple versions, each version with its own subject and content. Each user can have up to 300 versions across across all templates.
+
+
+        For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
+
+        ## URI Parameters
+        | URI Parameter | Type | Description |
+        |---|---|---|
+        | template_id | string | The ID of the original template |
+        | version_id | string |  The ID of the template version |
+      security:
+        - {}
+  '/whitelabel/domains/{id}/ips/{ip}':
+    parameters: []
+    delete:
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/whitelabel:domain_spf'
           examples:
             application/json:
               id: 1
@@ -10862,7 +10406,7 @@ paths:
         - application/json
       produces:
         - application/json
-      operationId: Remove an IP from a Domain
+      operationId: Remove an IP from a domain whitelabel.
       summary: ''
       description: |-
         **This endpoint allows you to remove a domain's IP address from that domain's whitelabel.**
@@ -10878,6 +10422,1601 @@ paths:
         | ip | string | IP to remove from the domain whitelabel. |
       security:
         - {}
+  /whitelabel/domains/default:
+    parameters: []
+    get:
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/whitelabel:domain_spf'
+      parameters: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: Get the default domain whitelabel.
+      summary: ''
+      description: |-
+        **This endpoint allows you to retrieve the default whitelabel for a domain.**
+
+        A domain whitelabel allows you to remove the “via” or “sent on behalf of” message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+        For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
+
+        ## URI Parameters
+        | URI Parameter   | Type   | Description  |
+        |---|---|---|
+        | domain | string  |The domain to find a default domain whitelabel for. |
+      security:
+        - {}
+  '/templates/{template_id}/versions':
+    parameters: []
+    post:
+      responses:
+        '201':
+          description: ''
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The id of the new transactional template version.
+              updated_at:
+                type: string
+                description: The date and time that this transactional template version was updated.
+              Transactional Template Version:
+                $ref: '#/definitions/transactional_templates::versions'
+            required:
+              - id
+              - updated_at
+          examples:
+            application/json:
+              id: 8aefe0ee-f12b-4575-b5b7-c97e21cb36f3
+              template_id: ddb96bbc-9b92-425e-8979-99464621b543
+              active: 1
+              name: example_version_name
+              html_content: '<%body%>'
+              plain_content: '<%body%>'
+              subject: '<%subject%>'
+              updated_at: '2014-03-19 18:56:33'
+      parameters: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: Create a new transactional template version.
+      summary: ''
+      description: |
+        **This endpoint allows you to create a new version of a template.**
+
+        Each transactional template can have multiple versions, each version with its own subject and content. Each user can have up to 300 versions across across all templates.
+
+        For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
+      security:
+        - {}
+  /:
+    parameters: []
+    get:
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              current_user_url:
+                type: string
+              current_user_authorizations_html_url:
+                type: string
+              authorizations_url:
+                type: string
+              code_search_url:
+                type: string
+              emails_url:
+                type: string
+              emojis_url:
+                type: string
+              events_url:
+                type: string
+              feeds_url:
+                type: string
+              followers_url:
+                type: string
+              following_url:
+                type: string
+              gists_url:
+                type: string
+              hub_url:
+                type: string
+              issue_search_url:
+                type: string
+              issues_url:
+                type: string
+              keys_url:
+                type: string
+              notifications_url:
+                type: string
+              organization_repositories_url:
+                type: string
+              organization_url:
+                type: string
+              public_gists_url:
+                type: string
+              rate_limit_url:
+                type: string
+              repository_url:
+                type: string
+              repository_search_url:
+                type: string
+              current_user_repositories_url:
+                type: string
+              starred_url:
+                type: string
+              starred_gists_url:
+                type: string
+              team_url:
+                type: string
+              user_url:
+                type: string
+              user_organizations_url:
+                type: string
+              user_repositories_url:
+                type: string
+              user_search_url:
+                type: string
+          examples:
+            application/json:
+              current_user_url: 'https://api.github.com/user'
+              current_user_authorizations_html_url: 'https://github.com/settings/connections/applications{/client_id}'
+              authorizations_url: 'https://api.github.com/authorizations'
+              code_search_url: 'https://api.github.com/search/code?q={query}{&page,per_page,sort,order}'
+              emails_url: 'https://api.github.com/user/emails'
+              emojis_url: 'https://api.github.com/emojis'
+              events_url: 'https://api.github.com/events'
+              feeds_url: 'https://api.github.com/feeds'
+              followers_url: 'https://api.github.com/user/followers'
+              following_url: 'https://api.github.com/user/following{/target}'
+              gists_url: 'https://api.github.com/gists{/gist_id}'
+              hub_url: 'https://api.github.com/hub'
+              issue_search_url: 'https://api.github.com/search/issues?q={query}{&page,per_page,sort,order}'
+              issues_url: 'https://api.github.com/issues'
+              keys_url: 'https://api.github.com/user/keys'
+              notifications_url: 'https://api.github.com/notifications'
+              organization_repositories_url: 'https://api.github.com/orgs/{org}/repos{?type,page,per_page,sort}'
+              organization_url: 'https://api.github.com/orgs/{org}'
+              public_gists_url: 'https://api.github.com/gists/public'
+              rate_limit_url: 'https://api.github.com/rate_limit'
+              repository_url: 'https://api.github.com/repos/{owner}/{repo}'
+              repository_search_url: 'https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}'
+              current_user_repositories_url: 'https://api.github.com/user/repos{?type,page,per_page,sort}'
+              starred_url: 'https://api.github.com/user/starred{/owner}{/repo}'
+              starred_gists_url: 'https://api.github.com/gists/starred'
+              team_url: 'https://api.github.com/teams'
+              user_url: 'https://api.github.com/users/{user}'
+              user_organizations_url: 'https://api.github.com/user/orgs'
+              user_repositories_url: 'https://api.github.com/users/{user}/repos{?type,page,per_page,sort}'
+              user_search_url: 'https://api.github.com/search/users?q={query}{&page,per_page,sort,order}'
+      parameters:
+        - type: string
+          name: X-Forwarded-For
+          in: header
+          description: ''
+        - type: integer
+          name: X-Request-Start
+          in: header
+          description: ''
+        - type: string
+          name: From
+          in: header
+          description: ''
+        - type: integer
+          name: Total-Route-Time
+          in: header
+          description: ''
+        - type: string
+          name: X-Request-Id
+          in: header
+          description: ''
+        - type: string
+          name: X-Forwarded-Proto
+          in: header
+          description: ''
+        - type: string
+          name: Via
+          in: header
+          description: ''
+        - type: integer
+          name: Connect-Time
+          in: header
+          description: ''
+        - type: string
+          name: Accept
+          in: header
+          description: ''
+        - type: integer
+          name: X-Forwarded-Port
+          in: header
+          description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: ''
+      summary: ''
+      description: ''
+  /robots.txt:
+    parameters: []
+    get:
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties: {}
+          examples:
+            text/plain: |-
+              # If you would like to crawl GitHub contact us at support@github.com.
+              # We also provide an extensive API: https://developer.github.com/
+
+              User-agent: CCBot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: coccoc
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: dotbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: duckduckbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: EtaoSpider
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Googlebot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: HTTrack
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: ia_archiver
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: IntuitGSACrawler
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Mail.RU_Bot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: msnbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Bingbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: naverbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: red-app-gsa-p-one
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: rogerbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: SandDollar
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: seznambot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Slurp
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Swiftbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Telefonica
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: teoma
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Twitterbot
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+              User-agent: Yandex
+              Allow: /*/*/tree/master
+              Allow: /*/*/blob/master
+              Disallow: /ekansa/Open-Context-Data
+              Disallow: /ekansa/opencontext-*
+              Disallow: /*/*/pulse
+              Disallow: /*/*/tree/*
+              Disallow: /*/*/blob/*
+              Disallow: /*/*/wiki/*/*
+              Disallow: /gist/*/*/*
+              Disallow: /oembed
+              Disallow: /*/forks
+              Disallow: /*/stars
+              Disallow: /*/download
+              Disallow: /*/revisions
+              Disallow: /*/*/issues/new
+              Disallow: /*/*/issues/search
+              Disallow: /*/*/commits/*/*
+              Disallow: /*/*/commits/*?author
+              Disallow: /*/*/commits/*?path
+              Disallow: /*/*/branches
+              Disallow: /*/*/tags
+              Disallow: /*/*/contributors
+              Disallow: /*/*/comments
+              Disallow: /*/*/stargazers
+              Disallow: /*/*/search
+              Disallow: /*/tarball/
+              Disallow: /*/zipball/
+              Disallow: /*/*/archive/
+              Disallow: /raw/*
+              Disallow: /*/followers
+              Disallow: /*/following
+              Disallow: /stars/*
+              Disallow: /*/blame/
+              Disallow: /*/watchers
+              Disallow: /*/network
+              Disallow: /*/graphs
+              Disallow: /*/raw/
+              Disallow: /*/compare/
+              Disallow: /*/cache/
+              Disallow: /*/*/blame/
+              Disallow: /*/*/watchers
+              Disallow: /*/*/network
+              Disallow: /*/*/graphs
+              Disallow: /*/*/raw/
+              Disallow: /*/*/compare/
+              Disallow: /*/*/cache/
+              Disallow: /.git/
+              Disallow: /*/.git/
+              Disallow: /*.git$
+              Disallow: /*/sitemap.xml
+              Disallow: /search/advanced
+              Disallow: /search
+              Disallow: /*q=
+              Disallow: /*.atom
+              Disallow: /login
+
+
+              User-agent: *
+              Allow: /humans.txt
+              Disallow: /
+      parameters:
+        - type: integer
+          name: X-Forwarded-Port
+          in: header
+          description: ''
+        - type: string
+          name: Via
+          in: header
+          description: ''
+        - type: string
+          name: From
+          in: header
+          description: ''
+        - type: string
+          name: X-Request-Id
+          in: header
+          description: ''
+        - type: string
+          name: X-Forwarded-For
+          in: header
+          description: ''
+        - type: integer
+          name: X-Request-Start
+          in: header
+          description: ''
+        - type: integer
+          name: Total-Route-Time
+          in: header
+          description: ''
+        - type: string
+          name: X-Forwarded-Proto
+          in: header
+          description: ''
+        - type: integer
+          name: Connect-Time
+          in: header
+          description: ''
+      consumes:
+        - application/json
+      produces:
+        - text/plain
+      operationId: ''
+      summary: ''
+      description: ''
 definitions:
   user_scheduled_send_status:
     allOf:
@@ -11182,6 +12321,40 @@ definitions:
         required:
           - id
       - $ref: '#/definitions/contactdb_segments'
+  'transactional_templates::versions':
+    type: object
+    properties:
+      template_id:
+        type: string
+        description: The name of the original transactional template.
+      active:
+        type: integer
+        description: Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.
+        enum:
+          - 0
+          - 1
+      name:
+        type: string
+        description: Name of the new transactional template version.
+        maxLength: 100
+      html_content:
+        type: string
+        description: 'The HTML content of the new version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.'
+        maxLength: 0
+      plain_content:
+        type: string
+        description: 'Text/plain content of the new transactional template version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.'
+        maxLength: 0
+      subject:
+        type: string
+        description: 'Subject of the new transactional template version. Must include <%subject%> tag.'
+    required:
+      - template_id
+      - active
+      - name
+      - html_content
+      - plain_content
+      - subject
   api_key_name_id_scopes:
     allOf:
       - type: object
@@ -11460,6 +12633,273 @@ definitions:
               description: "The last update date for this recipient's record."
           required:
             - email
+  'whitelabel::domain':
+    type: object
+    properties:
+      id:
+        type: number
+        description: The ID of the domain whitelabel.
+      user_id:
+        type: number
+        description: The ID of the user that this whitelabel will be associated with.
+      subdomain:
+        type: string
+        description: The subdomain to use for this domain whitelabel.
+      domain:
+        type: string
+        description: The domain that this whitelabel is being created for.
+      username:
+        type: string
+        description: The username that this whitelabel will be associated with.
+      ips:
+        type: array
+        description: The IPs to be included in the custom SPF record for this domain whitelabel.
+        items:
+          type: object
+          properties: {}
+      custom_spf:
+        type: boolean
+        description: Indicates whether this domain whitelabel will use custom SPF.
+      default:
+        type: boolean
+        description: Indicates if this domain whitelabel is the default whitelabel.
+      legacy:
+        type: boolean
+        description: Indicates if this domain whitelabel was created using the legacy whitelabel tool.
+      automatic_security:
+        type: boolean
+        description: Indicates if this domain whitelabel uses automated security.
+      valid:
+        type: boolean
+        description: Indicates if this is a valid whitelabel.
+      dns:
+        type: object
+        description: The DNS records for this whitelabel that are used to authenticate the sending domain.
+        required:
+          - mail_cname
+          - dkim1
+          - dkim2
+        properties:
+          mail_cname:
+            type: object
+            description: The CNAME for your sending domain that points to sendgrid.net.
+            required:
+              - valid
+              - type
+              - host
+              - data
+            properties:
+              valid:
+                type: boolean
+                description: Indicates if this is a valid CNAME.
+              type:
+                type: string
+                description: The type of DNS record.
+              host:
+                type: string
+                description: The domain that this CNAME is created for.
+                format: hostname
+              data:
+                type: string
+                description: The CNAME record.
+          dkim1:
+            type: object
+            description: A DNS record.
+            required:
+              - valid
+              - type
+              - host
+              - data
+            properties:
+              valid:
+                type: boolean
+                description: Indicates if this is a valid DNS record.
+              type:
+                type: string
+                description: The type of DNS record.
+              host:
+                type: string
+                description: The domain that this DNS record was created for.
+              data:
+                type: string
+                description: The DNS record.
+          dkim2:
+            type: object
+            description: A DNS record.
+            required:
+              - valid
+              - type
+              - host
+              - data
+            properties:
+              valid:
+                type: boolean
+                description: Indicates if this is a valid DNS record.
+              type:
+                type: string
+                description: The type of DNS record.
+              host:
+                type: string
+                description: The domain that this DNS record was created for.
+              data:
+                type: string
+                description: The DNS record.
+    required:
+      - id
+      - user_id
+      - subdomain
+      - domain
+      - username
+      - ips
+      - custom_spf
+      - default
+      - legacy
+      - automatic_security
+      - valid
+      - dns
+  'whitelabel:domain_spf':
+    type: object
+    properties:
+      id:
+        type: integer
+        description: The ID of the domain whitelabel.
+      domain:
+        type: string
+        description: The domain that this whitelabel was created for.
+      subdomain:
+        type: string
+        description: The subdomain that was used to create this whitelabel.
+      username:
+        type: string
+        description: The username of the account that this whitelabel is associated with.
+      user_id:
+        type: integer
+        description: The user_id of the account that this whitelabel is associated with.
+      ips:
+        type: array
+        description: The IP addresses that are included in the SPF record for this whitelabel.
+        items: {}
+      custom_spf:
+        type: boolean
+        description: Indicates if this whitelabel uses custom SPF.
+      default:
+        type: boolean
+        description: Indicates if this is the default whitelabel.
+      legacy:
+        type: boolean
+        description: Indicates if this whitelabel was created using the legacy whitelabel tool.
+      automatic_security:
+        type: boolean
+        description: Indicates if this whitelabel uses automated security.
+      valid:
+        type: boolean
+        description: Indicates if this is a valid whitelabel.
+      dns:
+        type: object
+        description: The DNS records for this whitelabel.
+        required:
+          - mail_server
+          - subdomain_spf
+          - domain_spf
+          - dkim
+        properties:
+          mail_server:
+            type: object
+            description: Designates which mail server is responsible for accepting messages from a domain.
+            required:
+              - host
+              - type
+              - data
+              - valid
+            properties:
+              host:
+                type: string
+                description: The domain sending the messages.
+              type:
+                type: string
+                description: They type of DNS record.
+              data:
+                type: string
+                description: The mail server responsible for accepting messages from the sending domain.
+              valid:
+                type: boolean
+                description: Indicates if this is a valid DNS record.
+          subdomain_spf:
+            type: object
+            description: The SPF record for the subdomain used to create this whitelabel.
+            required:
+              - host
+              - type
+              - data
+              - valid
+            properties:
+              host:
+                type: string
+                description: The domain that this SPF record will be used to authenticate.
+              type:
+                type: string
+                description: The type of data in the SPF record.
+              data:
+                type: string
+                description: The SPF record.
+              valid:
+                type: boolean
+                description: Indicates if this is a valid SPF record.
+          domain_spf:
+            type: object
+            description: The SPF record for the root domain.
+            required:
+              - host
+              - type
+              - data
+              - valid
+            properties:
+              host:
+                type: string
+                description: The root domain that this SPF record will be used to authenticate.
+              type:
+                type: string
+                description: The type of data in the SPF record.
+              data:
+                type: string
+                description: The SPF record.
+              valid:
+                type: boolean
+                description: Indicates if the SPF record is valid.
+          dkim:
+            type: object
+            description: The DKIM record for messages sent using this whitelabel.
+            required:
+              - host
+              - type
+              - data
+              - valid
+            properties:
+              host:
+                type: string
+                description: The DNS labels for the DKIM signature.
+              type:
+                type: string
+                description: The type of data in the DKIM record.
+              data:
+                type: string
+                description: The DKIM record.
+              valid:
+                type: boolean
+                description: Indicates if the DKIM record is valid.
+    required:
+      - id
+      - domain
+      - subdomain
+      - username
+      - user_id
+      - ips
+      - custom_spf
+      - default
+      - legacy
+      - automatic_security
+      - valid
+      - dns
 basePath: /v3
 host: 'https://api.sendgrid.com'
 schemes:
