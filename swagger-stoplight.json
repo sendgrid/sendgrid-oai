@@ -1579,7 +1579,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "",
                         "examples": {
                             "application/json": {
