@@ -814,6 +814,31 @@
             },
             "type": "object"
         },
+        "transactional_template": {
+            "properties": {
+                "id": {
+                    "description": "The ID of the transactional template.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name for the transactional template.",
+                    "maxLength": 100,
+                    "type": "string"
+                },
+                "versions": {
+                    "description": "The different versions of this transactional template.",
+                    "items": {
+                        "$ref": "#/definitions/transactional_templates::versions"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "type": "object"
+        },
         "transactional_templates::versions": {
             "properties": {
                 "active": {
@@ -1579,7 +1604,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "",
                         "examples": {
                             "application/json": {
@@ -12200,11 +12225,23 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Retrieve all templates.",
+                "description": "**This endpoint allows you to retrieve all transactional templates.**\n\nEach user can create up to 300 different transactional templates. Transactional templates are specific to accounts and subusers. Templates created on a parent account will not be accessible from the subuser accounts.\n\nTransactional templates are templates created specifically for transactional email and are not to be confused with [Marketing Campaigns templates](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/templates.html). For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).",
+                "operationId": "Retrieve all transactional templates.",
                 "parameters": [],
-                "produces": [],
-                "responses": {},
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/transactional_template"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
                 "security": [
                     {}
                 ],
@@ -12215,13 +12252,14 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Create a template.",
+                "description": "**This endpoint allows you to create a transactional template.**\n\nEach user can create up to 300 different transactional templates. Transactional templates are specific to accounts and subusers. Templates created on a parent account will not be accessible from the subuser accounts.\n\nTransactional templates are templates created specifically for transactional email and are not to be confused with [Marketing Campaigns templates](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/templates.html). For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).",
+                "operationId": "Create a transactional template.",
                 "parameters": [
                     {
-                        "description": "",
+                        "description": "The name for the new transactional template.",
                         "in": "formData",
                         "name": "name",
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -12239,28 +12277,7 @@
                             }
                         },
                         "schema": {
-                            "properties": {
-                                "templates": {
-                                    "items": {
-                                        "properties": {
-                                            "id": {
-                                                "type": "string"
-                                            },
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "versions": {
-                                                "items": {
-                                                    "properties": {}
-                                                },
-                                                "type": "array"
-                                            }
-                                        }
-                                    },
-                                    "type": "array"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/transactional_template"
                         }
                     }
                 },
