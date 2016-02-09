@@ -12314,11 +12314,20 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Retrieve a single template.",
+                "description": "**This endpoint allows you to retrieve a single transactional template.**\n\nEach user can create up to 300 different transactional templates. Transactional templates are specific to accounts and subusers. Templates created on a parent account will not be accessible from the subuser accounts.\n\nTransactional templates are templates created specifically for transactional email and are not to be confused with [Marketing Campaigns templates](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/templates.html). For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).\n\n## URI Parameters\n| URI Parameter   | Type  | Description  |\n|---|---|---|\n| id| string | The id of the transactional template you want to retrieve. |",
+                "operationId": "Retrieve a single transactional template.",
                 "parameters": [],
-                "produces": [],
-                "responses": {},
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/transactional_template"
+                        }
+                    }
+                },
                 "security": [
                     {}
                 ],
