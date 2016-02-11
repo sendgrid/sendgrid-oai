@@ -820,7 +820,7 @@
                 "versions": {
                     "description": "The different versions of this transactional template.",
                     "items": {
-                        "$ref": "#/definitions/transactional_templates::versions"
+                        "$ref": "#/definitions/transactional_template_version"
                     },
                     "type": "array"
                 }
@@ -831,7 +831,7 @@
             ],
             "type": "object"
         },
-        "transactional_templates::versions": {
+        "transactional_template_version": {
             "properties": {
                 "active": {
                     "description": "Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
@@ -3445,7 +3445,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "",
                         "examples": {
                             "application/json": {
@@ -3593,15 +3593,7 @@
                 ],
                 "description": "Send your campaign right now. Normally a POST would have a request body, but since this endpoint is telling us to send a resource that is already created, we don't need a body.\n\nFor more information:\n\n* [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)",
                 "operationId": "Send a Campaign",
-                "parameters": [
-                    {
-                        "description": "The id of the campaign",
-                        "in": "query",
-                        "name": "campaign_id",
-                        "required": true,
-                        "type": "number"
-                    }
-                ],
+                "parameters": [],
                 "produces": [
                     "application/json"
                 ],
@@ -12872,7 +12864,7 @@
                         "in": "body",
                         "name": "body",
                         "schema": {
-                            "$ref": "#/definitions/transactional_templates::versions"
+                            "$ref": "#/definitions/transactional_template_version"
                         }
                     }
                 ],
@@ -12897,7 +12889,7 @@
                         "schema": {
                             "properties": {
                                 "Transactional Template Version": {
-                                    "$ref": "#/definitions/transactional_templates::versions"
+                                    "$ref": "#/definitions/transactional_template_version"
                                 },
                                 "id": {
                                     "description": "The id of the new transactional template version.",
@@ -12976,7 +12968,7 @@
                         "schema": {
                             "properties": {
                                 "Transactional Template Version": {
-                                    "$ref": "#/definitions/transactional_templates::versions"
+                                    "$ref": "#/definitions/transactional_template_version"
                                 },
                                 "id": {
                                     "description": "The ID of the template version.",
@@ -13074,7 +13066,7 @@
                         "schema": {
                             "properties": {
                                 "Transactional Template Version": {
-                                    "$ref": "#/definitions/transactional_templates::versions"
+                                    "$ref": "#/definitions/transactional_template_version"
                                 },
                                 "id": {
                                     "description": "The ID of the template version.",
@@ -13144,7 +13136,7 @@
                         "schema": {
                             "properties": {
                                 "Transactional Template Version": {
-                                    "$ref": "#/definitions/transactional_templates::versions"
+                                    "$ref": "#/definitions/transactional_template_version"
                                 },
                                 "id": {
                                     "description": "The ID of the template version.",
