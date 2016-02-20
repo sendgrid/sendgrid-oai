@@ -17,7 +17,7 @@
       "file": "environments/common/production.rb",
       "key": "(\\$environment\\['sendgrid-swagger'\\]\\['deployment'\\]\\['revision'\\] = )(.*)"
     }
-  ]
+  ],
   "jenkins": {
       "master": "sendgrid-swagger",
       "pr": "sendgrid-swagger-pullrequests"
