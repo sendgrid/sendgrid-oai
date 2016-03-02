@@ -927,6 +927,35 @@
         "global:id": {
             "type": "integer"
         },
+        "google_analytics_settings": {
+            "properties": {
+                "enabled": {
+                    "description": "Indicates if Google Analytics is enabled.",
+                    "type": "boolean"
+                },
+                "utm_campaign": {
+                    "description": "The name of the campaign.",
+                    "type": "string"
+                },
+                "utm_content": {
+                    "description": "Used to differentiate ads",
+                    "type": "string"
+                },
+                "utm_medium": {
+                    "description": "Name of the marketing medium (e.g. \"Email\").",
+                    "type": "string"
+                },
+                "utm_source": {
+                    "description": "Name of the referrer source. ",
+                    "type": "string"
+                },
+                "utm_term": {
+                    "description": "Any paid keywords.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "ip_pool": {
             "properties": {
                 "name": {
@@ -1199,23 +1228,14 @@
             ],
             "type": "object"
         },
-        "mail_settings::patch": {
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "enabled": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
         "mail_settings_address_whitelabel": {
             "properties": {
                 "enabled": {
+                    "description": "Indicates if you have an email address whitelist enabled. ",
                     "type": "boolean"
                 },
                 "list": {
+                    "description": "All email address that are currently on the whitelist.",
                     "items": {
                         "type": "string"
                     },
@@ -1227,9 +1247,11 @@
         "mail_settings_bcc": {
             "properties": {
                 "email": {
+                    "description": "The email address that will be sent a blind carbon copy.",
                     "type": "string"
                 },
                 "enabled": {
+                    "description": "Indicates if the BCC setting is enabled.",
                     "type": "boolean"
                 }
             },
@@ -1238,15 +1260,18 @@
         "mail_settings_bounce_purge": {
             "properties": {
                 "enabled": {
+                    "description": "Indicates if the bounce purge mail setting is enabled.",
                     "type": "boolean"
                 },
                 "hard_bounces": {
+                    "description": "The number of days, after which SendGrid will purge all contacts from your hard bounces suppression lists.",
                     "type": [
                         "integer",
                         "null"
                     ]
                 },
                 "soft_bounces": {
+                    "description": "The number of days, after which SendGrid will purge all contacts from your soft bounces suppression lists.",
                     "type": [
                         "integer",
                         "null"
@@ -1258,12 +1283,15 @@
         "mail_settings_footer": {
             "properties": {
                 "enabled": {
+                    "description": "Indicates if the Footer mail setting is currently enabled.",
                     "type": "boolean"
                 },
                 "html_content": {
+                    "description": "The custom HTML content of your email footer.",
                     "type": "string"
                 },
                 "plain_content": {
+                    "description": "The plain text content of your email footer.",
                     "type": "string"
                 }
             },
@@ -1272,12 +1300,14 @@
         "mail_settings_forward_bounce": {
             "properties": {
                 "email": {
+                    "description": "The email address that you would like your bounce reports forwarded to.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
                 "enabled": {
+                    "description": "Indicates if the bounce forwarding mail setting is enabled.",
                     "type": "boolean"
                 }
             },
@@ -1286,12 +1316,24 @@
         "mail_settings_forward_spam": {
             "properties": {
                 "email": {
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "description": "The email address where you would like the spam reports to be forwarded.",
+                    "type": "string"
                 },
                 "enabled": {
+                    "description": "Indicates if the Forward Spam setting is enabled.",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "mail_settings_patch": {
+            "properties": {
+                "email": {
+                    "description": "The email address of the recipient.",
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "Indicates if the mail setting is enabled.",
                     "type": "boolean"
                 }
             },
@@ -1300,23 +1342,34 @@
         "mail_settings_spam_check": {
             "properties": {
                 "enabled": {
+                    "description": "Indicates if your Spam Checker mail setting is enabled.",
                     "type": "boolean"
                 },
                 "max_score": {
+                    "default": 5,
+                    "description": "The spam threshold. Can range from 1 to 10. The lower the number, the more strict the filtering.",
+                    "maximum": 10,
+                    "minimum": 1,
                     "type": "integer"
                 },
                 "url": {
+                    "description": "The inbound parse URL where you would like the spam messages to be sent to.",
                     "type": "string"
                 }
             },
+            "required": [
+                "enabled"
+            ],
             "type": "object"
         },
         "mail_settings_template": {
             "properties": {
                 "enabled": {
+                    "description": "Indicates if the legacy email template setting is enabled.",
                     "type": "boolean"
                 },
                 "html_content": {
+                    "description": "The HTML content that you want to use for your legacy email template.",
                     "type": "string"
                 }
             },
@@ -1460,6 +1513,35 @@
                 "type": "object"
             },
             "type": "array"
+        },
+        "subscription_tracking_settings": {
+            "properties": {
+                "enabled": {
+                    "description": "Indicates if subscription tracking is enabled.",
+                    "type": "boolean"
+                },
+                "html_content": {
+                    "description": "The information and HTML for your unsubscribe link. ",
+                    "type": "string"
+                },
+                "landing": {
+                    "description": "The HTML that will be displayed on the page that your customers will see after clicking unsubscribe, hosted on SendGrid\u2019s server.",
+                    "type": "string"
+                },
+                "plain_content": {
+                    "description": "The information in plain text for your unsubscribe link. You should have the \u201c<% %>\u201d tag in your content, otherwise the user will have no URL for unsubscribing.",
+                    "type": "string"
+                },
+                "replace": {
+                    "description": "Your custom defined replacement tag for your templates. Use this tag to place your unsubscribe content anywhere in your emailtemplate.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "The URL where you would like your users sent to unsubscribe.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
         },
         "subuser": {
             "properties": {
@@ -9756,15 +9838,17 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get all mail settings",
+                "description": "**This endpoint allows you to retrieve a list of all mail settings.**\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve all mail settings",
                 "parameters": [
                     {
+                        "description": "The number of settings to return.",
                         "in": "query",
                         "name": "limit",
                         "type": "integer"
                     },
                     {
+                        "description": "Where in the list of results to begin displaying settings.",
                         "in": "query",
                         "name": "offset",
                         "type": "integer"
@@ -9845,26 +9929,40 @@
                         "schema": {
                             "properties": {
                                 "result": {
+                                    "description": "The list of all mail settings.",
                                     "items": {
                                         "properties": {
                                             "description": {
+                                                "description": "A description of the mail setting.",
                                                 "type": "string"
                                             },
                                             "enabled": {
+                                                "description": "Indicates if this mail setting is currently enabled.",
                                                 "type": "boolean"
                                             },
                                             "name": {
+                                                "description": "The name of the mail setting.",
                                                 "type": "string"
                                             },
                                             "title": {
+                                                "description": "The title of the mail setting.",
                                                 "type": "string"
                                             }
                                         },
+                                        "required": [
+                                            "title",
+                                            "enabled",
+                                            "name",
+                                            "description"
+                                        ],
                                         "type": "object"
                                     },
                                     "type": "array"
                                 }
                             },
+                            "required": [
+                                "result"
+                            ],
                             "type": "object"
                         }
                     }
@@ -9883,8 +9981,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get address whitelist mail settings",
+                "description": "**This endpoint allows you to retrieve your current email address whitelist settings.**\n\nThe address whitelist setting whitelists a specified email address or domain for which mail should never be suppressed. For example, you own the domain \u201cexample.com,\u201d and one or more of your recipients use email@example.com addresses, by placing example.com in the address whitelist setting, all bounces, blocks, and unsubscribes logged for that domain will be ignored and sent as if under normal sending conditions.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve address whitelist mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -9917,7 +10015,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current email address whitelist settings.**\n\nThe address whitelist setting whitelists a specified email address or domain for which mail should never be suppressed. For example, you own the domain \u201cexample.com,\u201d and one or more of your recipients use email@example.com addresses, by placing example.com in the address whitelist setting, all bounces, blocks, and unsubscribes logged for that domain will be ignored and sent as if under normal sending conditions.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update address whitelist mail settings",
                 "parameters": [
                     {
@@ -9926,9 +10024,11 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "Indicates if your email address whitelist is enabled.",
                                     "type": "boolean"
                                 },
                                 "list": {
+                                    "description": "Either a single email address that you want whitelisted or a domain, for which all email addresses belonging to this domain will be whitelisted.",
                                     "items": {
                                         "type": "string"
                                     },
@@ -9971,8 +10071,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get BCC mail settings",
+                "description": "**This endpoint allows you to retrieve your current BCC mail settings.**\n\nWhen the BCC mail setting is enabled, SendGrid will automatically send a blind carbon copy (BCC) to an address for every email sent without adding that address to the header. Please note that only one email address may be entered in this field, if you wish to distribute BCCs to multiple addresses you will need to create a distribution group or use forwarding rules.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve all BCC mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10003,14 +10103,14 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current BCC mail settings.**\n\nWhen the BCC mail setting is enabled, SendGrid will automatically send a blind carbon copy (BCC) to an address for every email sent without adding that address to the header. Please note that only one email address may be entered in this field, if you wish to distribute BCCs to multiple addresses you will need to create a distribution group or use forwarding rules.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update BCC mail settings",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
                         "schema": {
-                            "$ref": "#/definitions/mail_settings::patch"
+                            "$ref": "#/definitions/mail_settings_patch"
                         }
                     }
                 ],
@@ -10027,7 +10127,7 @@
                             }
                         },
                         "schema": {
-                            "$ref": "#/definitions/mail_settings::patch"
+                            "$ref": "#/definitions/mail_settings_patch"
                         }
                     }
                 },
@@ -10044,8 +10144,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get bounce purge mail settings",
+                "description": "**This endpoint allows you to retrieve your current bounce purge settings.**\n\nThis setting allows you to set a schedule for SendGrid to automatically delete contacts from your soft and hard bounce suppression lists.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve bounce purge mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10077,25 +10177,14 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current bounce purge settings.**\n\nThis setting allows you to set a schedule for SendGrid to automatically delete contacts from your soft and hard bounce suppression lists.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update bounce purge mail settings",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "hard_bounces": {
-                                    "type": "integer"
-                                },
-                                "soft_bounces": {
-                                    "type": "integer"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/mail_settings_bounce_purge"
                         }
                     }
                 ],
@@ -10130,8 +10219,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get footer mail settings [params can be null?]",
+                "description": "**This endpoint allows you to retrieve your current Footer mail settings.**\n\nThe footer setting will insert a custom footer at the bottom of the text and HTML bodies. Use the embedded HTML editor and plain text entry fields to create the content of the footers to be inserted into your emails.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve footer mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10163,7 +10252,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current Footer mail settings.**\n\nThe footer setting will insert a custom footer at the bottom of the text and HTML bodies. Use the embedded HTML editor and plain text entry fields to create the content of the footers to be inserted into your emails.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update footer mail settings",
                 "parameters": [
                     {
@@ -10205,8 +10294,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get forward bounce mail settings",
+                "description": "**This endpoint allows you to retrieve your current bounce forwarding mail settings.**\n\nActivating this setting allows you to specify an email address to which bounce reports are forwarded.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve forward bounce mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10237,22 +10326,14 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current bounce forwarding mail settings.**\n\nActivating this setting allows you to specify an email address to which bounce reports are forwarded.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update forward bounce mail settings",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
                         "schema": {
-                            "properties": {
-                                "email": {
-                                    "type": "string"
-                                },
-                                "enabled": {
-                                    "type": "boolean"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/mail_settings_forward_bounce"
                         }
                     }
                 ],
@@ -10286,8 +10367,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get forward spam mail settings",
+                "description": "**This endpoint allows you to retrieve your current Forward Spam mail settings.**\n\nEnabling the forward spam setting allows you to specify an email address to which spam reports will be forwarded.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve forward spam mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10318,7 +10399,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current Forward Spam mail settings.**\n\nEnabling the forward spam setting allows you to specify an email address to which spam reports will be forwarded.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update forward spam mail settings",
                 "parameters": [
                     {
@@ -10359,8 +10440,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get plain content mail settings",
+                "description": "**This endpoint allows you to retrieve your current Plain Content mail settings.**\n\nThe plain content setting will automatically convert any plain text emails that you send to HTML before sending.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve plain content mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10376,6 +10457,7 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "Indicates if the Plain Content mail setting is enabled.",
                                     "type": "boolean"
                                 }
                             },
@@ -10395,7 +10477,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current Plain Content mail settings.**\n\nThe plain content setting will automatically convert any plain text emails that you send to HTML before sending.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update plain content mail settings",
                 "parameters": [
                     {
@@ -10404,6 +10486,7 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "The new setting you would like to use for your Plain Content mail setting.",
                                     "type": "boolean"
                                 }
                             },
@@ -10425,6 +10508,7 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "Indicates if your Plain Content mail setting is enabled.",
                                     "type": "boolean"
                                 }
                             },
@@ -10445,8 +10529,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get spam check mail settings",
+                "description": "**This endpoint allows you to retrieve your current Spam Checker mail settings.**\n\nThe spam checker filter notifies you when emails are detected that exceed a predefined spam threshold.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve spam check mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10478,7 +10562,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current spam checker mail settings.**\n\nThe spam checker filter notifies you when emails are detected that exceed a predefined spam threshold.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update spam check mail settings",
                 "parameters": [
                     {
@@ -10487,12 +10571,18 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "Indicates if you want the spam check mail setting to be enabled or not.",
                                     "type": "boolean"
                                 },
                                 "max_score": {
+                                    "default": 5,
+                                    "description": "The new max score, or spam threshold that you would like to set for the spam checker.",
+                                    "maximum": 10,
+                                    "minimum": 1,
                                     "type": "integer"
                                 },
                                 "url": {
+                                    "description": "The Inbound Parse URL where you would like your spam reports to be sent to.",
                                     "type": "string"
                                 }
                             },
@@ -10531,8 +10621,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get template mail settings",
+                "description": "**This endpoint allows you to retrieve your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). \n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
+                "operationId": "Retrieve legacy template mail settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -10547,15 +10637,7 @@
                             }
                         },
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "html_content": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/mail_settings_template"
                         }
                     }
                 },
@@ -10571,7 +10653,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). \n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid\u2019s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).",
                 "operationId": "Update template mail settings",
                 "parameters": [
                     {
@@ -10580,9 +10662,11 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "Indicates if you want to enable the legacy email template mail setting.",
                                     "type": "boolean"
                                 },
                                 "html_content": {
+                                    "description": "The new HTML content for your legacy email template.",
                                     "type": "string"
                                 }
                             },
@@ -14010,15 +14094,17 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get Tracking Settings",
+                "description": "**This endpoint allows you to retrieve a list of all tracking settings that you can enable on your account.**\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
+                "operationId": "Retrieve Tracking Settings",
                 "parameters": [
                     {
+                        "description": "The number of settings to return.",
                         "in": "query",
                         "name": "limit",
                         "type": "integer"
                     },
                     {
+                        "description": "Where in the list of results you want to begin retrieving settings.",
                         "in": "query",
                         "name": "offset",
                         "type": "integer"
@@ -14045,18 +14131,23 @@
                         "schema": {
                             "properties": {
                                 "result": {
+                                    "description": "The list of all tracking settings.",
                                     "items": {
                                         "properties": {
                                             "description": {
+                                                "description": "A description about the event that is being tracked.",
                                                 "type": "string"
                                             },
                                             "enabled": {
+                                                "description": "Indicates if this tracking setting is currently enabled.",
                                                 "type": "boolean"
                                             },
                                             "name": {
+                                                "description": "The name of the event being tracked.",
                                                 "type": "string"
                                             },
                                             "title": {
+                                                "description": "The title of the tracking setting.",
                                                 "type": "string"
                                             }
                                         },
@@ -14083,8 +14174,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get Click Track Settings",
+                "description": "**This endpoint allows you to retrieve your current click tracking setting.**\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
+                "operationId": "Retrieve Click Track Settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -14101,12 +14192,18 @@
                         "schema": {
                             "properties": {
                                 "enable_text": {
+                                    "description": "Indicates if click tracking is enabled for plain text emails.",
                                     "type": "boolean"
                                 },
                                 "enabled": {
+                                    "description": "Indicates if click tracking is enabled or disabled.",
                                     "type": "boolean"
                                 }
                             },
+                            "required": [
+                                "enable_text",
+                                "enabled"
+                            ],
                             "type": "object"
                         }
                     }
@@ -14123,7 +14220,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to change your current click tracking setting. You can enable, or disable, click tracking using this endpoint.**\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
                 "operationId": "Update Click Tracking Settings",
                 "parameters": [
                     {
@@ -14132,6 +14229,7 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "The setting you want to use for click tracking.",
                                     "type": "boolean"
                                 }
                             },
@@ -14154,12 +14252,18 @@
                         "schema": {
                             "properties": {
                                 "enable_text": {
+                                    "description": "Indicates if click tracking is enabled for plain text emails",
                                     "type": "boolean"
                                 },
                                 "enabled": {
+                                    "description": "The new setting new setting for click tracking.",
                                     "type": "boolean"
                                 }
                             },
+                            "required": [
+                                "enable_text",
+                                "enabled"
+                            ],
                             "type": "object"
                         }
                     }
@@ -14177,8 +14281,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get Google Analytics Settings",
+                "description": "**This endpoint allows you to retrieve your current setting for Google Analytics.**\n\nFor more information about using Google Analytics, please refer to [Google\u2019s URL Builder](https://support.google.com/analytics/answer/1033867?hl=en) and their article on [\"Best Practices for Campaign Building\"](https://support.google.com/analytics/answer/1037445).\n\nWe default the settings to Google\u2019s recommendations. For more information, see [Google Analytics Demystified](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/google_analytics_demystified_ga_statistics_vs_sg_statistics.html).\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
+                "operationId": "Retrieve Google Analytics Settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -14197,27 +14301,7 @@
                             }
                         },
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "utm_campaign": {
-                                    "type": "string"
-                                },
-                                "utm_content": {
-                                    "type": "string"
-                                },
-                                "utm_medium": {
-                                    "type": "string"
-                                },
-                                "utm_source": {
-                                    "type": "string"
-                                },
-                                "utm_term": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/google_analytics_settings"
                         }
                     }
                 },
@@ -14233,34 +14317,14 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current setting for Google Analytics.**\n\nFor more information about using Google Analytics, please refer to [Google\u2019s URL Builder](https://support.google.com/analytics/answer/1033867?hl=en) and their article on [\"Best Practices for Campaign Building\"](https://support.google.com/analytics/answer/1037445).\n\nWe default the settings to Google\u2019s recommendations. For more information, see [Google Analytics Demystified](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/google_analytics_demystified_ga_statistics_vs_sg_statistics.html).\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
                 "operationId": "Update Google Analytics Settings",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "utm_campaign": {
-                                    "type": "string"
-                                },
-                                "utm_content": {
-                                    "type": "string"
-                                },
-                                "utm_medium": {
-                                    "type": "string"
-                                },
-                                "utm_source": {
-                                    "type": "string"
-                                },
-                                "utm_term": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/google_analytics_settings"
                         }
                     }
                 ],
@@ -14281,27 +14345,7 @@
                             }
                         },
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "utm_campaign": {
-                                    "type": "string"
-                                },
-                                "utm_content": {
-                                    "type": "string"
-                                },
-                                "utm_medium": {
-                                    "type": "string"
-                                },
-                                "utm_source": {
-                                    "type": "string"
-                                },
-                                "utm_term": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/google_analytics_settings"
                         }
                     }
                 },
@@ -14318,7 +14362,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to retrieve your current settings for open tracking.**\n\nOpen Tracking adds an invisible image at the end of the email which can track email opens. If the email recipient has images enabled on their email client, a request to SendGrid\u2019s server for the invisible image is executed and an open event is logged. These events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
                 "operationId": "Get Open Tracking Settings",
                 "parameters": [],
                 "produces": [
@@ -14335,9 +14379,13 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "Indicates if open tracking is enabled.",
                                     "type": "boolean"
                                 }
                             },
+                            "required": [
+                                "enabled"
+                            ],
                             "type": "object"
                         }
                     }
@@ -14354,7 +14402,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current settings for open tracking.**\n\nOpen Tracking adds an invisible image at the end of the email which can track email opens. If the email recipient has images enabled on their email client, a request to SendGrid\u2019s server for the invisible image is executed and an open event is logged. These events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
                 "operationId": "Update Open Tracking Settings",
                 "parameters": [
                     {
@@ -14363,6 +14411,7 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "The new status that you want to set for open tracking.",
                                     "type": "boolean"
                                 }
                             },
@@ -14384,9 +14433,13 @@
                         "schema": {
                             "properties": {
                                 "enabled": {
+                                    "description": "Indicates if open tracking is enabled.",
                                     "type": "boolean"
                                 }
                             },
+                            "required": [
+                                "enabled"
+                            ],
                             "type": "object"
                         }
                     }
@@ -14404,8 +14457,8 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
-                "operationId": "Get Subscription Tracking Settings",
+                "description": "**This endpoint allows you to retrieve your current settings for subscription tracking.**\n\nSubscription tracking adds links to the bottom of your emails that allows your recipients to subscribe to, or unsubscribe from, your emails.\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
+                "operationId": "Retrieve Subscription Tracking Settings",
                 "parameters": [],
                 "produces": [
                     "application/json"
@@ -14424,27 +14477,7 @@
                             }
                         },
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "html_content": {
-                                    "type": "string"
-                                },
-                                "landing": {
-                                    "type": "string"
-                                },
-                                "plain_content": {
-                                    "type": "string"
-                                },
-                                "replace": {
-                                    "type": "string"
-                                },
-                                "url": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/subscription_tracking_settings"
                         }
                     }
                 },
@@ -14460,34 +14493,14 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "**This endpoint allows you to update your current settings for subscription tracking.**\n\nSubscription tracking adds links to the bottom of your emails that allows your recipients to subscribe to, or unsubscribe from, your emails.\n\nYou can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.\n\nFor more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).",
                 "operationId": "Update Subscription Tracking Settings",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "html_content": {
-                                    "type": "string"
-                                },
-                                "landing": {
-                                    "type": "string"
-                                },
-                                "plain_content": {
-                                    "type": "string"
-                                },
-                                "replace": {
-                                    "type": "string"
-                                },
-                                "url": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/subscription_tracking_settings"
                         }
                     }
                 ],
@@ -14508,27 +14521,7 @@
                             }
                         },
                         "schema": {
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "html_content": {
-                                    "type": "string"
-                                },
-                                "landing": {
-                                    "type": "string"
-                                },
-                                "plain_content": {
-                                    "type": "string"
-                                },
-                                "replace": {
-                                    "type": "string"
-                                },
-                                "url": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/subscription_tracking_settings"
                         }
                     }
                 },
