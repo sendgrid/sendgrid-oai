@@ -1,6 +1,6 @@
 [![Travis Badge](https://travis-ci.org/sendgrid/python-http-client.svg?branch=master)](https://travis-ci.org/sendgrid/python-http-client)
 
-**This is a Swagger 2.0 and RAML 0.8 representation of the [SendGrid v3 Web API](v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
+**This is a Swagger 2.0 and RAML 0.8 representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
 
 If you have an interesting use case for these files or have a request, please [let us know via email](mailto:dx@sendgrid.com) or [create an issue](https://github.com/sendgrid/sendgrid-swagger/issues).
 
