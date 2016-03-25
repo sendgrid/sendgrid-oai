@@ -2527,7 +2527,7 @@
     "host": "api.sendgrid.com",
     "info": {
         "description": "",
-        "title": "DX - v3 - Officially Documented Only - DO NOT EDIT",
+        "title": "SendGrid V3 API",
         "version": "3.0"
     },
     "paths": {
