@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: DX - v3 - Officially Documented Only - DO NOT EDIT
+title: SendGrid V3 API
 version: '3.0'
 baseUri: 'https://api.sendgrid.com/v3'
 mediaType: application/json
