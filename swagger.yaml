@@ -229,7 +229,16 @@ paths:
       tags:
         - Bounces API
       summary: Delete a bounce
-      description: "**This endpoint allows you to remove an email address from your bounce list.**\n\nBounces are messages that are returned to the server that sent it. This endpoint allows you to delete a single email addresses from your bounce list. \n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)\n* [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)"
+      description: |-
+        **This endpoint allows you to remove an email address from your bounce list.**
+
+        Bounces are messages that are returned to the server that sent it. This endpoint allows you to delete a single email addresses from your bounce list. 
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
+        * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
       operationId: DELETE_suppression-bounces-email
       consumes:
         - application/json
@@ -242,6 +251,10 @@ paths:
           required: true
           type: string
           format: email
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '204':
           description: ''
@@ -262,7 +275,16 @@ paths:
       tags:
         - Bounces API
       summary: Retrieve a Bounce
-      description: "**This endpoint allows you to retrieve a specific bounce for a given email address.**\n\nBounces are messages that are returned to the server that sent it.\n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)\n* [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)"
+      description: |-
+        **This endpoint allows you to retrieve a specific bounce for a given email address.**
+
+        Bounces are messages that are returned to the server that sent it.
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
+        * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
       operationId: GET_suppression-bounces-email
       consumes:
         - application/json
@@ -289,10 +311,177 @@ paths:
             application/json:
               - created: 1443651125
                 email: bounce1@test.com
-                reason: "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp "
+                reason: '550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient''s email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp '
                 status: 5.1.1
       security:
         - Authorization: []
+  '/subusers/{subuser_name}/monitor':
+    parameters:
+      - name: subuser_name
+        in: path
+        description: The name of the subuser for which to retrieve monitor settings.
+        required: true
+        type: string
+    get:
+      summary: Retrieve monitor settings for a subuser
+      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
+      operationId: GET_subusers-subuser_name-monitor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/monitor'
+          examples:
+            application/json:
+              email: example@example.com
+              frequency: 500
+        '401':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: null
+                  message: authorization required
+        '404':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: null
+                  message: No monitor settings for this user
+      security:
+        - Authorization: []
+    put:
+      summary: Update Monitor Settings for a subuser
+      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
+      operationId: PUT_subusers-subuser_name-monitor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/monitor'
+            example:
+              email: example@example.com
+              frequency: 500
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/monitor'
+          examples:
+            application/json:
+              email: example@example.com
+              frequency: 500
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: email
+                  message: Email is required
+        '401':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: null
+                  message: authorization required
+      security:
+        - Authorization: []
+    post:
+      summary: Create monitor settings
+      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
+      operationId: POST_subusers-subuser_name-monitor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/monitor'
+            example:
+              email: example@example.com
+              frequency: 50000
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/monitor'
+          examples:
+            application/json:
+              email: example@example.com
+              frequency: 50000
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: null
+                  message: User already has a monitor
+        '401':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: null
+                  message: authorization required
+      security:
+        - Authorization: []
+    delete:
+      summary: Delete monitor settings
+      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
+      operationId: DELETE_subusers-subuser_name-monitor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '204':
+          description: ''
+          schema:
+            type: object
+        '401':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: null
+                  message: authorization required
+        '404':
+          description: ''
+          schema:
+            $ref: '#/definitions/global:ErrorResponse'
+          examples:
+            application/json:
+              errors:
+                - field: null
+                  message: No monitor settings for this user
   /mailbox_providers/stats:
     parameters: []
     get:
@@ -828,7 +1017,10 @@ paths:
         type: integer
     get:
       summary: Retrieve all recipients on a List
-      description: "**This endpoint allows you to retrieve all recipients on the list with the given ID.** \n\nThe Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients."
+      description: |-
+        **This endpoint allows you to retrieve all recipients on the list with the given ID.** 
+
+        The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: GET_contactdb-lists-list_id-recipients
       consumes:
         - application/json
@@ -939,7 +1131,16 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: array
+            items:
+              type: string
+            example:
+              - recipient_id1
+              - recipient_id2
       responses:
         '201':
           description: ''
@@ -1014,9 +1215,9 @@ paths:
               template_id: ddb96bbc-9b92-425e-8979-99464621b543
               active: 1
               name: example_version_name
-              html_content: '<%body%>'
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              html_content: <%body%>
+              plain_content: <%body%>
+              subject: <%subject%>
       responses:
         '201':
           description: ''
@@ -1040,9 +1241,9 @@ paths:
               template_id: ddb96bbc-9b92-425e-8979-99464621b543
               active: 1
               name: example_version_name
-              html_content: '<%body%>'
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              html_content: <%body%>
+              plain_content: <%body%>
+              subject: <%subject%>
               updated_at: '2014-03-19 18:56:33'
       security:
         - Authorization: []
@@ -1202,9 +1403,9 @@ paths:
               template_id: d51480ca-ca3f-465c-bc3e-ceb71d73c38d
               active: 1
               name: version 1 name
-              html_content: '<%body%>'
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              html_content: <%body%>
+              plain_content: <%body%>
+              subject: <%subject%>
               updated_at: '2014-03-19 18:56:33'
       security:
         - Authorization: []
@@ -1277,9 +1478,9 @@ paths:
             example:
               active: 1
               name: updated_example_name
-              html_content: '<%body%>'
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              html_content: <%body%>
+              plain_content: <%body%>
+              subject: <%subject%>
       responses:
         '200':
           description: ''
@@ -1303,9 +1504,9 @@ paths:
               template_id: d51480ca-ca3f-465c-bc3e-ceb71d73c38d
               active: 1
               name: version 1 name
-              html_content: '<%body%>'
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              html_content: <%body%>
+              plain_content: <%body%>
+              subject: <%subject%>
               updated_at: '2014-03-19 18:56:33'
       security:
         - Authorization: []
@@ -1363,9 +1564,9 @@ paths:
               template_id: e3a61852-1acb-4b32-a1bc-b44b3814ab78
               active: 1
               name: example_version_name
-              html_content: '<%body%>'
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              html_content: <%body%>
+              plain_content: <%body%>
+              subject: <%subject%>
               updated_at: '2014-06-12 11:33:00'
       security:
         - Authorization: []
@@ -1862,7 +2063,18 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: array
+            items:
+              type: number
+            example:
+              - 1
+              - 2
+              - 3
+              - 4
       responses:
         '204':
           description: ''
@@ -1984,172 +2196,6 @@ paths:
                 - id: 1
                   name: the jones
                   recipient_count: 1
-      security:
-        - Authorization: []
-  '/subusers/{subuser_name}/monitor':
-    parameters:
-      - name: subuser_name
-        in: path
-        required: true
-        type: string
-    post:
-      summary: Create monitor settings
-      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
-      operationId: POST_subusers-subuser_name-monitor
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/monitor'
-            example:
-              email: example@example.com
-              frequency: 50000
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/monitor'
-          examples:
-            application/json:
-              email: example@example.com
-              frequency: 50000
-        '400':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: null
-                  message: User already has a monitor
-        '401':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: null
-                  message: authorization required
-      security:
-        - Authorization: []
-    delete:
-      summary: Delete monitor settings
-      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
-      operationId: DELETE_subusers-subuser_name-monitor
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '204':
-          description: ''
-          schema:
-            type: object
-        '401':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: null
-                  message: authorization required
-        '404':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: null
-                  message: No monitor settings for this user
-    put:
-      summary: Update Monitor Settings for a subuser
-      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
-      operationId: PUT_subusers-subuser_name-monitor
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/monitor'
-            example:
-              email: example@example.com
-              frequency: 500
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/monitor'
-          examples:
-            application/json:
-              email: example@example.com
-              frequency: 500
-        '400':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: email
-                  message: Email is required
-        '401':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: null
-                  message: authorization required
-      security:
-        - Authorization: []
-    get:
-      summary: Retrieve monitor settings for a subuser
-      description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
-      operationId: GET_subusers-subuser_name-monitor
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/monitor'
-          examples:
-            application/json:
-              email: example@example.com
-              frequency: 500
-        '401':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: null
-                  message: authorization required
-        '404':
-          description: ''
-          schema:
-            $ref: '#/definitions/global:ErrorResponse'
-          examples:
-            application/json:
-              errors:
-                - field: null
-                  message: No monitor settings for this user
       security:
         - Authorization: []
   '/whitelabel/links/{link_id}/subuser':
@@ -2364,7 +2410,30 @@ paths:
       tags:
         - Contacts API - Segments
       summary: Create a Segment
-      description: "**This endpoint allows you to create a segment.**\n\nAll recipients in your contactdb will be added or removed automatically depending on whether they match the criteria for this segment.\n\nList Id:\n\n* Send this to segment from an existing list\n* Don't send this in order to segment from your entire contactdb.\n\nValid operators for create and update depend on the type of the field you are segmenting: \n\n* **Dates:** \"eq\", \"ne\", \"lt\" (before), \"gt\" (after) \n* **Text:** \"contains\", \"eq\" (is - matches the full field), \"ne\" (is not - matches any field where the entire field is not the condition value) \n* **Numbers:** \"eq\", \"lt\", \"gt\" \n* **Email Clicks and Opens:** \"eq\" (opened), \"ne\" (not opened) \n\nSegment conditions using \"eq\" or \"ne\" for email clicks and opens should provide a \"field\" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign. \n\nSegments may contain multiple condtions, joined by an \"and\" or \"or\" in the \"and_or\" field. The first condition in the conditions list must have an empty \"and_or\", and subsequent conditions must all specify an \"and_or\".\n\nThe Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.\n\nFor more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment)."
+      description: |-
+        **This endpoint allows you to create a segment.**
+
+        All recipients in your contactdb will be added or removed automatically depending on whether they match the criteria for this segment.
+
+        List Id:
+
+        * Send this to segment from an existing list
+        * Don't send this in order to segment from your entire contactdb.
+
+        Valid operators for create and update depend on the type of the field you are segmenting: 
+
+        * **Dates:** "eq", "ne", "lt" (before), "gt" (after) 
+        * **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value) 
+        * **Numbers:** "eq", "lt", "gt" 
+        * **Email Clicks and Opens:** "eq" (opened), "ne" (not opened) 
+
+        Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign. 
+
+        Segments may contain multiple condtions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
+
+        The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
+
+        For more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment).
       operationId: POST_contactdb-segments
       consumes:
         - application/json
@@ -2939,7 +3008,16 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: array
+            items:
+              type: string
+            example:
+              - recipient_id1
+              - recipient_id2
       responses:
         '200':
           description: ''
@@ -2984,7 +3062,29 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                last_name:
+                  type: string
+                  description: The last name of the recipient. This is one of the default custom fields.
+                first_name:
+                  type: string
+                  description: The first name of the recipient. This is one of the default custom fields.
+              required:
+                - email
+            example:
+              - email: jones@example.com
+                last_name: Jones
+                first_name: Guy
       responses:
         '201':
           description: ''
@@ -3082,7 +3182,35 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The email address of the recipient.
+                  format: email
+                first_name:
+                  type: string
+                  description: The first name of the recipient.
+                last_name:
+                  type: string
+                  description: The last name of the recipient.
+              required:
+                - email
+            example:
+              - email: example@example.com
+                first_name: ''
+                last_name: User
+                age: 25
+              - email: example2@example.com
+                first_name: Example
+                last_name: User
+                age: 25
       responses:
         '201':
           description: ''
@@ -3156,6 +3284,10 @@ paths:
           description: The ID of the recipient to take off the list.
           required: true
           type: number
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '204':
           description: ''
@@ -3209,7 +3341,11 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '201':
           description: ''
@@ -3278,6 +3414,10 @@ paths:
           enum:
             - true
             - false
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '202':
           description: ''
@@ -3431,7 +3571,10 @@ paths:
     parameters: []
     get:
       summary: Retrieve all custom fields
-      description: "**This endpoint allows you to retrieve all custom fields.** \n\nThe contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)."
+      description: |-
+        **This endpoint allows you to retrieve all custom fields.** 
+
+        The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: GET_contactdb-custom_fields
       consumes:
         - application/json
@@ -3751,7 +3894,7 @@ paths:
       security:
         - Authorization: []
     put:
-      summary: 'Update the name & scopes of an API Key'
+      summary: Update the name & scopes of an API Key
       description: |
         **This endpoint allows you to update the name and scopes of a given API key.**
 
@@ -3801,7 +3944,7 @@ paths:
             application/json:
               errors:
                 - field: null
-                  message: "expected JSON request body with 'name' property"
+                  message: expected JSON request body with 'name' property
         '401':
           description: ''
           schema:
@@ -3931,7 +4074,11 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '204':
           description: ''
@@ -4515,11 +4662,11 @@ paths:
             application/json:
               errors:
                 - field: subject
-                  message: "subject can't be blank"
+                  message: subject can't be blank
                 - field: sender_id
-                  message: "sender_id can't be blank"
+                  message: sender_id can't be blank
                 - field: plain_content
-                  message: "plain_content can't be blank, please provide plain text or html content"
+                  message: 'plain_content can''t be blank, please provide plain text or html content'
                 - field: list_id
                   message: You must select at least 1 segment or 1 list to send to.
                 - field: unsubscribe_tag
@@ -4561,7 +4708,14 @@ paths:
     parameters: []
     get:
       summary: Retrieve legacy template mail settings
-      description: "**This endpoint allows you to retrieve your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). \n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html)."
+      description: |-
+        **This endpoint allows you to retrieve your current legacy email template settings.**
+
+        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). 
+
+        The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
+
+        Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-template
       consumes:
         - application/json
@@ -4582,7 +4736,14 @@ paths:
         - Authorization: []
     patch:
       summary: Update template mail settings
-      description: "**This endpoint allows you to update your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). \n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html)."
+      description: |-
+        **This endpoint allows you to update your current legacy email template settings.**
+
+        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). 
+
+        The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
+
+        Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: PATCH_mail_settings-template
       consumes:
         - application/json
@@ -4602,7 +4763,7 @@ paths:
                 description: The new HTML content for your legacy email template.
             example:
               enabled: true
-              html_content: '<% body %>'
+              html_content: <% body %>
       responses:
         '200':
           description: ''
@@ -5008,8 +5169,17 @@ paths:
     get:
       tags:
         - Users API
-      summary: "Get a user's account information."
-      description: "Your user's account information includes the user's account type and reputation."
+      summary: Get a user's account information.
+      description: |-
+        **This endpoint allows you to retrieve your user account details.**
+
+        Your user's account information includes the user's account type and reputation.
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
       operationId: GET_user-account
       consumes:
         - application/json
@@ -5267,7 +5437,18 @@ paths:
       tags:
         - Bounces API
       summary: Delete bounces
-      description: "**This endpoint allows you to delete all of your bounces. You can also use this endpoint to remove a specific email address from your bounce list.**\n\nBounces are messages that are returned to the server that sent it.\n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)\n* [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)\n\nNote: the `delete_all` and `emails` parameters should be used independently of each other as they have different purposes."
+      description: |-
+        **This endpoint allows you to delete all of your bounces. You can also use this endpoint to remove a specific email address from your bounce list.**
+
+        Bounces are messages that are returned to the server that sent it.
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
+        * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
+
+        Note: the `delete_all` and `emails` parameters should be used independently of each other as they have different purposes.
       operationId: DELETE_suppression-bounces
       consumes:
         - application/json
@@ -5281,7 +5462,7 @@ paths:
             properties:
               delete_all:
                 type: boolean
-                description: 'This parameter allows you to delete **every** email in your bounce list. This should not be used with the emails parameter.'
+                description: This parameter allows you to delete **every** email in your bounce list. This should not be used with the emails parameter.
               emails:
                 type: array
                 description: Delete multiple emails from your bounce list at the same time. This should not be used with the delete_all parameter.
@@ -5312,7 +5493,15 @@ paths:
       tags:
         - Bounces API
       summary: Retrieve all bounces
-      description: "**This endpoint allows you to retrieve all of your bounces.**\n\nBounces are messages that are returned to the server that sent it. \n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)"
+      description: |-
+        **This endpoint allows you to retrieve all of your bounces.**
+
+        Bounces are messages that are returned to the server that sent it. 
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
       operationId: GET_suppression-bounces
       consumes:
         - application/json
@@ -5351,7 +5540,7 @@ paths:
             application/json:
               - created: 1250337600
                 email: example@example.com
-                reason: "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp "
+                reason: '550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient''s email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp '
                 status: 5.1.1
               - created: 1250337600
                 email: example@example.com
@@ -5584,7 +5773,11 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '204':
           description: ''
@@ -5630,7 +5823,7 @@ paths:
             application/json:
               id: 986724
               title: March Newsletter
-              subject: 'New Products for Spring!'
+              subject: New Products for Spring!
               sender_id: 124451
               list_ids:
                 - 110
@@ -5642,8 +5835,8 @@ paths:
               suppression_group_id: 42
               custom_unsubscribe_url: ''
               ip_pool: marketing
-              html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
-              plain_content: 'Check out our spring line!'
+              html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
+              plain_content: Check out our spring line!
               status: Draft
         '401':
           description: ''
@@ -5710,11 +5903,11 @@ paths:
               - plain_content
             example:
               title: May Newsletter
-              subject: 'New Products for Summer!'
+              subject: New Products for Summer!
               categories:
                 - summer line
-              html_content: '<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>'
-              plain_content: 'Check out our summer line!'
+              html_content: <html><head><title></title></head><body><p>Check out our summer line!</p></body></html>
+              plain_content: Check out our summer line!
       responses:
         '200':
           description: ''
@@ -5724,7 +5917,7 @@ paths:
             application/json:
               id: 986724
               title: May Newsletter
-              subject: 'New Products for Summer!'
+              subject: New Products for Summer!
               sender_id: 124451
               list_ids:
                 - 110
@@ -5736,8 +5929,8 @@ paths:
               suppression_group_id: 42
               custom_unsubscribe_url: ''
               ip_pool: marketing
-              html_content: '<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>'
-              plain_content: 'Check out our summer line!'
+              html_content: <html><head><title></title></head><body><p>Check out our summer line!</p></body></html>
+              plain_content: Check out our summer line!
               status: Draft
         '400':
           description: |-
@@ -5760,7 +5953,7 @@ paths:
             application/json:
               errors:
                 - field: title
-                  message: "title can't be blank"
+                  message: title can't be blank
                 - field: title
                   message: title is too long (maximum is 100 characters)
                 - field: categories
@@ -5822,7 +6015,14 @@ paths:
         type: string
     get:
       summary: Validate batch ID
-      description: "**This endpoint allows you to validate a batch ID.**\n\nIf you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. \n\nMore Information:\n\n* [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)"
+      description: |-
+        **This endpoint allows you to validate a batch ID.**
+
+        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. 
+
+        More Information:
+
+        * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
       operationId: GET_mail-batch-batch_id
       consumes:
         - application/json
@@ -5862,8 +6062,10 @@ paths:
     patch:
       tags:
         - Users API
-      summary: "Update a user's profile"
+      summary: Update a user's profile
       description: |-
+        **This endpoint allows you to update your current profile details.**
+
         Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
 
         For more information about your user profile:
@@ -5887,7 +6089,7 @@ paths:
               city: Orange
         - name: on-behalf-of
           in: header
-          description: "You can enter a subuser name as the value for this header, in order to update the subuser's profile."
+          description: 'You can enter a subuser name as the value for this header, in order to update the subuser''s profile.'
           type: string
       responses:
         '200':
@@ -5921,7 +6123,7 @@ paths:
     get:
       tags:
         - Users API
-      summary: "Get a user's profile"
+      summary: Get a user's profile
       description: |-
         Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
 
@@ -5943,37 +6145,37 @@ paths:
             properties:
               address:
                 type: string
-                description: "The user's address."
+                description: The user's address.
               address2:
                 type: string
-                description: "The second line of the user's address."
+                description: The second line of the user's address.
               city:
                 type: string
-                description: "The user's city."
+                description: The user's city.
               company:
                 type: string
-                description: "The name of the user's company."
+                description: The name of the user's company.
               country:
                 type: string
-                description: "The user's country."
+                description: The user's country.
               first_name:
                 type: string
-                description: "The user's first name."
+                description: The user's first name.
               last_name:
                 type: string
-                description: "The user's last name."
+                description: The user's last name.
               phone:
                 type: string
-                description: "The user's phone number."
+                description: The user's phone number.
               state:
                 type: string
-                description: "The user's state."
+                description: The user's state.
               website:
                 type: string
-                description: "The user's website URL."
+                description: The user's website URL.
               zip:
                 type: string
-                description: "The user's zip code."
+                description: The user's zip code.
             required:
               - address
               - city
@@ -6934,7 +7136,11 @@ paths:
       consumes:
         - application/json
       produces: []
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '204':
           description: ''
@@ -6960,7 +7166,7 @@ paths:
         '200':
           description: ''
           schema:
-            title: "List fields that are reserved and can't be used for custom field names. response"
+            title: List fields that are reserved and can't be used for custom field names. response
             type: object
             properties:
               reserved_fields:
@@ -7049,7 +7255,7 @@ paths:
               result:
                 - id: 986724
                   title: March Newsletter
-                  subject: 'New Products for Spring!'
+                  subject: New Products for Spring!
                   sender_id: 124451
                   list_ids:
                     - 110
@@ -7061,12 +7267,12 @@ paths:
                   suppression_group_id: 42
                   custom_unsubscribe_url: ''
                   ip_pool: marketing
-                  html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
-                  plain_content: 'Check out our spring line!'
+                  html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
+                  plain_content: Check out our spring line!
                   status: Draft
                 - id: 986723
                   title: February Newsletter
-                  subject: 'Final Winter Product Sale!'
+                  subject: Final Winter Product Sale!
                   sender_id: 124451
                   list_ids:
                     - 110
@@ -7078,8 +7284,8 @@ paths:
                   suppression_group_id: 42
                   custom_unsubscribe_url: ''
                   ip_pool: marketing
-                  html_content: '<html><head><title></title></head><body><p>Last call for winter clothes!</p></body></html>'
-                  plain_content: 'Last call for winter clothes!'
+                  html_content: <html><head><title></title></head><body><p>Last call for winter clothes!</p></body></html>
+                  plain_content: Last call for winter clothes!
                   status: Sent
       security:
         - Authorization: []
@@ -7109,7 +7315,7 @@ paths:
             $ref: '#/definitions/campaign_request'
             example:
               title: March Newsletter
-              subject: 'New Products for Spring!'
+              subject: New Products for Spring!
               sender_id: 124451
               list_ids:
                 - 110
@@ -7121,8 +7327,8 @@ paths:
               suppression_group_id: 42
               custom_unsubscribe_url: ''
               ip_pool: marketing
-              html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
-              plain_content: 'Check out our spring line!'
+              html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
+              plain_content: Check out our spring line!
       responses:
         '201':
           description: ''
@@ -7132,7 +7338,7 @@ paths:
             application/json:
               id: 986724
               title: March Newsletter
-              subject: 'New Products for Spring!'
+              subject: New Products for Spring!
               sender_id: 124451
               list_ids:
                 - 110
@@ -7144,8 +7350,8 @@ paths:
               suppression_group_id: 42
               custom_unsubscribe_url: ''
               ip_pool: marketing
-              html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
-              plain_content: 'Check out our spring line!'
+              html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
+              plain_content: Check out our spring line!
               status: Draft
         '400':
           description: |-
@@ -7169,7 +7375,7 @@ paths:
             application/json:
               errors:
                 - field: title
-                  message: "title can't be blank"
+                  message: title can't be blank
                 - field: title
                   message: title is too long (maximum is 100 characters)
                 - field: categories
@@ -7195,7 +7401,7 @@ paths:
                 - field: null
                   message: The JSON you have submitted cannot be parsed.
                 - field: null
-                  message: "You've reached your limit of 250 campaigns. Please delete one or more and try again."
+                  message: You've reached your limit of 250 campaigns. Please delete one or more and try again.
         '401':
           description: ''
           schema:
@@ -7586,13 +7792,24 @@ paths:
       tags:
         - Cancel Scheduled Sends
       summary: Create a batch ID
-      description: "**This endpoint allows you to generate a new batch ID. This batch ID can be associated with scheduled sends via the mail/send endpoint.**\n\nIf you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. \n\nMore Information:\n\n* [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)"
+      description: |-
+        **This endpoint allows you to generate a new batch ID. This batch ID can be associated with scheduled sends via the mail/send endpoint.**
+
+        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. 
+
+        More Information:
+
+        * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
       operationId: POST_mail-batch
       consumes:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '201':
           description: ''
@@ -7620,13 +7837,28 @@ paths:
         type: string
     put:
       summary: Update IPs assigned to a subuser
-      description: "Each subuser should be assigned to an IP address, from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have their own, or multiple, IP addresses as well. \n\nMore information:\n\n* [How to request more IPs](https://sendgrid.com/docs/Classroom/Basics/Account/adding_an_additional_dedicated_ip_to_your_account.html)\n* [IPs can be whitelabeled](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/ips.html)"
+      description: |-
+        Each subuser should be assigned to an IP address, from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have their own, or multiple, IP addresses as well. 
+
+        More information:
+
+        * [How to request more IPs](https://sendgrid.com/docs/Classroom/Basics/Account/adding_an_additional_dedicated_ip_to_your_account.html)
+        * [IPs can be whitelabeled](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/ips.html)
       operationId: PUT_subusers-subuser_name-ips
       consumes:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: array
+            items:
+              type: string
+              format: ipv4
+            example:
+              - 127.0.0.1
       responses:
         '200':
           description: ''
@@ -7694,8 +7926,6 @@ paths:
       security:
         - Authorization: []
     post:
-      tags:
-        - API Keys
       summary: Create API keys
       description: |-
         **This enpoint allows you to create a new random API Key for the user.**
@@ -7875,7 +8105,7 @@ paths:
               validation_resuts:
                 mail_cname:
                   valid: false
-                  reason: 'Expected your MX record to be "mx.sendgrid.net" but found "example.com".'
+                  reason: Expected your MX record to be "mx.sendgrid.net" but found "example.com".
                 dkim1:
                   valid: true
                   reason: null
@@ -8182,7 +8412,10 @@ paths:
       tags:
         - API Key Permissions
       summary: Retrieve a list of scopes for which this user has access.
-      description: "**This endpoint returns a list of all scopes that this user has access to.**\n\nAPI Keys can be used to authenticate the use of [SendGrid’s v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html). "
+      description: |-
+        **This endpoint returns a list of all scopes that this user has access to.**
+
+        API Keys can be used to authenticate the use of [SendGrid’s v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html). 
       operationId: GET_scopes
       consumes:
         - application/json
@@ -8216,13 +8449,13 @@ paths:
             properties:
               errors:
                 type: array
-                description: "This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes."
+                description: This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes.
                 items:
                   type: object
                   properties:
                     field:
                       type: 'null'
-                      description: "This empty field is returned instead of the list of scopes if the user making the call doesn't have the authorization required."
+                      description: This empty field is returned instead of the list of scopes if the user making the call doesn't have the authorization required.
                     message:
                       type: string
                       description: Explains why the scopes cannot be returned.
@@ -8627,7 +8860,7 @@ paths:
                 description: Specify whether to use a custom SPF or allow SendGrid to manage your SPF. This option is only available to domain whitelabels setup for manual security.
               default:
                 type: boolean
-                description: "Whether to use this whitelabel as the fallback if no domain whitelabels match the sender's domain."
+                description: Whether to use this whitelabel as the fallback if no domain whitelabels match the sender's domain.
               automatic_security:
                 type: boolean
                 description: 'Whether to allow SendGrid to manage your SPF records, DKIM keys, and DKIM key rotation.'
@@ -8920,7 +9153,11 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: 'null'
       responses:
         '201':
           description: ''
@@ -8955,11 +9192,11 @@ paths:
             application/json:
               errors:
                 - field: subject
-                  message: "subject can't be blank"
+                  message: subject can't be blank
                 - field: sender_id
-                  message: "sender_id can't be blank"
+                  message: sender_id can't be blank
                 - field: plain_content
-                  message: "plain_content can't be blank, please provide plain text or html content"
+                  message: 'plain_content can''t be blank, please provide plain text or html content'
                 - field: list_id
                   message: You must select at least 1 segment or 1 list to send to.
                 - field: unsubscribe_tag
@@ -9800,7 +10037,7 @@ paths:
               validation_results:
                 domain_cname:
                   valid: false
-                  reason: 'Expected CNAME to match "sendgrid.net." but found "example.com.".'
+                  reason: Expected CNAME to match "sendgrid.net." but found "example.com.".
                 owner_cname:
                   valid: true
                   reason: null
@@ -9905,50 +10142,6 @@ paths:
                   message: invalid sort value
       security:
         - Authorization: []
-  '/ips/pools/{pool_name}/ips/{ip}':
-    parameters:
-      - name: pool_name
-        in: path
-        description: The name of the IP pool that you are removing the IP address from.
-        required: true
-        type: string
-      - name: ip
-        in: path
-        description: The IP address that you are removing.
-        required: true
-        type: string
-    delete:
-      summary: Remove an IP address from a pool.
-      description: |-
-        **This endpoint allows you to remove an IP address from an IP pool.**
-
-        The same IP address can be added to multiple IP pools.
-
-        A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
-      operationId: DELETE_ips-pools-pool_name-ips-ip
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '204':
-          description: ''
-          schema:
-            type: object
-        '404':
-          description: ''
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: An error explaining why the IP address could not be removed from the IP pool.
-          examples:
-            application/json:
-              error: Unable to locate specified IPs Pool
-      security:
-        - Authorization: []
   /ips/warmup:
     parameters: []
     get:
@@ -10028,98 +10221,12 @@ paths:
                       type: 'null'
                     message:
                       type: string
-                      description: "A message explaining why the IP couldn't entered into warmup mode."
+                      description: A message explaining why the IP couldn't entered into warmup mode.
           examples:
             application/json:
               errors:
                 - field: null
                   message: resource not found
-      security:
-        - Authorization: []
-  /user/settings/enforced_tls:
-    parameters: []
-    get:
-      summary: Retrieve current Enforced TLS settings.
-      description: |-
-        **This endpoint allows you to retrieve your current Enforced TLS settings.**
-
-        The Enforced TLS settings specify whether or not the recipient is required to support TLS or have a valid certificate. See the [SMTP Ports User Guide](https://sendgrid.com/docs/Classroom/Basics/Email_Infrastructure/smtp_ports.html) for more information on opportunistic TLS.
-
-        **Note:** If either setting is enabled and the recipient does not support TLS or have a valid certificate, we drop the message and send a block event with “TLS required but not supported” as the description.
-      operationId: GET_user-settings-enforced_tls
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: object
-            properties:
-              require_tls:
-                type: boolean
-                description: Indicates if the recipient is required to support TLS.
-              require_valid_cert:
-                type: boolean
-                description: Indicates if the recipient is required to have a valid certificate.
-            required:
-              - require_tls
-              - require_valid_cert
-          examples:
-            application/json:
-              require_tls: false
-              require_valid_cert: false
-      security:
-        - Authorization: []
-    patch:
-      summary: Update Enforced TLS settings
-      description: |-
-        **This endpoint allows you to update your current Enforced TLS settings.**
-
-        The Enforced TLS settings specify whether or not the recipient is required to support TLS or have a valid certificate. See the [SMTP Ports User Guide](https://sendgrid.com/docs/Classroom/Basics/Email_Infrastructure/smtp_ports.html) for more information on opportunistic TLS.
-
-        **Note:** If either setting is enabled and the recipient does not support TLS or have a valid certificate, we drop the message and send a block event with “TLS required but not supported” as the description.
-      operationId: PATCH_user-settings-enforced_tls
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              require_tls:
-                type: boolean
-                description: 'Indicates if you want to require your recipients to support TLS. '
-              require_valid_cert:
-                type: boolean
-                description: Indicates if you want to require your recipients to have a valid certificate.
-            example:
-              require_tls: true
-              require_valid_cert: false
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: object
-            properties:
-              require_tls:
-                type: boolean
-                description: Indicates if your recipients are required to support TLS.
-              require_valid_cert:
-                type: boolean
-                description: Indicates if your recipients are required to have a valid certificate.
-            required:
-              - require_tls
-              - require_valid_cert
-          examples:
-            application/json:
-              require_tls: true
-              require_valid_cert: false
       security:
         - Authorization: []
   /categories/stats:
@@ -10128,7 +10235,12 @@ paths:
       tags:
         - Stats - Category Stats
       summary: Retrieve Email Statistics for Categories
-      description: "**This endpoint allows you to retrieve all of your email statistics for each of your categories.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.\n\nCategories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). "
+      description: |-
+        **This endpoint allows you to retrieve all of your email statistics for each of your categories.**
+
+        If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
+
+        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). 
       operationId: GET_categories-stats
       consumes:
         - application/json
@@ -10521,7 +10633,12 @@ paths:
       tags:
         - Stats - Category Stats
       summary: 'Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?]'
-      description: "**This endpoint allows you to retrieve the total sum of each email statistic for every category over the given date range.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.\n\nCategories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). "
+      description: |-
+        **This endpoint allows you to retrieve the total sum of each email statistic for every category over the given date range.**
+
+        If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
+
+        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). 
       operationId: GET_categories-stats-sums
       consumes:
         - application/json
@@ -11061,7 +11178,7 @@ paths:
                 <p>Something something unsubscribe <% %> something something</p>
               landing: |
                 <p>subscribehere</p>
-              plain_content: 'Something something unsubscribe <% %> something something'
+              plain_content: Something something unsubscribe <% %> something something
               replace: thetag
               url: ''
       security:
@@ -11793,6 +11910,92 @@ paths:
               whitelabeled: true
       security:
         - Authorization: []
+  /user/settings/enforced_tls:
+    parameters: []
+    patch:
+      summary: Update Enforced TLS settings
+      description: |-
+        **This endpoint allows you to update your current Enforced TLS settings.**
+
+        The Enforced TLS settings specify whether or not the recipient is required to support TLS or have a valid certificate. See the [SMTP Ports User Guide](https://sendgrid.com/docs/Classroom/Basics/Email_Infrastructure/smtp_ports.html) for more information on opportunistic TLS.
+
+        **Note:** If either setting is enabled and the recipient does not support TLS or have a valid certificate, we drop the message and send a block event with “TLS required but not supported” as the description.
+      operationId: PATCH_user-settings-enforced_tls
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              require_tls:
+                type: boolean
+                description: 'Indicates if you want to require your recipients to support TLS. '
+              require_valid_cert:
+                type: boolean
+                description: Indicates if you want to require your recipients to have a valid certificate.
+            example:
+              require_tls: true
+              require_valid_cert: false
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              require_tls:
+                type: boolean
+                description: Indicates if your recipients are required to support TLS.
+              require_valid_cert:
+                type: boolean
+                description: Indicates if your recipients are required to have a valid certificate.
+            required:
+              - require_tls
+              - require_valid_cert
+          examples:
+            application/json:
+              require_tls: true
+              require_valid_cert: false
+      security:
+        - Authorization: []
+    get:
+      summary: Retrieve current Enforced TLS settings.
+      description: |-
+        **This endpoint allows you to retrieve your current Enforced TLS settings.**
+
+        The Enforced TLS settings specify whether or not the recipient is required to support TLS or have a valid certificate. See the [SMTP Ports User Guide](https://sendgrid.com/docs/Classroom/Basics/Email_Infrastructure/smtp_ports.html) for more information on opportunistic TLS.
+
+        **Note:** If either setting is enabled and the recipient does not support TLS or have a valid certificate, we drop the message and send a block event with “TLS required but not supported” as the description.
+      operationId: GET_user-settings-enforced_tls
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              require_tls:
+                type: boolean
+                description: Indicates if the recipient is required to support TLS.
+              require_valid_cert:
+                type: boolean
+                description: Indicates if the recipient is required to have a valid certificate.
+            required:
+              - require_tls
+              - require_valid_cert
+          examples:
+            application/json:
+              require_tls: false
+              require_valid_cert: false
+      security:
+        - Authorization: []
   '/ips/warmup/{ip_address}':
     parameters:
       - name: ip_address
@@ -11834,7 +12037,7 @@ paths:
                       type: 'null'
                     message:
                       type: string
-                      description: "A message explaining why the IP couldn't be removed from warmup."
+                      description: A message explaining why the IP couldn't be removed from warmup.
           examples:
             application/json:
               errors:
@@ -12073,7 +12276,17 @@ paths:
       tags:
         - Blocks API
       summary: Delete blocks
-      description: "**This endpoint allows you to delete all email addresses on your blocks list.**\n\nThere are two options for deleting blocked emails: \n\n1. You can delete all blocked emails by setting `delete_all` to true in the request body. \n2. You can delete some blocked emails by specifying the email addresses in an array in the request body.\n\n[Blocks](https://sendgrid.com/docs/Glossary/blocks.html) happen when your message was rejected for a reason related to the message, not the recipient address. This can happen when your mail server IP address has been added to a blacklist or blocked by an ISP, or if the message content is flagged by a filter on the receiving server.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html)."
+      description: |-
+        **This endpoint allows you to delete all email addresses on your blocks list.**
+
+        There are two options for deleting blocked emails: 
+
+        1. You can delete all blocked emails by setting `delete_all` to true in the request body. 
+        2. You can delete some blocked emails by specifying the email addresses in an array in the request body.
+
+        [Blocks](https://sendgrid.com/docs/Glossary/blocks.html) happen when your message was rejected for a reason related to the message, not the recipient address. This can happen when your mail server IP address has been added to a blacklist or blocked by an ISP, or if the message content is flagged by a filter on the receiving server.
+
+        For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).
       operationId: DELETE_suppression-blocks
       consumes:
         - application/json
@@ -12303,7 +12516,19 @@ paths:
         - Authorization: []
     delete:
       summary: Delete invalid emails
-      description: "**This endpoint allows you to remove email addresses from your invalid email address list.**\n\nThere are two options for deleting invalid email addresses: \n\n1) You can delete all invalid email addresses by setting `delete_all` to true in the request body.\n2) You can delete some invalid email addresses by specifying certain addresses in an array in the request body.\n\nAn invalid email occurs when you attempt to send email to an address that is formatted in a manner that does not meet internet email format standards or the email does not exist at the recipient’s mail server.\n\nExamples include addresses without the “@” sign or addresses that include certain special characters and/or spaces. This response can come from our own server or the recipient mail server.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html)."
+      description: |-
+        **This endpoint allows you to remove email addresses from your invalid email address list.**
+
+        There are two options for deleting invalid email addresses: 
+
+        1) You can delete all invalid email addresses by setting `delete_all` to true in the request body.
+        2) You can delete some invalid email addresses by specifying certain addresses in an array in the request body.
+
+        An invalid email occurs when you attempt to send email to an address that is formatted in a manner that does not meet internet email format standards or the email does not exist at the recipient’s mail server.
+
+        Examples include addresses without the “@” sign or addresses that include certain special characters and/or spaces. This response can come from our own server or the recipient mail server.
+
+        For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html).
       operationId: DELETE_suppression-invalid_emails
       consumes:
         - application/json
@@ -12395,7 +12620,17 @@ paths:
         - Authorization: []
     delete:
       summary: Delete spam reports
-      description: "**This endpoint allows you to delete your spam reports.**\n\nThere are two options for deleting spam reports: \n\n1) You can delete all spam reports by setting \"delete_all\" to true in the request body. \n2) You can delete some spam reports by specifying the email addresses in an array in the request body.\n\n[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html)."
+      description: |-
+        **This endpoint allows you to delete your spam reports.**
+
+        There are two options for deleting spam reports: 
+
+        1) You can delete all spam reports by setting "delete_all" to true in the request body. 
+        2) You can delete some spam reports by specifying the email addresses in an array in the request body.
+
+        [Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.
+
+        For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
       operationId: DELETE_suppression-spam_reports
       consumes:
         - application/json
@@ -12785,7 +13020,7 @@ paths:
             example:
               ips:
                 - ip: 192.168.1.1
-                - ip: '192.*.*.*'
+                - ip: 192.*.*.*
                 - ip: 192.168.1.3/32
       responses:
         '201':
@@ -12833,6 +13068,512 @@ paths:
                   ip: 192.168.1.3/32
                   created_at: 1441824715
                   updated_at: 1441824715
+      security:
+        - Authorization: []
+  /subusers/stats/monthly:
+    parameters: []
+    get:
+      tags:
+        - Stats - Subuser Stats
+      summary: Retrieve monthly stats for all subusers
+      description: |-
+        **This endpoint allows you to retrieve the monthly email statistics for all subusers over the given date range.**
+
+        While you can always view the statistics for all email activity on your account, subuser statistics enable you to view specific segments of your stats for your subusers. Emails sent, bounces, and spam reports are always tracked for subusers. Unsubscribes, clicks, and opens are tracked if you have enabled the required settings.
+
+        When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
+        `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
+
+        For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
+      operationId: GET_subusers-stats-monthly
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: date
+          in: query
+          description: The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
+          required: true
+          type: string
+        - name: subuser
+          in: query
+          description: A substring search of your subusers.
+          required: false
+          type: string
+        - name: sort_by_metric
+          in: query
+          description: 'The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'''
+          required: false
+          type: string
+          default: delivered
+        - name: sort_by_direction
+          in: query
+          description: The direction you want to sort.
+          required: false
+          type: string
+          default: desc
+          enum:
+            - desc
+            - asc
+        - name: limit
+          in: query
+          description: Optional field to limit the number of results returned.
+          required: false
+          type: integer
+          default: 5
+        - name: offset
+          in: query
+          description: Optional beginning point in the list to retrieve from.
+          required: false
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/subuser_stats'
+          examples:
+            application/json:
+              date: '2016-02-01'
+              stats:
+                - first_name: John
+                  last_name: Doe
+                  metrics:
+                    blocks: 0
+                    bounce_drops: 0
+                    bounces: 0
+                    clicks: 0
+                    deferred: 0
+                    delivered: 0
+                    invalid_emails: 0
+                    opens: 1
+                    processed: 0
+                    requests: 100
+                    spam_report_drops: 0
+                    spam_reports: 99
+                    unique_clicks: 0
+                    unique_opens: 0
+                    unsubscribe_drops: 0
+                    unsubscribes: 0
+                  name: user1
+                  type: subuser
+                - first_name: Jane
+                  last_name: Doe
+                  metrics:
+                    blocks: 0
+                    bounce_drops: 0
+                    bounces: 0
+                    clicks: 5
+                    deferred: 0
+                    delivered: 0
+                    invalid_emails: 0
+                    opens: 10
+                    processed: 10
+                    requests: 10
+                    spam_report_drops: 0
+                    spam_reports: 0
+                    unique_clicks: 0
+                    unique_opens: 0
+                    unsubscribe_drops: 0
+                    unsubscribes: 0
+                  name: user2
+                  type: subuser
+      security:
+        - Authorization: []
+  '/ips/pools/{pool_name}/ips/{ip}':
+    parameters:
+      - name: pool_name
+        in: path
+        description: The name of the IP pool that you are removing the IP address from.
+        required: true
+        type: string
+      - name: ip
+        in: path
+        description: The IP address that you are removing.
+        required: true
+        type: string
+    delete:
+      summary: Remove an IP address from a pool.
+      description: |-
+        **This endpoint allows you to remove an IP address from an IP pool.**
+
+        The same IP address can be added to multiple IP pools.
+
+        A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
+      operationId: DELETE_ips-pools-pool_name-ips-ip
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '204':
+          description: ''
+          schema:
+            type: object
+        '404':
+          description: ''
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: An error explaining why the IP address could not be removed from the IP pool.
+          examples:
+            application/json:
+              error: Unable to locate specified IPs Pool
+      security:
+        - Authorization: []
+  '/subusers/:subuser_name/stats/monthly':
+    parameters: []
+    get:
+      summary: Retrieve the monthly email statistics for a single subuser
+      description: |-
+        **This endpoint allows you to retrive the monthly email statistics for a specific subuser.**
+
+        While you can always view the statistics for all email activity on your account, subuser statistics enable you to view specific segments of your stats for your subusers. Emails sent, bounces, and spam reports are always tracked for subusers. Unsubscribes, clicks, and opens are tracked if you have enabled the required settings.
+
+        When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
+        `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
+
+        For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
+      operationId: 'GET_subusers-:subuser_name-stats-monthly'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: date
+          in: query
+          description: The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
+          required: true
+          type: string
+        - name: sort_by_metric
+          in: query
+          description: 'The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'''
+          required: false
+          type: string
+          default: delivered
+        - name: sort_by_direction
+          in: query
+          description: The direction you want to sort.
+          required: false
+          type: string
+          default: desc
+          enum:
+            - desc
+            - asc
+        - name: limit
+          in: query
+          description: Optional field to limit the number of results returned.
+          required: false
+          type: number
+          default: 5
+        - name: offset
+          in: query
+          description: Optional beginning point in the list to retrieve from.
+          required: false
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/subuser_stats'
+          examples:
+            application/json:
+              date: '2016-02-01'
+              stats:
+                - first_name: John
+                  last_name: Doe
+                  metrics:
+                    blocks: 0
+                    bounce_drops: 0
+                    bounces: 0
+                    clicks: 5
+                    deferred: 0
+                    delivered: 0
+                    invalid_emails: 0
+                    opens: 10
+                    processed: 10
+                    requests: 10
+                    spam_report_drops: 0
+                    spam_reports: 0
+                    unique_clicks: 0
+                    unique_opens: 0
+                    unsubscribe_drops: 0
+                    unsubscribes: 0
+                  name: user1
+                  type: subuser
+      security:
+        - Authorization: []
+  '/user/email ':
+    parameters: []
+    get:
+      tags:
+        - Users API
+      summary: Retrieve your account email address
+      description: |-
+        **This endpoint allows you to retrieve the email address currently on file for your account.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: GET_user-email
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The email address currently on file for your account.
+            required:
+              - email
+          examples:
+            application/json:
+              email: test@example.com
+      security:
+        - Authorization: []
+  /user/email:
+    parameters: []
+    put:
+      tags:
+        - Users API
+      summary: Update your account email address
+      description: |-
+        **This endpoint allows you to update the email address currently on file for your account.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: PUT_user-email
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The new email address that you would like to use for your account.
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The current email address on file for your account.
+            required:
+              - email
+      security:
+        - Authorization: []
+  /user/username:
+    parameters: []
+    get:
+      tags:
+        - Users API
+      summary: Retrieve your username
+      description: |-
+        **This endpoint allows you to retrieve your current account username.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: GET_user-username
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: Your account username.
+              user_id:
+                type: integer
+                description: The user ID for your account.
+            required:
+              - username
+              - user_id
+          examples:
+            application/json:
+              username: test_username
+              user_id: 1
+      security:
+        - Authorization: []
+    put:
+      tags:
+        - Users API
+      summary: Update your username
+      description: |-
+        **This endpoint allows you to update the username for your account.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: PUT_user-username
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: The new username you would like to use for your account.
+            example:
+              username: test_username
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: The current username on file for your account.
+            required:
+              - username
+          examples:
+            application/json:
+              username: test_username
+      security:
+        - Authorization: []
+  /user/credits:
+    parameters: []
+    get:
+      tags:
+        - Users API
+      summary: Retrieve your credit balance
+      description: |-
+        **This endpoint allows you to retrieve the current credit balance for your account.**
+
+        Your monthly credit allotment limits the number of emails you may send before incurring overage charges. For more information about credits and billing, please visit our [Clssroom](https://sendgrid.com/docs/Classroom/Basics/Billing/billing_info_and_faqs.html).
+      operationId: GET_user-credits
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              remain:
+                type: integer
+                description: The remaining number of credits available on your account.
+              total:
+                type: integer
+                description: The total number of credits assigned to your account.
+              overage:
+                type: integer
+                description: The number of overdrawn credits for your account.
+              used:
+                type: integer
+                description: The number of credits that you have used.
+              last_reset:
+                type: string
+                description: The date that your credit balance was last reset.
+              next_reset:
+                type: string
+                description: The next date that your credit balance will be reset.
+              reset_frequency:
+                type: string
+                description: The frequency at which your credit balance will be reset.
+            required:
+              - remain
+              - total
+              - overage
+              - used
+              - last_reset
+              - next_reset
+              - reset_frequency
+          examples:
+            application/json:
+              remain: 200
+              total: 200
+              overage: 0
+              used: 0
+              last_reset: '2013-01-01'
+              next_reset: '2013-02-01'
+              reset_frequency: monthly
+      security:
+        - Authorization: []
+  /user/password:
+    parameters: []
+    put:
+      tags:
+        - Users API
+      summary: Update your password
+      description: |-
+        **This endpoint allows you to update your password.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: PUT_user-password
+      consumes:
+        - application/json
+      produces: []
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              new_password:
+                type: string
+                description: The new password you would like to use for your account.
+              old_password:
+                type: string
+                description: The old password for your account.
+            required:
+              - new_password
+              - old_password
+            example:
+              new_password: new_password
+              old_password: old_password
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties: {}
       security:
         - Authorization: []
 definitions:
@@ -13017,7 +13758,7 @@ definitions:
         type:
           - 'null'
           - integer
-        description: 'The ID of the "sender" identity that you have created. Your recipients will see this as the "from" on your marketing emails.'
+        description: The ID of the "sender" identity that you have created. Your recipients will see this as the "from" on your marketing emails.
       list_ids:
         type:
           - array
@@ -13069,7 +13810,7 @@ definitions:
     example:
       id: 986724
       title: May Newsletter
-      subject: 'New Products for Summer!'
+      subject: New Products for Summer!
       sender_id: 124451
       list_ids:
         - 110
@@ -13081,8 +13822,8 @@ definitions:
       suppression_group_id: 42
       custom_unsubscribe_url: ''
       ip_pool: marketing
-      html_content: '<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>'
-      plain_content: 'Check out our summer line!'
+      html_content: <html><head><title></title></head><body><p>Check out our summer line!</p></body></html>
+      plain_content: Check out our summer line!
       status: Draft
   contactdb_recipient_response:
     type: object
@@ -13157,13 +13898,13 @@ definitions:
         description: Name of the new transactional template version.
       html_content:
         type: string
-        description: 'The HTML content of the new version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.'
+        description: The HTML content of the new version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.
       plain_content:
         type: string
-        description: 'Text/plain content of the new transactional template version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.'
+        description: Text/plain content of the new transactional template version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.
       subject:
         type: string
-        description: 'Subject of the new transactional template version. Must include <%subject%> tag.'
+        description: Subject of the new transactional template version. Must include <%subject%> tag.
     required:
       - template_id
       - active
@@ -13338,7 +14079,7 @@ definitions:
     properties:
       batch_id:
         type: string
-        pattern: "^[a-zA-Z0-9\\-\\_]"
+        pattern: '^[a-zA-Z0-9\-\_]'
     required:
       - batch_id
     example:
@@ -13374,7 +14115,7 @@ definitions:
             type:
               - string
               - 'null'
-            description: "The value of this recipient's custom field"
+            description: The value of this recipient's custom field
     title: ContactDB Custom field schema.
   contactdb_custom_field_with_id:
     allOf:
@@ -13523,7 +14264,7 @@ definitions:
     example:
       created: 1250337600
       email: example@example.com
-      reason: "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp "
+      reason: '550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient''s email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp '
       status: 5.1.1
   contactdb_recipient:
     type: object
@@ -13575,7 +14316,7 @@ definitions:
               description: 'The last time this recipient opened an email from you, in unixtime.'
             updated_at:
               type: number
-              description: "The last update date for this recipient's record."
+              description: The last update date for this recipient's record.
           required:
             - email
   'whitelabel::domain':
@@ -14505,7 +15246,7 @@ definitions:
         description: Used to differentiate ads
       utm_medium:
         type: string
-        description: 'Name of the marketing medium (e.g. "Email").'
+        description: Name of the marketing medium (e.g. "Email").
       utm_source:
         type: string
         description: 'Name of the referrer source. '
@@ -14632,10 +15373,10 @@ definitions:
         description: Receiving server could not or would not accept message.
       deferred:
         type: boolean
-        description: "Recipient's email server temporarily rejected message."
+        description: Recipient's email server temporarily rejected message.
       unsubscribe:
         type: boolean
-        description: "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
+        description: Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event.
       processed:
         type: boolean
         description: Message has been received and is ready to be delivered.
@@ -14662,6 +15403,81 @@ definitions:
       - open
       - click
       - dropped
+  subuser_stats:
+    type: object
+    properties:
+      date:
+        type: string
+        description: The date the statistics were gathered.
+      stats:
+        type: array
+        description: The list of statistics.
+        items:
+          type: object
+          properties:
+            first_name:
+              type: string
+              description: The first name of the subuser.
+            last_name:
+              type: string
+              description: The last name of the subuser.
+            metrics:
+              type: object
+              properties:
+                blocks:
+                  type: integer
+                  description: The number of emails that were not allowed to be delivered by ISPs.
+                bounce_drops:
+                  type: integer
+                  description: The number of emails that were dropped because of a bounce.
+                bounces:
+                  type: integer
+                  description: The number of emails that bounced instead of being delivered.
+                clicks:
+                  type: integer
+                  description: The number of links that were clicked in your emails.
+                deferred:
+                  type: integer
+                  description: The number of emails that temporarily could not be delivered.
+                delivered:
+                  type: integer
+                  description: The number of emails SendGrid was able to confirm were actually delivered to a recipient.
+                invalid_emails:
+                  type: integer
+                  description: The number of recipients who had malformed email addresses or whose mail provider reported the address as invalid.
+                opens:
+                  type: integer
+                  description: The total number of times your emails were opened by recipients.
+                processed:
+                  type: integer
+                  description: 'Requests from your website, application, or mail client via SMTP Relay or the API that SendGrid processed.'
+                requests:
+                  type: integer
+                  description: The number of emails that were requested to be delivered.
+                spam_report_drops:
+                  type: integer
+                  description: The number of emails that were dropped due to a recipient previously marking your emails as spam.
+                spam_reports:
+                  type: integer
+                  description: The number of recipients who marked your email as spam.
+                unique_clicks:
+                  type: integer
+                  description: The number of unique recipients who clicked links in your emails.
+                unique_opens:
+                  type: integer
+                  description: The number of unique recipients who opened your emails.
+                unsubscribe_drops:
+                  type: integer
+                  description: The number of emails dropped due to a recipient unsubscribing from your emails.
+                unsubscribes:
+                  type: integer
+                  description: The number of recipients who unsubscribed from your emails.
+            name:
+              type: string
+              description: The username of the subuser.
+            type:
+              type: string
+              description: The type of account.
 securityDefinitions:
   Authorization:
     name: Authorization
