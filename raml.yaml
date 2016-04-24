@@ -10381,8 +10381,8 @@ documentation:
                       "require_valid_cert": false
                   }
         queryParameters: {}
-  '/email ':
-    displayName: 'email '
+  /email:
+    displayName: email
     description: ''
     uriParameters: {}
     get:
@@ -10418,10 +10418,6 @@ documentation:
                     "email": "test@example.com"
                 }
       queryParameters: {}
-  /email:
-    displayName: email
-    description: ''
-    uriParameters: {}
     put:
       displayName: Update your account email address
       description: |-

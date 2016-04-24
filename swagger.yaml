@@ -13312,7 +13312,7 @@ paths:
                   type: subuser
       security:
         - Authorization: []
-  '/user/email ':
+  /user/email:
     parameters: []
     get:
       tags:
@@ -13348,8 +13348,6 @@ paths:
               email: test@example.com
       security:
         - Authorization: []
-  /user/email:
-    parameters: []
     put:
       tags:
         - Users API
