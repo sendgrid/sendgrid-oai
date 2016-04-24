@@ -1148,6 +1148,87 @@ documentation:
                       ]
                   }
         queryParameters: {}
+    /stats:
+      displayName: stats
+      description: ''
+      /monthly:
+        displayName: monthly
+        description: ''
+        uriParameters: {}
+        get:
+          displayName: Retrieve the monthly email statistics for a single subuser
+          description: |-
+            **This endpoint allows you to retrive the monthly email statistics for a specific subuser.**
+
+            While you can always view the statistics for all email activity on your account, subuser statistics enable you to view specific segments of your stats for your subusers. Emails sent, bounces, and spam reports are always tracked for subusers. Unsubscribes, clicks, and opens are tracked if you have enabled the required settings.
+
+            When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
+            `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
+
+            For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
+          headers: {}
+          responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "$ref": "#/definitions/subuser_stats"
+                    }
+                  example: |-
+                    {
+                        "date": "2016-02-01",
+                        "stats": [
+                            {
+                                "first_name": "John",
+                                "last_name": "Doe",
+                                "metrics": {
+                                    "blocks": 0,
+                                    "bounce_drops": 0,
+                                    "bounces": 0,
+                                    "clicks": 5,
+                                    "deferred": 0,
+                                    "delivered": 0,
+                                    "invalid_emails": 0,
+                                    "opens": 10,
+                                    "processed": 10,
+                                    "requests": 10,
+                                    "spam_report_drops": 0,
+                                    "spam_reports": 0,
+                                    "unique_clicks": 0,
+                                    "unique_opens": 0,
+                                    "unsubscribe_drops": 0,
+                                    "unsubscribes": 0
+                                },
+                                "name": "user1",
+                                "type": "subuser"
+                            }
+                        ]
+                    }
+          queryParameters:
+            date:
+              type: string
+              description: The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
+              required: true
+            sort_by_metric:
+              type: string
+              description: 'The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'''
+              default: delivered
+            sort_by_direction:
+              type: string
+              description: The direction you want to sort.
+              default: desc
+              enum:
+                - desc
+                - asc
+            limit:
+              type: number
+              description: Optional field to limit the number of results returned.
+              default: 5
+            offset:
+              type: integer
+              description: Optional beginning point in the list to retrieve from.
+              default: 0
   uriParameters: {}
   get:
     displayName: List all Subusers
@@ -1834,90 +1915,6 @@ documentation:
             type: integer
             description: Optional beginning point in the list to retrieve from.
             default: 0
-  '/:subuser_name':
-    displayName: ':subuser_name'
-    description: ''
-    /stats:
-      displayName: stats
-      description: ''
-      /monthly:
-        displayName: monthly
-        description: ''
-        uriParameters: {}
-        get:
-          displayName: Retrieve the monthly email statistics for a single subuser
-          description: |-
-            **This endpoint allows you to retrive the monthly email statistics for a specific subuser.**
-
-            While you can always view the statistics for all email activity on your account, subuser statistics enable you to view specific segments of your stats for your subusers. Emails sent, bounces, and spam reports are always tracked for subusers. Unsubscribes, clicks, and opens are tracked if you have enabled the required settings.
-
-            When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
-            `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
-
-            For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
-          headers: {}
-          responses:
-            '200':
-              body:
-                application/json:
-                  schema: |-
-                    {
-                        "$ref": "#/definitions/subuser_stats"
-                    }
-                  example: |-
-                    {
-                        "date": "2016-02-01",
-                        "stats": [
-                            {
-                                "first_name": "John",
-                                "last_name": "Doe",
-                                "metrics": {
-                                    "blocks": 0,
-                                    "bounce_drops": 0,
-                                    "bounces": 0,
-                                    "clicks": 5,
-                                    "deferred": 0,
-                                    "delivered": 0,
-                                    "invalid_emails": 0,
-                                    "opens": 10,
-                                    "processed": 10,
-                                    "requests": 10,
-                                    "spam_report_drops": 0,
-                                    "spam_reports": 0,
-                                    "unique_clicks": 0,
-                                    "unique_opens": 0,
-                                    "unsubscribe_drops": 0,
-                                    "unsubscribes": 0
-                                },
-                                "name": "user1",
-                                "type": "subuser"
-                            }
-                        ]
-                    }
-          queryParameters:
-            date:
-              type: string
-              description: The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
-              required: true
-            sort_by_metric:
-              type: string
-              description: 'The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'''
-              default: delivered
-            sort_by_direction:
-              type: string
-              description: The direction you want to sort.
-              default: desc
-              enum:
-                - desc
-                - asc
-            limit:
-              type: number
-              description: Optional field to limit the number of results returned.
-              default: 5
-            offset:
-              type: integer
-              description: Optional beginning point in the list to retrieve from.
-              default: 0
 /suppression:
   displayName: suppression
   description: ''

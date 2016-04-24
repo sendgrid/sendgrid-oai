@@ -13225,8 +13225,12 @@ paths:
               error: Unable to locate specified IPs Pool
       security:
         - Authorization: []
-  '/subusers/:subuser_name/stats/monthly':
-    parameters: []
+  '/subusers/{subuser_name}/stats/monthly':
+    parameters:
+      - name: subuser_name
+        in: path
+        required: true
+        type: string
     get:
       summary: Retrieve the monthly email statistics for a single subuser
       description: |-
@@ -13238,7 +13242,7 @@ paths:
         `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
 
         For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
-      operationId: 'GET_subusers-:subuser_name-stats-monthly'
+      operationId: GET_subusers-subuser_name-stats-monthly
       consumes:
         - application/json
       produces:

@@ -18423,12 +18423,19 @@
                 ]
             }
         },
-        "/subusers/:subuser_name/stats/monthly": {
-            "parameters": [],
+        "/subusers/{subuser_name}/stats/monthly": {
+            "parameters": [
+                {
+                    "name": "subuser_name",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
             "get": {
                 "summary": "Retrieve the monthly email statistics for a single subuser",
                 "description": "**This endpoint allows you to retrive the monthly email statistics for a specific subuser.**\n\nWhile you can always view the statistics for all email activity on your account, subuser statistics enable you to view specific segments of your stats for your subusers. Emails sent, bounces, and spam reports are always tracked for subusers. Unsubscribes, clicks, and opens are tracked if you have enabled the required settings.\n\nWhen using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:\n`bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.\n\nFor more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).",
-                "operationId": "GET_subusers-:subuser_name-stats-monthly",
+                "operationId": "GET_subusers-subuser_name-stats-monthly",
                 "consumes": [
                     "application/json"
                 ],
