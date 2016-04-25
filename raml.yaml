@@ -403,7 +403,12 @@ documentation:
           Each user can create up to 25 different suppression groups.
         body:
           application/json:
-            example: ''
+            example: |-
+              {
+                  "id": 103,
+                  "name": "Item Suggestions",
+                  "description": "Suggestions for items our users might like."
+              }
             schema: |-
               {
                   "type": "object",

@@ -161,6 +161,10 @@ paths:
                 description: Indicates if the suppression group is set as the default group.
             required:
               - name
+            example:
+              id: 103
+              name: Item Suggestions
+              description: Suggestions for items our users might like.
       responses:
         '201':
           description: ''

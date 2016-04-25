@@ -204,7 +204,12 @@
                             },
                             "required": [
                                 "name"
-                            ]
+                            ],
+                            "example": {
+                                "id": 103,
+                                "name": "Item Suggestions",
+                                "description": "Suggestions for items our users might like."
+                            }
                         }
                     }
                 ],
