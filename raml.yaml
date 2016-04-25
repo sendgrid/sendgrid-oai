@@ -10435,7 +10435,10 @@ documentation:
         * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
       body:
         application/json:
-          example: ''
+          example: |-
+            {
+                "email": "example@example.com"
+            }
           schema: |-
             {
                 "type": "object",

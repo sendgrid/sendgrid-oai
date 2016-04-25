@@ -18606,6 +18606,9 @@
                                     "type": "string",
                                     "description": "The new email address that you would like to use for your account."
                                 }
+                            },
+                            "example": {
+                                "email": "example@example.com"
                             }
                         }
                     }
