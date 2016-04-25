@@ -17661,6 +17661,13 @@
                                         "type": "string"
                                     }
                                 }
+                            },
+                            "example": {
+                                "delete_all": false,
+                                "emails": [
+                                    "example1@example.com",
+                                    "example2@example.com"
+                                ]
                             }
                         }
                     }

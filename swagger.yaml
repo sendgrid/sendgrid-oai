@@ -12653,6 +12653,11 @@ paths:
                 description: A list of specific email addresses that you want to remove from the spam report list.
                 items:
                   type: string
+            example:
+              delete_all: false
+              emails:
+                - example1@example.com
+                - example2@example.com
       responses:
         '204':
           description: ''
