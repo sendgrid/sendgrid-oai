@@ -5099,6 +5099,9 @@
                         "in": "body",
                         "name": "body",
                         "schema": {
+                            "example": {
+                                "send_at": 1489451436
+                            },
                             "properties": {
                                 "send_at": {
                                     "format": "int64",

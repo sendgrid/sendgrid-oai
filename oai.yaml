@@ -4445,6 +4445,8 @@ paths:
                 format: int64
             required:
               - send_at
+            example:
+              send_at: 1489451436
       responses:
         '200':
           description: ''
