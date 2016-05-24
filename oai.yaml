@@ -13692,7 +13692,7 @@ paths:
                       description: The filename of the attachment.
                     disposition:
                       type: string
-                      default: 'inline, attachment'
+                      default: attachment
                       description: 'The content-disposition of the attachment specifying how you would like the attachment to be displayed. For example, “inline” results in the attached file being displayed automatically within the message while “attachment” results in the attached file requiring some action to be taken before it is displayed (e.g. opening or downloading the file).'
                       enum:
                         - inline

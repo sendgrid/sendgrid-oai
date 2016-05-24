@@ -11697,7 +11697,7 @@
                                                 "type": "string"
                                             },
                                             "disposition": {
-                                                "default": "inline, attachment",
+                                                "default": "attachment",
                                                 "description": "The content-disposition of the attachment specifying how you would like the attachment to be displayed. For example, \u201cinline\u201d results in the attached file being displayed automatically within the message while \u201cattachment\u201d results in the attached file requiring some action to be taken before it is displayed (e.g. opening or downloading the file).",
                                                 "enum": [
                                                     "inline",
