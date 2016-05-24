@@ -11,7 +11,7 @@ Hello! Thank you for choosing to help contribute to one of the SendGrid open sou
 - [Creating a Pull Request](#creating_a_pull_request)
 
 <a name="roadmap"></a>
-We use [Milestones](https://github.com/sendgrid/sendgrid-swagger/milestones) to help define current roadmaps, please feel free to grab an issue from the current milestone. Please indicate that you have begun work on it to avoid collisions. Once a PR is made, community review, comments, suggestions and additional PRs are welcomed and encouraged.
+We use [Milestones](https://github.com/sendgrid/sendgrid-oai/milestones) to help define current roadmaps, please feel free to grab an issue from the current milestone. Please indicate that you have begun work on it to avoid collisions. Once a PR is made, community review, comments, suggestions and additional PRs are welcomed and encouraged.
 
 <a name="cla"></a>
 ## CLAs and CCLAs
@@ -51,7 +51,7 @@ Before you decide to create a new issue, please try the following:
 
 ### Please use our Bug Report Template
 
-In order to make the process easier, we've included a [sample bug report template](https://github.com/sendgrid/sendgrid-swagger/.github/ISSUE_TEMPLATE) (borrowed from [Ghost](https://github.com/TryGhost/Ghost/)). The template uses [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/) for formatting.
+In order to make the process easier, we've included a [sample bug report template](https://github.com/sendgrid/sendgrid-oai/.github/ISSUE_TEMPLATE) (borrowed from [Ghost](https://github.com/TryGhost/Ghost/)). The template uses [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/) for formatting.
 
 ## Creating a Pull Request<a name="creating_a_pull_request"></a>
 
@@ -60,11 +60,11 @@ In order to make the process easier, we've included a [sample bug report templat
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/sendgrid/sendgrid-swagger
+   git clone https://github.com/sendgrid/sendgrid-oai
    # Navigate to the newly cloned directory
    cd sendgrid-python
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/sendgrid/sendgrid-swagger
+   git remote add upstream https://github.com/sendgrid/sendgrid-oai
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:

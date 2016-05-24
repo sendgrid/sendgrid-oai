@@ -6,7 +6,7 @@ basePath: /v3
 host: api.sendgrid.com
 info:
   version: '3.0'
-  title: DSendGrid V3 API
+  title: SendGrid V3 API
   description: ''
 consumes:
   - application/json
