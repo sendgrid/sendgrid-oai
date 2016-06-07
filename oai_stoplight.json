@@ -26407,10 +26407,6 @@
                                 "type": "schemas"
                             },
                             {
-                                "_id": "POST_asm-groups",
-                                "type": "endpoints"
-                            },
-                            {
                                 "_id": "GET_asm-groups",
                                 "type": "endpoints"
                             },

@@ -3473,121 +3473,6 @@ paths:
                   message: authorization required
       security:
         - Authorization: []
-  /asm/groups:
-    parameters: []
-    post:
-      tags:
-        - Suppression Management - Unsubscribe Groups
-      summary: Create a new suppression group
-      description: |-
-        **This endpoint allows you to create a new suppression group.**
-
-        Suppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.
-
-        The **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.
-
-        Each user can create up to 25 different suppression groups.
-      operationId: POST_asm-groups
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name that you would like to use for your new suppression group.
-                maxLength: 30
-              description:
-                type: string
-                description: A brief description of your new suppression group.
-                maxLength: 100
-              is_default:
-                type: boolean
-                description: Indicates if you would like this to be your default suppression group.
-            required:
-              - name
-              - description
-            example:
-              name: Product Suggestions
-              description: Suggestions for products our users might like.
-              is_default: true
-      responses:
-        '201':
-          description: ''
-          schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: The ID of the suppression group.
-              name:
-                type: string
-                description: The name of the suppression group.
-              description:
-                type: string
-                description: A brief description of the suppression group.
-              is_default:
-                type: boolean
-                description: Indicates if this is the default suppression group.
-            required:
-              - id
-              - name
-              - description
-              - is_default
-          examples:
-            application/json:
-              id: 103
-              name: Product Suggestions
-              description: Suggestions for products our users might like.
-              is_default: false
-      security:
-        - Authorization: []
-    get:
-      tags:
-        - Suppression Management - Unsubscribe Groups
-      summary: Retrieve information about multiple suppression groups
-      description: |-
-        **This endpoint allows you to retrieve information about multiple suppression groups.**
-
-        This endpoint will return information for each group ID that you include in your request. To add a group ID to your request, simply append `&id=` followed by the group ID.
-      operationId: GET_asm-groups
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: query
-          description: The ID of a suppression group that you want to retrieve information for.
-          type: integer
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/suppression_group'
-          examples:
-            application/json:
-              - id: 100
-                name: Newsletters
-                description: Our monthly newsletter.
-                last_email_sent_at: null
-                is_default: true
-                unsubscribes: 400
-              - id: 101
-                name: Alerts
-                description: Emails triggered by user-defined rules.
-                last_email_sent_at: null
-                is_default: false
-                unsubscribes: 1
-      security:
-        - Authorization: []
   /user/webhooks/parse/stats:
     parameters: []
     get:
@@ -7734,6 +7619,121 @@ paths:
               errors:
                 - field: null
                   message: authorization required
+      security:
+        - Authorization: []
+  /asm/groups:
+    parameters: []
+    get:
+      tags:
+        - Suppression Management - Unsubscribe Groups
+      summary: Retrieve information about multiple suppression groups
+      description: |-
+        **This endpoint allows you to retrieve information about multiple suppression groups.**
+
+        This endpoint will return information for each group ID that you include in your request. To add a group ID to your request, simply append `&id=` followed by the group ID.
+      operationId: GET_asm-groups
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          description: The ID of a suppression group that you want to retrieve information for.
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/suppression_group'
+          examples:
+            application/json:
+              - id: 100
+                name: Newsletters
+                description: Our monthly newsletter.
+                last_email_sent_at: null
+                is_default: true
+                unsubscribes: 400
+              - id: 101
+                name: Alerts
+                description: Emails triggered by user-defined rules.
+                last_email_sent_at: null
+                is_default: false
+                unsubscribes: 1
+      security:
+        - Authorization: []
+    post:
+      tags:
+        - Suppression Management - Unsubscribe Groups
+      summary: Create a new suppression group
+      description: |-
+        **This endpoint allows you to create a new suppression group.**
+
+        Suppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.
+
+        The **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.
+
+        Each user can create up to 25 different suppression groups.
+      operationId: POST_asm-groups
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name that you would like to use for your new suppression group.
+                maxLength: 30
+              description:
+                type: string
+                description: A brief description of your new suppression group.
+                maxLength: 100
+              is_default:
+                type: boolean
+                description: Indicates if you would like this to be your default suppression group.
+            required:
+              - name
+              - description
+            example:
+              name: Product Suggestions
+              description: Suggestions for products our users might like.
+              is_default: true
+      responses:
+        '201':
+          description: ''
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: The ID of the suppression group.
+              name:
+                type: string
+                description: The name of the suppression group.
+              description:
+                type: string
+                description: A brief description of the suppression group.
+              is_default:
+                type: boolean
+                description: Indicates if this is the default suppression group.
+            required:
+              - id
+              - name
+              - description
+              - is_default
+          examples:
+            application/json:
+              id: 103
+              name: Product Suggestions
+              description: Suggestions for products our users might like.
+              is_default: false
       security:
         - Authorization: []
   '/contactdb/lists/{list_id}/recipients':
