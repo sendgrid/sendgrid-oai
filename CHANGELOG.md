@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2016-05-24
+### Fixed
+- Fixed several request body schemas
+
 ## [1.0.4] - 2016-05-24
 ### Fixed
 - Bug in the /mail/send/beta schema

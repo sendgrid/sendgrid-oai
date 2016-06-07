@@ -3498,7 +3498,15 @@
                 ],
                 "description": "**This endpoint allows you to remove a specific IP address from your IP whitelist.**\n\nWhen removing a specific IP address from your whitelist, you must include the ID in your call.\n\nIP Access Management allows you to control which IP addresses can be used to access your account, either through the User Interface or the API. There is no limit to the number of IP addresses that you can add to your whitelist. It is possible to remove your own IP address from the whitelist, thus preventing yourself from accessing your account.\n\nFor more information, please see our [User Guide](http://sendgrid.com/docs/User_Guide/Settings/ip_access_management.html).",
                 "operationId": "DELETE_access_settings-whitelist-rule_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -3834,13 +3842,24 @@
                 ],
                 "description": "**This endpoint allows you to revoke an existing API Key**\n\nAuthentications using this API Key will fail after this request is made, with some small propogation delay.If the API Key ID does not exist an HTTP 404 will be returned.\n\nThe API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).\n\n## URI Parameters\n\n| URI Parameter   | Type  | Required?  | Description  |\n|---|---|---|---|\n|api_key_id |string | required | The ID of the API Key you are deleting.|",
                 "operationId": "DELETE_api_keys-api_key_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "responses": {
                     "204": {
                         "description": "",
+                        "examples": {
+                            "application/json": null
+                        },
                         "schema": {
                             "type": "null"
                         }
@@ -4169,9 +4188,16 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "**This endpoint allows you to retrieve a list of all suppression groups created by this user.**\n\nSuppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.\n\nThe **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.\n\nEach user can create up to 25 different suppression groups.",
+                "description": "**This endpoint allows you to retrieve information about multiple suppression groups.**\n\nThis endpoint will return information for each group ID that you include in your request. To add a group ID to your request, simply append `&id=` followed by the group ID.",
                 "operationId": "GET_asm-groups",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "description": "The ID of a suppression group that you want to retrieve information for.",
+                        "in": "query",
+                        "name": "id",
+                        "type": "integer"
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -4181,26 +4207,26 @@
                         "examples": {
                             "application/json": [
                                 {
-                                    "description": "An Unsubscribe Group",
-                                    "id": 1234,
+                                    "description": "Our monthly newsletter.",
+                                    "id": 100,
                                     "is_default": true,
                                     "last_email_sent_at": null,
-                                    "name": "Unsubscribe Group",
-                                    "unsubscribes": 1234
+                                    "name": "Newsletters",
+                                    "unsubscribes": 400
                                 },
                                 {
-                                    "description": "An Unsubscribe Group",
-                                    "id": 1234,
-                                    "is_default": true,
+                                    "description": "Emails triggered by user-defined rules.",
+                                    "id": 101,
+                                    "is_default": false,
                                     "last_email_sent_at": null,
-                                    "name": "Unsubscribe Group",
-                                    "unsubscribes": 1234
+                                    "name": "Alerts",
+                                    "unsubscribes": 1
                                 }
                             ]
                         },
                         "schema": {
                             "items": {
-                                "$ref": "#/definitions/suppression_group_unsubscribes"
+                                "$ref": "#/definitions/suppression_group"
                             },
                             "type": "array"
                         }
@@ -4211,7 +4237,7 @@
                         "Authorization": []
                     }
                 ],
-                "summary": "Retrieve all suppression groups associated with the user.",
+                "summary": "Retrieve information about multiple suppression groups",
                 "tags": [
                     "Suppression Management - Unsubscribe Groups"
                 ],
@@ -4232,7 +4258,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "**This endoint allows you to create a new suppression group.**\n\nSuppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.\n\nThe **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.\n\nEach user can create up to 25 different suppression groups.",
+                "description": "**This endpoint allows you to create a new suppression group.**\n\nSuppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.\n\nThe **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.\n\nEach user can create up to 25 different suppression groups.",
                 "operationId": "POST_asm-groups",
                 "parameters": [
                     {
@@ -4240,23 +4266,22 @@
                         "name": "body",
                         "schema": {
                             "example": {
-                                "description": "A group description",
-                                "is_default": false,
-                                "name": "A group name"
+                                "description": "Suggestions for products our users might like.",
+                                "is_default": true,
+                                "name": "Product Suggestions"
                             },
                             "properties": {
                                 "description": {
-                                    "description": "A description of the suppression group.",
+                                    "description": "A brief description of your new suppression group.",
                                     "maxLength": 100,
                                     "type": "string"
                                 },
                                 "is_default": {
-                                    "default": false,
-                                    "description": "Indicates if this is the default suppression group.",
+                                    "description": "Indicates if you would like this to be your default suppression group.",
                                     "type": "boolean"
                                 },
                                 "name": {
-                                    "description": "The name of the new suppression group. May not share its name with any other suppression group on the user.",
+                                    "description": "The name that you would like to use for your new suppression group.",
                                     "maxLength": 30,
                                     "type": "string"
                                 }
@@ -4265,7 +4290,6 @@
                                 "name",
                                 "description"
                             ],
-                            "title": "Create a Group request",
                             "type": "object"
                         }
                     }
@@ -4274,19 +4298,42 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "",
                         "examples": {
                             "application/json": {
-                                "description": "A group description",
-                                "id": 1234,
+                                "description": "Suggestions for products our users might like.",
+                                "id": 103,
                                 "is_default": false,
-                                "last_email_sent_at": null,
-                                "name": "A group name"
+                                "name": "Product Suggestions"
                             }
                         },
                         "schema": {
-                            "$ref": "#/definitions/suppression_group"
+                            "properties": {
+                                "description": {
+                                    "description": "A brief description of the suppression group.",
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "description": "The ID of the suppression group.",
+                                    "type": "integer"
+                                },
+                                "is_default": {
+                                    "description": "Indicates if this is the default suppression group.",
+                                    "type": "boolean"
+                                },
+                                "name": {
+                                    "description": "The name of the suppression group.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "name",
+                                "description",
+                                "is_default"
+                            ],
+                            "type": "object"
                         }
                     }
                 },
@@ -4295,7 +4342,7 @@
                         "Authorization": []
                     }
                 ],
-                "summary": "Create a Group",
+                "summary": "Create a new suppression group",
                 "tags": [
                     "Suppression Management - Unsubscribe Groups"
                 ],
@@ -4305,8 +4352,8 @@
                     "id": "POST_asm-groups",
                     "mock": {
                         "dynamic": false,
-                        "enabled": null,
-                        "statusCode": null
+                        "enabled": false,
+                        "statusCode": 200
                     },
                     "public": true
                 }
@@ -4405,7 +4452,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a suppression group.**\n\nYou can only delete groups that have not been attached to sent mail in the last 60 days. If a recipient uses the \"one-click unsubscribe\" option on an email associated with a deleted group, that recipient will be added to the global suppression list.\n\nSuppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.\n\nThe **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.\n\nEach user can create up to 25 different suppression groups.",
                 "operationId": "DELETE_asm-groups-group_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -4960,7 +5015,15 @@
                 ],
                 "description": "**This endpoint allows you to remove an email address from the global suppressions group.**\n\nA global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).",
                 "operationId": "DELETE_asm-suppressions-global-email",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -5985,7 +6048,15 @@
                 ],
                 "description": "**This endpoint allows you to unschedule a campaign that has already been scheduled to be sent.**\n\nA successful unschedule will return a 204.\nIf the specified campaign is in the process of being sent, the only option is to cancel (a different method).\n\nFor more information:\n\n* [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)",
                 "operationId": "DELETE_campaigns-campaign_id-schedules",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -7691,7 +7762,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a custom field by ID.**\n\nThe contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).",
                 "operationId": "DELETE_contactdb-custom_fields-custom_field_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -9621,7 +9700,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a single recipient with the given ID from your contact database.**\n\nThe Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.",
                 "operationId": "DELETE_contactdb-recipients-recipient_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -10279,6 +10366,13 @@
                         "in": "query",
                         "name": "delete_contacts",
                         "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
                     }
                 ],
                 "produces": [
@@ -12182,7 +12276,15 @@
                 ],
                 "description": "**This endpoint allows you to delete an IP pool.**\n\nIP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.\n\nIP pools can only be used with whitelabeled IP addresses.\n\nIf an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.",
                 "operationId": "DELETE_ips-pools-pool_name",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -12560,7 +12662,15 @@
                 ],
                 "description": "**This endpoint allows you to remove an IP address from an IP pool.**\n\nThe same IP address can be added to multiple IP pools.\n\nA single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.",
                 "operationId": "DELETE_ips-pools-pool_name-ips-ip",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -12779,7 +12889,15 @@
                 ],
                 "description": "**This endpoint allows you to remove an IP address from warmup mode.**\n\nSendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how SendGrid limits your email traffic for IPs in warmup.\n\nFor more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).",
                 "operationId": "DELETE_ips-warmup-ip_address",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -17301,7 +17419,15 @@
                 ],
                 "description": "This endpoint allows you to delete a subuser. This is a permanent action, once deleted a subuser cannot be retrieved.\n\nFor more information about Subusers:\n\n* [User Guide > Subusers](https://sendgrid.com/docs/User_Guide/Settings/Subusers/index.html)\n* [Classroom > How do I add more subusers to my account?](https://sendgrid.com/docs/Classroom/Basics/Account/how_do_i_add_more_subusers_to_my_account.html)",
                 "operationId": "DELETE_subusers-subuser_name",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -17553,7 +17679,15 @@
                 ],
                 "description": "Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.",
                 "operationId": "DELETE_subusers-subuser_name-monitor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -18164,7 +18298,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a specific email address from your blocks list.**\n\n[Blocks](https://sendgrid.com/docs/Glossary/blocks.html) happen when your message was rejected for a reason related to the message, not the recipient address. This can happen when your mail server IP address has been added to a blacklist or blocked by an ISP, or if the message content is flagged by a filter on the receiving server.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).",
                 "operationId": "DELETE_suppression-blocks-email",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -18787,7 +18929,15 @@
                 ],
                 "description": "**This endpoint allows you to remove a specific email address from the invalid email address list.**\n\nAn invalid email occurs when you attempt to send email to an address that is formatted in a manner that does not meet internet email format standards or the email does not exist at the recipient\u2019s mail server.\n\nExamples include addresses without the \u201c@\u201d sign or addresses that include certain special characters and/or spaces. This response can come from our own server or the recipient mail server.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html).",
                 "operationId": "DELETE_suppression-invalid_emails-email",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -18890,7 +19040,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a specific spam report.**\n\n[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).",
                 "operationId": "DELETE_suppression-spam_report-email",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -19374,7 +19532,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a transactional template.**\n\nEach user can create up to 300 different transactional templates. Transactional templates are specific to accounts and subusers. Templates created on a parent account will not be accessible from the subuser accounts.\n\nTransactional templates are templates created specifically for transactional email and are not to be confused with [Marketing Campaigns templates](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/templates.html). For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).\n",
                 "operationId": "DELETE_templates-template_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -19607,7 +19773,15 @@
                 ],
                 "description": "**This endpoint allows you to delete one of your transactional template versions.**\n\nEach transactional template can have multiple versions, each version with its own subject and content. Each user can have up to 300 versions across across all templates.\n\nFor more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).\n\n## URI Parameters\n| URI Parameter | Type | Description |\n|---|---|---|\n| template_id | string | The ID of the original template |\n| version_id | string | The ID of the template version |",
                 "operationId": "DELETE_templates-template_id-versions-version_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -19838,7 +20012,15 @@
                 ],
                 "description": "**This endpoint allows you to activate a version of one of your templates.**\n\nEach transactional template can have multiple versions, each version with its own subject and content. Each user can have up to 300 versions across across all templates.\n\n\nFor more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).\n\n## URI Parameters\n| URI Parameter | Type | Description |\n|---|---|---|\n| template_id | string | The ID of the original template |\n| version_id | string |  The ID of the template version |",
                 "operationId": "POST_templates-template_id-versions-version_id-activate",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -22930,7 +23112,15 @@
                 ],
                 "description": "**This endpoint allows you to disassociate a specific whitelabel from a subuser.**\n\nA domain whitelabel allows you to remove the \u201cvia\u201d or \u201csent on behalf of\u201d message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.\n\nDomain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The the parent may then associate the whitelabel via the subuser management tools.\n\nFor more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)\n\n## URI Parameters\n| URI Parameter   | Type  | Required?  | Description  |\n|---|---|---|---|\n| username | string  | required  | Username for the subuser to find associated whitelabels for. |",
                 "operationId": "DELETE_whitelabel-domains-subuser",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -23050,7 +23240,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a domain whitelabel.**\n\nA domain whitelabel allows you to remove the \u201cvia\u201d or \u201csent on behalf of\u201d message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.\n\nFor more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)",
                 "operationId": "DELETE_whitelabel-domains-domain_id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -23411,7 +23609,15 @@
                 ],
                 "description": "**This endpoint allows you to remove a domain's IP address from that domain's whitelabel.**\n\nA domain whitelabel allows you to remove the \u201cvia\u201d or \u201csent on behalf of\u201d message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.\n\nFor more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)\n\n## URI Parameters\n| URI Parameter   | Type  | Description  |\n|---|---|---|\n| id | integer  | ID of the domain whitelabel to delete the IP from. |\n| ip | string | IP to remove from the domain whitelabel. |",
                 "operationId": "DELETE_whitelabel-domains-id-ips-ip",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -23515,7 +23721,15 @@
                 ],
                 "description": "**This endpoint allows you to validate a domain whitelabel. If it fails, it will return an error message describing why the whitelabel could not be validated.**\n\nA domain whitelabel allows you to remove the \u201cvia\u201d or \u201csent on behalf of\u201d message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.\n\nFor more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)\n\n## URI Parameters\n| URI Parameter   | Type   | Description  |\n|---|---|---|\n| id | integer  |ID of the domain whitelabel to validate. |",
                 "operationId": "POST_whitelabel-domains-id-validate",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -23894,7 +24108,15 @@
                 ],
                 "description": "**This endpoint allows you to delete an IP whitelabel.**\n\nA IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).",
                 "operationId": "DELETE_whitelabel-ips-id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -24080,7 +24302,15 @@
                 ],
                 "description": "**This endpoint allows you to validate an IP whitelabel.**\n\nA IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).",
                 "operationId": "POST_whitelabel-ips-id-validate",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -24554,6 +24784,13 @@
                         "name": "username",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
                     }
                 ],
                 "produces": [],
@@ -24668,7 +24905,15 @@
                 ],
                 "description": "**This endpoint allows you to delete a link whitelabel.**\n\nEmail link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).",
                 "operationId": "DELETE_whitelabel-links-id",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [],
                 "responses": {
                     "204": {
@@ -24876,7 +25121,15 @@
                 ],
                 "description": "**This endpoint allows you to validate a link whitelabel.**\n\nEmail link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).",
                 "operationId": "POST_whitelabel-links-id-validate",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "null"
+                        }
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -25161,60 +25414,20 @@
                 "name": "Audit_LogDataInResponse",
                 "script": "function(ctx, request, response) {\n  /*\n    This function is added to your calls if you want, by adding ?audit=true to your URI\n  */\n\n  var output = \"\";\n  var spacer = \"\\t\";\n  \n  //fill in the date in the spreadsheet, so you don't have to\n  var date = new Date();\n  date.setHours(date.getHours() - 7); // time is UTC, so subtract 6 hrs to compensate to CT, 7 for MST\n  var todays_date = date.toLocaleDateString(\"en-US\")+\"\\t\";\n  \n  //do we even snake case, bro?\n  var regex_camel_case = new RegExp(\"^[a-zA-Z0-9_]*$\");\n  \n  //output += \"Limit: \" + response.header.get(\"X-RateLimit-Limit\") + \"//\";\n  var checkHeader = function(header, test) {\n    \n    if (test) {\n      return (response.header.get(header).indexOf(test) != -1 ? \"Yes\\t\" : \"No\\t\");\n    } else {\n      \n      return (response.header.get(header) ? \"Yes\\t\" : \"No\\t\");\n    }\n    \n  };\n  \n  \n  \n  \n  var accept_header_block = \"DOES NOT INCLUDE ACCEPT HEADER BLOCK:   \";\n\n  //test the Accept header\n  var code = response.statusCode.get();\n  accept_header_block = (code == 406 ? \" \\tYes\\t \\tYes\\t\" : \"Yes\\tNo\\tYes\\tNo\\t\") + todays_date + spacer;\n  \n  \n  \n  var request_body_block = \"DOES NOT INCLUDE REQUEST BODY BLOCK:  \";\n  \n  var req_body = response.body.get();\n  var req_keys = Object.keys(req_body);\n  \n  var req_is_camel_case = 0, req_has_bool_vals = 0;\n\n  for (var i=0; i<req_body.length; i++) {\n  \n    //if is_camel_case comes back greater than 0, we fail\n    req_is_camel_case += (regex_camel_case.exec(req_keys[i]) ? 0 : 1);\n  \n  }\n  \n  //check the values of the request body keys\n  for (var k in req_body) {\n    \n    //check the values for bool values\n    req_has_bool_vals += (req_body[k] === true || req_body[k] == \"true\" || req_body[k] === false || req_body[k] == \"false\" ? 1 : 0);\n    \n  }\n  \n  request_body_block = \n    (req_body.length > 0 ?  (is_camel_case > 0 ? \"No\" : \"Yes\") : \"\" ) + spacer + //snake case\n    (req_body.length > 0 ? \"\" : \"N/A\" ) + spacer + //allows null/empty req, if no req - this is N/A\n    (req_body.length > 0 ?  (req_has_bool_vals > 0 ? \"Yes\" : \"\") : \"\") + spacer  + //has bool values?\n    spacer + todays_date +  //todays date\n    spacer; // the empty column\n  \n  var authorization_block = spacer + spacer + spacer + spacer + todays_date + spacer;\n  \n\n  \n  //get headers: X-RateLimit-Limit, X-RateLimit-Remaining. X-RateLimit-Reset, Content-Type. Modified, Etags, Link\n  var rate_limit = response.header.get(\"X-RateLimit-Limit\")+\"\\t\";\n  var rateLimit_remaining_header = checkHeader(\"X-RateLimit-Remaining\");\n  var rateLimit_limit_header = checkHeader(\"X-RateLimit-Limit\");\n  var ratelimit_reset_header = checkHeader(\"X-RateLimit-Reset\");\n  \n  //Content-Type is specified as application/json\n  var content_type_header = checkHeader(\"Content-Type\", \"application/json\");\n\n  //Modified Header?\n  //Response includes \"Not Modified\"\n  //This is a shitty check, because SG doesn't have this header right now 12/9/15\n  var modified_check = (response.statusCode.get() == 304 ? \"Yes\\t\" : \"No\\t\");\n  \n  //get the headers we want to check\n  var access_control_allow_headers = response.header.get(\"Access-Control-Allow-Headers\")+spacer;\n  var access_control_allow_methods = response.header.get(\"Access-Control-Allow-Methods\")+spacer;\n  var etags_header = checkHeader(\"ETags\");\n  var link_header = checkHeader(\"Link\");\n  var request_id_header = checkHeader(\"X-RequestID\");\n  \n  var headers_block = rate_limit + rateLimit_remaining_header + rateLimit_limit_header + ratelimit_reset_header + content_type_header + \n              modified_check + access_control_allow_headers + access_control_allow_methods + spacer + etags_header + link_header + request_id_header + \n              todays_date + spacer;\n\n  //get the body keys\n  var resp_body = response.body.get();\n  var resp_keys = Object.keys(resp_body);\n  \n  //check if the result key is there.\n  var result_key_check = (resp_keys.length == 1 && resp_body.result && resp_body.result != \"undefined\" ? \"Yes\"+spacer : \"No\"+spacer);\n\n  var is_camel_case = 0, \n    has_empties = 0, \n    has_bool_vals = false,\n    pagination_params = 0, \n    resp_is_unixtime = 0;\n        \n  // //validate response params are \"^[a-zA-Z0-9_]*$\"\n  for (var l=0; l<resp_keys.length; l++) {\n    \n    //if is_camel_case comes back greater than 0, we fail\n    is_camel_case += (regex_camel_case.exec(resp_keys[l]) ? 0 : 1);\n    \n    //do we have link params?\n    pagination_params += (resp_keys[l] == \"link\" ? 1 : 0);\n  }\n\n  //check the values of keys\n  for (var j in resp_body) { \n    //check the values for empty values\n    has_empties +=  (resp_body[j] === null || resp_body[j] == [] || resp_body[j] == \"null\" ? 1 : 0);\n    \n    //check the values for bool values\n    has_bool_vals += (resp_body[j] === true || resp_body[j] == \"true\" || resp_body[j] === false || resp_body[j] == \"false\" ? 1 : 0);\n    \n    //are our timestamps unixtime?\n    //unixtime is 10 chars and a num\n    resp_is_unixtime += (!isNaN(resp_body[j]) && resp_body[j].length == 10 ? 1 : 0);    \n  }\n  \n  \n  /*\n  Apologies to whoever comes next, I mixed types on my variables. - Matt\n  */\n\n  //if we have anything that doesn't match the regex, we'll get > 0 otherwise 0=passes test\n  is_camel_case = (resp_keys.length > 0 ? (is_camel_case > 0 ? \"No\" : \"Yes\") : \"N/A\" ) + spacer;\n  \n  //if has_bool_vals > 0, Yes -- otherwise blank, because we can't predict the params should be bool right now\n  has_bool_vals = (resp_keys.length > 0 ? (has_bool_vals > 0 ? \"Yes\" : \"\") : \"N/A\" ) + spacer;\n  \n  //if resp_is_unixtime, there's a good chance we have dates\n  resp_is_unixtime = (resp_keys.length > 0 ? (resp_is_unixtime > 1 ? \"Yes\" : \"\") : \"N/A\" ) + spacer;\n  \n  //do we have any empty strings or empty arrays? Return No if we do, becasue this is bad. If we don't return blank because we need to eyeball verify\n  has_empties = (resp_keys.length > 0 ? (has_empties > 0 ? \"Yes\" : \"\") : \"N/A\" ) + spacer;\n  \n  //if we have params that are called \"link\"\n  pagination_params = (resp_keys.length > 0 ? (pagination_params > 0 ? \"Yes\" : \"No\") : \"N/A\" ) + spacer;\n  \n  var validation_block = result_key_check + is_camel_case + has_bool_vals + resp_is_unixtime + \n                          has_empties + pagination_params + todays_date;\n  \n  /*\n  The following would require making a second call to the endpoint, but we can't parse the response right now, so this will wait -  Matt Bernier 12/9/15\n  \t\t\t\t\t\t\tError block follows guidelines\t\n  \t\t\t\t\t\t\tError codes conform to allowed Response Codes\t\n  \t\t\t\t\t\t\tDate Updated\n  */\n  \n\n  \n  var error_block = spacer + spacer + spacer + todays_date;\n  \n  //put the blocks together in one string for output\n    output +=  accept_header_block + \n              request_body_block + \n              authorization_block + \n              headers_block + \n              validation_block +\n              error_block;\n  \n  // This is how we set the output! \n  var current_body = response.body.get();\n  //response.body.set(current_body + output);\n  //response.body.set(output);\n  response.logInfo({audit_results:output});\n  /*\n  Need echo.stoplight.io spec to make this work\n  SL.sendRequest(request.method.get(), request.url.path.get(), 'application/json', request.body.get(), {\"headers\" : request.header.get()});\n  */\n}"
             },
-            "RunSpecifiedTests": {
-                "description": "",
-                "name": "RunSpecifiedTests",
-                "script": "//This will only run if you have ?test=something on the query string\n//See the Master Environment \"After\" Scripts for the logic that gets us to this test\n//@todo we will need to secure this somehow so that no one else but SendGrid can run these tests.\n\nfunction(ctx, request, response) {\n  // This should be able to call other tests, based on the request param \"test\"\n    var resp_body = response.body.get();\n    var test_responses = {\"what?\": \"Yeah dude\"};\n    \n    var tests = [\"string_camel_case\"];//these could be passed in the request body\n    \n    if (resp_body.test) {\n      tests = request.body.get('test');\n    }\n    \n    resp_body.tests = \"\";\n    \n    //@todo we will need to test whether this is an object or an array first, then inspect either params or an array of objects\n    //@todo we really need to parse through the response object (rather than the tests) and pass the data to the test function\n   for (var i=0; i < tests.length; i++) {\n     \n      //test = \"SL.utilities.Validator_\"+tests[i]+\"()\";\n      var test = \"SL.utilities.Validator_string_camel_case()\";\n      \n      resp_body.tests += (resp_body.tests.length > 1 ? \",\" : \"\") + tests[i] + \":\" + eval(test);\n      \n    }\n    \n    response.body.set(resp_body); \n}"
-            },
-            "Validator_header": {
-                "description": "",
-                "name": "Validator_header",
-                "script": "function(response, header, testString) {\n  \n  if (test) {\n    return (response.header.get(header).indexOf(testString) != -1 ? \"Yes\\t\" : \"No\\t\");\n  } else {\n    \n    return (response.header.get(header) ? \"Yes\\t\" : \"No\\t\");\n  }\n}"
-            },
-            "Validator_is_array": {
-                "description": "",
-                "name": "Validator_is_array",
-                "script": "function(item) {\n  return Array.isArray(item);\n}"
-            },
-            "Validator_is_boolean": {
-                "description": "",
-                "name": "Validator_is_boolean",
-                "script": "function(item) {\n    return typeof item === \"boolean\"\n}"
-            },
-            "Validator_is_null": {
-                "description": "",
-                "name": "Validator_is_null",
-                "script": "function(item) {\n  return (item === null && typeof item === \"object\");\n}"
-            },
-            "Validator_is_number": {
-                "description": "",
-                "name": "Validator_is_number",
-                "script": "function(item) {\n    return typeof item === \"number\"\n}"
-            },
-            "Validator_is_object": {
-                "description": "",
-                "name": "Validator_is_object",
-                "script": "function(item) {\n  return typeof item === \"object\"\n}"
-            },
-            "Validator_is_string": {
-                "description": "",
-                "name": "Validator_is_string",
-                "script": "function(item) {\n  // You have access to the global SL object here.\n  // You can change the function parameters to whatever you like.\n  return typeof item === \"string\"\n}"
-            },
             "Validator_obj_has_key_value": {
                 "description": "",
                 "name": "Validator_obj_has_key_value",
-                "script": "function(obj, key) {\n  // You have access to the global SL object here.\n    // You can change the function parameters to whatever you like.\n  return (obj.key);\n}"
+                "script": "function(obj, key) {\n  // You have access to the global SL object here.\n    // You can change the function parameters to whatever you like.\n  //return (obj.key);\n}"
             },
             "Validator_obj_has_value": {
                 "description": "",
                 "name": "Validator_obj_has_value",
-                "script": "function(obj, key, value) {\n  // You have access to the global SL object here.\n  // You can change the function parameters to whatever you like.\n  return (SL.utilities.Validator_obj_has_value(obj, key) && obj.key == value);\n}"
+                "script": "function(obj, key, value) {\n  // You have access to the global SL object here.\n  // You can change the function parameters to whatever you like.\n  //return (SL.utilities.Validator_obj_has_value(obj, key) && obj.key == value);\n}"
             },
             "Validator_string_camel_case": {
                 "description": "",
                 "name": "Validator_string_camel_case",
-                "script": "function(string) {\n  \n  var regex_camel_case = new RegExp(\"[a-z0-9_]*$\");\n  \n  return (regex_camel_case.exec(rq_keys[i]) ? true : false);\n  \n}"
+                "script": "\nfunction(string) {\n/*  \n  var regex_camel_case = new RegExp(\"[a-z0-9_]*$\");\n  \n  return (regex_camel_case.exec(rq_keys[i]) ? true : false);\n  */\n}"
             },
             "VerifyAuthWithMockingOn": {
                 "description": "",
@@ -26211,6 +26424,14 @@
                             },
                             {
                                 "_id": "DELETE_asm-groups-groupid",
+                                "type": "endpoints"
+                            },
+                            {
+                                "_id": "POST_asm-groups",
+                                "type": "endpoints"
+                            },
+                            {
+                                "_id": "GET_asm-groups",
                                 "type": "endpoints"
                             }
                         ],
