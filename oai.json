@@ -2670,7 +2670,7 @@
     "host": "api.sendgrid.com",
     "info": {
         "description": "",
-        "title": "SendGrid V3 API",
+        "title": "DX - v3 - Officially Documented Only - DO NOT EDIT",
         "version": "3.0"
     },
     "paths": {
@@ -3797,81 +3797,6 @@
                 "tags": [
                     "Suppression Management - Unsubscribe Groups"
                 ]
-            }
-        },
-        "/asm/groups/:group_id/suppressions": {
-            "parameters": [],
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "**This endpoint allows you to determine if the given list of email addresses exists in the given suppression group. The endpoint will return a subset of emails from the request that exists in the suppression group specified.**\n\nSuppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.",
-                "operationId": "POST_asm-groups-:group_id-suppressions",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "schema": {
-                            "example": {
-                                "recipient_emails": [
-                                    "exists1@example.com",
-                                    "exists2@example.com",
-                                    "doesnotexists@example.com"
-                                ]
-                            },
-                            "properties": {
-                                "recipient_emails": {
-                                    "description": "The list of email address you would like to search for.",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array"
-                                }
-                            },
-                            "required": [
-                                "recipient_emails"
-                            ],
-                            "type": "object"
-                        }
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "examples": {
-                            "application/json": {
-                                "recipient_emails": [
-                                    "exists1@example.com",
-                                    "exists2@example.com"
-                                ]
-                            }
-                        },
-                        "schema": {
-                            "properties": {
-                                "recipient_emails": {
-                                    "description": "The subset of email address that do exist in the suppression group.",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array"
-                                }
-                            },
-                            "required": [
-                                "recipient_emails"
-                            ],
-                            "type": "object"
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Authorization": []
-                    }
-                ],
-                "summary": "Search a suppression group for a set of email addresses"
             }
         },
         "/asm/groups/{group_id}": {
