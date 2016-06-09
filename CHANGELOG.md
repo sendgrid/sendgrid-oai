@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.9] - 2016-06-09
+### Fixed
+- Adjustments to the stoplight schema
+
 ## [1.0.8] - 2016-06-09
 ### Fixed
 - Fixed more request body schemas when there should be no request body
