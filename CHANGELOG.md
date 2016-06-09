@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.10] - 2016-06-09
+### Fixed
+- Remove unecessary test
+
 ## [1.0.9] - 2016-06-09
 ### Fixed
 - Adjustments to the stoplight schema
