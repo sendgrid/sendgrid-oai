@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.10] - 2016-06-27
+### Added
+- v3 /mail/send out of beta
+
 ## [1.0.10] - 2016-06-09
 ### Fixed
 - Remove unecessary test
