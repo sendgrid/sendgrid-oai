@@ -221,7 +221,7 @@ paths:
 
         If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
 
-        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). 
+        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html).
       operationId: GET_categories-stats-sums
       consumes: []
       produces:
@@ -786,9 +786,9 @@ paths:
       description: |-
         **This endpoint allows you to delete all email addresses on your blocks list.**
 
-        There are two options for deleting blocked emails: 
+        There are two options for deleting blocked emails:
 
-        1. You can delete all blocked emails by setting `delete_all` to true in the request body. 
+        1. You can delete all blocked emails by setting `delete_all` to true in the request body.
         2. You can delete some blocked emails by specifying the email addresses in an array in the request body.
 
         [Blocks](https://sendgrid.com/docs/Glossary/blocks.html) happen when your message was rejected for a reason related to the message, not the recipient address. This can happen when your mail server IP address has been added to a blacklist or blocked by an ISP, or if the message content is flagged by a filter on the receiving server.
@@ -878,9 +878,9 @@ paths:
       description: |-
         **This endpoint allows you to remove an email address from your bounce list.**
 
-        Bounces are messages that are returned to the server that sent it. This endpoint allows you to delete a single email addresses from your bounce list. 
+        Bounces are messages that are returned to the server that sent it. This endpoint allows you to delete a single email addresses from your bounce list.
 
-        For more information see: 
+        For more information see:
 
         * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
         * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
@@ -921,7 +921,7 @@ paths:
 
         Bounces are messages that are returned to the server that sent it.
 
-        For more information see: 
+        For more information see:
 
         * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
         * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
@@ -967,7 +967,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve a specific alert.**
 
-        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics. 
+        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
         * Usage alerts allow you to set the threshold at which an alert will be sent.
         * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
 
@@ -1032,7 +1032,7 @@ paths:
       description: |-
         **This endpoint allows you to delete an alert.**
 
-        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics. 
+        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
         * Usage alerts allow you to set the threshold at which an alert will be sent.
         * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
 
@@ -1051,7 +1051,7 @@ paths:
       description: |-
         **This endpoint allows you to update an alert.**
 
-        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics. 
+        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
         * Usage alerts allow you to set the threshold at which an alert will be sent.
         * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
 
@@ -1139,7 +1139,7 @@ paths:
       description: |-
         **This endpoint returns a list of all scopes that this user has access to.**
 
-        API Keys can be used to authenticate the use of [SendGrid’s v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html). 
+        API Keys can be used to authenticate the use of [SendGrid’s v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html).
       operationId: GET_scopes
       consumes: []
       produces:
@@ -4067,7 +4067,7 @@ paths:
     get:
       summary: Retrieve all recipients on a List
       description: |-
-        **This endpoint allows you to retrieve all recipients on the list with the given ID.** 
+        **This endpoint allows you to retrieve all recipients on the list with the given ID.**
 
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: GET_contactdb-lists-list_id-recipients
@@ -5292,7 +5292,7 @@ paths:
       description: |-
         **This endpoint allows you to validate a batch ID.**
 
-        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. 
+        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint.
 
         More Information:
 
@@ -5339,9 +5339,9 @@ paths:
       description: |-
         **This endpoint allows you to retrieve all of your bounces.**
 
-        Bounces are messages that are returned to the server that sent it. 
+        Bounces are messages that are returned to the server that sent it.
 
-        For more information see: 
+        For more information see:
 
         * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
         * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
@@ -5410,7 +5410,7 @@ paths:
 
         Bounces are messages that are returned to the server that sent it.
 
-        For more information see: 
+        For more information see:
 
         * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
         * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
@@ -6240,7 +6240,7 @@ paths:
     get:
       summary: Retrieve all custom fields
       description: |-
-        **This endpoint allows you to retrieve all custom fields.** 
+        **This endpoint allows you to retrieve all custom fields.**
 
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: GET_contactdb-custom_fields
@@ -6704,14 +6704,14 @@ paths:
         * Send this to segment from an existing list
         * Don't send this in order to segment from your entire contactdb.
 
-        Valid operators for create and update depend on the type of the field you are segmenting: 
+        Valid operators for create and update depend on the type of the field you are segmenting:
 
-        * **Dates:** "eq", "ne", "lt" (before), "gt" (after) 
-        * **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value) 
-        * **Numbers:** "eq", "lt", "gt" 
-        * **Email Clicks and Opens:** "eq" (opened), "ne" (not opened) 
+        * **Dates:** "eq", "ne", "lt" (before), "gt" (after)
+        * **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value)
+        * **Numbers:** "eq", "lt", "gt"
+        * **Email Clicks and Opens:** "eq" (opened), "ne" (not opened)
 
-        Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign. 
+        Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign.
 
         Segments may contain multiple condtions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
 
@@ -7486,7 +7486,7 @@ paths:
       description: |-
         **This endpoint allows you to retieve all of your alerts.**
 
-        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics. 
+        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
         * Usage alerts allow you to set the threshold at which an alert will be sent.
         * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
 
@@ -7567,7 +7567,7 @@ paths:
       description: |-
         **This endpoint allows you to create a new alert.**
 
-        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics. 
+        Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
         * Usage alerts allow you to set the threshold at which an alert will be sent.
         * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
 
@@ -7608,7 +7608,7 @@ paths:
               - email_to
             example:
               type: stats_notification
-              email_to: eric.schallock@sendgrid.com
+              email_to: example@example.com
               frequency: daily
         - name: Authorization
           in: header
@@ -7806,7 +7806,7 @@ paths:
       description: |-
         **This endpoint allows you to generate a new batch ID. This batch ID can be associated with scheduled sends via the mail/send endpoint.**
 
-        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. 
+        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint.
 
         More Information:
 
@@ -7844,7 +7844,7 @@ paths:
     put:
       summary: Update IPs assigned to a subuser
       description: |-
-        Each subuser should be assigned to an IP address, from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have their own, or multiple, IP addresses as well. 
+        Each subuser should be assigned to an IP address, from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have their own, or multiple, IP addresses as well.
 
         More information:
 
@@ -10080,7 +10080,7 @@ paths:
       description: |-
         **This endpoint allows you to update your current legacy email template settings.**
 
-        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). 
+        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
 
         The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
 
@@ -10132,7 +10132,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve your current legacy email template settings.**
 
-        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). 
+        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
 
         The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
 
@@ -10661,7 +10661,7 @@ paths:
       description: |-
         **This endpoint allows you to remove email addresses from your invalid email address list.**
 
-        There are two options for deleting invalid email addresses: 
+        There are two options for deleting invalid email addresses:
 
         1) You can delete all invalid email addresses by setting `delete_all` to true in the request body.
         2) You can delete some invalid email addresses by specifying certain addresses in an array in the request body.
@@ -10894,9 +10894,9 @@ paths:
       description: |-
         **This endpoint allows you to delete your spam reports.**
 
-        There are two options for deleting spam reports: 
+        There are two options for deleting spam reports:
 
-        1) You can delete all spam reports by setting "delete_all" to true in the request body. 
+        1) You can delete all spam reports by setting "delete_all" to true in the request body.
         2) You can delete some spam reports by specifying the email addresses in an array in the request body.
 
         [Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.
@@ -13970,7 +13970,7 @@ paths:
 
         If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
 
-        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). 
+        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html).
       operationId: GET_categories-stats
       consumes: []
       produces:

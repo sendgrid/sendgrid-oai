@@ -3258,7 +3258,7 @@
                         "name": "body",
                         "schema": {
                             "example": {
-                                "email_to": "eric.schallock@sendgrid.com",
+                                "email_to": "example@example.com",
                                 "frequency": "daily",
                                 "type": "stats_notification"
                             },
