@@ -3121,7 +3121,7 @@
     "host": "api.sendgrid.com",
     "info": {
         "description": "",
-        "title": "SendGrid V3 API",
+        "title": "SendGrid v3 API Documentation",
         "version": "3.0"
     },
     "parameters": {
@@ -3297,6 +3297,18 @@
                                         "id": 1,
                                         "ip": "192.168.1.1/32",
                                         "updated_at": 1441824715
+                                    },
+                                    {
+                                        "created_at": 1441824715,
+                                        "id": 2,
+                                        "ip": "192.168.1.2/32",
+                                        "updated_at": 1441824715
+                                    },
+                                    {
+                                        "created_at": 1441824715,
+                                        "id": 3,
+                                        "ip": "192.168.1.3/32",
+                                        "updated_at": 1441824715
                                     }
                                 ]
                             }
@@ -3304,26 +3316,40 @@
                         "schema": {
                             "properties": {
                                 "result": {
+                                    "description": "An array listing all of your whitelisted IPs.",
                                     "items": {
                                         "properties": {
                                             "created_at": {
+                                                "description": "A Unix timestamp indicating when the IP was whitelisted.",
                                                 "type": "integer"
                                             },
                                             "id": {
+                                                "description": "The ID of the whitelisted IP.",
                                                 "type": "integer"
                                             },
                                             "ip": {
+                                                "description": "The whitelisted IP.",
                                                 "type": "string"
                                             },
                                             "updated_at": {
+                                                "description": "A Unix timestamp indicating when the IPs whitelisting status was most recently updated.",
                                                 "type": "integer"
                                             }
                                         },
+                                        "required": [
+                                            "id",
+                                            "ip",
+                                            "created_at",
+                                            "updated_at"
+                                        ],
                                         "type": "object"
                                     },
                                     "type": "array"
                                 }
                             },
+                            "required": [
+                                "result"
+                            ],
                             "type": "object"
                         }
                     }
@@ -3410,6 +3436,18 @@
                                         "id": 1,
                                         "ip": "192.168.1.1/32",
                                         "updated_at": 1441824715
+                                    },
+                                    {
+                                        "created_at": 1441824715,
+                                        "id": 2,
+                                        "ip": "192.0.0.0/8",
+                                        "updated_at": 1441824715
+                                    },
+                                    {
+                                        "created_at": 1441824715,
+                                        "id": 3,
+                                        "ip": "192.168.1.3/32",
+                                        "updated_at": 1441824715
                                     }
                                 ]
                             }
@@ -3417,26 +3455,40 @@
                         "schema": {
                             "properties": {
                                 "result": {
+                                    "description": "An array listing all of your whitelisted IPs.",
                                     "items": {
                                         "properties": {
                                             "created_at": {
+                                                "description": "A Unix timestamp indicating when the IP was whitelisted.",
                                                 "type": "integer"
                                             },
                                             "id": {
+                                                "description": "The ID of the whitelisted IP.",
                                                 "type": "integer"
                                             },
                                             "ip": {
+                                                "description": "The whitelisted IP.",
                                                 "type": "string"
                                             },
                                             "updated_at": {
+                                                "description": "A Unix timestamp indicating when the IPs whitelisting status was most recently updated.",
                                                 "type": "integer"
                                             }
                                         },
+                                        "required": [
+                                            "id",
+                                            "ip",
+                                            "created_at",
+                                            "updated_at"
+                                        ],
                                         "type": "object"
                                     },
                                     "type": "array"
                                 }
                             },
+                            "required": [
+                                "result"
+                            ],
                             "type": "object"
                         }
                     }
@@ -3512,18 +3564,28 @@
                         "schema": {
                             "properties": {
                                 "created_at": {
+                                    "description": "A Unix timestamp indicating when the IP was whitelisted.",
                                     "type": "integer"
                                 },
                                 "id": {
+                                    "description": "The ID of the IP address.",
                                     "type": "integer"
                                 },
                                 "ip": {
+                                    "description": "The IP address.",
                                     "type": "string"
                                 },
                                 "updated_at": {
+                                    "description": "A Unix timestamp indicating when the IP address was last updated.",
                                     "type": "integer"
                                 }
                             },
+                            "required": [
+                                "id",
+                                "ip",
+                                "created_at",
+                                "updated_at"
+                            ],
                             "type": "object"
                         }
                     }
@@ -3579,7 +3641,7 @@
                             "application/json": [
                                 {
                                     "created_at": 1451498784,
-                                    "email_to": "reaper@example.com",
+                                    "email_to": "example1@example.com",
                                     "id": 46,
                                     "percentage": 90,
                                     "type": "usage_limit",
@@ -3587,7 +3649,7 @@
                                 },
                                 {
                                     "created_at": 1451498812,
-                                    "email_to": "reaper@example.com",
+                                    "email_to": "example2@example.com",
                                     "frequency": "monthly",
                                     "id": 47,
                                     "type": "stats_notification",
@@ -3595,7 +3657,7 @@
                                 },
                                 {
                                     "created_at": 1451520930,
-                                    "email_to": "someone@example.com",
+                                    "email_to": "example3@example.com",
                                     "frequency": "daily",
                                     "id": 48,
                                     "type": "stats_notification",
@@ -3723,23 +3785,73 @@
                     }
                 ],
                 "produces": [
-                    "application/json",
-                    "text/plain"
+                    "application/json"
                 ],
                 "responses": {
                     "201": {
                         "description": "",
                         "examples": {
-                            "text/plain": {
-                                "created_at": 1465595735,
-                                "email_to": "eric.schallock@sendgrid.com",
+                            "application/json": {
+                                "created_at": 1451520930,
+                                "email_to": "test@example.com",
                                 "frequency": "daily",
-                                "id": 304575,
+                                "id": 48,
                                 "type": "stats_notification",
-                                "updated_at": 1465595735
+                                "updated_at": 1451520930
                             }
                         },
                         "schema": {
+                            "properties": {
+                                "created_at": {
+                                    "description": "A Unix timestamp indicating when the alert was created.",
+                                    "type": "integer"
+                                },
+                                "email_to": {
+                                    "description": "The email address that the alert will be sent to.",
+                                    "type": "string"
+                                },
+                                "frequency": {
+                                    "description": "If the alert is of type stats_notification, this indicates how frequently the stats notifications will be sent. For example, \"daily\", \"weekly\", or \"monthly\".",
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "description": "The ID of the alert.",
+                                    "type": "integer"
+                                },
+                                "percentage": {
+                                    "description": "\"If the alert is of type usage_limit, this indicates the percentage of email usage that must be reached before the alert will be sent.",
+                                    "type": "integer"
+                                },
+                                "type": {
+                                    "description": "The type of alert.",
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "description": "A Unix timestamp indicating when the alert was last modified.",
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "created_at",
+                                "email_to",
+                                "id",
+                                "type",
+                                "updated_at"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "properties": {
+                                "field": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
                             "type": "object"
                         }
                     }
@@ -3809,23 +3921,63 @@
                     }
                 ],
                 "produces": [
-                    "application/json",
-                    "text/plain"
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "examples": {
-                            "text/plain": {
-                                "created_at": 1465613735,
-                                "email_to": "eric.schallock@sendgrid.com",
+                            "application/json": {
+                                "created_at": 1451520930,
+                                "email_to": "example@example.com",
                                 "frequency": "daily",
-                                "id": 304575,
+                                "id": 48,
                                 "type": "stats_notification",
-                                "updated_at": 1465595735
+                                "updated_at": 1451520930
                             }
                         },
                         "schema": {
+                            "properties": {
+                                "created_at": {
+                                    "description": "A Unix timestamp indicating when the alert was created.",
+                                    "type": "integer"
+                                },
+                                "email_to": {
+                                    "description": "The email address that the alert will be sent to.",
+                                    "type": "string"
+                                },
+                                "frequency": {
+                                    "description": "If the alert is of type stats_notification, this indicates how frequently the stats notifications will be sent. For example: \"daily\", \"weekly\", or \"monthly\".",
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "description": "The ID of the alert.",
+                                    "type": "integer"
+                                },
+                                "percentage": {
+                                    "description": "If the alert is of type usage_limit, this indicates the percentage of email usage that must be reached before the alert will be sent.",
+                                    "type": "integer"
+                                },
+                                "type": {
+                                    "description": "The type of alert.",
+                                    "enum": [
+                                        "usage_alert",
+                                        "stats_notification"
+                                    ],
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "description": "A Unix timestamp indicating when the alert was last modified.",
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "created_at",
+                                "email_to",
+                                "id",
+                                "type",
+                                "updated_at"
+                            ],
                             "type": "object"
                         }
                     }
@@ -3869,7 +4021,7 @@
                         "name": "body",
                         "schema": {
                             "example": {
-                                "email_to": "test@example.com"
+                                "email_to": "example@example.com"
                             },
                             "properties": {
                                 "email_to": {
@@ -3898,7 +4050,7 @@
                         "examples": {
                             "application/json": {
                                 "created_at": 1451520930,
-                                "email_to": "test@example.com",
+                                "email_to": "example@example.com",
                                 "frequency": "daily",
                                 "id": 48,
                                 "type": "stats_notification",
@@ -6201,7 +6353,7 @@
             },
             "parameters": [
                 {
-                    "description": "The id of the campaign you would like to retrieve.",
+                    "description": "The ID of the campaign that you would like to delete.",
                     "in": "path",
                     "name": "campaign_id",
                     "required": true,
@@ -7669,12 +7821,7 @@
                             }
                         },
                         "schema": {
-                            "properties": {
-                                "": {
-                                    "$ref": "#/definitions/category_stats"
-                                }
-                            },
-                            "type": "object"
+                            "$ref": "#/definitions/category_stats"
                         }
                     }
                 },
@@ -13780,13 +13927,7 @@
                                     "type": "object"
                                 },
                                 "from": {
-                                    "description": "An email object containing the email address and name of the sender.",
-                                    "properties": {
-                                        "": {
-                                            "$ref": "#/definitions/email_object"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/definitions/email_object"
                                 },
                                 "headers": {
                                     "description": "An object containing key/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be one of the reserved headers.",
@@ -13884,27 +14025,17 @@
                                             "bcc": {
                                                 "description": "An array of recipients who will receive a blind carbon copy of your email. Each object within this array may contain the name, but must always contain the email, of a recipient.",
                                                 "items": {
-                                                    "properties": {
-                                                        "": {
-                                                            "$ref": "#/definitions/email_object"
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                                    "$ref": "#/definitions/email_object"
                                                 },
-                                                "maxItems": 100,
+                                                "maxItems": 1000,
                                                 "type": "array"
                                             },
                                             "cc": {
                                                 "description": "An array of recipients who will receive a copy of your email. Each object within this array may contain the name, but must always contain the email, of a recipient.",
                                                 "items": {
-                                                    "properties": {
-                                                        "": {
-                                                            "$ref": "#/definitions/email_object"
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                                    "$ref": "#/definitions/email_object"
                                                 },
-                                                "maxItems": 100,
+                                                "maxItems": 1000,
                                                 "type": "array"
                                             },
                                             "custom_args": {
@@ -13932,14 +14063,9 @@
                                             "to": {
                                                 "description": "An array of recipients. Each object within this array may contain the name, but must always contain the email, of a recipient.",
                                                 "items": {
-                                                    "properties": {
-                                                        "": {
-                                                            "$ref": "#/definitions/email_object"
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                                    "$ref": "#/definitions/email_object"
                                                 },
-                                                "maxItems": 100,
+                                                "maxItems": 1000,
                                                 "minItems": 1,
                                                 "type": "array"
                                             }
@@ -13954,13 +14080,7 @@
                                     "uniqueItems": false
                                 },
                                 "reply_to": {
-                                    "description": "An email object containing the email address and name of the individual who should receive responses to your email.",
-                                    "properties": {
-                                        "": {
-                                            "$ref": "#/definitions/email_object"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/definitions/email_object"
                                 },
                                 "sections": {
                                     "description": "An object of key/value pairs that define block sections of code to be used as substitutions.",
@@ -18378,7 +18498,7 @@
                             "application/json": [
                                 {
                                     "created": 1443651154,
-                                    "email": "user1@example.com",
+                                    "email": "example@example.com",
                                     "reason": "error dialing remote address: dial tcp 10.57.152.165:25: no route to host",
                                     "status": "4.0.0"
                                 }
@@ -18482,7 +18602,7 @@
                             "application/json": [
                                 {
                                     "created": 1443651154,
-                                    "email": "user1@example.com",
+                                    "email": "example@example.com",
                                     "reason": "error dialing remote address: dial tcp 10.57.152.165:25: no route to host",
                                     "status": "4.0.0"
                                 }
@@ -18650,6 +18770,14 @@
                         "in": "query",
                         "name": "end_time",
                         "type": "integer"
+                    },
+                    {
+                        "default": "application/json",
+                        "description": "",
+                        "in": "header",
+                        "name": "Accept",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "produces": [
@@ -19656,7 +19784,7 @@
             },
             "parameters": [
                 {
-                    "description": "The id of the transactional template you want to delete.",
+                    "description": "The id of the transactional template you want to edit.",
                     "in": "path",
                     "name": "template_id",
                     "required": true,
@@ -26953,6 +27081,7 @@
                         "name": "Global: Traits"
                     }
                 ],
+                "tests": [],
                 "utilFuncs": [
                     {
                         "_id": "ZwcqTZkzjF2hNntT5",
