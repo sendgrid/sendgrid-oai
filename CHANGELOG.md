@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.13] - 2016-07-5
+### Fixed
+- /user/webhooks/parse/settings/{hostname} consumes parameter fixed
+
 ## [1.1.12] - 2016-07-5
 ### Fixed
 - Removed extra /

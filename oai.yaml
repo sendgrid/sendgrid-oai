@@ -2279,8 +2279,7 @@ paths:
 
         The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the contnet, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
       operationId: DELETE_user-webhooks-parse-settings-hostname
-      consumes:
-        - application/json
+      consumes: []
       produces: []
       parameters: []
       responses:
