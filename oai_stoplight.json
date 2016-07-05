@@ -4365,7 +4365,7 @@
                     "204": {
                         "description": "",
                         "examples": {
-                            "application/json": null
+                            "null": null
                         },
                         "schema": {
                             "type": "null"
@@ -22412,17 +22412,6 @@
             },
             "parameters": [
                 {
-                    "description": "The hostname associated with the inbound parse setting that you want to delete.",
-                    "in": "path",
-                    "name": "hostname",
-                    "required": true,
-                    "type": "string"
-                }
-            ]
-        },
-        "/user/webhooks/parse/settings/{hostname}/": {
-            "parameters": [
-                {
                     "description": "The hostname associated with the specific inbound parse setting that you want to update.",
                     "in": "path",
                     "name": "hostname",
@@ -22475,10 +22464,13 @@
                     }
                 ],
                 "summary": "Update a parse setting",
+                "tags": [
+                    "Settings - Inbound Parse"
+                ],
                 "x-stoplight": {
                     "afterScript": null,
                     "beforeScript": null,
-                    "id": "PATCH_user-webhooks-parse-settings-hostname-",
+                    "id": "PATCH_user-webhooks-parse-settings-hostname",
                     "mock": {
                         "dynamic": false,
                         "enabled": false,
@@ -25652,7 +25644,7 @@
                                 "type": "endpoints"
                             },
                             {
-                                "_id": "PATCH_user-webhooks-parse-settings-hostname-",
+                                "_id": "PATCH_user-webhooks-parse-settings-hostname",
                                 "type": "endpoints"
                             },
                             {

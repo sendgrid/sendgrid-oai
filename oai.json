@@ -3809,7 +3809,7 @@
                     "204": {
                         "description": "",
                         "examples": {
-                            "application/json": null
+                            "null": null
                         },
                         "schema": {
                             "type": "null"
@@ -19843,17 +19843,6 @@
             },
             "parameters": [
                 {
-                    "description": "The hostname associated with the inbound parse setting that you want to delete.",
-                    "in": "path",
-                    "name": "hostname",
-                    "required": true,
-                    "type": "string"
-                }
-            ]
-        },
-        "/user/webhooks/parse/settings/{hostname}/": {
-            "parameters": [
-                {
                     "description": "The hostname associated with the specific inbound parse setting that you want to update.",
                     "in": "path",
                     "name": "hostname",
@@ -19905,7 +19894,10 @@
                         "Authorization": []
                     }
                 ],
-                "summary": "Update a parse setting"
+                "summary": "Update a parse setting",
+                "tags": [
+                    "Settings - Inbound Parse"
+                ]
             }
         },
         "/user/webhooks/parse/stats": {

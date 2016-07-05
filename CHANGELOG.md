@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.12] - 2016-07-5
+### Fixed
+- Removed extra /
+
+
 ## [1.1.11] - 2016-07-5
 ### Fixed
 - [Issue #7](https://github.com/sendgrid/sendgrid-oai/issues/7) - Object with empty property name
