@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.14] - 2016-07-5
+### Fixed
+- Duplicate query parameter
+### Added
+- Sender ID endpint
+
 ## [1.1.13] - 2016-07-5
 ### Fixed
 - /user/webhooks/parse/settings/{hostname} consumes parameter fixed
