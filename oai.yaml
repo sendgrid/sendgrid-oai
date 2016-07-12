@@ -14468,11 +14468,9 @@ paths:
             $ref: '#/definitions/whitelabel:domain_spf'
       security:
         - Authorization: []
-  /v3/senders:
+  /senders:
     parameters: []
     get:
-      tags:
-        - Sender Identities API
       summary: Get all Sender Identities
       description: |-
         **This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**
@@ -14526,7 +14524,7 @@ paths:
         *You may create up to 100 unique sender identities.*
 
         Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
-      operationId: POST_v3-senders
+      operationId: POST_senders
       consumes:
         - application/json
       produces:
@@ -14667,7 +14665,7 @@ paths:
                   field: country
       security:
         - Authorization: []
-  '/v3/senders/{sender_id}':
+  '/senders/{sender_id}':
     parameters:
       - name: sender_id
         in: path
@@ -14964,7 +14962,7 @@ paths:
                   field: id
       security:
         - Authorization: []
-  '/v3/senders/{sender_id}/resend_verification':
+  '/senders/{sender_id}/resend_verification':
     parameters:
       - name: sender_id
         in: path

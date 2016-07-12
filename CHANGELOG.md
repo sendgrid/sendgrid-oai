@@ -1,7 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.2.14] - 2016-07-5
+## [1.2.15] - 2016-07-12
+### Fixed
+- Sender ID url
+
+## [1.2.14] - 2016-07-12
 ### Fixed
 - Duplicate query parameter
 ### Added
