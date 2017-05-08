@@ -1,0 +1,25 @@
+{
+  "name": "sendgrid-swagger",
+  "wf_version": "1.0.0",
+  "envrepo": "sendgrid-ops/chef-data",
+  "staging": [
+    {
+      "file": "environments/common/staging/dfw2.rb",
+      "key": "(\\$environment\\['sendgrid-swagger'\\]\\['deployment'\\]\\['revision'\\] = )(.*)"
+    },
+    {
+      "file": "environments/common/staging/mdw1.rb",
+      "key": "(\\$environment\\['sendgrid-swagger'\\]\\['deployment'\\]\\['revision'\\] = )(.*)"
+    }
+  ],
+  "production": [
+    {
+      "file": "environments/common/production.rb",
+      "key": "(\\$environment\\['sendgrid-swagger'\\]\\['deployment'\\]\\['revision'\\] = )(.*)"
+    }
+  ],
+  "jenkins": {
+      "master": "sendgrid-swagger",
+      "pr": "sendgrid-swagger-pullrequests"
+  }
+}
