@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2017-06-16
+### Added
+- Optional `on-behalf-of` subuser header and minor documentation updates.
+
 ## [1.2.15] - 2016-07-12
 ### Fixed
 - Sender ID url
