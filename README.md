@@ -1,10 +1,14 @@
+[![Email Notifications Badge](https://dx.sendgrid.com/badge/oai)](https://dx.sendgrid.com/newsletter/oai)
+
 **This is a OpenAPI 2.0 representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
 
 If you have an interesting use case for these files or have a request, please [let us know via email](mailto:dx@sendgrid.com) or [create an issue](https://github.com/sendgrid/sendgrid-oai/issues).
 
 # Announcements
 
-All updates to this project is documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-oai/blob/master/CHANGELOG.md).
+**NEW:** Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for releases and breaking changes.
+
+All updates to this project are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-oai/blob/master/CHANGELOG.md).
 
 ## Roadmap
 
