@@ -6179,13 +6179,6 @@
                         "type": "integer"
                     },
                     {
-                        "name": "list_id",
-                        "in": "query",
-                        "description": "The ID of the list whose recipients you are requesting.",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
                     }
                 ],
