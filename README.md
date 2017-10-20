@@ -20,8 +20,8 @@ We encourage contribution to our projects, please see our [CONTRIBUTING](https:/
 
 Quick links:
 
-- [Feature Request](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md#feature_request)
-- [Bug Reports](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md#submit_a_bug_report)
+- [Feature Request](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md#feature-request)
+- [Bug Reports](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md#submit-a-bug-report)
 - [Sign the CLA to Create a Pull Request](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md#cla)
 
 # About
