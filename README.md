@@ -1,4 +1,11 @@
+[![SendGrid Logo](https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
+
+[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-oai.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-oai)
 [![Email Notifications Badge](https://dx.sendgrid.com/badge/oai)](https://dx.sendgrid.com/newsletter/oai)
+[![npm](https://img.shields.io/npm/l/express.svg)]()
+[![Twitter Follow](https://img.shields.io/twitter/follow/sendgrid.svg?style=social&label=Follow)](https://twitter.com/sendgrid)
+[![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-oai.svg)](https://github.com/sendgrid/sendgrid-nodejs/graphs/contributors)
+
 
 **This is a OpenAPI 2.0 representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
 
