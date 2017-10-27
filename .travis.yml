@@ -1,0 +1,5 @@
+language: python
+install:
+  - pip install prance
+script:
+  - prance validate --strict oai.json oai_stoplight.json oai.yaml
