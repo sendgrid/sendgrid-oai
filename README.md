@@ -17,11 +17,11 @@ If you have an interesting use case for these files or have a request, please [l
 
 All updates to this project are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-oai/blob/master/CHANGELOG.md).
 
-## Roadmap
+# Roadmap
 
 If you are interested in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-oai/milestones). We would love to hear your feedback.
 
-## How to Contribute
+# How to Contribute
 
 We encourage contribution to our projects, please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md) guide for details.
 
