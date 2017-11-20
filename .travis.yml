@@ -2,4 +2,5 @@ language: python
 install:
   - pip install prance
 script:
+  - python test/test.py
   - prance validate --strict oai.json oai_stoplight.json oai.yaml
