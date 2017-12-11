@@ -4,10 +4,6 @@ Hello! Thank you for choosing to help contribute to one of the SendGrid open sou
 - [Roadmap & Milestones](#roadmap)
 - [Feature Request](#feature-request)
 - [Submit a Bug Report](#submit-a-bug-report)
-- [Improvements to the Codebase](#improvements-to-the-codebase)
-- [Understanding the Code Base](#understanding-the-codebase)
-- [Testing](#testing)
-- [Style Guidelines & Naming Conventions](#style-guidelines-and-naming-conventions)
 - [Creating a Pull Request](#creating-a-pull-request)
 
 <a name="roadmap"></a>
@@ -53,7 +49,8 @@ Before you decide to create a new issue, please try the following:
 
 In order to make the process easier, we've included a [sample bug report template](https://github.com/sendgrid/sendgrid-oai/.github/ISSUE_TEMPLATE) (borrowed from [Ghost](https://github.com/TryGhost/Ghost/)). The template uses [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/) for formatting.
 
-## Creating a Pull Request<a name="creating-a-pull-request"></a>
+<a name="creating-a-pull-request"></a>
+## Creating a Pull Request
 
 1. [Fork](https://help.github.com/fork-a-repo/) the project, clone your fork,
    and configure the remotes:
