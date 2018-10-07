@@ -1,5 +1,5 @@
 # Change Log
-All notable changes to this project will be documented in this file.
+All the notable changes to this project will be documented in this file.
 
 [2020-08-05] Version 1.4.1
 --------------------------
