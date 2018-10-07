@@ -17,15 +17,15 @@ If you have an interesting use case for these files or have a request, please [c
 
 Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for new releases and breaking changes.
 
-All updates to this project are documented in our [CHANGELOG](CHANGELOG.md).
+All the updates to this project are documented in our [CHANGELOG](CHANGELOG.md).
 
 # Roadmap
 
-If you are interested in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-oai/milestones). We would love to hear your feedback.
+If you are interested in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-oai/milestones). Your feedback would be highly appreciated.
 
 # How to Contribute
 
-We encourage contribution to our projects, please see our [CONTRIBUTING](CONTRIBUTING.md) guide for more details.
+We encourage contributions to our projects, please see our [CONTRIBUTING](CONTRIBUTING.md) guide for more details.
 
 Quick links:
 

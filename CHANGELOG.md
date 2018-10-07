@@ -68,7 +68,7 @@ All the notable changes to this project will be documented in this file.
 - [Issue #7](https://github.com/sendgrid/sendgrid-oai/issues/7) - Object with empty property name
 
 ### Updated
-- examples and definitions
+- Examples and definitions
 
 ## [1.1.10] - 2016-06-27
 ### Added
