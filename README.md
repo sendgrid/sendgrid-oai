@@ -12,6 +12,8 @@
 If you have an interesting use case for these files or have a request, please [let us know via email](mailto:dx@sendgrid.com) or [create an issue](https://github.com/sendgrid/sendgrid-oai/issues).
 
 # Announcements
+**HOT!!**
+If you're a software engineer who is passionate about #DeveloperExperience and/or #OpenSource, [this is an incredible opportunity to join our #DX](https://sendgrid.com/careers/role/1421152/?gh_jid=1421152) team as a Developer Experience Engineer and work with [@thinkingserious](https://github.com/thinkingserious) and [@aroach!](https://github.com/aroach) Tell your friends :)
 
 **NEW:** Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for releases and breaking changes.
 
