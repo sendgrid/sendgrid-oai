@@ -15120,7 +15120,7 @@ paths:
               valid:
                 type: boolean
                 description: Indicates if this is a valid whitelabel.
-              validation_resuts:
+              validation_results:
                 type: object
                 description: 'The individual DNS records that are checked when validating, including the reason for any invalid DNS records.'
                 properties:
@@ -15165,7 +15165,7 @@ paths:
             application/json:
               id: 1
               valid: true
-              validation_resuts:
+              validation_results:
                 mail_cname:
                   valid: false
                   reason: Expected your MX record to be "mx.sendgrid.net" but found "example.com".
