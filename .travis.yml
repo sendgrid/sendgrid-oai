@@ -4,3 +4,12 @@ install:
 script:
   - python test/test.py
   - prance validate --strict oai.json oai_stoplight.json oai.yaml
+
+notifications:
+  slack:
+    if: branch = master
+    on_pull_requests: false
+    on_success: never
+    on_failure: change
+    rooms:
+      - secure: Bc4Ps1LtGKMIOtPv3hMbnF9NcJ6O/pvI/srqCTfJl7T4gYS/c0qUYnbousuy2mQYe64W3myi+WNpYdVWB87Njwg1sBXA6rnainjs7E28eHSNhcxwbgXJB2thTov3cTbDtH9p5upbtNbu5kc3rYwEPiNwn432w50pfvljEggZf5OcyFYsJsmJmqoT+WVcXDUQss9Ugibs2wyWb0zfwXiq1t1ybUmefTVGQxYudgA15HAUSfvKEEkbeB8Sl/HbLFCLfvy/pJKmyyzgJs5F0iWxxZiQvnXGEjZ7ePAsxAWkdu+lvnYwDRcjW8p9xx0P3NGW8lra6Mwm787Mxfu+Ur+hdZE2XWmKEkC2r+9CNmfU1Z1GkARW9jmvkwYU/m1gm87kq3Eh9/grQHh35HvbxelpyznYER43sFkocVOfommVYaHrMaoO+kJyT4TlI1S+iAJwydoGN9eX23awbsyMaI0ixjblSlZC1a7S4QKP2pvEHvcLQG20xqk+UnBb5gpfJXblo7i6E1QIu/ZlgVhGQTQsvZcXAweL5WODt2PaFpcRD44GQ5QqTgKM/j5+75cxUGqpagZ06whncPMeczXLhHA880LQGvY9QZvHNuyYQMbUwVfIDn70UtabWZlTPBT/XthXOvkr6J7+IPwc9bGfiHrTHc0J67EGA+mNEAmbAph2QN0=
