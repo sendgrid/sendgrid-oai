@@ -1,10 +1,11 @@
-import unittest
 import datetime
+import unittest
+
 
 class TestLicenseYear(unittest.TestCase):
 
     def setUp(self):
-        self.license_file = 'LICENSE.txt'
+        self.license_file = 'LICENSE.md'
 
     def test_license_year(self):
         copyright_line = ''
@@ -13,7 +14,9 @@ class TestLicenseYear(unittest.TestCase):
                 if line.startswith('Copyright'):
                     copyright_line = line.strip()
                     break
-        self.assertEqual('Copyright (c) 2016-%s SendGrid, Inc.' % datetime.datetime.now().year, copyright_line)
+        self.assertEqual('Copyright (C) %s, Twilio SendGrid, Inc. <help@twilio.com>' % datetime.datetime.now().year,
+                         copyright_line)
+
 
 if __name__ == '__main__':
     unittest.main()
