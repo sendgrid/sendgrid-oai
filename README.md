@@ -9,11 +9,9 @@
 
 **This is a OpenAPI 2.0 representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
 
-If you have an interesting use case for these files or have a request, please [let us know via email](mailto:dx@sendgrid.com) or [create an issue](https://github.com/sendgrid/sendgrid-oai/issues).
+If you have an interesting use case for these files or have a request, please [create an issue](https://github.com/sendgrid/sendgrid-oai/issues).
 
 # Announcements
-
-**NEW:** If you're a software engineer who is passionate about #DeveloperExperience and/or #OpenSource, [this is an incredible opportunity to join our #DX team](https://sendgrid.com/careers/role/1421152/?gh_jid=1421152) as a Developer Experience Engineer and work with [@thinkingserious](https://github.com/thinkingserious) and [@aroach](https://github.com/aroach)! Tell your friends :)
 
 Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for releases and breaking changes.
 
@@ -35,9 +33,7 @@ Quick links:
 
 # About
 
-sendgrid-oai is guided and supported by the SendGrid [Developer Experience Team](mailto:dx@sendgrid.com).
-
-sendgrid-oai is maintained and funded by SendGrid, Inc. The names and logos for sendgrid-python are trademarks of SendGrid, Inc.
+sendgrid-oai is maintained and funded by Twilio SendGrid, Inc. The names and logos for sendgrid-oai are trademarks of Twilio SendGrid, Inc.
 
 # License
 [The MIT License (MIT)](LICENSE.txt)
