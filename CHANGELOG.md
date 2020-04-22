@@ -1,7 +1,8 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.3.0] - 2017-06-16
+[2017-06-16] Version 1.3.0
+--------------------------
 ### Added
 - Optional `on-behalf-of` subuser header and minor documentation updates.
 
