@@ -1,8 +1,15 @@
 #!/bin/bash
-set -eu
+set -e
 
 rm -rf prism && mkdir -p prism && cd prism
 git clone --depth 1 https://github.com/sendgrid/sendgrid-oai .
 cd prism
 
-docker-compose up --build --force-recreate --abort-on-container-exit
+docker-compose build --parallel
+
+if [ -z "$command" ]; then
+  docker-compose up --force-recreate --abort-on-container-exit
+else
+  docker-compose run helper-runner "$command"
+  docker-compose down
+fi
