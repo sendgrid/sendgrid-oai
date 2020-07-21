@@ -1,6 +1,6 @@
 ![SendGrid Logo](https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
 
-[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-oai.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-oai)
+[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-oai.svg?branch=main)](https://travis-ci.org/sendgrid/sendgrid-oai)
 [![Email Notifications Badge](https://dx.sendgrid.com/badge/oai)](https://dx.sendgrid.com/newsletter/oai)
 [![Twitter Follow](https://img.shields.io/twitter/follow/sendgrid.svg?style=social&label=Follow)](https://twitter.com/sendgrid)
 [![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-oai.svg)](https://github.com/sendgrid/sendgrid-oai/graphs/contributors)
@@ -13,9 +13,11 @@ If you have an interesting use case for these files or have a request, please [c
 
 # Announcements
 
+**The default branch name for this repository has been changed to `main` as of 07/20/2020.**
+
 Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for releases and breaking changes.
 
-All updates to this project are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-oai/blob/master/CHANGELOG.md).
+All updates to this project are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-oai/blob/main/CHANGELOG.md).
 
 # Roadmap
 
@@ -23,12 +25,12 @@ If you are interested in the future direction of this project, please take a loo
 
 # How to Contribute
 
-We encourage contribution to our projects, please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md) guide for details.
+We encourage contribution to our projects, please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-oai/blob/main/CONTRIBUTING.md) guide for details.
 
 Quick links:
 
-- [Feature Request](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md#feature-request)
-- [Bug Reports](https://github.com/sendgrid/sendgrid-oai/blob/master/CONTRIBUTING.md#submit-a-bug-report)
+- [Feature Request](https://github.com/sendgrid/sendgrid-oai/blob/main/CONTRIBUTING.md#feature-request)
+- [Bug Reports](https://github.com/sendgrid/sendgrid-oai/blob/main/CONTRIBUTING.md#submit-a-bug-report)
 
 # About
 
