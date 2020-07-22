@@ -17,7 +17,7 @@ If you have an interesting use case for these files or have a request, please [c
 
 Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for releases and breaking changes.
 
-All updates to this project are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-oai/blob/main/CHANGELOG.md).
+All updates to this project are documented in our [CHANGELOG](./CHANGELOG.md).
 
 # Roadmap
 
