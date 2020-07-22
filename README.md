@@ -25,12 +25,12 @@ If you are interested in the future direction of this project, please take a loo
 
 # How to Contribute
 
-We encourage contribution to our projects, please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-oai/blob/main/CONTRIBUTING.md) guide for details.
+We encourage contribution to our projects, please see our [CONTRIBUTING](./CONTRIBUTING.md) guide for details.
 
 Quick links:
 
-- [Feature Request](https://github.com/sendgrid/sendgrid-oai/blob/main/CONTRIBUTING.md#feature-request)
-- [Bug Reports](https://github.com/sendgrid/sendgrid-oai/blob/main/CONTRIBUTING.md#submit-a-bug-report)
+- [Feature Request](./CONTRIBUTING.md#feature-request)
+- [Bug Reports](./CONTRIBUTING.md#submit-a-bug-report)
 
 # About
 
