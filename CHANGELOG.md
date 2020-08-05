@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+[2020-08-05] Version 1.4.1
+--------------------------
+**Library - Chore**
+- [PR #72](https://github.com/sendgrid/sendgrid-oai/pull/72): update readme to reflect default branch rename. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+
 [2020-04-29] Version 1.4.0
 --------------------------
 **Library - Feature**
