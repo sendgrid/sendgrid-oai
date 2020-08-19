@@ -1,6 +1,12 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2020-08-19] Version 1.4.2
+--------------------------
+**Library - Docs**
+- [PR #52](https://github.com/sendgrid/sendgrid-oai/pull/52): Ran all .md files through grammar.ly. Thanks to [@ssiddhantsharma](https://github.com/ssiddhantsharma)!
+
+
 [2020-08-05] Version 1.4.1
 --------------------------
 **Library - Chore**
