@@ -19,10 +19,6 @@ Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for n
 
 All the updates to this project are documented in our [CHANGELOG](CHANGELOG.md).
 
-# Roadmap
-
-If you are interested in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-oai/milestones). Your feedback would be highly appreciated.
-
 # How to Contribute
 
 We encourage contributions to our projects, please see our [CONTRIBUTING](CONTRIBUTING.md) guide for more details.
