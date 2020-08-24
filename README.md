@@ -6,7 +6,6 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-oai.svg)](https://github.com/sendgrid/sendgrid-oai/graphs/contributors)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
-
 **This is an OpenAPI 2.0 representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
 
 If you have an interesting use case for these files or have a request, please [create an issue](https://github.com/sendgrid/sendgrid-oai/issues).
@@ -18,10 +17,6 @@ If you have an interesting use case for these files or have a request, please [c
 Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for new releases and breaking changes.
 
 All the updates to this project are documented in our [CHANGELOG](CHANGELOG.md).
-
-# Roadmap
-
-If you are interested in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-oai/milestones). Your feedback would be highly appreciated.
 
 # How to Contribute
 
