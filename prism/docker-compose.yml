@@ -1,0 +1,22 @@
+version: '3'
+services:
+  helper-runner:
+    build:
+      context: ../../
+      args:
+        - version
+    command: bash -c "sleep 10 && make test-integ" # Sleep until prism boots.
+    depends_on:
+      - nginx
+  nginx:
+    image: nginx
+    networks:
+      default:
+        aliases:
+          - api.sendgrid.com
+    depends_on:
+      - prism
+    volumes:
+      - ./nginx:/etc/nginx
+  prism:
+    build: ./
