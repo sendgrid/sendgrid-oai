@@ -4,7 +4,7 @@
 [![Email Notifications Badge](https://dx.sendgrid.com/badge/oai)](https://dx.sendgrid.com/newsletter/oai)
 [![Twitter Follow](https://img.shields.io/twitter/follow/sendgrid.svg?style=social&label=Follow)](https://twitter.com/sendgrid)
 [![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-oai.svg)](https://github.com/sendgrid/sendgrid-oai/graphs/contributors)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **This is an OpenAPI 2.0 representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
 
@@ -32,4 +32,4 @@ Quick links:
 sendgrid-oai is maintained and funded by Twilio SendGrid, Inc. The names and logos for sendgrid-oai are trademarks of Twilio SendGrid, Inc.
 
 # License
-[The MIT License (MIT)](LICENSE.md)
+[The MIT License (MIT)](LICENSE)

@@ -5,7 +5,7 @@ import unittest
 class TestLicenseYear(unittest.TestCase):
 
     def setUp(self):
-        self.license_file = 'LICENSE.md'
+        self.license_file = 'LICENSE'
 
     def test_license_year(self):
         copyright_line = ''
