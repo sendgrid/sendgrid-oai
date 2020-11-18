@@ -1,6 +1,12 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2020-11-18] Version 1.4.3
+--------------------------
+**Library - Docs**
+- [PR #48](https://github.com/sendgrid/sendgrid-oai/pull/48): Add Code Review to Contributing.md #47. Thanks to [@derekneuland](https://github.com/derekneuland)!
+
+
 [2020-08-19] Version 1.4.2
 --------------------------
 **Library - Docs**
