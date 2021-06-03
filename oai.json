@@ -36769,6 +36769,357 @@
                 }
             }
         },
+        "stats": {
+            "title": "stats",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "metrics": {
+                                    "type": "object",
+                                    "properties": {
+                                        "blocks": {
+                                            "type": "integer"
+                                        },
+                                        "bounce_drops": {
+                                            "type": "integer"
+                                        },
+                                        "bounces": {
+                                            "type": "integer"
+                                        },
+                                        "clicks": {
+                                            "type": "integer"
+                                        },
+                                        "deferred": {
+                                            "type": "integer"
+                                        },
+                                        "delivered": {
+                                            "type": "integer"
+                                        },
+                                        "invalid_emails": {
+                                            "type": "integer"
+                                        },
+                                        "opens": {
+                                            "type": "integer"
+                                        },
+                                        "processed": {
+                                            "type": "integer"
+                                        },
+                                        "requests": {
+                                            "type": "integer"
+                                        },
+                                        "spam_report_drops": {
+                                            "type": "integer"
+                                        },
+                                        "spam_reports": {
+                                            "type": "integer"
+                                        },
+                                        "unique_clicks": {
+                                            "type": "integer"
+                                        },
+                                        "unique_opens": {
+                                            "type": "integer"
+                                        },
+                                        "unsubscribe_drops": {
+                                            "type": "integer"
+                                        },
+                                        "unsubscribes": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "example": [
+                {
+                    "date": "2015-10-01",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-02",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-03",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-04",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-05",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-06",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-07",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-08",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-09",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "date": "2015-10-10",
+                    "stats": [
+                        {
+                            "type": "subuser",
+                            "name": "Matt_subuser",
+                            "metrics": {
+                                "blocks": 0,
+                                "bounce_drops": 0,
+                                "bounces": 0,
+                                "clicks": 0,
+                                "deferred": 0,
+                                "delivered": 0,
+                                "invalid_emails": 0,
+                                "opens": 0,
+                                "processed": 0,
+                                "requests": 0,
+                                "spam_report_drops": 0,
+                                "spam_reports": 0,
+                                "unique_clicks": 0,
+                                "unique_opens": 0,
+                                "unsubscribe_drops": 0,
+                                "unsubscribes": 0
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
         "abbv-message": {
             "title": "Abbv. Message",
             "type": "object",
