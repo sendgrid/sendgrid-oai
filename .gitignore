@@ -1,1 +1,6 @@
 temp.json
+
+# Python and venv
+pyvenv.cfg
+bin
+lib
