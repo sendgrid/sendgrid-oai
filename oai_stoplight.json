@@ -6679,6 +6679,7 @@
                 "tags": [
                     "Contacts API - Recipients"
                 ],
+                "description": "",
                 "consumes": [
                     "application/json"
                 ],
@@ -6695,7 +6696,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "This endpoint allows you to query the status of a contact upload",
                         "schema": {
                             "type": "object",
                             "properties": {
