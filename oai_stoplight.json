@@ -8954,63 +8954,6 @@
                 ]
             }
         },
-        "/validations/email/bulk": {
-            "post": {
-                "operationId": "POST_validations-email-bulk",
-                "summary": "Validate a list of Email Addresses",
-                "tags": [
-                    "Email Address Validation"
-                ],
-                "description": "**This endpoint allows you to validate a list of email addresses.**",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "emails": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "email": {
-                                                "type": "string",
-                                                "format": "email"
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "example": {
-                                "emails": [
-                                    {
-                                        "email": "example@example.com"
-                                    },
-                                    {
-                                        "email": "test@example.com"
-                                    },
-                                    {
-                                        "email": "example@test.com"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "",
-                        "schema": {}
-                    }
-                },
-                "security": [
-                    {
-                        "Authorization": []
-                    }
-                ]
-            }
-        },
         "/whitelabel/dns/email": {
             "post": {
                 "operationId": "POST_whitelabel-dns-email",
@@ -10342,6 +10285,43 @@
                         "description": "",
                         "schema": {
                             "$ref": "#/definitions/authentication::domain"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "id": 45373692,
+                                "user_id": 66036447,
+                                "subdomain": "sub",
+                                "domain": "example.com",
+                                "username": "jdoe",
+                                "ips": [
+                                    "127.0.0.1"
+                                ],
+                                "custom_spf": false,
+                                "default": true,
+                                "legacy": false,
+                                "automatic_security": true,
+                                "valid": true,
+                                "dns": {
+                                    "mail_cname": {
+                                        "valid": true,
+                                        "type": "cname",
+                                        "host": "mail.example.com",
+                                        "data": "u7.wl.sendgrid.net"
+                                    },
+                                    "dkim1": {
+                                        "valid": true,
+                                        "type": "cname",
+                                        "host": "s1._domainkey.example.com",
+                                        "data": "s1._domainkey.u7.wl.sendgrid.net"
+                                    },
+                                    "dkim2": {
+                                        "valid": true,
+                                        "type": "cname",
+                                        "host": "s2._domainkey.example.com",
+                                        "data": "s2._domainkey.u7.wl.sendgrid.net"
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -10507,7 +10487,7 @@
                 "tags": [
                     "Domain Authentication"
                 ],
-                "description": "**This endpoint allows you to retrieve the default authentication for a domain.**",
+                "description": "**This endpoint allows you to retrieve the default authentication for a domain.**\n\nWhen creating or updating a domain authentication, you can set the domain as a default. The default domain will be used to send all mail. If you have multiple authenticated domains, the authenticated domain matching the domain of the From address will be used, and the default will be overridden.\n\nThis endpoint will return a default domain and its details only if a default is set. You are not required to set a default. If you do not set a default domain, this endpoint will return general information about your domain authentication status.",
                 "parameters": [
                     {
                         "name": "domain",
@@ -10523,7 +10503,47 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/domain_authentication:domain_spf"
+                            "$ref": "#/definitions/domain-authentication-200-response"
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "user_id": 7,
+                                    "subdomain": "mail",
+                                    "domain": "example.com",
+                                    "username": "jane@example.com",
+                                    "ips": [
+                                        "192.168.1.1",
+                                        "192.168.1.2"
+                                    ],
+                                    "custom_spf": true,
+                                    "default": true,
+                                    "legacy": false,
+                                    "automatic_security": true,
+                                    "valid": true,
+                                    "dns": {
+                                        "mail_cname": {
+                                            "valid": true,
+                                            "type": "cname",
+                                            "host": "mail.example.com",
+                                            "data": "u7.wl.sendgrid.net"
+                                        },
+                                        "dkim1": {
+                                            "valid": true,
+                                            "type": "cname",
+                                            "host": "s1._domainkey.example.com",
+                                            "data": "s1._domainkey.u7.wl.sendgrid.net"
+                                        },
+                                        "dkim2": {
+                                            "valid": true,
+                                            "type": "cname",
+                                            "host": "s2._domainkey.example.com",
+                                            "data": "s2._domainkey.u7.wl.sendgrid.net"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 },
@@ -11025,7 +11045,7 @@
                                 "username"
                             ],
                             "example": {
-                                "username": "jane@example.com"
+                                "username": "jdoe"
                             }
                         }
                     }
@@ -11805,158 +11825,6 @@
                 ]
             }
         },
-        "/designs": {
-            "post": {
-                "operationId": "POST-design",
-                "summary": "Create Design",
-                "tags": [
-                    "Designs API"
-                ],
-                "description": "**This endpoint allows you to create a new design**.\n\nYou can add a new design by passing data, including a string of HTML email content, to `/designs`. When creating designs from scratch, be aware of the styling constraints inherent to many email clients. For a list of best practices, see our guide to [Cross-Platform Email Design](https://sendgrid.com/docs/ui/sending-email/cross-platform-html-design/).\n\nThe Design Library can also convert your design’s HTML elements into drag and drop modules that are editable in the Designs Library user interface. For more, visit the [Design and Code Editor documentation](https://sendgrid.com/docs/ui/sending-email/editor/#drag--drop-markup).\n\nBecause the `/designs` endpoint makes it easy to add designs, you can create a design with your preferred tooling or migrate designs you already own without relying on the Design Library UI.",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/design-input",
-                            "example": {
-                                "name": "Ahoy, World!",
-                                "editor": "design",
-                                "subject": "Getting Started",
-                                "html_content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html data-editor-version=\"2\" class=\"sg-campaigns\" xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\">\n      <!--[if !mso]><!-->\n      <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\">\n      <!--<![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n      <xml>\n        <o:OfficeDocumentSettings>\n          <o:AllowPNG/>\n          <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n      </xml>\n      <![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n  <style type=\"text/css\">\n    body {width: 600px;margin: 0 auto;}\n    table {border-collapse: collapse;}\n    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}\n    img {-ms-interpolation-mode: bicubic;}\n  </style>\n<![endif]-->\n      <style type=\"text/css\">\n    body, p, div {\n      font-family: arial,helvetica,sans-serif;\n      font-size: 14px;\n    }\n    body {\n      color: #000000;\n    }\n    body a {\n      color: #1188E6;\n      text-decoration: none;\n    }\n    p { margin: 0; padding: 0; }\n    table.wrapper {\n      width:100% !important;\n      table-layout: fixed;\n      -webkit-font-smoothing: antialiased;\n      -webkit-text-size-adjust: 100%;\n      -moz-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n    img.max-width {\n      max-width: 100% !important;\n    }\n    .column.of-2 {\n      width: 50%;\n    }\n    .column.of-3 {\n      width: 33.333%;\n    }\n    .column.of-4 {\n      width: 25%;\n    }\n    ul ul ul ul  {\n      list-style-type: disc !important;\n    }\n    ol ol {\n      list-style-type: lower-roman !important;\n    }\n    ol ol ol {\n      list-style-type: lower-latin !important;\n    }\n    ol ol ol ol {\n      list-style-type: decimal !important;\n    }\n    @media screen and (max-width:480px) {\n      .preheader .rightColumnContent,\n      .footer .rightColumnContent {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent div,\n      .preheader .rightColumnContent span,\n      .footer .rightColumnContent div,\n      .footer .rightColumnContent span {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent,\n      .preheader .leftColumnContent {\n        font-size: 80% !important;\n        padding: 5px 0;\n      }\n      table.wrapper-mobile {\n        width: 100% !important;\n        table-layout: fixed;\n      }\n      img.max-width {\n        height: auto !important;\n        max-width: 100% !important;\n      }\n      a.bulletproof-button {\n        display: block !important;\n        width: auto !important;\n        font-size: 80%;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n      }\n      .columns {\n        width: 100% !important;\n      }\n      .column {\n        display: block !important;\n        width: 100% !important;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n      }\n      .social-icon-column {\n        display: inline-block !important;\n      }\n    }\n  </style>\n      <!--user entered Head Start--><!--End Head user entered-->\n    </head>\n    <body>\n      <center class=\"wrapper\" data-link-color=\"#1188E6\" data-body-style=\"font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;\">\n        <div class=\"webkit\">\n          <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" class=\"wrapper\" bgcolor=\"#FFFFFF\">\n            <tr>\n              <td valign=\"top\" bgcolor=\"#FFFFFF\" width=\"100%\">\n                <table width=\"100%\" role=\"content-container\" class=\"outer\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                  <tr>\n                    <td width=\"100%\">\n                      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                        <tr>\n                          <td>\n                            <!--[if mso]>\n    <center>\n    <table><tr><td width=\"600\">\n  <![endif]-->\n                                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:100%; max-width:600px;\" align=\"center\">\n                                      <tr>\n                                        <td role=\"modules-container\" style=\"padding:0px 0px 0px 0px; color:#000000; text-align:left;\" bgcolor=\"#FFFFFF\" width=\"100%\" align=\"left\"><table class=\"module preheader preheader-hide\" role=\"module\" data-type=\"preheader\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;\">\n    <tr>\n      <td role=\"module-content\">\n        <p></p>\n      </td>\n    </tr>\n  </table><table class=\"module\" role=\"module\" data-type=\"text\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"table-layout: fixed;\" data-muid=\"41f90842-501c-4f08-96c9-17c0f74cb841\" data-mc-module-version=\"2019-10-22\">\n    <tbody>\n      <tr>\n        <td style=\"padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;\" height=\"100%\" valign=\"top\" bgcolor=\"\" role=\"module-content\"><div><div style=\"font-family: inherit; text-align: inherit\">Ahoy, World!</div><div></div></div></td>\n      </tr>\n    </tbody>\n  </table><div data-role=\"module-unsubscribe\" class=\"module\" role=\"module\" data-type=\"unsubscribe\" style=\"color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;\" data-muid=\"4e838cf3-9892-4a6d-94d6-170e474d21e5\"><div class=\"Unsubscribe--addressLine\"><p class=\"Unsubscribe--senderName\" style=\"font-size:12px; line-height:20px;\">{{Sender_Name}}</p><p style=\"font-size:12px; line-height:20px;\"><span class=\"Unsubscribe--senderAddress\">{{Sender_Address}}</span>, <span class=\"Unsubscribe--senderCity\">{{Sender_City}}</span>, <span class=\"Unsubscribe--senderState\">{{Sender_State}}</span> <span class=\"Unsubscribe--senderZip\">{{Sender_Zip}}</span></p></div><p style=\"font-size:12px; line-height:20px;\"><a class=\"Unsubscribe--unsubscribeLink\" href=\"{{{unsubscribe}}}\" target=\"_blank\" style=\"\">Unsubscribe</a> - <a href=\"{{{unsubscribe_preferences}}}\" target=\"_blank\" class=\"Unsubscribe--unsubscribePreferences\" style=\"\">Unsubscribe Preferences</a></p></div></td>\n                                      </tr>\n                                    </table>\n                                    <!--[if mso]>\n                                  </td>\n                                </tr>\n                              </table>\n                            </center>\n                            <![endif]-->\n                          </td>\n                        </tr>\n                      </table>\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n          </table>\n        </div>\n      </center>\n    </body>\n  </html>",
-                                "plain_content": "Ahoy, World!\n\n{{Sender_Name}}\n\n{{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}\n\nUnsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/design-output"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "id": "3247eaea-c912-42a3-b0bc-60bdaf210396",
-                                "name": "Ahoy, World!",
-                                "html_content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html data-editor-version=\"2\" class=\"sg-campaigns\" xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\">\n      <!--[if !mso]><!-->\n      <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\">\n      <!--<![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n      <xml>\n        <o:OfficeDocumentSettings>\n          <o:AllowPNG/>\n          <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n      </xml>\n      <![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n  <style type=\"text/css\">\n    body {width: 600px;margin: 0 auto;}\n    table {border-collapse: collapse;}\n    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}\n    img {-ms-interpolation-mode: bicubic;}\n  </style>\n<![endif]-->\n      <style type=\"text/css\">\n    body, p, div {\n      font-family: arial,helvetica,sans-serif;\n      font-size: 14px;\n    }\n    body {\n      color: #000000;\n    }\n    body a {\n      color: #1188E6;\n      text-decoration: none;\n    }\n    p { margin: 0; padding: 0; }\n    table.wrapper {\n      width:100% !important;\n      table-layout: fixed;\n      -webkit-font-smoothing: antialiased;\n      -webkit-text-size-adjust: 100%;\n      -moz-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n    img.max-width {\n      max-width: 100% !important;\n    }\n    .column.of-2 {\n      width: 50%;\n    }\n    .column.of-3 {\n      width: 33.333%;\n    }\n    .column.of-4 {\n      width: 25%;\n    }\n    ul ul ul ul  {\n      list-style-type: disc !important;\n    }\n    ol ol {\n      list-style-type: lower-roman !important;\n    }\n    ol ol ol {\n      list-style-type: lower-latin !important;\n    }\n    ol ol ol ol {\n      list-style-type: decimal !important;\n    }\n    @media screen and (max-width:480px) {\n      .preheader .rightColumnContent,\n      .footer .rightColumnContent {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent div,\n      .preheader .rightColumnContent span,\n      .footer .rightColumnContent div,\n      .footer .rightColumnContent span {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent,\n      .preheader .leftColumnContent {\n        font-size: 80% !important;\n        padding: 5px 0;\n      }\n      table.wrapper-mobile {\n        width: 100% !important;\n        table-layout: fixed;\n      }\n      img.max-width {\n        height: auto !important;\n        max-width: 100% !important;\n      }\n      a.bulletproof-button {\n        display: block !important;\n        width: auto !important;\n        font-size: 80%;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n      }\n      .columns {\n        width: 100% !important;\n      }\n      .column {\n        display: block !important;\n        width: 100% !important;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n      }\n      .social-icon-column {\n        display: inline-block !important;\n      }\n    }\n  </style>\n      <!--user entered Head Start--><!--End Head user entered-->\n    </head>\n    <body>\n      <center class=\"wrapper\" data-link-color=\"#1188E6\" data-body-style=\"font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;\">\n        <div class=\"webkit\">\n          <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" class=\"wrapper\" bgcolor=\"#FFFFFF\">\n            <tr>\n              <td valign=\"top\" bgcolor=\"#FFFFFF\" width=\"100%\">\n                <table width=\"100%\" role=\"content-container\" class=\"outer\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                  <tr>\n                    <td width=\"100%\">\n                      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                        <tr>\n                          <td>\n                            <!--[if mso]>\n    <center>\n    <table><tr><td width=\"600\">\n  <![endif]-->\n                                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:100%; max-width:600px;\" align=\"center\">\n                                      <tr>\n                                        <td role=\"modules-container\" style=\"padding:0px 0px 0px 0px; color:#000000; text-align:left;\" bgcolor=\"#FFFFFF\" width=\"100%\" align=\"left\"><table class=\"module preheader preheader-hide\" role=\"module\" data-type=\"preheader\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;\">\n    <tr>\n      <td role=\"module-content\">\n        <p></p>\n      </td>\n    </tr>\n  </table><table class=\"module\" role=\"module\" data-type=\"text\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"table-layout: fixed;\" data-muid=\"41f90842-501c-4f08-96c9-17c0f74cb841\" data-mc-module-version=\"2019-10-22\">\n    <tbody>\n      <tr>\n        <td style=\"padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;\" height=\"100%\" valign=\"top\" bgcolor=\"\" role=\"module-content\"><div><div style=\"font-family: inherit; text-align: inherit\">Ahoy, World!</div><div></div></div></td>\n      </tr>\n    </tbody>\n  </table><div data-role=\"module-unsubscribe\" class=\"module\" role=\"module\" data-type=\"unsubscribe\" style=\"color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;\" data-muid=\"4e838cf3-9892-4a6d-94d6-170e474d21e5\"><div class=\"Unsubscribe--addressLine\"><p class=\"Unsubscribe--senderName\" style=\"font-size:12px; line-height:20px;\">{{Sender_Name}}</p><p style=\"font-size:12px; line-height:20px;\"><span class=\"Unsubscribe--senderAddress\">{{Sender_Address}}</span>, <span class=\"Unsubscribe--senderCity\">{{Sender_City}}</span>, <span class=\"Unsubscribe--senderState\">{{Sender_State}}</span> <span class=\"Unsubscribe--senderZip\">{{Sender_Zip}}</span></p></div><p style=\"font-size:12px; line-height:20px;\"><a class=\"Unsubscribe--unsubscribeLink\" href=\"{{{unsubscribe}}}\" target=\"_blank\" style=\"\">Unsubscribe</a> - <a href=\"{{{unsubscribe_preferences}}}\" target=\"_blank\" class=\"Unsubscribe--unsubscribePreferences\" style=\"\">Unsubscribe Preferences</a></p></div></td>\n                                      </tr>\n                                    </table>\n                                    <!--[if mso]>\n                                  </td>\n                                </tr>\n                              </table>\n                            </center>\n                            <![endif]-->\n                          </td>\n                        </tr>\n                      </table>\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n          </table>\n        </div>\n      </center>\n    </body>\n  </html>",
-                                "plain_content": "Ahoy, World!\n\n{{Sender_Name}}\n\n{{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}\n\nUnsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )",
-                                "generate_plain_content": false,
-                                "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/kjlrmded0qnrscv8zqr39npoimrpdwgiax59q8iq6ovj7yoks2fzxoxpfjpwph6o.png",
-                                "subject": "Getting Started",
-                                "created_at": "2021-04-30T18:51:20Z",
-                                "updated_at": "2021-04-30T18:51:20Z",
-                                "editor": "design",
-                                "categories": []
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/api-errors"
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Authorization": []
-                    }
-                ]
-            },
-            "get": {
-                "operationId": "LIST-designs",
-                "summary": "List Designs",
-                "tags": [
-                    "Designs API"
-                ],
-                "description": "**This endpoint allows you to retrieve a list of designs already stored in your Design Library**.\n\nA GET request to `/designs` will return a list of your existing designs. This endpoint will not return the pre-built Twilio SendGrid designs. Pre-built designs can be retrieved using the `/designs/pre-builts` endpoint, which is detailed below.\n\nBy default, you will receive 100 results per request; however, you can modify the number of results returned by passing an integer to the `page_size` query parameter.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/trait:designsQueryStrings:page_size"
-                    },
-                    {
-                        "$ref": "#/parameters/trait:designsQueryStrings:page_token"
-                    },
-                    {
-                        "$ref": "#/parameters/trait:designsQueryStrings:summary"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "result": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/design-output-summary"
-                                    }
-                                },
-                                "_metadata": {
-                                    "$ref": "#/definitions/_metadata"
-                                }
-                            }
-                        },
-                        "examples": {
-                            "application/json": {
-                                "result": [
-                                    {
-                                        "id": "3247eaea-c912-42a3-b0bc-60bdaf210396",
-                                        "name": "Welcome Email",
-                                        "generate_plain_content": true,
-                                        "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/llny8o5b3m636z92p7hbjnmq1jvpka39p370jwtin2s1wxv7x1sgm0y5fk518d0s.png",
-                                        "subject": "Welcom to the Cake or Pie Cafe",
-                                        "created_at": "2021-04-09T17:29:46Z",
-                                        "updated_at": "2021-04-09T17:29:55Z",
-                                        "editor": "code",
-                                        "categories": [
-                                            "welcome",
-                                            "new customer"
-                                        ]
-                                    },
-                                    {
-                                        "id": "02dfd792-f31f-439a-a79e-5c47fbcfdbac",
-                                        "name": "Monthly Promo",
-                                        "generate_plain_content": true,
-                                        "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/hfyxahd7ues2ajuoeoqq2xe6ibdasl1q89ox0y9ncya2ftpoicssmtf9ddus4c39.png",
-                                        "subject": "Free Dozen Cupcakes",
-                                        "created_at": "2021-04-09T17:29:21Z",
-                                        "updated_at": "2021-04-09T17:29:42Z",
-                                        "editor": "design",
-                                        "categories": [
-                                            "promo",
-                                            "coupon"
-                                        ]
-                                    },
-                                    {
-                                        "id": "e54be823-19ef-4c6f-8b60-efd7514f492d",
-                                        "name": "Duplicate: Ingrid & Anders",
-                                        "generate_plain_content": true,
-                                        "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/12kni9gjpyb9uxmwr9vk7unycjr70u95zoyhe9sg2zounul2zg7dih1s20k13q2z.png",
-                                        "subject": "Welcome to Ingrid & Anders!",
-                                        "created_at": "2020-10-09T17:33:46Z",
-                                        "updated_at": "2021-04-07T19:57:52Z",
-                                        "editor": "design",
-                                        "categories": []
-                                    }
-                                ],
-                                "_metadata": {
-                                    "self": "https://api.sendgrid.com/v3/designs?page_token=vHdvHCg0w1F-TmWJcPNpTEnFY2aPEmRBHONwOgZ6TgJbX2_I",
-                                    "count": 3
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Authorization": []
-                    }
-                ]
-            }
-        },
         "/designs/{id}": {
             "parameters": [
                 {
@@ -12207,6 +12075,158 @@
                         "description": "",
                         "schema": {
                             "$ref": "#/definitions/api-errors"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/designs": {
+            "post": {
+                "operationId": "POST-design",
+                "summary": "Create Design",
+                "tags": [
+                    "Designs API"
+                ],
+                "description": "**This endpoint allows you to create a new design**.\n\nYou can add a new design by passing data, including a string of HTML email content, to `/designs`. When creating designs from scratch, be aware of the styling constraints inherent to many email clients. For a list of best practices, see our guide to [Cross-Platform Email Design](https://sendgrid.com/docs/ui/sending-email/cross-platform-html-design/).\n\nThe Design Library can also convert your design’s HTML elements into drag and drop modules that are editable in the Designs Library user interface. For more, visit the [Design and Code Editor documentation](https://sendgrid.com/docs/ui/sending-email/editor/#drag--drop-markup).\n\nBecause the `/designs` endpoint makes it easy to add designs, you can create a design with your preferred tooling or migrate designs you already own without relying on the Design Library UI.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/design-input",
+                            "example": {
+                                "name": "Ahoy, World!",
+                                "editor": "design",
+                                "subject": "Getting Started",
+                                "html_content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html data-editor-version=\"2\" class=\"sg-campaigns\" xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\">\n      <!--[if !mso]><!-->\n      <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\">\n      <!--<![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n      <xml>\n        <o:OfficeDocumentSettings>\n          <o:AllowPNG/>\n          <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n      </xml>\n      <![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n  <style type=\"text/css\">\n    body {width: 600px;margin: 0 auto;}\n    table {border-collapse: collapse;}\n    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}\n    img {-ms-interpolation-mode: bicubic;}\n  </style>\n<![endif]-->\n      <style type=\"text/css\">\n    body, p, div {\n      font-family: arial,helvetica,sans-serif;\n      font-size: 14px;\n    }\n    body {\n      color: #000000;\n    }\n    body a {\n      color: #1188E6;\n      text-decoration: none;\n    }\n    p { margin: 0; padding: 0; }\n    table.wrapper {\n      width:100% !important;\n      table-layout: fixed;\n      -webkit-font-smoothing: antialiased;\n      -webkit-text-size-adjust: 100%;\n      -moz-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n    img.max-width {\n      max-width: 100% !important;\n    }\n    .column.of-2 {\n      width: 50%;\n    }\n    .column.of-3 {\n      width: 33.333%;\n    }\n    .column.of-4 {\n      width: 25%;\n    }\n    ul ul ul ul  {\n      list-style-type: disc !important;\n    }\n    ol ol {\n      list-style-type: lower-roman !important;\n    }\n    ol ol ol {\n      list-style-type: lower-latin !important;\n    }\n    ol ol ol ol {\n      list-style-type: decimal !important;\n    }\n    @media screen and (max-width:480px) {\n      .preheader .rightColumnContent,\n      .footer .rightColumnContent {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent div,\n      .preheader .rightColumnContent span,\n      .footer .rightColumnContent div,\n      .footer .rightColumnContent span {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent,\n      .preheader .leftColumnContent {\n        font-size: 80% !important;\n        padding: 5px 0;\n      }\n      table.wrapper-mobile {\n        width: 100% !important;\n        table-layout: fixed;\n      }\n      img.max-width {\n        height: auto !important;\n        max-width: 100% !important;\n      }\n      a.bulletproof-button {\n        display: block !important;\n        width: auto !important;\n        font-size: 80%;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n      }\n      .columns {\n        width: 100% !important;\n      }\n      .column {\n        display: block !important;\n        width: 100% !important;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n      }\n      .social-icon-column {\n        display: inline-block !important;\n      }\n    }\n  </style>\n      <!--user entered Head Start--><!--End Head user entered-->\n    </head>\n    <body>\n      <center class=\"wrapper\" data-link-color=\"#1188E6\" data-body-style=\"font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;\">\n        <div class=\"webkit\">\n          <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" class=\"wrapper\" bgcolor=\"#FFFFFF\">\n            <tr>\n              <td valign=\"top\" bgcolor=\"#FFFFFF\" width=\"100%\">\n                <table width=\"100%\" role=\"content-container\" class=\"outer\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                  <tr>\n                    <td width=\"100%\">\n                      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                        <tr>\n                          <td>\n                            <!--[if mso]>\n    <center>\n    <table><tr><td width=\"600\">\n  <![endif]-->\n                                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:100%; max-width:600px;\" align=\"center\">\n                                      <tr>\n                                        <td role=\"modules-container\" style=\"padding:0px 0px 0px 0px; color:#000000; text-align:left;\" bgcolor=\"#FFFFFF\" width=\"100%\" align=\"left\"><table class=\"module preheader preheader-hide\" role=\"module\" data-type=\"preheader\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;\">\n    <tr>\n      <td role=\"module-content\">\n        <p></p>\n      </td>\n    </tr>\n  </table><table class=\"module\" role=\"module\" data-type=\"text\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"table-layout: fixed;\" data-muid=\"41f90842-501c-4f08-96c9-17c0f74cb841\" data-mc-module-version=\"2019-10-22\">\n    <tbody>\n      <tr>\n        <td style=\"padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;\" height=\"100%\" valign=\"top\" bgcolor=\"\" role=\"module-content\"><div><div style=\"font-family: inherit; text-align: inherit\">Ahoy, World!</div><div></div></div></td>\n      </tr>\n    </tbody>\n  </table><div data-role=\"module-unsubscribe\" class=\"module\" role=\"module\" data-type=\"unsubscribe\" style=\"color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;\" data-muid=\"4e838cf3-9892-4a6d-94d6-170e474d21e5\"><div class=\"Unsubscribe--addressLine\"><p class=\"Unsubscribe--senderName\" style=\"font-size:12px; line-height:20px;\">{{Sender_Name}}</p><p style=\"font-size:12px; line-height:20px;\"><span class=\"Unsubscribe--senderAddress\">{{Sender_Address}}</span>, <span class=\"Unsubscribe--senderCity\">{{Sender_City}}</span>, <span class=\"Unsubscribe--senderState\">{{Sender_State}}</span> <span class=\"Unsubscribe--senderZip\">{{Sender_Zip}}</span></p></div><p style=\"font-size:12px; line-height:20px;\"><a class=\"Unsubscribe--unsubscribeLink\" href=\"{{{unsubscribe}}}\" target=\"_blank\" style=\"\">Unsubscribe</a> - <a href=\"{{{unsubscribe_preferences}}}\" target=\"_blank\" class=\"Unsubscribe--unsubscribePreferences\" style=\"\">Unsubscribe Preferences</a></p></div></td>\n                                      </tr>\n                                    </table>\n                                    <!--[if mso]>\n                                  </td>\n                                </tr>\n                              </table>\n                            </center>\n                            <![endif]-->\n                          </td>\n                        </tr>\n                      </table>\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n          </table>\n        </div>\n      </center>\n    </body>\n  </html>",
+                                "plain_content": "Ahoy, World!\n\n{{Sender_Name}}\n\n{{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}\n\nUnsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/design-output"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "id": "3247eaea-c912-42a3-b0bc-60bdaf210396",
+                                "name": "Ahoy, World!",
+                                "html_content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html data-editor-version=\"2\" class=\"sg-campaigns\" xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\">\n      <!--[if !mso]><!-->\n      <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\">\n      <!--<![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n      <xml>\n        <o:OfficeDocumentSettings>\n          <o:AllowPNG/>\n          <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n      </xml>\n      <![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n  <style type=\"text/css\">\n    body {width: 600px;margin: 0 auto;}\n    table {border-collapse: collapse;}\n    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}\n    img {-ms-interpolation-mode: bicubic;}\n  </style>\n<![endif]-->\n      <style type=\"text/css\">\n    body, p, div {\n      font-family: arial,helvetica,sans-serif;\n      font-size: 14px;\n    }\n    body {\n      color: #000000;\n    }\n    body a {\n      color: #1188E6;\n      text-decoration: none;\n    }\n    p { margin: 0; padding: 0; }\n    table.wrapper {\n      width:100% !important;\n      table-layout: fixed;\n      -webkit-font-smoothing: antialiased;\n      -webkit-text-size-adjust: 100%;\n      -moz-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n    img.max-width {\n      max-width: 100% !important;\n    }\n    .column.of-2 {\n      width: 50%;\n    }\n    .column.of-3 {\n      width: 33.333%;\n    }\n    .column.of-4 {\n      width: 25%;\n    }\n    ul ul ul ul  {\n      list-style-type: disc !important;\n    }\n    ol ol {\n      list-style-type: lower-roman !important;\n    }\n    ol ol ol {\n      list-style-type: lower-latin !important;\n    }\n    ol ol ol ol {\n      list-style-type: decimal !important;\n    }\n    @media screen and (max-width:480px) {\n      .preheader .rightColumnContent,\n      .footer .rightColumnContent {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent div,\n      .preheader .rightColumnContent span,\n      .footer .rightColumnContent div,\n      .footer .rightColumnContent span {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent,\n      .preheader .leftColumnContent {\n        font-size: 80% !important;\n        padding: 5px 0;\n      }\n      table.wrapper-mobile {\n        width: 100% !important;\n        table-layout: fixed;\n      }\n      img.max-width {\n        height: auto !important;\n        max-width: 100% !important;\n      }\n      a.bulletproof-button {\n        display: block !important;\n        width: auto !important;\n        font-size: 80%;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n      }\n      .columns {\n        width: 100% !important;\n      }\n      .column {\n        display: block !important;\n        width: 100% !important;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n      }\n      .social-icon-column {\n        display: inline-block !important;\n      }\n    }\n  </style>\n      <!--user entered Head Start--><!--End Head user entered-->\n    </head>\n    <body>\n      <center class=\"wrapper\" data-link-color=\"#1188E6\" data-body-style=\"font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;\">\n        <div class=\"webkit\">\n          <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" class=\"wrapper\" bgcolor=\"#FFFFFF\">\n            <tr>\n              <td valign=\"top\" bgcolor=\"#FFFFFF\" width=\"100%\">\n                <table width=\"100%\" role=\"content-container\" class=\"outer\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                  <tr>\n                    <td width=\"100%\">\n                      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                        <tr>\n                          <td>\n                            <!--[if mso]>\n    <center>\n    <table><tr><td width=\"600\">\n  <![endif]-->\n                                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:100%; max-width:600px;\" align=\"center\">\n                                      <tr>\n                                        <td role=\"modules-container\" style=\"padding:0px 0px 0px 0px; color:#000000; text-align:left;\" bgcolor=\"#FFFFFF\" width=\"100%\" align=\"left\"><table class=\"module preheader preheader-hide\" role=\"module\" data-type=\"preheader\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;\">\n    <tr>\n      <td role=\"module-content\">\n        <p></p>\n      </td>\n    </tr>\n  </table><table class=\"module\" role=\"module\" data-type=\"text\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"table-layout: fixed;\" data-muid=\"41f90842-501c-4f08-96c9-17c0f74cb841\" data-mc-module-version=\"2019-10-22\">\n    <tbody>\n      <tr>\n        <td style=\"padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;\" height=\"100%\" valign=\"top\" bgcolor=\"\" role=\"module-content\"><div><div style=\"font-family: inherit; text-align: inherit\">Ahoy, World!</div><div></div></div></td>\n      </tr>\n    </tbody>\n  </table><div data-role=\"module-unsubscribe\" class=\"module\" role=\"module\" data-type=\"unsubscribe\" style=\"color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;\" data-muid=\"4e838cf3-9892-4a6d-94d6-170e474d21e5\"><div class=\"Unsubscribe--addressLine\"><p class=\"Unsubscribe--senderName\" style=\"font-size:12px; line-height:20px;\">{{Sender_Name}}</p><p style=\"font-size:12px; line-height:20px;\"><span class=\"Unsubscribe--senderAddress\">{{Sender_Address}}</span>, <span class=\"Unsubscribe--senderCity\">{{Sender_City}}</span>, <span class=\"Unsubscribe--senderState\">{{Sender_State}}</span> <span class=\"Unsubscribe--senderZip\">{{Sender_Zip}}</span></p></div><p style=\"font-size:12px; line-height:20px;\"><a class=\"Unsubscribe--unsubscribeLink\" href=\"{{{unsubscribe}}}\" target=\"_blank\" style=\"\">Unsubscribe</a> - <a href=\"{{{unsubscribe_preferences}}}\" target=\"_blank\" class=\"Unsubscribe--unsubscribePreferences\" style=\"\">Unsubscribe Preferences</a></p></div></td>\n                                      </tr>\n                                    </table>\n                                    <!--[if mso]>\n                                  </td>\n                                </tr>\n                              </table>\n                            </center>\n                            <![endif]-->\n                          </td>\n                        </tr>\n                      </table>\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n          </table>\n        </div>\n      </center>\n    </body>\n  </html>",
+                                "plain_content": "Ahoy, World!\n\n{{Sender_Name}}\n\n{{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}\n\nUnsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )",
+                                "generate_plain_content": false,
+                                "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/kjlrmded0qnrscv8zqr39npoimrpdwgiax59q8iq6ovj7yoks2fzxoxpfjpwph6o.png",
+                                "subject": "Getting Started",
+                                "created_at": "2021-04-30T18:51:20Z",
+                                "updated_at": "2021-04-30T18:51:20Z",
+                                "editor": "design",
+                                "categories": []
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/api-errors"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "get": {
+                "operationId": "LIST-designs",
+                "summary": "List Designs",
+                "tags": [
+                    "Designs API"
+                ],
+                "description": "**This endpoint allows you to retrieve a list of designs already stored in your Design Library**.\n\nA GET request to `/designs` will return a list of your existing designs. This endpoint will not return the pre-built Twilio SendGrid designs. Pre-built designs can be retrieved using the `/designs/pre-builts` endpoint, which is detailed below.\n\nBy default, you will receive 100 results per request; however, you can modify the number of results returned by passing an integer to the `page_size` query parameter.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/trait:designsQueryStrings:page_size"
+                    },
+                    {
+                        "$ref": "#/parameters/trait:designsQueryStrings:page_token"
+                    },
+                    {
+                        "$ref": "#/parameters/trait:designsQueryStrings:summary"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/design-output-summary"
+                                    }
+                                },
+                                "_metadata": {
+                                    "$ref": "#/definitions/_metadata"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": [
+                                    {
+                                        "id": "3247eaea-c912-42a3-b0bc-60bdaf210396",
+                                        "name": "Welcome Email",
+                                        "generate_plain_content": true,
+                                        "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/llny8o5b3m636z92p7hbjnmq1jvpka39p370jwtin2s1wxv7x1sgm0y5fk518d0s.png",
+                                        "subject": "Welcom to the Cake or Pie Cafe",
+                                        "created_at": "2021-04-09T17:29:46Z",
+                                        "updated_at": "2021-04-09T17:29:55Z",
+                                        "editor": "code",
+                                        "categories": [
+                                            "welcome",
+                                            "new customer"
+                                        ]
+                                    },
+                                    {
+                                        "id": "02dfd792-f31f-439a-a79e-5c47fbcfdbac",
+                                        "name": "Monthly Promo",
+                                        "generate_plain_content": true,
+                                        "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/hfyxahd7ues2ajuoeoqq2xe6ibdasl1q89ox0y9ncya2ftpoicssmtf9ddus4c39.png",
+                                        "subject": "Free Dozen Cupcakes",
+                                        "created_at": "2021-04-09T17:29:21Z",
+                                        "updated_at": "2021-04-09T17:29:42Z",
+                                        "editor": "design",
+                                        "categories": [
+                                            "promo",
+                                            "coupon"
+                                        ]
+                                    },
+                                    {
+                                        "id": "e54be823-19ef-4c6f-8b60-efd7514f492d",
+                                        "name": "Duplicate: Ingrid & Anders",
+                                        "generate_plain_content": true,
+                                        "thumbnail_url": "//us-east-2-production-thumbnail-bucket.s3.amazonaws.com/12kni9gjpyb9uxmwr9vk7unycjr70u95zoyhe9sg2zounul2zg7dih1s20k13q2z.png",
+                                        "subject": "Welcome to Ingrid & Anders!",
+                                        "created_at": "2020-10-09T17:33:46Z",
+                                        "updated_at": "2021-04-07T19:57:52Z",
+                                        "editor": "design",
+                                        "categories": []
+                                    }
+                                ],
+                                "_metadata": {
+                                    "self": "https://api.sendgrid.com/v3/designs?page_token=vHdvHCg0w1F-TmWJcPNpTEnFY2aPEmRBHONwOgZ6TgJbX2_I",
+                                    "count": 3
+                                }
+                            }
                         }
                     }
                 },
@@ -17047,80 +17067,39 @@
                 "tags": [
                     "Sender Identities API"
                 ],
-                "description": "**This endpoint allows you to create a new sender identity.**\n\n*You may create up to 100 unique sender identities.*\n\nSender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.",
+                "description": "**This endpoint allows you to create a new sender identity.**\n\nYou may create up to 100 unique sender identities.",
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "nickname": {
-                                    "type": "string",
-                                    "description": "A nickname for the sender identity. Not used for sending."
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/sender-id-request"
                                 },
-                                "from": {
+                                {
                                     "type": "object",
                                     "properties": {
-                                        "email": {
-                                            "type": "string",
-                                            "description": "This is where the email will appear to originate from for your recipient"
+                                        "from": {
+                                            "type": "object",
+                                            "required": [
+                                                "email"
+                                            ]
                                         },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "This is the name appended to the from email field. IE - Your name or company name."
+                                        "reply_to": {
+                                            "type": "object",
+                                            "required": [
+                                                "email"
+                                            ]
                                         }
                                     },
                                     "required": [
-                                        "email"
+                                        "nickname",
+                                        "address",
+                                        "city",
+                                        "country"
                                     ]
-                                },
-                                "reply_to": {
-                                    "type": "object",
-                                    "properties": {
-                                        "email": {
-                                            "type": "string",
-                                            "description": "This is the email that your recipient will reply to."
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "This is the name appended to the reply to email field. IE - Your name or company name."
-                                        }
-                                    },
-                                    "required": [
-                                        "email"
-                                    ]
-                                },
-                                "address": {
-                                    "type": "string",
-                                    "description": "The physical address of the sender identity."
-                                },
-                                "address_2": {
-                                    "type": "string",
-                                    "description": "Additional sender identity address information."
-                                },
-                                "city": {
-                                    "type": "string",
-                                    "description": "The city of the sender identity."
-                                },
-                                "state": {
-                                    "type": "string",
-                                    "description": "The state of the sender identity."
-                                },
-                                "zip": {
-                                    "type": "string",
-                                    "description": "The zipcode of the sender identity."
-                                },
-                                "country": {
-                                    "type": "string",
-                                    "description": "The country of the sender identity."
                                 }
-                            },
-                            "required": [
-                                "nickname",
-                                "address",
-                                "city",
-                                "country"
                             ],
                             "example": {
                                 "nickname": "My Sender ID",
@@ -17265,7 +17244,7 @@
                 "tags": [
                     "Sender Identities API"
                 ],
-                "description": "**This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**\n\nSender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.",
+                "description": "**This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -17327,80 +17306,106 @@
                 {
                     "name": "sender_id",
                     "in": "path",
-                    "description": "The ID of the sender identity that you want to update.",
+                    "description": "The ID of the sender identity that you want to retrieve.",
                     "required": true,
                     "type": "integer"
                 }
             ],
+            "get": {
+                "operationId": "GET_v3-senders-sender_id",
+                "summary": "View a Sender Identity",
+                "tags": [
+                    "Sender Identities API"
+                ],
+                "description": "**This endpoint allows you to retrieve a specific sender identity.**",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/senderID"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "id": 1,
+                                "nickname": "My Sender ID",
+                                "from": {
+                                    "email": "from@example.com",
+                                    "name": "Example INC"
+                                },
+                                "reply_to": {
+                                    "email": "replyto@example.com",
+                                    "name": "Example INC"
+                                },
+                                "address": "123 Elm St.",
+                                "address_2": "Apt. 456",
+                                "city": "Denver",
+                                "state": "Colorado",
+                                "zip": "80202",
+                                "country": "United States",
+                                "verified": true,
+                                "updated_at": 1449872165,
+                                "created_at": 1449872165,
+                                "locked": false
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "field": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "errors": [
+                                    {
+                                        "message": "resource not found",
+                                        "field": "id"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
             "patch": {
                 "operationId": "PATCH_v3-senders-sender_id",
                 "summary": "Update a Sender Identity",
                 "tags": [
                     "Sender Identities API"
                 ],
-                "description": "**This endpoint allows you to update a sender identity.**\n\nUpdates to `from.email` require re-verification. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.\n\nPartial updates are allowed, but fields that are marked as \"required\" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.",
+                "description": "**This endpoint allows you to update a sender identity.**\n\nUpdates to `from.email` require re-verification.\n\nPartial updates are allowed, but fields that are marked as \"required\" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.",
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "nickname": {
-                                    "type": "string",
-                                    "description": "A nickname for the sender identity. Not used for sending."
-                                },
-                                "from": {
-                                    "type": "object",
-                                    "properties": {
-                                        "email": {
-                                            "type": "string",
-                                            "description": "This is where the email will appear to originate from for your recipient"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "This is the name appended to the from email field. IE - Your name or company name."
-                                        }
-                                    }
-                                },
-                                "reply_to": {
-                                    "type": "object",
-                                    "properties": {
-                                        "email": {
-                                            "type": "string",
-                                            "description": "This is the email that your recipient will reply to."
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "This is the name appended to the reply to email field. IE - Your name or company name."
-                                        }
-                                    }
-                                },
-                                "address": {
-                                    "type": "string",
-                                    "description": "The physical address of the sender identity."
-                                },
-                                "address_2": {
-                                    "type": "string",
-                                    "description": "Additional sender identity address information."
-                                },
-                                "city": {
-                                    "type": "string",
-                                    "description": "The city of the sender identity."
-                                },
-                                "state": {
-                                    "type": "string",
-                                    "description": "The state of the sender identity."
-                                },
-                                "zip": {
-                                    "type": "string",
-                                    "description": "The zipcode of the sender identity."
-                                },
-                                "country": {
-                                    "type": "string",
-                                    "description": "The country of the sender identity."
-                                }
-                            },
+                            "$ref": "#/definitions/sender-id-request",
                             "example": {
                                 "nickname": "My Sender ID",
                                 "from": {
@@ -17604,7 +17609,7 @@
                 "tags": [
                     "Sender Identities API"
                 ],
-                "description": "**This endoint allows you to delete one of your sender identities.**\n\nSender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.",
+                "description": "**This endoint allows you to delete one of your sender identities.**",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -17688,88 +17693,6 @@
                         "Authorization": []
                     }
                 ]
-            },
-            "get": {
-                "operationId": "GET_v3-senders-sender_id",
-                "summary": "View a Sender Identity",
-                "tags": [
-                    "Sender Identities API"
-                ],
-                "description": "**This endpoint allows you to retrieve a specific sender identity.**\n\nSender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/senderID"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "id": 1,
-                                "nickname": "My Sender ID",
-                                "from": {
-                                    "email": "from@example.com",
-                                    "name": "Example INC"
-                                },
-                                "reply_to": {
-                                    "email": "replyto@example.com",
-                                    "name": "Example INC"
-                                },
-                                "address": "123 Elm St.",
-                                "address_2": "Apt. 456",
-                                "city": "Denver",
-                                "state": "Colorado",
-                                "zip": "80202",
-                                "country": "United States",
-                                "verified": true,
-                                "updated_at": 1449872165,
-                                "created_at": 1449872165,
-                                "locked": false
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "errors": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "message": {
-                                                "type": "string"
-                                            },
-                                            "field": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "examples": {
-                            "application/json": {
-                                "errors": [
-                                    {
-                                        "message": "resource not found",
-                                        "field": "id"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Authorization": []
-                    }
-                ]
             }
         },
         "/senders/{sender_id}/resend_verification": {
@@ -17788,7 +17711,7 @@
                 "tags": [
                     "Sender Identities API"
                 ],
-                "description": "**This enpdoint allows you to resend a sender identity verification email.**\n\nSender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.",
+                "description": "**This enpdoint allows you to resend a sender identity verification email.**",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -18561,7 +18484,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "type": "string"
+                                "type": "integer"
                             },
                             "example": [
                                 "recipient_id1",
@@ -23646,11 +23569,11 @@
         "/user/webhooks/parse/settings": {
             "get": {
                 "operationId": "GET_user-webhooks-parse-settings",
-                "summary": "Retrieve all parse settings",
+                "summary": "Retrieve Parse Webhook settings",
                 "tags": [
                     "Webhooks"
                 ],
-                "description": "**This endpoint allows you to retrieve all of your current inbound parse settings.**",
+                "description": "**This endpoint allows you to retrieve your current inbound parse webhook settings.**\n\nSendGrid can parse the attachments and contents of incoming emails. The Parse API will POST the parsed email to a URL that you specify. For more information, see our Inbound [Parse Webhook documentation](https://sendgrid.com/docs/for-developers/parsing-email/inbound-email/).",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -23661,12 +23584,39 @@
                         "description": "",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "result"
+                            ],
                             "properties": {
                                 "result": {
                                     "type": "array",
-                                    "description": "The list of your current inbound parse settings.",
+                                    "description": "The array containing the parse webhook settings.",
                                     "items": {
-                                        "$ref": "#/definitions/parse-setting"
+                                        "type": "object",
+                                        "properties": {
+                                            "hostname": {
+                                                "type": "string",
+                                                "description": "The hostname of the URL where you would like your parsed emails to be posted."
+                                            },
+                                            "url": {
+                                                "type": "string",
+                                                "description": "The URL where you want your parsed emails to be posted."
+                                            },
+                                            "spam_check": {
+                                                "type": "boolean",
+                                                "description": "Indicates if the parsed content will be checked for spam."
+                                            },
+                                            "send_raw": {
+                                                "type": "boolean",
+                                                "description": "Indicates if the raw content that was parsed will be posted."
+                                            }
+                                        },
+                                        "required": [
+                                            "hostname",
+                                            "url",
+                                            "spam_check",
+                                            "send_raw"
+                                        ]
                                     }
                                 }
                             }
@@ -23675,26 +23625,14 @@
                             "application/json": {
                                 "result": [
                                     {
-                                        "url": "http://mydomain.com/parse",
-                                        "hostname": "mail.mydomain.com",
-                                        "spam_check": true,
+                                        "hostname": "eiusmod est aliqua",
+                                        "url": "consequat minim",
+                                        "spam_check": false,
                                         "send_raw": true
                                     }
                                 ]
                             }
                         }
-                    },
-                    "401": {
-                        "$ref": "#/responses/trait:globalErrors:401"
-                    },
-                    "403": {
-                        "$ref": "#/responses/trait:globalErrors:403"
-                    },
-                    "404": {
-                        "$ref": "#/responses/trait:globalErrors:404"
-                    },
-                    "500": {
-                        "$ref": "#/responses/trait:globalErrors:500"
                     }
                 },
                 "security": [
@@ -31149,91 +31087,44 @@
         },
         "senderID": {
             "title": "Sender ID",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "The unique identifier of the sender identity."
+            "allOf": [
+                {
+                    "$ref": "#/definitions/sender-id-request"
                 },
-                "nickname": {
-                    "type": "string",
-                    "description": "A nickname for the sender identity. Not used for sending."
-                },
-                "from": {
+                {
                     "type": "object",
                     "properties": {
-                        "email": {
-                            "type": "string",
-                            "description": "This is where the email will appear to originate from for your recipient"
+                        "id": {
+                            "type": "integer",
+                            "description": "The unique identifier of the sender identity."
                         },
-                        "name": {
-                            "type": "string",
-                            "description": "This is the name appended to the from email field. IE - Your name or company name."
-                        }
-                    },
-                    "required": [
-                        "email"
-                    ]
-                },
-                "reply_to": {
-                    "type": "object",
-                    "properties": {
-                        "email": {
-                            "type": "string",
-                            "description": "This is the email that your recipient will reply to."
+                        "verified": {
+                            "type": "boolean",
+                            "description": "If the sender identity is verified or not. Only verified sender identities can be used to send email."
                         },
-                        "name": {
-                            "type": "string",
-                            "description": "This is the name appended to the reply to email field. IE - Your name or company name."
+                        "updated_at": {
+                            "type": "integer",
+                            "description": "The time the sender identity was last updated."
+                        },
+                        "created_at": {
+                            "type": "integer",
+                            "description": "The time the sender identity was created."
+                        },
+                        "locked": {
+                            "type": "boolean",
+                            "description": "True when the sender id is associated to a campaign in the Draft, Scheduled, or In Progress status. You cannot update or delete a locked sender identity."
                         }
                     }
                 },
-                "address": {
-                    "type": "string",
-                    "description": "The physical address of the sender identity."
-                },
-                "address_2": {
-                    "type": "string",
-                    "description": "Additional sender identity address information."
-                },
-                "city": {
-                    "type": "string",
-                    "description": "The city of the sender identity."
-                },
-                "state": {
-                    "type": "string",
-                    "description": "The state of the sender identity."
-                },
-                "zip": {
-                    "type": "string",
-                    "description": "The zipcode of the sender identity."
-                },
-                "country": {
-                    "type": "string",
-                    "description": "The country of the sender identity."
-                },
-                "verified": {
-                    "type": "boolean",
-                    "description": "If the sender identity is verified or not. Only verified sender identities can be used to send email."
-                },
-                "updated_at": {
-                    "type": "integer",
-                    "description": "The time the sender identity was last updated."
-                },
-                "created_at": {
-                    "type": "integer",
-                    "description": "The time the sender identity was created."
-                },
-                "locked": {
-                    "type": "boolean",
-                    "description": "A sender identity is locked when it is associated to a campaign in the Draft, Scheduled, or In Progress status. You cannot update or delete a locked sender identity."
+                {
+                    "type": "object",
+                    "required": [
+                        "nickname",
+                        "address",
+                        "city",
+                        "country"
+                    ]
                 }
-            },
-            "required": [
-                "nickname",
-                "address",
-                "city",
-                "country"
             ],
             "example": {
                 "id": 1,
@@ -33297,7 +33188,42 @@
                 "automatic_security",
                 "valid",
                 "dns"
-            ]
+            ],
+            "example": {
+                "id": 45373692,
+                "user_id": 66036447,
+                "subdomain": "sub",
+                "domain": "example.com",
+                "username": "jdoe",
+                "ips": [
+                    "127.0.0.1"
+                ],
+                "custom_spf": false,
+                "default": true,
+                "legacy": false,
+                "automatic_security": true,
+                "valid": true,
+                "dns": {
+                    "mail_cname": {
+                        "valid": true,
+                        "type": "cname",
+                        "host": "mail.example.com",
+                        "data": "u7.wl.sendgrid.net"
+                    },
+                    "dkim1": {
+                        "valid": true,
+                        "type": "cname",
+                        "host": "s1._domainkey.example.com",
+                        "data": "s1._domainkey.u7.wl.sendgrid.net"
+                    },
+                    "dkim2": {
+                        "valid": true,
+                        "type": "cname",
+                        "host": "s2._domainkey.example.com",
+                        "data": "s2._domainkey.u7.wl.sendgrid.net"
+                    }
+                }
+            }
         },
         "contactdb_custom_field_with_id_value": {
             "title": "ContactDB Custom field schema.",
@@ -36826,6 +36752,83 @@
                     "type": "string",
                     "description": "The name of the IP pool."
                 }
+            }
+        },
+        "sender-id-request": {
+            "title": "Sender ID Request",
+            "type": "object",
+            "properties": {
+                "nickname": {
+                    "type": "string",
+                    "description": "A nickname for the sender identity. Not used for sending."
+                },
+                "from": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "description": "The email address from which your recipient will receive emails."
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The name appended to the from email field. Typically your name or company name."
+                        }
+                    }
+                },
+                "reply_to": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "description": "The email address to which your recipient will reply."
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The name appended to the reply to email field. Typically your name or company name."
+                        }
+                    }
+                },
+                "address": {
+                    "type": "string",
+                    "description": "The physical address of the sender identity."
+                },
+                "address_2": {
+                    "type": "string",
+                    "description": "Additional sender identity address information."
+                },
+                "city": {
+                    "type": "string",
+                    "description": "The city of the sender identity."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state of the sender identity."
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "The zipcode of the sender identity."
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The country of the sender identity."
+                }
+            },
+            "example": {
+                "nickname": "My Sender ID",
+                "from": {
+                    "email": "from@example.com",
+                    "name": "Example INC"
+                },
+                "reply_to": {
+                    "email": "replyto@example.com",
+                    "name": "Example INC"
+                },
+                "address": "123 Elm St.",
+                "address_2": "Apt. 456",
+                "city": "Denver",
+                "state": "Colorado",
+                "zip": "80202",
+                "country": "United States"
             }
         },
         "abbv-message": {
