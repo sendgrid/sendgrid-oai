@@ -31,7 +31,7 @@
                 "tags": [
                     "Mail Send"
                 ],
-                "description": "The Mail Send endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).\n\n## Helper Libraries\n\nTwilio SendGrid provides libraries to help you quickly and easily integrate with the v3 Web API in 7 different languages:\n* [C#](https://github.com/sendgrid/sendgrid-csharp)\n* [Go](https://github.com/sendgrid/sendgrid-go)\n* [Java](https://github.com/sendgrid/sendgrid-java)\n* [Node JS](https://github.com/sendgrid/sendgrid-nodejs)\n* [PHP](https://github.com/sendgrid/sendgrid-php)\n* [Python](https://github.com/sendgrid/sendgrid-python)\n* [Ruby](https://github.com/sendgrid/sendgrid-ruby)\n\n## Dynamic Transactional Templates and Handlebars\n\nIn order to send a dynamic template, specify the template ID with the `template_id` parameter. \n\nTo specify handlebar substitutions, define your substitutions in the request JSON with this syntax:\n\n```\n\"dynamic_template_data\": {\n      \"guest\": \"Jane Doe\",\n      \"partysize\": \"4\",\n      \"english\": true,\n      \"date\": \"April 1st, 2021\"\n    }\n```\n\nFor more information about Dynamic Transactional Templates and Handlebars, see our documentation and reference pages.\n\n* [How to send an email with Dynamic Transactional Templates\n](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)\n* [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) \n\n## Mail body compression\n\nMail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).\n\nTo use mail body compression:\n1. Add a `Content-Encoding` header, with a value of `gzip`.  \n   a. `Content-Encoding: gzip` \n2. Send the gzip as a data-binary.  \n   a. `--data-binary '@data.json.gz'\n`",
+                "description": "The Mail Send endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).\n\n## Helper Libraries\n\nTwilio SendGrid provides libraries to help you quickly and easily integrate with the v3 Web API in 7 different languages:\n\n* [C#](https://github.com/sendgrid/sendgrid-csharp) \n* [Go](https://github.com/sendgrid/sendgrid-go)\n* [Java](https://github.com/sendgrid/sendgrid-java)\n* [Node JS](https://github.com/sendgrid/sendgrid-nodejs)\n* [PHP](https://github.com/sendgrid/sendgrid-php)\n* [Python](https://github.com/sendgrid/sendgrid-python)\n* [Ruby](https://github.com/sendgrid/sendgrid-ruby)\n\n## Dynamic Transactional Templates and Handlebars\n\nIn order to send a dynamic template, specify the template ID with the `template_id` parameter. \n\nTo specify handlebar substitutions, define your substitutions in the request JSON with this syntax:\n\n```\n\"dynamic_template_data\": {\n      \"guest\": \"Jane Doe\",\n      \"partysize\": \"4\",\n      \"english\": true,\n      \"date\": \"April 1st, 2021\"\n    }\n```\n\nFor more information about Dynamic Transactional Templates and Handlebars, see our documentation and reference pages.\n\n* [How to send an email with Dynamic Transactional Templates\n](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)\n* [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) \n\n## Mail body compression\n\nMail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).\n\nTo use mail body compression:\n\n1. Add a `Content-Encoding` header, with a value of `gzip`.  \n   a. `Content-Encoding: gzip` \n2. Send the gzip as a data-binary.  \n   a. `--data-binary '@data.json.gz'\n`",
                 "parameters": [
                     {
                         "name": "body",
@@ -19884,18 +19884,7 @@
                     "201": {
                         "description": "",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "integer"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
+                            "$ref": "#/definitions/contactdb_custom_field_with_id"
                         },
                         "examples": {
                             "application/json": {
@@ -20314,7 +20303,7 @@
                 "tags": [
                     "Contacts API - Segments"
                 ],
-                "description": "<p>\n  Create a segment using search conditions.\n  Body contains a JSON object with <code>conditions</code>, a list of conditions as described below, a unique <code>name</code>, and an optional <code>list_id</code>, which is a valid list ID for a list to limit the search on.\n</p>\n\n<p>\n  Valid operators for create and update depend on the type of the field for which you are searching.\n</p>\n\n<ul>\n  <li>Dates:\n    <ul>\n      <li>\"eq\", \"ne\", \"lt\" (before), \"gt\" (after)\n        <ul>\n          <li>You may use MM/DD/YYYY for day granularity or an epoch for second granularity.</li>\n        </ul>\n      </li>\n      <li>\"empty\", \"not_empty\"</li>\n      <li>\"is within\"\n        <ul>\n          <li>You may use an <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 date format</a> or the # of days.</li>\n        </ul>\n      </li>\n    </ul>\n  </li>\n  <li>Text: \"contains\", \"eq\" (is - matches the full field), \"ne\" (is not - matches any field where the entire field is not the condition value), \"empty\", \"not_empty\"</li>\n  <li>Numbers: \"eq\", \"lt\", \"gt\", \"empty\", \"not_empty\"</li>\n  <li>Email Clicks and Opens: \"eq\" (opened), \"ne\" (not opened)</li>\n</ul>\n\n<p>\n  Field values must all be a string.\n</p>\n\n<p>\n  Conditions using \"eq\" or \"ne\" for email clicks and opens should provide a \"field\" of either <code>clicks.campaign_identifier</code> or <code>opens.campaign_identifier</code>.\n  The condition value should be a string containing the id of a completed campaign.\n</p>\n\n<p>\n  The conditions list may contain multiple conditions, joined by an \"and\" or \"or\" in the \"and_or\" field.\n  The first condition in the conditions list must have an empty \"and_or\", and subsequent conditions must all specify an \"and_or\".\n</p>",
+                "description": "**This endpoint allows you to create a new segment.**\n\n\n  Valid operators for create and update depend on the type of the field for which you are searching.\n\n**Dates**\n- \"eq\", \"ne\", \"lt\" (before), \"gt\" (after)\n    - You may use MM/DD/YYYY for day granularity or an epoch for second granularity.\n- \"empty\", \"not_empty\"\n- \"is within\"\n    - You may use an [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601) or the # of days.\n\n**Text**\n- \"contains\"\n- \"eq\" (is/equals - matches the full field)\n- \"ne\" (is not/not equals - matches any field where the entire field is not the condition value)\n- \"empty\"\n- \"not_empty\"\n\n**Numbers**\n- \"eq\" (is/equals)\n- \"lt\" (is less than)\n- \"gt\" (is greater than)\n- \"empty\"\n- \"not_empty\"\n\n**Email Clicks and Opens**\n- \"eq\" (opened)\n- \"ne\" (not opened)\n\nAll field values must be a string.\n\n\nConditions using \"eq\" or \"ne\" for email clicks and opens should provide a \"field\" of either `clicks.campaign_identifier` or `opens.campaign_identifier`.\nThe condition value should be a string containing the id of a completed campaign.\n\n\nThe conditions list may contain multiple conditions, joined by an \"and\" or \"or\" in the \"and_or\" field.\n\nThe first condition in the conditions list must have an empty \"and_or\", and subsequent conditions must all specify an \"and_or\".",
                 "parameters": [
                     {
                         "name": "body",
@@ -21023,7 +21012,7 @@
                 "tags": [
                     "Categories"
                 ],
-                "description": "**This endpoint allows you to retrieve a list of all of your categories.**\n\nCategories can help organize your email analytics by enabling you to “tag” emails by type or broad topic. You can define your own custom categories.",
+                "description": "**This endpoint allows you to retrieve a list of all of your categories.**",
                 "parameters": [
                     {
                         "name": "limit",
@@ -21131,7 +21120,7 @@
                 "tags": [
                     "Categories"
                 ],
-                "description": "**This endpoint allows you to retrieve the total sum of each email statistic for every category over the given date range.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.\n\nCategories allow you to group your emails together according to broad topics that you define.\n\n> Category statistics are available for the previous thirteen months only.",
+                "description": "**This endpoint allows you to retrieve the total sum of each email statistic for every category over the given date range.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.",
                 "parameters": [
                     {
                         "name": "sort_by_metric",
@@ -21338,7 +21327,7 @@
                 "tags": [
                     "Categories"
                 ],
-                "description": "**This endpoint allows you to retrieve all of your email statistics for each of your categories.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.\n\nCategories allow you to group your emails together according to broad topics that you define.\n\n> Category statistics are available for the previous thirteen months only.",
+                "description": "**This endpoint allows you to retrieve all of your email statistics for each of your categories.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.",
                 "parameters": [
                     {
                         "name": "start_date",
@@ -21520,7 +21509,7 @@
                 "tags": [
                     "Campaigns API"
                 ],
-                "description": "**This endpoint allows you to create a campaign.**\n\nOur Marketing Campaigns API lets you create, manage, send, and schedule campaigns.\n\nNote: In order to send or schedule the campaign, you will be required to provide a subject, sender ID, content (we suggest both html and plain text), and at least one list or segment ID. This information is not required when you create a campaign.",
+                "description": "**This endpoint allows you to create a campaign.**\n\nIn order to send or schedule the campaign, you will be required to provide a subject, sender ID, content (we suggest both html and plain text), and at least one list or segment ID. This information is not required when you create a campaign.",
                 "parameters": [
                     {
                         "name": "body",
@@ -21780,7 +21769,7 @@
                 "tags": [
                     "Campaigns API"
                 ],
-                "description": "**This endpoint allows you to retrieve a specific campaign.**\n\nOur Marketing Campaigns API lets you create, manage, send, and schedule campaigns.",
+                "description": "**This endpoint allows you to retrieve a specific campaign.**",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -21911,7 +21900,7 @@
                 "tags": [
                     "Campaigns API"
                 ],
-                "description": "**This endpoint allows you to delete a specific campaign.**\n\nOur Marketing Campaigns API lets you create, manage, send, and schedule campaigns.",
+                "description": "**This endpoint allows you to delete a specific campaign.**",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -21959,7 +21948,7 @@
                 "tags": [
                     "Campaigns API"
                 ],
-                "description": "Update a campaign. This is especially useful if you only set up the campaign using POST /campaigns, but didn't set many of the parameters.",
+                "description": "**This endpoint allows you to update a specific campaign.**\n\nThis is especially useful if you only set up the campaign using POST /campaigns, but didn't set many of the parameters.",
                 "parameters": [
                     {
                         "name": "body",
@@ -22180,7 +22169,7 @@
                 "tags": [
                     "Campaigns API"
                 ],
-                "description": "**This endpoint allows you to immediately send a campaign at the time you make the API call.**\n\nNormally a POST would have a request body, but since this endpoint is telling us to send a resource that is already created, a request body is not needed.",
+                "description": "**This endpoint allows you to immediately send an existing campaign.**\n\nNormally a POST request would have a body, but since this endpoint is telling us to send a resource that is already created, a request body is not needed.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -22610,7 +22599,7 @@
                 "tags": [
                     "Campaigns API"
                 ],
-                "description": "**This endpoint allows you to retrieve the date and time that the given campaign has been scheduled to be sent.**",
+                "description": "**This endpoint allows you to retrieve the date and time that a campaign has been scheduled to be sent.**",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
