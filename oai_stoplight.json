@@ -1577,7 +1577,7 @@
                 "tags": [
                     "IP Access Management"
                 ],
-                "description": "**This endpoint allows you to add one or more allowed IP addresses.**\n\nTo allow one or more IP addresses, pass them to this endpoint in an array. Once an IP address is added to your allow list, it will be assigned an `id` that can be used to remove the address. You can retrieve the ID associated with an IP using the \"#endpoint:nzCz472S9yaNpgmDu\" endpoint.",
+                "description": "**This endpoint allows you to add one or more allowed IP addresses.**\n\nTo allow one or more IP addresses, pass them to this endpoint in an array. Once an IP address is added to your allow list, it will be assigned an `id` that can be used to remove the address. You can retrieve the ID associated with an IP using the \"Retrieve a list of currently allowed IPs\" endpoint.",
                 "parameters": [
                     {
                         "name": "body",
@@ -1742,7 +1742,7 @@
                 "tags": [
                     "IP Access Management"
                 ],
-                "description": "**This endpoint allows you to remove one or more IP addresses from your list of allowed addresses.**\n\nTo remove one or more IP addresses, pass this endpoint an array containing the ID(s) associated with the IP(s) you intend to remove. You can retrieve the IDs associated with your allowed IP addresses using the \"#endpoint:nzCz472S9yaNpgmDu\" endpoint.\n\nIt is possible to remove your own IP address, which will block access to your account. You will need to submit a [support ticket](https://sendgrid.com/docs/ui/account-and-settings/support/) if this happens. For this reason, it is important to double check that you are removing only the IPs you intend to remove when using this endpoint.",
+                "description": "**This endpoint allows you to remove one or more IP addresses from your list of allowed addresses.**\n\nTo remove one or more IP addresses, pass this endpoint an array containing the ID(s) associated with the IP(s) you intend to remove. You can retrieve the IDs associated with your allowed IP addresses using the \"Retrieve a list of currently allowed IPs\" endpoint.\n\nIt is possible to remove your own IP address, which will block access to your account. You will need to submit a [support ticket](https://sendgrid.com/docs/ui/account-and-settings/support/) if this happens. For this reason, it is important to double check that you are removing only the IPs you intend to remove when using this endpoint.",
                 "parameters": [
                     {
                         "name": "body",
@@ -1930,7 +1930,7 @@
                 "tags": [
                     "IP Access Management"
                 ],
-                "description": "**This endpoint allows you to retreive a specific IP address that has been allowed to access your account.**\n\nYou must include the ID for the specific IP address you want to retrieve in your call. You can retrieve the IDs associated with your allowed IP addresses using the \"#endpoint:nzCz472S9yaNpgmDu\" endpoint.",
+                "description": "**This endpoint allows you to retreive a specific IP address that has been allowed to access your account.**\n\nYou must include the ID for the specific IP address you want to retrieve in your call. You can retrieve the IDs associated with your allowed IP addresses using the \"Retrieve a  list of currently allowed IPs\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -1964,7 +1964,7 @@
                 "tags": [
                     "IP Access Management"
                 ],
-                "description": "**This endpoint allows you to remove a specific IP address from your list of allowed addresses.**\n\nWhen removing a specific IP address from your list, you must include the ID in your call.  You can retrieve the IDs associated with your allowed IP addresses using the \"#endpoint:nzCz472S9yaNpgmDu\" endpoint.",
+                "description": "**This endpoint allows you to remove a specific IP address from your list of allowed addresses.**\n\nWhen removing a specific IP address from your list, you must include the ID in your call.  You can retrieve the IDs associated with your allowed IP addresses using the \"Retrieve a list of currently allowed IPs\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -2077,7 +2077,7 @@
                 "tags": [
                     "Certificates"
                 ],
-                "description": "**This endpoint allows you to retrieve all your IdP configurations by configuration ID.**\n\nThe `integration_id` expected by this endpoint is the `id` returned in the response by the #endpoint:qv7RWLGAHninr8zdG endpoint.",
+                "description": "**This endpoint allows you to retrieve all your IdP configurations by configuration ID.**\n\nThe `integration_id` expected by this endpoint is the `id` returned in the response by the \"Get All SSO Integrations\" endpoint.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -2172,7 +2172,7 @@
                 "tags": [
                     "Certificates"
                 ],
-                "description": "**This endpoint allows you to update an existing certificate by ID.**\n\nYou can retrieve a certificate's ID from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.",
+                "description": "**This endpoint allows you to update an existing certificate by ID.**\n\nYou can retrieve a certificate's ID from the response provided by the \"Get All SSO Integrations\" endpoint.",
                 "parameters": [
                     {
                         "name": "body",
@@ -2225,7 +2225,7 @@
                 "tags": [
                     "Certificates"
                 ],
-                "description": "**This endpoint allows you to delete an SSO certificate.**\n\nYou can retrieve a certificate's ID from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.",
+                "description": "**This endpoint allows you to delete an SSO certificate.**\n\nYou can retrieve a certificate's ID from the response provided by the \"Get All SSO Integrations\" endpoint.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -2394,7 +2394,7 @@
                 "tags": [
                     "Single Sign-On Settings"
                 ],
-                "description": "**This endpoint allows you to retrieve an SSO integration by ID.**\n\nYou can retrieve the IDs for your configurations from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.",
+                "description": "**This endpoint allows you to retrieve an SSO integration by ID.**\n\nYou can retrieve the IDs for your configurations from the response provided by the \"Get All SSO Integrations\" endpoint.",
                 "parameters": [
                     {
                         "name": "si",
@@ -2446,7 +2446,7 @@
                 "tags": [
                     "Single Sign-On Settings"
                 ],
-                "description": "**This endpoint allows you to modify an exisiting SSO integration.**\n\nYou can retrieve the IDs for your configurations from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.",
+                "description": "**This endpoint allows you to modify an exisiting SSO integration.**\n\nYou can retrieve the IDs for your configurations from the response provided by the \"Get All SSO Integrations\" endpoint.",
                 "parameters": [
                     {
                         "name": "si",
@@ -2514,7 +2514,7 @@
                 "tags": [
                     "Single Sign-On Settings"
                 ],
-                "description": "**This endpoint allows you to delete an IdP configuration by ID.**\n\nYou can retrieve the IDs for your configurations from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.",
+                "description": "**This endpoint allows you to delete an IdP configuration by ID.**\n\nYou can retrieve the IDs for your configurations from the response provided by the \"Get All SSO Integrations\" endpoint.",
                 "responses": {
                     "204": {
                         "description": ""
@@ -3047,7 +3047,7 @@
                 "tags": [
                     "Settings - Mail"
                 ],
-                "description": "**This endpoint allows you to retrieve your current Footer mail settings.**\n\nThe Footer setting will insert a custom footer at the bottom of your text and HTML email message bodies.\n\nYou can insert your HTML or plain text directly using the #endpoint:LPTaj7czYsMS8spND, or you can create the footer using the [Mail Settings menu in the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
+                "description": "**This endpoint allows you to retrieve your current Footer mail settings.**\n\nThe Footer setting will insert a custom footer at the bottom of your text and HTML email message bodies.\n\nYou can insert your HTML or plain text directly using the \"Update footer mail settings\" endpoint, or you can create the footer using the [Mail Settings menu in the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -3097,7 +3097,7 @@
                 "tags": [
                     "Settings - Mail"
                 ],
-                "description": "**This endpoint allows you to update your current Forward Spam mail settings.**\n\nEnabling the Forward Spam setting allows you to specify `email` addresses to which spam reports will be forwarded. You can set multiple addresses by passing this endpoint a comma separated list of emails in a single string.\n\n```\n{\n  \"email\": \"address1@example.com, address2@exapmle.com\",\n  \"enabled\": true\n}\n```\n\nThe Forward Spam setting may also be used to receive emails sent to `abuse@` and `postmaster@` role addresses if you have authenticated your domain.\n\nFor example, if you authenticated `example.com` as your root domain and set a custom return path of `sub` for that domain, you could turn on Forward Spam, and any emails sent to `abuse@sub.example.com` or `postmaster@sub.example.com` would be forwarded to the email address you entered in the `email` field.\n\nYou can authenticate your domain using the #endpoint:aXpkWYramCg4ZNEGT endpoint or in the [Sender Authentication section of the Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth). You can also configure the Forward Spam mail settings in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
+                "description": "**This endpoint allows you to update your current Forward Spam mail settings.**\n\nEnabling the Forward Spam setting allows you to specify `email` addresses to which spam reports will be forwarded. You can set multiple addresses by passing this endpoint a comma separated list of emails in a single string.\n\n```\n{\n  \"email\": \"address1@example.com, address2@exapmle.com\",\n  \"enabled\": true\n}\n```\n\nThe Forward Spam setting may also be used to receive emails sent to `abuse@` and `postmaster@` role addresses if you have authenticated your domain.\n\nFor example, if you authenticated `example.com` as your root domain and set a custom return path of `sub` for that domain, you could turn on Forward Spam, and any emails sent to `abuse@sub.example.com` or `postmaster@sub.example.com` would be forwarded to the email address you entered in the `email` field.\n\nYou can authenticate your domain using the \"Authenticate a domain\" endpoint or in the [Sender Authentication section of the Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth). You can also configure the Forward Spam mail settings in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
                 "parameters": [
                     {
                         "name": "body",
@@ -4303,7 +4303,7 @@
                 "tags": [
                     "Teammates"
                 ],
-                "description": "**This endpoint allows you to retrieve a specific Teammate by username.**\n\nYou can retrieve the username's for each of your Teammates using the #endpoint:DiW4xbhq35GgRP6Mp endpoint.",
+                "description": "**This endpoint allows you to retrieve a specific Teammate by username.**\n\nYou can retrieve the username's for each of your Teammates using the \"Retrieve all Teammates\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -7913,7 +7913,7 @@
                 "tags": [
                     "Link branding"
                 ],
-                "description": "**This endpoint allows you to delete a branded link.**\n\nYour request will receive a response with a 204 status code if the deletion was successful. The call does not return the link's details, so if you wish to record these make sure you call the  #endpoint:9Rjrfftdm4Jdzqpko endpoint *before* you request its deletion.\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+                "description": "**This endpoint allows you to delete a branded link.**\n\nYour request will receive a response with a 204 status code if the deletion was successful. The call does not return the link's details, so if you wish to record these make sure you call the  \"Retrieve a branded link\" endpoint *before* you request its deletion.\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -7941,7 +7941,7 @@
                 "tags": [
                     "Link branding"
                 ],
-                "description": "**This endpoint allows you to retrieve the default branded link.**\n\nThe default branded link is the actual URL to be used when sending messages. If you have more than one branded link, the default is determined by the following order:\n\n* The validated branded link marked as `default` (set when you call #endpoint:2gXQQ3udkNjXHWjmk or by calling #endpoint:Hx235Zi3nPGGtpNdM on an existing link)\n* Legacy branded links (migrated from the whitelabel wizard)\n* Default SendGrid-branded links (i.e., `100.ct.sendgrid.net`)\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+                "description": "**This endpoint allows you to retrieve the default branded link.**\n\nThe default branded link is the actual URL to be used when sending messages. If you have more than one branded link, the default is determined by the following order:\n\n* The validated branded link marked as `default` (set when you call the \"Create a branded link\" endpoint or by calling the \"Update a branded link\" endpoint on an existing link)\n* Legacy branded links (migrated from the whitelabel wizard)\n* Default SendGrid-branded links (i.e., `100.ct.sendgrid.net`)\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
                 "parameters": [
                     {
                         "name": "domain",
@@ -8210,7 +8210,7 @@
                 "tags": [
                     "IP Warmup"
                 ],
-                "description": "**This endpoint allows you to retrieve the warmup status for a specific IP address.**\n\nYou can retrieve all of your warming IPs using the #endpoint:T8KgmGqsDsx9JTHp8 endpoint.",
+                "description": "**This endpoint allows you to retrieve the warmup status for a specific IP address.**\n\nYou can retrieve all of your warming IPs using the \"Retrieve all IPs currently in warmup\" endpoint.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -8273,7 +8273,7 @@
                 "tags": [
                     "IP Warmup"
                 ],
-                "description": "**This endpoint allows you to remove an IP address from warmup mode.**\n\nYour request will return a 204 status code if the specified IP was successfully removed from warmup mode. To retrieve details of the IP’s warmup status *before* removing it from warmup mode, call the  #endpoint:qf84mxELWH3Prd9JB endpoint.",
+                "description": "**This endpoint allows you to remove an IP address from warmup mode.**\n\nYour request will return a 204 status code if the specified IP was successfully removed from warmup mode. To retrieve details of the IP’s warmup status *before* removing it from warmup mode, call the  \"Retrieve the warmpup status for a specific IP address\" endpoint.",
                 "responses": {
                     "204": {
                         "description": "",
@@ -8516,7 +8516,7 @@
                 "tags": [
                     "Reverse DNS"
                 ],
-                "description": "**This endpoint allows you to validate a reverse DNS record.**\n\nAlways check the `valid` property of the response’s `validation_results.a_record` object. This field will indicate whether it was possible to validate the reverse DNS record. If the `validation_results.a_record.valid` is `false`, this indicates only that Twilio SendGrid could not determine the validity your reverse DNS record — it may still be valid.\n\nIf validity couldn’t be determined, you can check the value of `validation_results.a_record.reason` to find out why.\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"#endpoint:ZqgmCfzjZqJYaava7\" endpoint.",
+                "description": "**This endpoint allows you to validate a reverse DNS record.**\n\nAlways check the `valid` property of the response’s `validation_results.a_record` object. This field will indicate whether it was possible to validate the reverse DNS record. If the `validation_results.a_record.valid` is `false`, this indicates only that Twilio SendGrid could not determine the validity your reverse DNS record — it may still be valid.\n\nIf validity couldn’t be determined, you can check the value of `validation_results.a_record.reason` to find out why.\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"Retrieve all reverse DNS records\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -8686,7 +8686,7 @@
                 "tags": [
                     "Reverse DNS"
                 ],
-                "description": "**This endpoint allows you to retrieve a reverse DNS record.**\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"#endpoint:ZqgmCfzjZqJYaava7\" endpoint.",
+                "description": "**This endpoint allows you to retrieve a reverse DNS record.**\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"Retrieve all reverse DNS records\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -8735,7 +8735,7 @@
                 "tags": [
                     "Reverse DNS"
                 ],
-                "description": "**This endpoint allows you to delete a reverse DNS record.**\n\nA call to this endpoint will respond with a 204 status code if the deletion was successful.\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"#endpoint:ZqgmCfzjZqJYaava7\" endpoint.",
+                "description": "**This endpoint allows you to delete a reverse DNS record.**\n\nA call to this endpoint will respond with a 204 status code if the deletion was successful.\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"Retrieve all reverse DNS records\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -8961,7 +8961,7 @@
                 "tags": [
                     "Email CNAME records"
                 ],
-                "description": "**This endpoint is used to share DNS records with a colleagues**\n\nUse this endpoint to send SendGrid-generated DNS record information to a co-worker so they can enter it into your DNS provider to validate your domain and link branding. \n\nWhat type of records are sent will depend on whether you have chosen Automated Security or not. When using Automated Security, SendGrid provides you with three CNAME records. If you turn Automated Security off, you are instead given TXT and MX records.\n\nIf you pass a `link_id` to this endpoint, the generated email will supply the DNS records necessary to complete [Link Branding](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/) setup. If you pass a `domain_id` to this endpoint, the generated email will supply the DNS records needed to complete [Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/). Passing both IDs will generate an email with the records needed to complete both setup steps.\n\nYou can retrieve all your domain IDs from the returned `id` fields for each domain using the \"#endpoint:2uc5Dx5bR4iDqCzS9\" endpoint. You can retrieve all of your link IDs using the \"#endpoint:wQKA6mJBDXXycDkgC\" endpoint.",
+                "description": "**This endpoint is used to share DNS records with a colleagues**\n\nUse this endpoint to send SendGrid-generated DNS record information to a co-worker so they can enter it into your DNS provider to validate your domain and link branding. \n\nWhat type of records are sent will depend on whether you have chosen Automated Security or not. When using Automated Security, SendGrid provides you with three CNAME records. If you turn Automated Security off, you are instead given TXT and MX records.\n\nIf you pass a `link_id` to this endpoint, the generated email will supply the DNS records necessary to complete [Link Branding](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/) setup. If you pass a `domain_id` to this endpoint, the generated email will supply the DNS records needed to complete [Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/). Passing both IDs will generate an email with the records needed to complete both setup steps.\n\nYou can retrieve all your domain IDs from the returned `id` fields for each domain using the \"List all authenticated domains\" endpoint. You can retrieve all of your link IDs using the \"Retrieve all branded links\" endpoint.",
                 "parameters": [
                     {
                         "name": "body",
@@ -9135,7 +9135,7 @@
                 "tags": [
                     "IP Pools"
                 ],
-                "description": "**This endpoint allows you to add an IP address to an IP pool.**\n\nYou can add the same IP address to multiple pools. It may take up to 60 seconds for your IP address to be added to a pool after your request is made.\n\nBefore you can add an IP to a pool, you need to activate it in your SendGrid account:\n\n1. Log into your SendGrid account.  \n1. Navigate to **Settings** and then select **IP Addresses**.  \n1. Find the IP address you want to activate and then click **Edit**.  \n1. Check **Allow my account to send mail using this IP address**.\n1. Click **Save**.\n\nYou can retrieve all of your available IP addresses from the \"#endpoint:ebQqc7eNTRxxpCy3G\" endpoint.",
+                "description": "**This endpoint allows you to add an IP address to an IP pool.**\n\nYou can add the same IP address to multiple pools. It may take up to 60 seconds for your IP address to be added to a pool after your request is made.\n\nBefore you can add an IP to a pool, you need to activate it in your SendGrid account:\n\n1. Log into your SendGrid account.  \n1. Navigate to **Settings** and then select **IP Addresses**.  \n1. Find the IP address you want to activate and then click **Edit**.  \n1. Check **Allow my account to send mail using this IP address**.\n1. Click **Save**.\n\nYou can retrieve all of your available IP addresses from the \"Retrieve all IP addresses\" endpoint.",
                 "parameters": [
                     {
                         "name": "body",
@@ -11186,7 +11186,7 @@
                 "tags": [
                     "Sender Verification"
                 ],
-                "description": "**This endpoint allows you to determine which of SendGrid’s verification processes have been completed for an account**.\n\nThis endpoint returns boolean values, `true` and `false`, for [Domain Authentication](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#domain-authentication), `domain_verified`, and [Single Sender Verification](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#single-sender-verification), `sender_verified`, for the account.\n\nAn account may have one, both, or neither verification steps completed. If you need to authenticate a domain rather than a Single Sender, see the \"#endpoint:aXpkWYramCg4ZNEGT\" endpoint.",
+                "description": "**This endpoint allows you to determine which of SendGrid’s verification processes have been completed for an account**.\n\nThis endpoint returns boolean values, `true` and `false`, for [Domain Authentication](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#domain-authentication), `domain_verified`, and [Single Sender Verification](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#single-sender-verification), `sender_verified`, for the account.\n\nAn account may have one, both, or neither verification steps completed. If you need to authenticate a domain rather than a Single Sender, see the \"Authenticate a domain\" endpoint.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -11650,7 +11650,7 @@
                 "tags": [
                     "Sender Verification"
                 ],
-                "description": "**This endpoint allows you to delete a Sender Identity**.\n\nPass the `id` assigned to a Sender Identity to this endpoint to delete the Sender Identity from your account.\n\nYou can retrieve the IDs associated with Sender Identities using the #endpoint:ow3obGPTZxwZAJtkn endpoint.",
+                "description": "**This endpoint allows you to delete a Sender Identity**.\n\nPass the `id` assigned to a Sender Identity to this endpoint to delete the Sender Identity from your account.\n\nYou can retrieve the IDs associated with Sender Identities using the \"Get All Verified Senders\" endpoint.",
                 "responses": {
                     "204": {
                         "description": "",
@@ -11742,7 +11742,7 @@
                 "tags": [
                     "Sender Verification"
                 ],
-                "description": "**This endpoint allows you to resend a verification email to a specified Sender Identity**.\n\nPassing the `id` assigned to a Sender Identity to this endpoint will resend a verification email to the `from_address` associated with the Sender Identity. This can be useful if someone loses their verification email or needs to have it resent for any other reason.\n\nYou can retrieve the IDs associated with Sender Identities by passing a \"#endpoint:ow3obGPTZxwZAJtkn\" endpoint.",
+                "description": "**This endpoint allows you to resend a verification email to a specified Sender Identity**.\n\nPassing the `id` assigned to a Sender Identity to this endpoint will resend a verification email to the `from_address` associated with the Sender Identity. This can be useful if someone loses their verification email or needs to have it resent for any other reason.\n\nYou can retrieve the IDs associated with Sender Identities by passing a \"Get All Verified Senders\" endpoint.",
                 "responses": {
                     "204": {
                         "description": "",
@@ -12254,7 +12254,7 @@
                 "tags": [
                     "Designs API"
                 ],
-                "description": "**This endpoint allows you to duplicate one of the pre-built Twilio SendGrid designs**.\n\nLike duplicating one of your existing designs, you are not required to pass any data in the body of a request to this endpoint. If you choose to leave the `name` field blank, your duplicate will be assigned the name of the design it was copied from with the text \"Duplicate: \" prepended to it. This name change is only a convenience, as the duplicate design will be assigned a unique ID that differentiates it from your other designs. You can retrieve the IDs for Twilio SendGrid pre-built designs using the #endpoint:onypXY6DEQabeqdF7 endpoint.\n\nYou can modify your duplicate’s name at the time of creation by passing an updated value to the `name` field when making the initial request.\nMore on retrieving design IDs can be found above.",
+                "description": "**This endpoint allows you to duplicate one of the pre-built Twilio SendGrid designs**.\n\nLike duplicating one of your existing designs, you are not required to pass any data in the body of a request to this endpoint. If you choose to leave the `name` field blank, your duplicate will be assigned the name of the design it was copied from with the text \"Duplicate: \" prepended to it. This name change is only a convenience, as the duplicate design will be assigned a unique ID that differentiates it from your other designs. You can retrieve the IDs for Twilio SendGrid pre-built designs using the \"List SendGrid Pre-built Designs\" endpoint.\n\nYou can modify your duplicate’s name at the time of creation by passing an updated value to the `name` field when making the initial request.\nMore on retrieving design IDs can be found above.",
                 "parameters": [
                     {
                         "name": "body",
@@ -12486,7 +12486,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. \n\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to confirm your contacts have been updated or added, you can use the #endpoint:oNz2fgJriXmSkdyEe endpoint.\n\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the #endpoint:oC6DjiarRqXQu5kTm endpoint.\n\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the #endpoint:m5WnoiseMvTXuNwZt endpoint.\n\nThe email field is case sensitive. If you add an email with capital letters then try to use the #endpoint:oNz2fgJriXmSkdyEe endpoint, you will need to apply the same case you used when updating or adding the contact.\n\nIf the contact already exists in the system, any entries you submit via this endpoint will update the existing contact.",
+                "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. \n\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to confirm your contacts have been updated or added, you can use the \"Get Contacts by Emails\" endpoint.\n\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the \"Create Custom Field Definition\" endpoint.\n\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the \"Import Contacts Status\" endpoint.\n\nThe email field is case sensitive. If you add an email with capital letters then try to use the \"Get Contacts by Emails\" endpoint, you will need to apply the same case you used when updating or adding the contact.\n\nIf the contact already exists in the system, any entries you submit via this endpoint will update the existing contact.",
                 "parameters": [
                     {
                         "name": "body",
@@ -12526,7 +12526,7 @@
                             "properties": {
                                 "job_id": {
                                     "type": "string",
-                                    "description": "Indicates that the contacts are queued for processing. Check the job status with the #endpoint:m5WnoiseMvTXuNwZt endpoint."
+                                    "description": "Indicates that the contacts are queued for processing. Check the job status with the \"Import Contacts Status\" endpoint."
                                 }
                             }
                         }
@@ -12777,7 +12777,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**Use this endpoint to export lists or segments of contacts**.\n\nIf you would just like to have a link to the exported list sent to your email set the `notifications.email` option to `true` in the `POST` payload.\n\nIf you would like to download the list, take the `id` that is returned and use the #endpoint:TrwE7WeCWP8hEbYis endpoint to get the `urls`. Once you have the list of URLs, make a `GET` request to each URL provided to download your CSV file(s).\n\nYou specify the segements and or/contact lists you wish to export by providing the relevant IDs in, respectively, the `segment_ids` and `list_ids` fields in the request body.\n\nThe lists will be provided in either JSON or CSV files. To specify which of these you would required, set the request body `file_type` field to `json` or `csv`.\n\nYou can also specify a maximum file size (in MB). If the export file is larger than this, it will be split into multiple files.",
+                "description": "**Use this endpoint to export lists or segments of contacts**.\n\nIf you would just like to have a link to the exported list sent to your email set the `notifications.email` option to `true` in the `POST` payload.\n\nIf you would like to download the list, take the `id` that is returned and use the \"Export Contacts Status\" endpoint to get the `urls`. Once you have the list of URLs, make a `GET` request to each URL provided to download your CSV file(s).\n\nYou specify the segements and or/contact lists you wish to export by providing the relevant IDs in, respectively, the `segment_ids` and `list_ids` fields in the request body.\n\nThe lists will be provided in either JSON or CSV files. To specify which of these you would required, set the request body `file_type` field to `json` or `csv`.\n\nYou can also specify a maximum file size (in MB). If the export file is larger than this, it will be split into multiple files.",
                 "parameters": [
                     {
                         "name": "body",
@@ -12884,7 +12884,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**Use this endpoint to retrieve details of all current exported jobs**.\n\nIt will return an array of objects, each of which records an export job in flight or recently completed. \n\nEach object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files — there will be more than one if you specified a maximum file size in your initial export request.\n\nUse this endpoint if you have exports in flight but do not know their IDs, which are required for #endpoint:TrwE7WeCWP8hEbYis.",
+                "description": "**Use this endpoint to retrieve details of all current exported jobs**.\n\nIt will return an array of objects, each of which records an export job in flight or recently completed. \n\nEach object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files — there will be more than one if you specified a maximum file size in your initial export request.\n\nUse this endpoint if you have exports in flight but do not know their IDs, which are required for the \"Export Contacts Status\" endpoint.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -13208,7 +13208,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. \n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See #endpoint:ShdXXCcwwTE39zYAT to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H 'HEADER_GIVEN'`\n\nIf you'd like to monitor the status of your import job, use the `job_id` and the #endpoint:m5WnoiseMvTXuNwZt endpoint.",
+                "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. \n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the \"Get All Field Definitions\" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H 'HEADER_GIVEN'`\n\nIf you'd like to monitor the status of your import job, use the `job_id` and the \"Import Contacts Status\" endpoint.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13359,7 +13359,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to check the status of a contact import job**. \n\nUse the `job_id` from the #endpoint:LPe3yJSpmGyv39oTa, #endpoint:rAGcTKvL5Q3XQd8Xp, or #endpoint:oazoY5DJsLqGMPfNY as the `id` in the path parameter.\n\nIf there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.\n\nThe job `status` field indicates whether the job is `pending`, `completed`, `errored`, or `failed`. \n\nPending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.\n\nThe `results` object will have fields depending on the job type.",
+                "description": "**This endpoint can be used to check the status of a contact import job**. \n\nUse the `job_id` from the \"Improt Contacts,\" \"Add or Update a Contact,\" or \"Delete Contacts\" endpoints as the `id` in the path parameter.\n\nIf there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.\n\nThe job `status` field indicates whether the job is `pending`, `completed`, `errored`, or `failed`. \n\nPending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.\n\nThe `results` object will have fields depending on the job type.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -13413,7 +13413,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to check the status of a contact export job**. \n\nTo use this call, you will need the `id` from the #endpoint:aQ42cqyfw3XHCMdfY call.\n\nIf you would like to download a list, take the `id` that is returned from #endpoint:aQ42cqyfw3XHCMdfY and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).",
+                "description": "**This endpoint can be used to check the status of a contact export job**. \n\nTo use this call, you will need the `id` from the \"Export Contacts\" call.\n\nIf you would like to download a list, take the `id` that is returned from the \"Export Contacts\" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).",
                 "responses": {
                     "200": {
                         "description": "",
@@ -13462,7 +13462,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint is used to retrieve a set of contacts identified by their IDs.**\n\nThis can be more efficient endpoint to get contacts than making a series of individual `GET` requests to #endpoint:f8xTRGmJGQ5bsgGaR.\n\nYou can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.",
+                "description": "**This endpoint is used to retrieve a set of contacts identified by their IDs.**\n\nThis can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the \"Get a Contact by ID\" endpoint.\n\nYou can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13531,7 +13531,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses are not case sensitive, and returned email addresses will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the #endpoint:5oj27hT9p3TLXNBJP endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the #endpoint:aQ42cqyfw3XHCMdfY endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.",
+                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses are not case sensitive, and returned email addresses will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the \"Search Contacts\" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the \"Export Contacts\" endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.",
                 "parameters": [
                     {
                         "name": "body",
@@ -16697,7 +16697,7 @@
                 "tags": [
                     "Marketing Campaigns Stats"
                 ],
-                "description": "**This endpoint allows you to retrieve stats for a single Automation using its ID.**\n\nMultiple Automation IDs can be retrieved using the #endpoint:tMC3DWPZFRZKCx45d endpoint. Once you have an ID, this endpoint will return detailed stats for the single automation specified.\n\nYou may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.",
+                "description": "**This endpoint allows you to retrieve stats for a single Automation using its ID.**\n\nMultiple Automation IDs can be retrieved using the \"Get All Automation Stats\" endpoint. Once you have an ID, this endpoint will return detailed stats for the single automation specified.\n\nYou may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:automationQueryParams:group_by"
@@ -16805,7 +16805,7 @@
                 "tags": [
                     "Marketing Campaigns Stats"
                 ],
-                "description": "**This endpoint allows you to retrieve stats for an individual Single Send using a Single Send ID.**\n\nMultiple Single Send IDs can be retrieved using the #endpoint:CkrCH9JrWPiySTTuu endpoint. Once you have an ID, this endpoint will return detailed stats for the Single Send specified.\n\nYou may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.",
+                "description": "**This endpoint allows you to retrieve stats for an individual Single Send using a Single Send ID.**\n\nMultiple Single Send IDs can be retrieved using the \"Get All Single Sends Stats\" endpoint. Once you have an ID, this endpoint will return detailed stats for the Single Send specified.\n\nYou may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:baseParams:aggregated_by"
@@ -23636,7 +23636,7 @@
                 "tags": [
                     "Settings - Inbound Parse"
                 ],
-                "description": "**This endpoint allows you to create a new inbound parse setting.**\n\nCreating an Inbound Parse setting requires two pieces of information: a `url` and a `hostname`.\n\nThe `hostname` must correspond to a domain authenticated by Twilio SendGrid on your account. If you need to complete domain authentication, you can use the [Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth) or the #endpoint:aXpkWYramCg4ZNEGT endpoint. See \"[How to Set Up Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)\" for instructions.\n\nAny email received by the `hostname` will be parsed when you complete this setup. You must also add a Twilio SendGrid MX record to this domain's DNS records. See \"[Setting up the Inbound Parse Webhook](https://sendgrid.com/docs/for-developers/parsing-email/setting-up-the-inbound-parse-webhook/)\" for full instructions.\n\nThe `url` represents a location where the parsed message data will be delivered. Twilio SendGrid will make an HTTP POST request to this `url` with the message data. The `url` must be publicly reachable, and your application must return a `200` status code to signal that the message data has been received.",
+                "description": "**This endpoint allows you to create a new inbound parse setting.**\n\nCreating an Inbound Parse setting requires two pieces of information: a `url` and a `hostname`.\n\nThe `hostname` must correspond to a domain authenticated by Twilio SendGrid on your account. If you need to complete domain authentication, you can use the [Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth) or the \"Authenticate a domain\" endpoint. See \"[How to Set Up Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)\" for instructions.\n\nAny email received by the `hostname` will be parsed when you complete this setup. You must also add a Twilio SendGrid MX record to this domain's DNS records. See \"[Setting up the Inbound Parse Webhook](https://sendgrid.com/docs/for-developers/parsing-email/setting-up-the-inbound-parse-webhook/)\" for full instructions.\n\nThe `url` represents a location where the parsed message data will be delivered. Twilio SendGrid will make an HTTP POST request to this `url` with the message data. The `url` must be publicly reachable, and your application must return a `200` status code to signal that the message data has been received.",
                 "parameters": [
                     {
                         "name": "body",
@@ -25342,7 +25342,7 @@
                     "CSV (UI only)",
                     "V3"
                 ],
-                "description": "**This endpoint will return a presigned URL that can be used to download the CSV that was requested from the #endpoint:LhbZ87Wq5k9AyFWD6 endpoint.**",
+                "description": "**This endpoint will return a presigned URL that can be used to download the CSV that was requested from the \"Request a CSV\" endpoint.**",
                 "responses": {
                     "200": {
                         "description": "",
@@ -30011,7 +30011,7 @@
                 "tags": [
                     "Settings - Inbound Parse"
                 ],
-                "description": "**This endpoint allows you to retrieve a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the #endpoint:b8xyiHYsGatArCnSt endpoint.",
+                "description": "**This endpoint allows you to retrieve a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the \"Retrieve all parse settings\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -30057,7 +30057,7 @@
                 "tags": [
                     "Settings - Inbound Parse"
                 ],
-                "description": "**This endpoint allows you to update a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the #endpoint:b8xyiHYsGatArCnSt endpoint.",
+                "description": "**This endpoint allows you to update a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the \"Retrieve all parse settings\" endpoint.",
                 "parameters": [
                     {
                         "name": "body",
@@ -30115,7 +30115,7 @@
                 "tags": [
                     "Settings - Inbound Parse"
                 ],
-                "description": "**This endpoint allows you to delete a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the #endpoint:b8xyiHYsGatArCnSt endpoint.",
+                "description": "**This endpoint allows you to delete a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the \"Retrieve all parse settings\" endpoint.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
