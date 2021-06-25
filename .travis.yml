@@ -3,6 +3,7 @@ install:
 - pip install prance flex
 script:
 - python test/test.py
+- prance validate --strict oai_stoplight.json
 notifications:
   slack:
     if: branch = main
