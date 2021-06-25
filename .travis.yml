@@ -3,6 +3,7 @@ install:
 - pip install prance flex
 script:
 - python test/test.py
+- prance validate --strict oai_stoplight.json
 notifications:
   slack:
     if: branch = main
@@ -10,4 +11,4 @@ notifications:
     on_success: never
     on_failure: change
     rooms:
-      secure: Xt7y4p3bQ7E1jAIN5VUVMGQcgAbAlaJPqT6HaoBU+P1So2Iqa/N17basWWWtKRH/laBXm0IcRg7k78Ft2Lu+d/BtEpJCyOIhrpkeMLvnsuxgkk8eHSbKNXkGDMfyE4NQia53eYDHRAnMJ3Pbj+sMPb5FvKWhyqE744851597lzn1PITOzkaX8Ykc9lz8lx1kkVTjZS5C4jxG+WPzJdgKGcXyQMZ/RxG7Pd3vkokSrXhiu57yQQrf6VOn3DiCJ3tIlLnfjY3TmIWIXq5Zya6F8KIm9Jd5qKhntWYXiFpJPcyxazJzklRm9oPa2GnPCy0HQtrDGB/BKjM8WPzkzMij2l+NO/Q3ofXwrXrQw+rQHDUfc4IqNGFGlSJFSpE1JDvsZaxxgPnHQBYaTI2uYVgEWgkKe7Ku689g/XmRMhwPXypNCuHJI7aIrQPF42gTIY0tZHomInLw/ozDVmURlK43jYT36uN/wQLS1Cc8/f/vtrloM7wnr9kCFp7iO+GLyBTZ/3Wnzo8QlqK3W+mY+CitSWKcnSby9PySahiFX8gdAGx0bLkHF3m4rJnXtAP/bqMz/MECTbWcIal/HfLmlVhMObQu+wCIIiRMjclBJxWDmj0Eh1h0l6D7m57lzbentLNG+RZp6RoCCKss+Pd14L0zAaueOqfU+dtz1mHPnaYlW9M=
+      secure: KhGk2d5rPXdu1zK1mI5Xw6krojLxvUrLrZSkceL50DPE6YS9PEhxxogAg/5hO5N/p6rA7T9z5P+ZfULtGv2oYj4Y6QLOMbbq9aPScVCbMaXXjrk5JFg2CnHvRhr1cI4YnV/3L4za4xQJrH47F1SklwQ8EbXjDiuLuhibVlj0h3FINUaFqhp78hbnX/X6lTUDZaACrgj4Rgq4H+fr5qsIVi6yEqpcE1BCcCtzQzN3PeDw3jJqkPjyQoGNiC+vtjJ1tuxbKxMUSCPaBWjHCdxng2iV3l83r6UH3dxqD8h6pOy/03idocqH+iK9yVBjIlrsf0qyexPEmA1F6uL2/YDhz/+h5hWph1bIeJEbKrRDo+yH35WL4y9jGy49bVk/e37cSihnn07NzLAJfGyQhEEITl7D+UWB4r1BKvCOOtOErDqHKWWd/gUweIO54XdzuYYJWeYFqwp9LJv8ehqG9l6XD7wTbya3hzIDN/sRMrk+ZQS0P8hGdb2/8IWbbUCsSg7NnAb3EyxRRUoj70ODm5tj9nQo35bIp+mFZ+NF6YcmlbKbldR5NdN4zK6Wvaamxg7kx7K61h7VMl2q32EsgJAURPPXLSw2aEDhKLJOQt61gwjqWWnoeQxceeUUftkRIidJDLAVFH3DVMmKOOwOzvU//tkWP0+XzgoR8ciATcoFSiY=

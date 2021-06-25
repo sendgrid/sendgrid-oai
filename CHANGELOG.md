@@ -1,6 +1,14 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-06-09] Version 1.4.4
+
+**Library - Feature**
+- [PR #77](https://github.com/sendgrid/sendgrid-oai/pull/77): Replace the `oai_stoplight.json` file with a recent export from Stoplight. This change does not modify the `oai.json` or `oai.yaml` files. It is in place to support the public API reference.
+
+**Library - Docs**
+- [PR #77](https://github.com/sendgrid/sendgrid-oai/pull/77): Add instructions for installing and running the Python prance library locally.
+
 [2020-11-18] Version 1.4.3
 --------------------------
 **Library - Docs**

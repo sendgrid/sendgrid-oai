@@ -30,23 +30,40 @@ git remote add upstream https://github.com/sendgrid/sendgrid-oai
 git checkout -b <topic-branch-name>
 ```
 
-5. __Commit your changes__ in logical chunks.
+5. Your changes will be validated by the Python [prance](https://pypi.org/project/prance/) library before they are merged into the repository. You can install prance and validate your changes locally before making your commits.
+
+**Install**
+
+`pip install prance`
+
+**Validate**
+
+`prance validate --strict oai.json oai.yml oai_stoplight.json`
+
+Be sure to leave any installed libraries, Python files, or virtual env directories out of your commits. This project's `.gitignore` excludes the following files and directories for you; it assumes the use of a virtualenv.
+
+* pyvenv.cfg
+* bin
+* lib
+
+6. __Commit your changes__ in logical chunks.
 
 Please adhere to these [git commit message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) or your code is unlikely be merged into the main project. Use Git's [interactive rebase](https://help.github.com/articles/interactive-rebase) feature to tidy up your commits before making them public. Probably you will also have to create tests (if needed) or create or update the example code that demonstrates the functionality of this change to the code.
 
-6. __Locally merge (or rebase)__ the upstream development branch into your topic branch:
+
+7. __Locally merge (or rebase)__ the upstream development branch into your topic branch:
 
 ```bash
 git pull [--rebase] upstream main
 ```
 
-7. __Push__ your topic branch up to your fork:
+8. __Push__ your topic branch up to your fork:
 
 ```bash
 git push origin <topic-branch-name>
 ```
 
-8. __[Open a Pull Request](https://help.github.com/articles/creating-a-pull-request/#changing-the-branch-range-and-destination-repository/)__ with a clear title and description against the `main` branch. All tests must be passing before we will review the PR.
+9. __[Open a Pull Request](https://help.github.com/articles/creating-a-pull-request/#changing-the-branch-range-and-destination-repository/)__ with a clear title and description against the `main` branch. All tests must be passing before we will review the PR.
 
 ## Important notice
 
