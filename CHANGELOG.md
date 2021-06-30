@@ -1,6 +1,24 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-06-30] Version 1.5.0
+--------------------------
+**Library - Chore**
+- [PR #80](https://github.com/sendgrid/sendgrid-oai/pull/80): Api reference: update with export from Stoplight. Thanks to [@astuteape](https://github.com/astuteape)!
+- [PR #77](https://github.com/sendgrid/sendgrid-oai/pull/77): Update Stoplight export to support SendGrid's API Reference. Thanks to [@astuteape](https://github.com/astuteape)!
+
+**Library - Feature**
+- [PR #82](https://github.com/sendgrid/sendgrid-oai/pull/82): Format Mail Send description, clean up new Marketing Campaigns copy. Thanks to [@astuteape](https://github.com/astuteape)!
+
+**Library - Fix**
+- [PR #83](https://github.com/sendgrid/sendgrid-oai/pull/83): Remove non-rendering links. Thanks to [@astuteape](https://github.com/astuteape)!
+- [PR #81](https://github.com/sendgrid/sendgrid-oai/pull/81): change docker spec. Thanks to [@JenniferMah](https://github.com/JenniferMah)!
+- [PR #79](https://github.com/sendgrid/sendgrid-oai/pull/79): use last working version of OAI to run prism. Thanks to [@JenniferMah](https://github.com/JenniferMah)!
+
+**Library - Docs**
+- [PR #84](https://github.com/sendgrid/sendgrid-oai/pull/84): Adding new Stoplight oai file for a docs change. Thanks to [@Whatthefoxsays](https://github.com/Whatthefoxsays)!
+
+
 [2021-06-09] Version 1.4.4
 
 **Library - Feature**
