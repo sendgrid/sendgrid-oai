@@ -34,7 +34,8 @@ paths:
         ## Helper Libraries
 
         Twilio SendGrid provides libraries to help you quickly and easily integrate with the v3 Web API in 7 different languages:
-        * [C#](https://github.com/sendgrid/sendgrid-csharp)
+
+        * [C#](https://github.com/sendgrid/sendgrid-csharp) 
         * [Go](https://github.com/sendgrid/sendgrid-go)
         * [Java](https://github.com/sendgrid/sendgrid-java)
         * [Node JS](https://github.com/sendgrid/sendgrid-nodejs)
@@ -68,6 +69,7 @@ paths:
         Mail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).
 
         To use mail body compression:
+
         1. Add a `Content-Encoding` header, with a value of `gzip`.  
            a. `Content-Encoding: gzip` 
         2. Send the gzip as a data-binary.  
@@ -1154,7 +1156,7 @@ paths:
       description: |-
         **This endpoint allows you to add one or more allowed IP addresses.**
 
-        To allow one or more IP addresses, pass them to this endpoint in an array. Once an IP address is added to your allow list, it will be assigned an `id` that can be used to remove the address. You can retrieve the ID associated with an IP using the "#endpoint:nzCz472S9yaNpgmDu" endpoint.
+        To allow one or more IP addresses, pass them to this endpoint in an array. Once an IP address is added to your allow list, it will be assigned an `id` that can be used to remove the address. You can retrieve the ID associated with an IP using the "Retrieve a list of currently allowed IPs" endpoint.
       parameters:
         - name: body
           in: body
@@ -1259,7 +1261,7 @@ paths:
       description: |-
         **This endpoint allows you to remove one or more IP addresses from your list of allowed addresses.**
 
-        To remove one or more IP addresses, pass this endpoint an array containing the ID(s) associated with the IP(s) you intend to remove. You can retrieve the IDs associated with your allowed IP addresses using the "#endpoint:nzCz472S9yaNpgmDu" endpoint.
+        To remove one or more IP addresses, pass this endpoint an array containing the ID(s) associated with the IP(s) you intend to remove. You can retrieve the IDs associated with your allowed IP addresses using the "Retrieve a list of currently allowed IPs" endpoint.
 
         It is possible to remove your own IP address, which will block access to your account. You will need to submit a [support ticket](https://sendgrid.com/docs/ui/account-and-settings/support/) if this happens. For this reason, it is important to double check that you are removing only the IPs you intend to remove when using this endpoint.
       parameters:
@@ -1388,7 +1390,7 @@ paths:
       description: |-
         **This endpoint allows you to retreive a specific IP address that has been allowed to access your account.**
 
-        You must include the ID for the specific IP address you want to retrieve in your call. You can retrieve the IDs associated with your allowed IP addresses using the "#endpoint:nzCz472S9yaNpgmDu" endpoint.
+        You must include the ID for the specific IP address you want to retrieve in your call. You can retrieve the IDs associated with your allowed IP addresses using the "Retrieve a  list of currently allowed IPs" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -1412,7 +1414,7 @@ paths:
       description: |-
         **This endpoint allows you to remove a specific IP address from your list of allowed addresses.**
 
-        When removing a specific IP address from your list, you must include the ID in your call.  You can retrieve the IDs associated with your allowed IP addresses using the "#endpoint:nzCz472S9yaNpgmDu" endpoint.
+        When removing a specific IP address from your list, you must include the ID in your call.  You can retrieve the IDs associated with your allowed IP addresses using the "Retrieve a list of currently allowed IPs" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -1490,7 +1492,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve all your IdP configurations by configuration ID.**
 
-        The `integration_id` expected by this endpoint is the `id` returned in the response by the #endpoint:qv7RWLGAHninr8zdG endpoint.
+        The `integration_id` expected by this endpoint is the `id` returned in the response by the "Get All SSO Integrations" endpoint.
       responses:
         '200':
           description: ''
@@ -1557,7 +1559,7 @@ paths:
       description: |-
         **This endpoint allows you to update an existing certificate by ID.**
 
-        You can retrieve a certificate's ID from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.
+        You can retrieve a certificate's ID from the response provided by the "Get All SSO Integrations" endpoint.
       parameters:
         - name: body
           in: body
@@ -1596,7 +1598,7 @@ paths:
       description: |-
         **This endpoint allows you to delete an SSO certificate.**
 
-        You can retrieve a certificate's ID from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.
+        You can retrieve a certificate's ID from the response provided by the "Get All SSO Integrations" endpoint.
       responses:
         '200':
           description: ''
@@ -1719,7 +1721,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve an SSO integration by ID.**
 
-        You can retrieve the IDs for your configurations from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.
+        You can retrieve the IDs for your configurations from the response provided by the "Get All SSO Integrations" endpoint.
       parameters:
         - name: si
           in: query
@@ -1759,7 +1761,7 @@ paths:
       description: |-
         **This endpoint allows you to modify an exisiting SSO integration.**
 
-        You can retrieve the IDs for your configurations from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.
+        You can retrieve the IDs for your configurations from the response provided by the "Get All SSO Integrations" endpoint.
       parameters:
         - name: si
           in: query
@@ -1811,7 +1813,7 @@ paths:
       description: |-
         **This endpoint allows you to delete an IdP configuration by ID.**
 
-        You can retrieve the IDs for your configurations from the response provided by the #endpoint:qv7RWLGAHninr8zdG endpoint.
+        You can retrieve the IDs for your configurations from the response provided by the "Get All SSO Integrations" endpoint.
       responses:
         '204':
           description: ''
@@ -2204,7 +2206,7 @@ paths:
 
         The Footer setting will insert a custom footer at the bottom of your text and HTML email message bodies.
 
-        You can insert your HTML or plain text directly using the #endpoint:LPTaj7czYsMS8spND, or you can create the footer using the [Mail Settings menu in the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).
+        You can insert your HTML or plain text directly using the "Update footer mail settings" endpoint, or you can create the footer using the [Mail Settings menu in the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -2252,7 +2254,7 @@ paths:
 
         For example, if you authenticated `example.com` as your root domain and set a custom return path of `sub` for that domain, you could turn on Forward Spam, and any emails sent to `abuse@sub.example.com` or `postmaster@sub.example.com` would be forwarded to the email address you entered in the `email` field.
 
-        You can authenticate your domain using the #endpoint:aXpkWYramCg4ZNEGT endpoint or in the [Sender Authentication section of the Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth). You can also configure the Forward Spam mail settings in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).
+        You can authenticate your domain using the "Authenticate a domain" endpoint or in the [Sender Authentication section of the Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth). You can also configure the Forward Spam mail settings in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).
       parameters:
         - name: body
           in: body
@@ -3116,7 +3118,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve a specific Teammate by username.**
 
-        You can retrieve the username's for each of your Teammates using the #endpoint:DiW4xbhq35GgRP6Mp endpoint.
+        You can retrieve the username's for each of your Teammates using the "Retrieve all Teammates" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -5045,7 +5047,7 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/stats'
+            $ref: '#/definitions/category_stats'
           examples:
             application/json:
               - date: '2015-10-01'
@@ -5662,7 +5664,7 @@ paths:
       description: |-
         **This endpoint allows you to delete a branded link.**
 
-        Your request will receive a response with a 204 status code if the deletion was successful. The call does not return the link's details, so if you wish to record these make sure you call the  #endpoint:9Rjrfftdm4Jdzqpko endpoint *before* you request its deletion.
+        Your request will receive a response with a 204 status code if the deletion was successful. The call does not return the link's details, so if you wish to record these make sure you call the  "Retrieve a branded link" endpoint *before* you request its deletion.
 
         You can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.
       parameters:
@@ -5685,7 +5687,7 @@ paths:
 
         The default branded link is the actual URL to be used when sending messages. If you have more than one branded link, the default is determined by the following order:
 
-        * The validated branded link marked as `default` (set when you call #endpoint:2gXQQ3udkNjXHWjmk or by calling #endpoint:Hx235Zi3nPGGtpNdM on an existing link)
+        * The validated branded link marked as `default` (set when you call the "Create a branded link" endpoint or by calling the "Update a branded link" endpoint on an existing link)
         * Legacy branded links (migrated from the whitelabel wizard)
         * Default SendGrid-branded links (i.e., `100.ct.sendgrid.net`)
 
@@ -5874,7 +5876,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve the warmup status for a specific IP address.**
 
-        You can retrieve all of your warming IPs using the #endpoint:T8KgmGqsDsx9JTHp8 endpoint.
+        You can retrieve all of your warming IPs using the "Retrieve all IPs currently in warmup" endpoint.
       responses:
         '200':
           description: ''
@@ -5915,7 +5917,7 @@ paths:
       description: |-
         **This endpoint allows you to remove an IP address from warmup mode.**
 
-        Your request will return a 204 status code if the specified IP was successfully removed from warmup mode. To retrieve details of the IP’s warmup status *before* removing it from warmup mode, call the  #endpoint:qf84mxELWH3Prd9JB endpoint.
+        Your request will return a 204 status code if the specified IP was successfully removed from warmup mode. To retrieve details of the IP’s warmup status *before* removing it from warmup mode, call the  "Retrieve the warmpup status for a specific IP address" endpoint.
       responses:
         '204':
           description: ''
@@ -6087,7 +6089,7 @@ paths:
 
         If validity couldn’t be determined, you can check the value of `validation_results.a_record.reason` to find out why.
 
-        You can retrieve the IDs associated with all your reverse DNS records using the "#endpoint:ZqgmCfzjZqJYaava7" endpoint.
+        You can retrieve the IDs associated with all your reverse DNS records using the "Retrieve all reverse DNS records" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -6199,7 +6201,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve a reverse DNS record.**
 
-        You can retrieve the IDs associated with all your reverse DNS records using the "#endpoint:ZqgmCfzjZqJYaava7" endpoint.
+        You can retrieve the IDs associated with all your reverse DNS records using the "Retrieve all reverse DNS records" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -6236,7 +6238,7 @@ paths:
 
         A call to this endpoint will respond with a 204 status code if the deletion was successful.
 
-        You can retrieve the IDs associated with all your reverse DNS records using the "#endpoint:ZqgmCfzjZqJYaava7" endpoint.
+        You can retrieve the IDs associated with all your reverse DNS records using the "Retrieve all reverse DNS records" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -6264,12 +6266,12 @@ paths:
                 description: The email address that you want to validate.
               source:
                 type: string
-                description: An optional indicator of the email address's source. You may include this if you are capturing email addresses from multiple locations.
+                description: A one-word classifier for where this validation originated.
             required:
               - email
             example:
               email: example@example.com
-              source: Signup Form
+              source: signup
       responses:
         '200':
           description: ''
@@ -6278,81 +6280,102 @@ paths:
             properties:
               result:
                 type: object
+                required:
+                  - email
+                  - verdict
+                  - score
+                  - local
+                  - host
+                  - checks
+                  - ip_address
                 properties:
                   email:
                     type: string
+                    description: The email being validated
                     format: email
-                    description: The email address being validated.
                   verdict:
                     type: string
+                    description: A generic classification of whether or not the email address is valid.
                     enum:
                       - Valid
                       - Risky
                       - Invalid
-                    description: 'This field will contain one of three categories: “Valid”, “Risky”, or “Invalid”. These are generic classifications based on the detailed results. You can filter based on this field, but you can also look at more detailed information available in the `score` and `checks` fields.'
                   score:
                     type: number
-                    minimum: 0
-                    maximum: 1
-                    description: This number from 0 to 1 represents the likelihood the email address is valid. Scores closer to 1 are more likely to be valid.
+                    description: A numeric representation of the email validity.
                   local:
                     type: string
-                    description: The local portion of an email address is everything before the @ symbol.
+                    description: The local part of the email address.
                   host:
                     type: string
-                    description: the domain following the @ symbol in an email address.
+                    description: The domain of the email address.
+                    format: hostname
                   suggestion:
                     type: string
-                    description: 'If Twilio SendGrid detects what it believes to be a typo in the address''s domain, it will provide a suggested correct spelling in this field.'
+                    description: 'A suggested correction in the event of domain name typos (e.g., gmial.com)'
                   checks:
                     type: object
-                    description: A list of all the checks that ran on the email address. You can use these results to determine your own standards for the message's validity.
+                    description: Granular checks for email address validity.
+                    required:
+                      - domain
+                      - local_part
+                      - additional
                     properties:
                       domain:
                         type: object
-                        description: 'The checks performed on the domain portion, after the @ symbol, of the email address.'
+                        description: Checks on the domain portion of the email address.
+                        required:
+                          - has_valid_address_syntax
+                          - has_mx_or_a_record
+                          - is_suspected_disposable_address
                         properties:
                           has_valid_address_syntax:
                             type: boolean
-                            description: Indicates if the domain is properly formatted.
+                            description: Whether the email address syntax is valid.
                           has_mx_or_a_record:
                             type: boolean
-                            description: Indicates if the domain has appropriate DNS records needed for email receipt and delivery.
+                            description: 'Whether the email has appropriate DNS records to deliver a message. '
                           is_suspected_disposable_address:
                             type: boolean
-                            description: Indicates if the email address's domain appears to be from a disposable email address service.
+                            description: Whether the domain appears to be from a disposable email address service.
                       local_part:
                         type: object
-                        description: 'The checks performed on the local portion, before the @ symbol, of the email address.'
+                        description: Checks on the local part of the email address.
+                        required:
+                          - is_suspected_role_address
                         properties:
                           is_suspected_role_address:
                             type: boolean
-                            description: 'Indicates if the local portion of the email appears to be a group address such as "hr," "support," or "admin."'
+                            description: 'Whether the local part of email appears to be a role or group (e.g., hr, admin)'
                       additional:
                         type: object
-                        description: Additional checks performed on the address.
+                        description: Additional checks on the email address.
+                        required:
+                          - has_known_bounces
+                          - has_suspected_bounces
                         properties:
                           has_known_bounces:
                             type: boolean
-                            description: Indicates if the address has previously bounced a message sent by Twilio SendGrid.
+                            description: WHether email sent to this address from your account has bounced.
                           has_suspected_bounces:
                             type: boolean
-                            description: Indicates if Twilio SendGrid's machine learning suspects the address will bounce.
+                            description: Whether our model predicts that the email address might bounce.
                   source:
                     type: string
-                    description: An optional indicator of the email address's source. You may include this if you are capturing email addresses from multiple locations.
+                    description: 'The source of the validation, as per the API request.'
                   ip_address:
                     type: string
-                    description: The IP address the validation request was made from.
+                    description: The IP address associated with this email.
+            required:
+              - result
           examples:
             application/json:
               result:
-                email: jane_doe@gmial.com
+                email: cedric@fogowl.com
                 verdict: Valid
-                score: 0.79498
-                local: jane_doe
-                host: gmial.com
-                suggestion: gmail.com
+                score: 0.85021
+                local: cedric
+                host: fogowl.com
                 checks:
                   domain:
                     has_valid_address_syntax: true
@@ -6362,40 +6385,8 @@ paths:
                     is_suspected_role_address: false
                   additional:
                     has_known_bounces: false
-                    has_suspected_bounces: true
-                ip_address: 192.168.2.1
-      security:
-        - Authorization: []
-  /validations/email/bulk:
-    post:
-      operationId: POST_validations-email-bulk
-      summary: Validate a list of Email Addresses
-      tags:
-        - Email Address Validation
-      description: '**This endpoint allows you to validate a list of email addresses.**'
-      parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              emails:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    email:
-                      type: string
-                      format: email
-            example:
-              emails:
-                - email: example@example.com
-                - email: test@example.com
-                - email: example@test.com
-      responses:
-        default:
-          description: ''
-          schema: {}
+                    has_suspected_bounces: false
+                ip_address: 192.168.1.1
       security:
         - Authorization: []
   /whitelabel/dns/email:
@@ -6413,7 +6404,7 @@ paths:
 
         If you pass a `link_id` to this endpoint, the generated email will supply the DNS records necessary to complete [Link Branding](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/) setup. If you pass a `domain_id` to this endpoint, the generated email will supply the DNS records needed to complete [Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/). Passing both IDs will generate an email with the records needed to complete both setup steps.
 
-        You can retrieve all your domain IDs from the returned `id` fields for each domain using the "#endpoint:2uc5Dx5bR4iDqCzS9" endpoint. You can retrieve all of your link IDs using the "#endpoint:wQKA6mJBDXXycDkgC" endpoint.
+        You can retrieve all your domain IDs from the returned `id` fields for each domain using the "List all authenticated domains" endpoint. You can retrieve all of your link IDs using the "Retrieve all branded links" endpoint.
       parameters:
         - name: body
           in: body
@@ -6546,7 +6537,7 @@ paths:
         1. Check **Allow my account to send mail using this IP address**.
         1. Click **Save**.
 
-        You can retrieve all of your available IP addresses from the "#endpoint:ebQqc7eNTRxxpCy3G" endpoint.
+        You can retrieve all of your available IP addresses from the "Retrieve all IP addresses" endpoint.
       parameters:
         - name: body
           in: body
@@ -6637,10 +6628,17 @@ paths:
                 description: The name of the IP pool.
                 maxLength: 64
               ips:
-                type: array
                 description: The IP addresses that belong to this pool.
+                type: array
                 items:
                   type: string
+          examples:
+            application/json:
+              pool_name: Sample
+              ips:
+                - 192.168.1.1
+                - 192.158.1.2
+                - 192.138.2.1
         '404':
           description: ''
           schema:
@@ -6855,7 +6853,7 @@ paths:
         '400':
           description: ''
           schema:
-            $ref: '#/definitions/error_schema'
+            $ref: '#/definitions/global_error_response_schema'
           examples:
             application/json:
               errors:
@@ -7340,6 +7338,36 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/authentication::domain'
+          examples:
+            application/json:
+              id: 45373692
+              user_id: 66036447
+              subdomain: sub
+              domain: example.com
+              username: jdoe
+              ips:
+                - 127.0.0.1
+              custom_spf: false
+              default: true
+              legacy: false
+              automatic_security: true
+              valid: true
+              dns:
+                mail_cname:
+                  valid: true
+                  type: cname
+                  host: mail.example.com
+                  data: u7.wl.sendgrid.net
+                dkim1:
+                  valid: true
+                  type: cname
+                  host: s1._domainkey.example.com
+                  data: s1._domainkey.u7.wl.sendgrid.net
+                dkim2:
+                  valid: true
+                  type: cname
+                  host: s2._domainkey.example.com
+                  data: s2._domainkey.u7.wl.sendgrid.net
       security:
         - Authorization: []
     patch:
@@ -7455,7 +7483,9 @@ paths:
       description: |-
         **This endpoint allows you to retrieve the default authentication for a domain.**
 
-        TODO: Check this URL. Does it have a query param, or does the domain go in the URL path? If so, where?
+        When creating or updating a domain authentication, you can set the domain as a default. The default domain will be used to send all mail. If you have multiple authenticated domains, the authenticated domain matching the domain of the From address will be used, and the default will be overridden.
+
+        This endpoint will return a default domain and its details only if a default is set. You are not required to set a default. If you do not set a default domain, this endpoint will return general information about your domain authentication status.
       parameters:
         - name: domain
           in: query
@@ -7466,7 +7496,38 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/domain_authentication:domain_spf'
+            $ref: '#/definitions/domain-authentication-200-response'
+          examples:
+            application/json:
+              - id: 1
+                user_id: 7
+                subdomain: mail
+                domain: example.com
+                username: jane@example.com
+                ips:
+                  - 192.168.1.1
+                  - 192.168.1.2
+                custom_spf: true
+                default: true
+                legacy: false
+                automatic_security: true
+                valid: true
+                dns:
+                  mail_cname:
+                    valid: true
+                    type: cname
+                    host: mail.example.com
+                    data: u7.wl.sendgrid.net
+                  dkim1:
+                    valid: true
+                    type: cname
+                    host: s1._domainkey.example.com
+                    data: s1._domainkey.u7.wl.sendgrid.net
+                  dkim2:
+                    valid: true
+                    type: cname
+                    host: s2._domainkey.example.com
+                    data: s2._domainkey.u7.wl.sendgrid.net
       security:
         - Authorization: []
   '/whitelabel/domains/{id}/ips':
@@ -7541,10 +7602,12 @@ paths:
     parameters:
       - name: id
         in: path
+        description: ID of the domain to delete the IP from.
         required: true
-        type: string
+        type: integer
       - name: ip
         in: path
+        description: IP to remove from the domain.
         required: true
         type: string
     delete:
@@ -7552,14 +7615,7 @@ paths:
       summary: Remove an IP from an authenticated domain.
       tags:
         - Domain Authentication
-      description: |-
-        **This endpoint allows you to remove an IP address from that domain's authentication.**
-
-        ## URI Parameters
-        | URI Parameter   | Type  | Description  |
-        |---|---|---|
-        | id | integer  | ID of the domain to delete the IP from. |
-        | ip | string | IP to remove from the domain. |
+      description: '**This endpoint allows you to remove an IP address from that domain''s authentication.**'
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -7642,7 +7698,9 @@ paths:
                         type: boolean
                         description: Indicates if this DNS record is valid.
                       reason:
-                        type: string
+                        type:
+                          - string
+                          - 'null'
                         description: The reason this record is invalid.
                   dkim1:
                     type: object
@@ -7652,7 +7710,9 @@ paths:
                         type: boolean
                         description: Indicates if the DNS record is valid.
                       reason:
-                        type: 'null'
+                        type:
+                          - string
+                          - 'null'
                   dkim2:
                     type: object
                     description: A DNS record for this authenticated domain.
@@ -7661,7 +7721,9 @@ paths:
                         type: boolean
                         description: Indicates if the DNS record is valid.
                       reason:
-                        type: 'null'
+                        type:
+                          - string
+                          - 'null'
                   spf:
                     type: object
                     description: The SPF record for the authenticated domain.
@@ -7670,7 +7732,9 @@ paths:
                         type: boolean
                         description: Indicates if the SPF record is valid.
                       reason:
-                        type: 'null'
+                        type:
+                          - string
+                          - 'null'
           examples:
             application/json:
               id: 1
@@ -7768,7 +7832,7 @@ paths:
         - Authorization: []
     delete:
       operationId: DELETE_whitelabel-domains-subuser
-      summary: Disassociate a authenticated domain from a given user.
+      summary: Disassociate an authenticated domain from a given user.
       tags:
         - Domain Authentication
       description: |-
@@ -7815,7 +7879,7 @@ paths:
             required:
               - username
             example:
-              username: jane@example.com
+              username: jdoe
       responses:
         '201':
           description: ''
@@ -7919,7 +7983,7 @@ paths:
 
         This endpoint returns boolean values, `true` and `false`, for [Domain Authentication](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#domain-authentication), `domain_verified`, and [Single Sender Verification](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#single-sender-verification), `sender_verified`, for the account.
 
-        An account may have one, both, or neither verification steps completed. If you need to authenticate a domain rather than a Single Sender, see the "#endpoint:aXpkWYramCg4ZNEGT" endpoint.
+        An account may have one, both, or neither verification steps completed. If you need to authenticate a domain rather than a Single Sender, see the "Authenticate a domain" endpoint.
       responses:
         '200':
           description: ''
@@ -8260,7 +8324,7 @@ paths:
 
         Pass the `id` assigned to a Sender Identity to this endpoint to delete the Sender Identity from your account.
 
-        You can retrieve the IDs associated with Sender Identities using the #endpoint:ow3obGPTZxwZAJtkn endpoint.
+        You can retrieve the IDs associated with Sender Identities using the "Get All Verified Senders" endpoint.
       responses:
         '204':
           description: ''
@@ -8324,7 +8388,7 @@ paths:
 
         Passing the `id` assigned to a Sender Identity to this endpoint will resend a verification email to the `from_address` associated with the Sender Identity. This can be useful if someone loses their verification email or needs to have it resent for any other reason.
 
-        You can retrieve the IDs associated with Sender Identities by passing a "#endpoint:ow3obGPTZxwZAJtkn" endpoint.
+        You can retrieve the IDs associated with Sender Identities by passing a "Get All Verified Senders" endpoint.
       responses:
         '204':
           description: ''
@@ -8374,475 +8438,6 @@ paths:
               - errors
         '500':
           $ref: '#/responses/trait:globalErrors:500'
-      security:
-        - Authorization: []
-  /designs:
-    post:
-      operationId: POST-design
-      summary: Create Design
-      tags:
-        - Designs API
-      description: |-
-        **This endpoint allows you to create a new design**.
-
-        You can add a new design by passing data, including a string of HTML email content, to `/designs`. When creating designs from scratch, be aware of the styling constraints inherent to many email clients. For a list of best practices, see our guide to [Cross-Platform Email Design](https://sendgrid.com/docs/ui/sending-email/cross-platform-html-design/).
-
-        The Design Library can also convert your design’s HTML elements into drag and drop modules that are editable in the Designs Library user interface. For more, visit the [Design and Code Editor documentation](https://sendgrid.com/docs/ui/sending-email/editor/#drag--drop-markup).
-
-        Because the `/designs` endpoint makes it easy to add designs, you can create a design with your preferred tooling or migrate designs you already own without relying on the Design Library UI.
-      parameters:
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/design-input'
-            example:
-              name: 'Ahoy, World!'
-              editor: design
-              subject: Getting Started
-              html_content: |-
-                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-                <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
-                    <head>
-                      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-                      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-                      <!--[if !mso]><!-->
-                      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-                      <!--<![endif]-->
-                      <!--[if (gte mso 9)|(IE)]>
-                      <xml>
-                        <o:OfficeDocumentSettings>
-                          <o:AllowPNG/>
-                          <o:PixelsPerInch>96</o:PixelsPerInch>
-                        </o:OfficeDocumentSettings>
-                      </xml>
-                      <![endif]-->
-                      <!--[if (gte mso 9)|(IE)]>
-                  <style type="text/css">
-                    body {width: 600px;margin: 0 auto;}
-                    table {border-collapse: collapse;}
-                    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
-                    img {-ms-interpolation-mode: bicubic;}
-                  </style>
-                <![endif]-->
-                      <style type="text/css">
-                    body, p, div {
-                      font-family: arial,helvetica,sans-serif;
-                      font-size: 14px;
-                    }
-                    body {
-                      color: #000000;
-                    }
-                    body a {
-                      color: #1188E6;
-                      text-decoration: none;
-                    }
-                    p { margin: 0; padding: 0; }
-                    table.wrapper {
-                      width:100% !important;
-                      table-layout: fixed;
-                      -webkit-font-smoothing: antialiased;
-                      -webkit-text-size-adjust: 100%;
-                      -moz-text-size-adjust: 100%;
-                      -ms-text-size-adjust: 100%;
-                    }
-                    img.max-width {
-                      max-width: 100% !important;
-                    }
-                    .column.of-2 {
-                      width: 50%;
-                    }
-                    .column.of-3 {
-                      width: 33.333%;
-                    }
-                    .column.of-4 {
-                      width: 25%;
-                    }
-                    ul ul ul ul  {
-                      list-style-type: disc !important;
-                    }
-                    ol ol {
-                      list-style-type: lower-roman !important;
-                    }
-                    ol ol ol {
-                      list-style-type: lower-latin !important;
-                    }
-                    ol ol ol ol {
-                      list-style-type: decimal !important;
-                    }
-                    @media screen and (max-width:480px) {
-                      .preheader .rightColumnContent,
-                      .footer .rightColumnContent {
-                        text-align: left !important;
-                      }
-                      .preheader .rightColumnContent div,
-                      .preheader .rightColumnContent span,
-                      .footer .rightColumnContent div,
-                      .footer .rightColumnContent span {
-                        text-align: left !important;
-                      }
-                      .preheader .rightColumnContent,
-                      .preheader .leftColumnContent {
-                        font-size: 80% !important;
-                        padding: 5px 0;
-                      }
-                      table.wrapper-mobile {
-                        width: 100% !important;
-                        table-layout: fixed;
-                      }
-                      img.max-width {
-                        height: auto !important;
-                        max-width: 100% !important;
-                      }
-                      a.bulletproof-button {
-                        display: block !important;
-                        width: auto !important;
-                        font-size: 80%;
-                        padding-left: 0 !important;
-                        padding-right: 0 !important;
-                      }
-                      .columns {
-                        width: 100% !important;
-                      }
-                      .column {
-                        display: block !important;
-                        width: 100% !important;
-                        padding-left: 0 !important;
-                        padding-right: 0 !important;
-                        margin-left: 0 !important;
-                        margin-right: 0 !important;
-                      }
-                      .social-icon-column {
-                        display: inline-block !important;
-                      }
-                    }
-                  </style>
-                      <!--user entered Head Start--><!--End Head user entered-->
-                    </head>
-                    <body>
-                      <center class="wrapper" data-link-color="#1188E6" data-body-style="font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;">
-                        <div class="webkit">
-                          <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#FFFFFF">
-                            <tr>
-                              <td valign="top" bgcolor="#FFFFFF" width="100%">
-                                <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0" border="0">
-                                  <tr>
-                                    <td width="100%">
-                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                          <td>
-                                            <!--[if mso]>
-                    <center>
-                    <table><tr><td width="600">
-                  <![endif]-->
-                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px;" align="center">
-                                                      <tr>
-                                                        <td role="modules-container" style="padding:0px 0px 0px 0px; color:#000000; text-align:left;" bgcolor="#FFFFFF" width="100%" align="left"><table class="module preheader preheader-hide" role="module" data-type="preheader" border="0" cellpadding="0" cellspacing="0" width="100%" style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
-                    <tr>
-                      <td role="module-content">
-                        <p></p>
-                      </td>
-                    </tr>
-                  </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="41f90842-501c-4f08-96c9-17c0f74cb841" data-mc-module-version="2019-10-22">
-                    <tbody>
-                      <tr>
-                        <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit">Ahoy, World!</div><div></div></div></td>
-                      </tr>
-                    </tbody>
-                  </table><div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"><div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">{{Sender_Name}}</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">{{Sender_Address}}</span>, <span class="Unsubscribe--senderCity">{{Sender_City}}</span>, <span class="Unsubscribe--senderState">{{Sender_State}}</span> <span class="Unsubscribe--senderZip">{{Sender_Zip}}</span></p></div><p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="{{{unsubscribe}}}" target="_blank" style="">Unsubscribe</a> - <a href="{{{unsubscribe_preferences}}}" target="_blank" class="Unsubscribe--unsubscribePreferences" style="">Unsubscribe Preferences</a></p></div></td>
-                                                      </tr>
-                                                    </table>
-                                                    <!--[if mso]>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </center>
-                                            <![endif]-->
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      </center>
-                    </body>
-                  </html>
-              plain_content: |-
-                Ahoy, World!
-
-                {{Sender_Name}}
-
-                {{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}
-
-                Unsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )
-      responses:
-        '201':
-          description: ''
-          schema:
-            $ref: '#/definitions/design-output'
-          examples:
-            application/json:
-              id: 3247eaea-c912-42a3-b0bc-60bdaf210396
-              name: 'Ahoy, World!'
-              html_content: |-
-                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-                <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
-                    <head>
-                      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-                      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-                      <!--[if !mso]><!-->
-                      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-                      <!--<![endif]-->
-                      <!--[if (gte mso 9)|(IE)]>
-                      <xml>
-                        <o:OfficeDocumentSettings>
-                          <o:AllowPNG/>
-                          <o:PixelsPerInch>96</o:PixelsPerInch>
-                        </o:OfficeDocumentSettings>
-                      </xml>
-                      <![endif]-->
-                      <!--[if (gte mso 9)|(IE)]>
-                  <style type="text/css">
-                    body {width: 600px;margin: 0 auto;}
-                    table {border-collapse: collapse;}
-                    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
-                    img {-ms-interpolation-mode: bicubic;}
-                  </style>
-                <![endif]-->
-                      <style type="text/css">
-                    body, p, div {
-                      font-family: arial,helvetica,sans-serif;
-                      font-size: 14px;
-                    }
-                    body {
-                      color: #000000;
-                    }
-                    body a {
-                      color: #1188E6;
-                      text-decoration: none;
-                    }
-                    p { margin: 0; padding: 0; }
-                    table.wrapper {
-                      width:100% !important;
-                      table-layout: fixed;
-                      -webkit-font-smoothing: antialiased;
-                      -webkit-text-size-adjust: 100%;
-                      -moz-text-size-adjust: 100%;
-                      -ms-text-size-adjust: 100%;
-                    }
-                    img.max-width {
-                      max-width: 100% !important;
-                    }
-                    .column.of-2 {
-                      width: 50%;
-                    }
-                    .column.of-3 {
-                      width: 33.333%;
-                    }
-                    .column.of-4 {
-                      width: 25%;
-                    }
-                    ul ul ul ul  {
-                      list-style-type: disc !important;
-                    }
-                    ol ol {
-                      list-style-type: lower-roman !important;
-                    }
-                    ol ol ol {
-                      list-style-type: lower-latin !important;
-                    }
-                    ol ol ol ol {
-                      list-style-type: decimal !important;
-                    }
-                    @media screen and (max-width:480px) {
-                      .preheader .rightColumnContent,
-                      .footer .rightColumnContent {
-                        text-align: left !important;
-                      }
-                      .preheader .rightColumnContent div,
-                      .preheader .rightColumnContent span,
-                      .footer .rightColumnContent div,
-                      .footer .rightColumnContent span {
-                        text-align: left !important;
-                      }
-                      .preheader .rightColumnContent,
-                      .preheader .leftColumnContent {
-                        font-size: 80% !important;
-                        padding: 5px 0;
-                      }
-                      table.wrapper-mobile {
-                        width: 100% !important;
-                        table-layout: fixed;
-                      }
-                      img.max-width {
-                        height: auto !important;
-                        max-width: 100% !important;
-                      }
-                      a.bulletproof-button {
-                        display: block !important;
-                        width: auto !important;
-                        font-size: 80%;
-                        padding-left: 0 !important;
-                        padding-right: 0 !important;
-                      }
-                      .columns {
-                        width: 100% !important;
-                      }
-                      .column {
-                        display: block !important;
-                        width: 100% !important;
-                        padding-left: 0 !important;
-                        padding-right: 0 !important;
-                        margin-left: 0 !important;
-                        margin-right: 0 !important;
-                      }
-                      .social-icon-column {
-                        display: inline-block !important;
-                      }
-                    }
-                  </style>
-                      <!--user entered Head Start--><!--End Head user entered-->
-                    </head>
-                    <body>
-                      <center class="wrapper" data-link-color="#1188E6" data-body-style="font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;">
-                        <div class="webkit">
-                          <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#FFFFFF">
-                            <tr>
-                              <td valign="top" bgcolor="#FFFFFF" width="100%">
-                                <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0" border="0">
-                                  <tr>
-                                    <td width="100%">
-                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                          <td>
-                                            <!--[if mso]>
-                    <center>
-                    <table><tr><td width="600">
-                  <![endif]-->
-                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px;" align="center">
-                                                      <tr>
-                                                        <td role="modules-container" style="padding:0px 0px 0px 0px; color:#000000; text-align:left;" bgcolor="#FFFFFF" width="100%" align="left"><table class="module preheader preheader-hide" role="module" data-type="preheader" border="0" cellpadding="0" cellspacing="0" width="100%" style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
-                    <tr>
-                      <td role="module-content">
-                        <p></p>
-                      </td>
-                    </tr>
-                  </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="41f90842-501c-4f08-96c9-17c0f74cb841" data-mc-module-version="2019-10-22">
-                    <tbody>
-                      <tr>
-                        <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit">Ahoy, World!</div><div></div></div></td>
-                      </tr>
-                    </tbody>
-                  </table><div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"><div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">{{Sender_Name}}</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">{{Sender_Address}}</span>, <span class="Unsubscribe--senderCity">{{Sender_City}}</span>, <span class="Unsubscribe--senderState">{{Sender_State}}</span> <span class="Unsubscribe--senderZip">{{Sender_Zip}}</span></p></div><p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="{{{unsubscribe}}}" target="_blank" style="">Unsubscribe</a> - <a href="{{{unsubscribe_preferences}}}" target="_blank" class="Unsubscribe--unsubscribePreferences" style="">Unsubscribe Preferences</a></p></div></td>
-                                                      </tr>
-                                                    </table>
-                                                    <!--[if mso]>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </center>
-                                            <![endif]-->
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      </center>
-                    </body>
-                  </html>
-              plain_content: |-
-                Ahoy, World!
-
-                {{Sender_Name}}
-
-                {{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}
-
-                Unsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )
-              generate_plain_content: false
-              thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/kjlrmded0qnrscv8zqr39npoimrpdwgiax59q8iq6ovj7yoks2fzxoxpfjpwph6o.png
-              subject: Getting Started
-              created_at: '2021-04-30T18:51:20Z'
-              updated_at: '2021-04-30T18:51:20Z'
-              editor: design
-              categories: []
-        '400':
-          description: ''
-          schema:
-            $ref: '#/definitions/api-errors'
-      security:
-        - Authorization: []
-    get:
-      operationId: LIST-designs
-      summary: List Designs
-      tags:
-        - Designs API
-      description: |-
-        **This endpoint allows you to retrieve a list of designs already stored in your Design Library**.
-
-        A GET request to `/designs` will return a list of your existing designs. This endpoint will not return the pre-built Twilio SendGrid designs. Pre-built designs can be retrieved using the `/designs/pre-builts` endpoint, which is detailed below.
-
-        By default, you will receive 100 results per request; however, you can modify the number of results returned by passing an integer to the `page_size` query parameter.
-      parameters:
-        - $ref: '#/parameters/trait:designsQueryStrings:page_size'
-        - $ref: '#/parameters/trait:designsQueryStrings:page_token'
-        - $ref: '#/parameters/trait:designsQueryStrings:summary'
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: object
-            properties:
-              result:
-                type: array
-                items:
-                  $ref: '#/definitions/design-output-summary'
-              _metadata:
-                $ref: '#/definitions/_metadata'
-          examples:
-            application/json:
-              result:
-                - id: 3247eaea-c912-42a3-b0bc-60bdaf210396
-                  name: Welcome Email
-                  generate_plain_content: true
-                  thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/llny8o5b3m636z92p7hbjnmq1jvpka39p370jwtin2s1wxv7x1sgm0y5fk518d0s.png
-                  subject: Welcom to the Cake or Pie Cafe
-                  created_at: '2021-04-09T17:29:46Z'
-                  updated_at: '2021-04-09T17:29:55Z'
-                  editor: code
-                  categories:
-                    - welcome
-                    - new customer
-                - id: 02dfd792-f31f-439a-a79e-5c47fbcfdbac
-                  name: Monthly Promo
-                  generate_plain_content: true
-                  thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/hfyxahd7ues2ajuoeoqq2xe6ibdasl1q89ox0y9ncya2ftpoicssmtf9ddus4c39.png
-                  subject: Free Dozen Cupcakes
-                  created_at: '2021-04-09T17:29:21Z'
-                  updated_at: '2021-04-09T17:29:42Z'
-                  editor: design
-                  categories:
-                    - promo
-                    - coupon
-                - id: e54be823-19ef-4c6f-8b60-efd7514f492d
-                  name: 'Duplicate: Ingrid & Anders'
-                  generate_plain_content: true
-                  thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/12kni9gjpyb9uxmwr9vk7unycjr70u95zoyhe9sg2zounul2zg7dih1s20k13q2z.png
-                  subject: Welcome to Ingrid & Anders!
-                  created_at: '2020-10-09T17:33:46Z'
-                  updated_at: '2021-04-07T19:57:52Z'
-                  editor: design
-                  categories: []
-              _metadata:
-                self: 'https://api.sendgrid.com/v3/designs?page_token=vHdvHCg0w1F-TmWJcPNpTEnFY2aPEmRBHONwOgZ6TgJbX2_I'
-                count: 3
       security:
         - Authorization: []
   '/designs/{id}':
@@ -9748,6 +9343,475 @@ paths:
             $ref: '#/definitions/api-errors'
       security:
         - Authorization: []
+  /designs:
+    post:
+      operationId: POST-design
+      summary: Create Design
+      tags:
+        - Designs API
+      description: |-
+        **This endpoint allows you to create a new design**.
+
+        You can add a new design by passing data, including a string of HTML email content, to `/designs`. When creating designs from scratch, be aware of the styling constraints inherent to many email clients. For a list of best practices, see our guide to [Cross-Platform Email Design](https://sendgrid.com/docs/ui/sending-email/cross-platform-html-design/).
+
+        The Design Library can also convert your design’s HTML elements into drag and drop modules that are editable in the Designs Library user interface. For more, visit the [Design and Code Editor documentation](https://sendgrid.com/docs/ui/sending-email/editor/#drag--drop-markup).
+
+        Because the `/designs` endpoint makes it easy to add designs, you can create a design with your preferred tooling or migrate designs you already own without relying on the Design Library UI.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/design-input'
+            example:
+              name: 'Ahoy, World!'
+              editor: design
+              subject: Getting Started
+              html_content: |-
+                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
+                    <head>
+                      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+                      <!--[if !mso]><!-->
+                      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+                      <!--<![endif]-->
+                      <!--[if (gte mso 9)|(IE)]>
+                      <xml>
+                        <o:OfficeDocumentSettings>
+                          <o:AllowPNG/>
+                          <o:PixelsPerInch>96</o:PixelsPerInch>
+                        </o:OfficeDocumentSettings>
+                      </xml>
+                      <![endif]-->
+                      <!--[if (gte mso 9)|(IE)]>
+                  <style type="text/css">
+                    body {width: 600px;margin: 0 auto;}
+                    table {border-collapse: collapse;}
+                    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+                    img {-ms-interpolation-mode: bicubic;}
+                  </style>
+                <![endif]-->
+                      <style type="text/css">
+                    body, p, div {
+                      font-family: arial,helvetica,sans-serif;
+                      font-size: 14px;
+                    }
+                    body {
+                      color: #000000;
+                    }
+                    body a {
+                      color: #1188E6;
+                      text-decoration: none;
+                    }
+                    p { margin: 0; padding: 0; }
+                    table.wrapper {
+                      width:100% !important;
+                      table-layout: fixed;
+                      -webkit-font-smoothing: antialiased;
+                      -webkit-text-size-adjust: 100%;
+                      -moz-text-size-adjust: 100%;
+                      -ms-text-size-adjust: 100%;
+                    }
+                    img.max-width {
+                      max-width: 100% !important;
+                    }
+                    .column.of-2 {
+                      width: 50%;
+                    }
+                    .column.of-3 {
+                      width: 33.333%;
+                    }
+                    .column.of-4 {
+                      width: 25%;
+                    }
+                    ul ul ul ul  {
+                      list-style-type: disc !important;
+                    }
+                    ol ol {
+                      list-style-type: lower-roman !important;
+                    }
+                    ol ol ol {
+                      list-style-type: lower-latin !important;
+                    }
+                    ol ol ol ol {
+                      list-style-type: decimal !important;
+                    }
+                    @media screen and (max-width:480px) {
+                      .preheader .rightColumnContent,
+                      .footer .rightColumnContent {
+                        text-align: left !important;
+                      }
+                      .preheader .rightColumnContent div,
+                      .preheader .rightColumnContent span,
+                      .footer .rightColumnContent div,
+                      .footer .rightColumnContent span {
+                        text-align: left !important;
+                      }
+                      .preheader .rightColumnContent,
+                      .preheader .leftColumnContent {
+                        font-size: 80% !important;
+                        padding: 5px 0;
+                      }
+                      table.wrapper-mobile {
+                        width: 100% !important;
+                        table-layout: fixed;
+                      }
+                      img.max-width {
+                        height: auto !important;
+                        max-width: 100% !important;
+                      }
+                      a.bulletproof-button {
+                        display: block !important;
+                        width: auto !important;
+                        font-size: 80%;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                      }
+                      .columns {
+                        width: 100% !important;
+                      }
+                      .column {
+                        display: block !important;
+                        width: 100% !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                      }
+                      .social-icon-column {
+                        display: inline-block !important;
+                      }
+                    }
+                  </style>
+                      <!--user entered Head Start--><!--End Head user entered-->
+                    </head>
+                    <body>
+                      <center class="wrapper" data-link-color="#1188E6" data-body-style="font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;">
+                        <div class="webkit">
+                          <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#FFFFFF">
+                            <tr>
+                              <td valign="top" bgcolor="#FFFFFF" width="100%">
+                                <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0" border="0">
+                                  <tr>
+                                    <td width="100%">
+                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                          <td>
+                                            <!--[if mso]>
+                    <center>
+                    <table><tr><td width="600">
+                  <![endif]-->
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px;" align="center">
+                                                      <tr>
+                                                        <td role="modules-container" style="padding:0px 0px 0px 0px; color:#000000; text-align:left;" bgcolor="#FFFFFF" width="100%" align="left"><table class="module preheader preheader-hide" role="module" data-type="preheader" border="0" cellpadding="0" cellspacing="0" width="100%" style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+                    <tr>
+                      <td role="module-content">
+                        <p></p>
+                      </td>
+                    </tr>
+                  </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="41f90842-501c-4f08-96c9-17c0f74cb841" data-mc-module-version="2019-10-22">
+                    <tbody>
+                      <tr>
+                        <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit">Ahoy, World!</div><div></div></div></td>
+                      </tr>
+                    </tbody>
+                  </table><div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"><div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">{{Sender_Name}}</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">{{Sender_Address}}</span>, <span class="Unsubscribe--senderCity">{{Sender_City}}</span>, <span class="Unsubscribe--senderState">{{Sender_State}}</span> <span class="Unsubscribe--senderZip">{{Sender_Zip}}</span></p></div><p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="{{{unsubscribe}}}" target="_blank" style="">Unsubscribe</a> - <a href="{{{unsubscribe_preferences}}}" target="_blank" class="Unsubscribe--unsubscribePreferences" style="">Unsubscribe Preferences</a></p></div></td>
+                                                      </tr>
+                                                    </table>
+                                                    <!--[if mso]>
+                                                  </td>
+                                                </tr>
+                                              </table>
+                                            </center>
+                                            <![endif]-->
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </center>
+                    </body>
+                  </html>
+              plain_content: |-
+                Ahoy, World!
+
+                {{Sender_Name}}
+
+                {{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}
+
+                Unsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/design-output'
+          examples:
+            application/json:
+              id: 3247eaea-c912-42a3-b0bc-60bdaf210396
+              name: 'Ahoy, World!'
+              html_content: |-
+                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
+                    <head>
+                      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+                      <!--[if !mso]><!-->
+                      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+                      <!--<![endif]-->
+                      <!--[if (gte mso 9)|(IE)]>
+                      <xml>
+                        <o:OfficeDocumentSettings>
+                          <o:AllowPNG/>
+                          <o:PixelsPerInch>96</o:PixelsPerInch>
+                        </o:OfficeDocumentSettings>
+                      </xml>
+                      <![endif]-->
+                      <!--[if (gte mso 9)|(IE)]>
+                  <style type="text/css">
+                    body {width: 600px;margin: 0 auto;}
+                    table {border-collapse: collapse;}
+                    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+                    img {-ms-interpolation-mode: bicubic;}
+                  </style>
+                <![endif]-->
+                      <style type="text/css">
+                    body, p, div {
+                      font-family: arial,helvetica,sans-serif;
+                      font-size: 14px;
+                    }
+                    body {
+                      color: #000000;
+                    }
+                    body a {
+                      color: #1188E6;
+                      text-decoration: none;
+                    }
+                    p { margin: 0; padding: 0; }
+                    table.wrapper {
+                      width:100% !important;
+                      table-layout: fixed;
+                      -webkit-font-smoothing: antialiased;
+                      -webkit-text-size-adjust: 100%;
+                      -moz-text-size-adjust: 100%;
+                      -ms-text-size-adjust: 100%;
+                    }
+                    img.max-width {
+                      max-width: 100% !important;
+                    }
+                    .column.of-2 {
+                      width: 50%;
+                    }
+                    .column.of-3 {
+                      width: 33.333%;
+                    }
+                    .column.of-4 {
+                      width: 25%;
+                    }
+                    ul ul ul ul  {
+                      list-style-type: disc !important;
+                    }
+                    ol ol {
+                      list-style-type: lower-roman !important;
+                    }
+                    ol ol ol {
+                      list-style-type: lower-latin !important;
+                    }
+                    ol ol ol ol {
+                      list-style-type: decimal !important;
+                    }
+                    @media screen and (max-width:480px) {
+                      .preheader .rightColumnContent,
+                      .footer .rightColumnContent {
+                        text-align: left !important;
+                      }
+                      .preheader .rightColumnContent div,
+                      .preheader .rightColumnContent span,
+                      .footer .rightColumnContent div,
+                      .footer .rightColumnContent span {
+                        text-align: left !important;
+                      }
+                      .preheader .rightColumnContent,
+                      .preheader .leftColumnContent {
+                        font-size: 80% !important;
+                        padding: 5px 0;
+                      }
+                      table.wrapper-mobile {
+                        width: 100% !important;
+                        table-layout: fixed;
+                      }
+                      img.max-width {
+                        height: auto !important;
+                        max-width: 100% !important;
+                      }
+                      a.bulletproof-button {
+                        display: block !important;
+                        width: auto !important;
+                        font-size: 80%;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                      }
+                      .columns {
+                        width: 100% !important;
+                      }
+                      .column {
+                        display: block !important;
+                        width: 100% !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                      }
+                      .social-icon-column {
+                        display: inline-block !important;
+                      }
+                    }
+                  </style>
+                      <!--user entered Head Start--><!--End Head user entered-->
+                    </head>
+                    <body>
+                      <center class="wrapper" data-link-color="#1188E6" data-body-style="font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;">
+                        <div class="webkit">
+                          <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#FFFFFF">
+                            <tr>
+                              <td valign="top" bgcolor="#FFFFFF" width="100%">
+                                <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0" border="0">
+                                  <tr>
+                                    <td width="100%">
+                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                          <td>
+                                            <!--[if mso]>
+                    <center>
+                    <table><tr><td width="600">
+                  <![endif]-->
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px;" align="center">
+                                                      <tr>
+                                                        <td role="modules-container" style="padding:0px 0px 0px 0px; color:#000000; text-align:left;" bgcolor="#FFFFFF" width="100%" align="left"><table class="module preheader preheader-hide" role="module" data-type="preheader" border="0" cellpadding="0" cellspacing="0" width="100%" style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+                    <tr>
+                      <td role="module-content">
+                        <p></p>
+                      </td>
+                    </tr>
+                  </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="41f90842-501c-4f08-96c9-17c0f74cb841" data-mc-module-version="2019-10-22">
+                    <tbody>
+                      <tr>
+                        <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit">Ahoy, World!</div><div></div></div></td>
+                      </tr>
+                    </tbody>
+                  </table><div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"><div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">{{Sender_Name}}</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">{{Sender_Address}}</span>, <span class="Unsubscribe--senderCity">{{Sender_City}}</span>, <span class="Unsubscribe--senderState">{{Sender_State}}</span> <span class="Unsubscribe--senderZip">{{Sender_Zip}}</span></p></div><p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="{{{unsubscribe}}}" target="_blank" style="">Unsubscribe</a> - <a href="{{{unsubscribe_preferences}}}" target="_blank" class="Unsubscribe--unsubscribePreferences" style="">Unsubscribe Preferences</a></p></div></td>
+                                                      </tr>
+                                                    </table>
+                                                    <!--[if mso]>
+                                                  </td>
+                                                </tr>
+                                              </table>
+                                            </center>
+                                            <![endif]-->
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </center>
+                    </body>
+                  </html>
+              plain_content: |-
+                Ahoy, World!
+
+                {{Sender_Name}}
+
+                {{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}
+
+                Unsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )
+              generate_plain_content: false
+              thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/kjlrmded0qnrscv8zqr39npoimrpdwgiax59q8iq6ovj7yoks2fzxoxpfjpwph6o.png
+              subject: Getting Started
+              created_at: '2021-04-30T18:51:20Z'
+              updated_at: '2021-04-30T18:51:20Z'
+              editor: design
+              categories: []
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/api-errors'
+      security:
+        - Authorization: []
+    get:
+      operationId: LIST-designs
+      summary: List Designs
+      tags:
+        - Designs API
+      description: |-
+        **This endpoint allows you to retrieve a list of designs already stored in your Design Library**.
+
+        A GET request to `/designs` will return a list of your existing designs. This endpoint will not return the pre-built Twilio SendGrid designs. Pre-built designs can be retrieved using the `/designs/pre-builts` endpoint, which is detailed below.
+
+        By default, you will receive 100 results per request; however, you can modify the number of results returned by passing an integer to the `page_size` query parameter.
+      parameters:
+        - $ref: '#/parameters/trait:designsQueryStrings:page_size'
+        - $ref: '#/parameters/trait:designsQueryStrings:page_token'
+        - $ref: '#/parameters/trait:designsQueryStrings:summary'
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              result:
+                type: array
+                items:
+                  $ref: '#/definitions/design-output-summary'
+              _metadata:
+                $ref: '#/definitions/_metadata'
+          examples:
+            application/json:
+              result:
+                - id: 3247eaea-c912-42a3-b0bc-60bdaf210396
+                  name: Welcome Email
+                  generate_plain_content: true
+                  thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/llny8o5b3m636z92p7hbjnmq1jvpka39p370jwtin2s1wxv7x1sgm0y5fk518d0s.png
+                  subject: Welcom to the Cake or Pie Cafe
+                  created_at: '2021-04-09T17:29:46Z'
+                  updated_at: '2021-04-09T17:29:55Z'
+                  editor: code
+                  categories:
+                    - welcome
+                    - new customer
+                - id: 02dfd792-f31f-439a-a79e-5c47fbcfdbac
+                  name: Monthly Promo
+                  generate_plain_content: true
+                  thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/hfyxahd7ues2ajuoeoqq2xe6ibdasl1q89ox0y9ncya2ftpoicssmtf9ddus4c39.png
+                  subject: Free Dozen Cupcakes
+                  created_at: '2021-04-09T17:29:21Z'
+                  updated_at: '2021-04-09T17:29:42Z'
+                  editor: design
+                  categories:
+                    - promo
+                    - coupon
+                - id: e54be823-19ef-4c6f-8b60-efd7514f492d
+                  name: 'Duplicate: Ingrid & Anders'
+                  generate_plain_content: true
+                  thumbnail_url: //us-east-2-production-thumbnail-bucket.s3.amazonaws.com/12kni9gjpyb9uxmwr9vk7unycjr70u95zoyhe9sg2zounul2zg7dih1s20k13q2z.png
+                  subject: Welcome to Ingrid & Anders!
+                  created_at: '2020-10-09T17:33:46Z'
+                  updated_at: '2021-04-07T19:57:52Z'
+                  editor: design
+                  categories: []
+              _metadata:
+                self: 'https://api.sendgrid.com/v3/designs?page_token=vHdvHCg0w1F-TmWJcPNpTEnFY2aPEmRBHONwOgZ6TgJbX2_I'
+                count: 3
+      security:
+        - Authorization: []
   '/designs/pre-builts/{id}':
     parameters:
       - name: id
@@ -9764,7 +9828,7 @@ paths:
       description: |-
         **This endpoint allows you to duplicate one of the pre-built Twilio SendGrid designs**.
 
-        Like duplicating one of your existing designs, you are not required to pass any data in the body of a request to this endpoint. If you choose to leave the `name` field blank, your duplicate will be assigned the name of the design it was copied from with the text "Duplicate: " prepended to it. This name change is only a convenience, as the duplicate design will be assigned a unique ID that differentiates it from your other designs. You can retrieve the IDs for Twilio SendGrid pre-built designs using the #endpoint:onypXY6DEQabeqdF7 endpoint.
+        Like duplicating one of your existing designs, you are not required to pass any data in the body of a request to this endpoint. If you choose to leave the `name` field blank, your duplicate will be assigned the name of the design it was copied from with the text "Duplicate: " prepended to it. This name change is only a convenience, as the duplicate design will be assigned a unique ID that differentiates it from your other designs. You can retrieve the IDs for Twilio SendGrid pre-built designs using the "List SendGrid Pre-built Designs" endpoint.
 
         You can modify your duplicate’s name at the time of creation by passing an updated value to the `name` field when making the initial request.
         More on retrieving design IDs can be found above.
@@ -10430,15 +10494,15 @@ paths:
       description: |-
         **This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. 
 
-        Because the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to confirm your contacts have been updated or added, you can use the #endpoint:oNz2fgJriXmSkdyEe endpoint.
+        Because the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to get the resulting contact's ID or confirm your contacts have been updated or added, you can use the "Get Contacts by Emails" endpoint. 
 
-        Please note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the #endpoint:oC6DjiarRqXQu5kTm endpoint.
+        Please note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the "Create Custom Field Definition" endpoint.
 
-        You will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the #endpoint:m5WnoiseMvTXuNwZt endpoint.
+        You will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the "Import Contacts Status" endpoint.
 
-        The email field is case sensitive. If you add an email with capital letters then try to use the #endpoint:oNz2fgJriXmSkdyEe endpoint, you will need to apply the same case you used when updating or adding the contact.
+        If the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. The contact to update will be determined only by the `email` field and any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.
 
-        If the contact already exists in the system, any entries you submit via this endpoint will update the existing contact.
+        The email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.
       parameters:
         - name: body
           in: body
@@ -10468,7 +10532,7 @@ paths:
             properties:
               job_id:
                 type: string
-                description: 'Indicates that the contacts are queued for processing. Check the job status with the #endpoint:m5WnoiseMvTXuNwZt endpoint.'
+                description: Indicates that the contacts are queued for processing. Check the job status with the "Import Contacts Status" endpoint.
         '400':
           description: ''
           schema:
@@ -10650,7 +10714,7 @@ paths:
 
         If you would just like to have a link to the exported list sent to your email set the `notifications.email` option to `true` in the `POST` payload.
 
-        If you would like to download the list, take the `id` that is returned and use the #endpoint:TrwE7WeCWP8hEbYis endpoint to get the `urls`. Once you have the list of URLs, make a `GET` request to each URL provided to download your CSV file(s).
+        If you would like to download the list, take the `id` that is returned and use the "Export Contacts Status" endpoint to get the `urls`. Once you have the list of URLs, make a `GET` request to each URL provided to download your CSV file(s).
 
         You specify the segements and or/contact lists you wish to export by providing the relevant IDs in, respectively, the `segment_ids` and `list_ids` fields in the request body.
 
@@ -10734,7 +10798,7 @@ paths:
 
         Each object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files — there will be more than one if you specified a maximum file size in your initial export request.
 
-        Use this endpoint if you have exports in flight but do not know their IDs, which are required for #endpoint:TrwE7WeCWP8hEbYis.
+        Use this endpoint if you have exports in flight but do not know their IDs, which are required for the "Export Contacts Status" endpoint.
       responses:
         '200':
           description: ''
@@ -10849,7 +10913,10 @@ paths:
       summary: Get a Contact by ID
       tags:
         - Contacts
-      description: '**This endpoint returns the full details and all fields for the specified contact**.'
+      description: |-
+        **This endpoint returns the full details and all fields for the specified contact**.
+
+        The "Get Contacts by Emails" endpoint can be used to get the ID of a contact.
       responses:
         '200':
           description: ''
@@ -10875,6 +10942,8 @@ paths:
         **Use this endpoint to locate contacts**.
 
         The request body's `query` field accepts valid [SGQL](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) for searching for a contact.
+
+        Because contact emails are stored in lower case, using SGQL to search by email address requires the provided email address to be in lower case. The SGQL `lower()` function can be used for this.
 
         Only the first 50 contacts that meet the search criteria will be returned.
 
@@ -10964,13 +11033,13 @@ paths:
 
         The `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. 
 
-        For example, if `field_mappings` is set to `[null, "w1", "_rf1"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See #endpoint:ShdXXCcwwTE39zYAT to fetch your custom and reserved field IDs to use with `field_mappings`.
+        For example, if `field_mappings` is set to `[null, "w1", "_rf1"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the "Get All Field Definitions" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.
 
         Once you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:
 
         `curl --upload-file "file/path.csv" "URL_GIVEN" -H 'HEADER_GIVEN'`
 
-        If you'd like to monitor the status of your import job, use the `job_id` and the #endpoint:m5WnoiseMvTXuNwZt endpoint.
+        If you'd like to monitor the status of your import job, use the `job_id` and the "Import Contacts Status" endpoint.
       parameters:
         - name: body
           in: body
@@ -11028,7 +11097,6 @@ paths:
           description: ''
           schema:
             type: object
-            uniqueItems: true
             properties:
               errors:
                 type: array
@@ -11046,7 +11114,6 @@ paths:
           schema:
             type: object
             description: If any of the specified lists do not exist.
-            uniqueItems: true
             properties:
               errors:
                 type: array
@@ -11073,7 +11140,7 @@ paths:
       description: |-
         **This endpoint can be used to check the status of a contact import job**. 
 
-        Use the `job_id` from the #endpoint:LPe3yJSpmGyv39oTa, #endpoint:rAGcTKvL5Q3XQd8Xp, or #endpoint:oazoY5DJsLqGMPfNY as the `id` in the path parameter.
+        Use the `job_id` from the "Improt Contacts," "Add or Update a Contact," or "Delete Contacts" endpoints as the `id` in the path parameter.
 
         If there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.
 
@@ -11118,9 +11185,9 @@ paths:
       description: |-
         **This endpoint can be used to check the status of a contact export job**. 
 
-        To use this call, you will need the `id` from the #endpoint:aQ42cqyfw3XHCMdfY call.
+        To use this call, you will need the `id` from the "Export Contacts" call.
 
-        If you would like to download a list, take the `id` that is returned from #endpoint:aQ42cqyfw3XHCMdfY and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).
+        If you would like to download a list, take the `id` that is returned from the "Export Contacts" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).
       responses:
         '200':
           description: ''
@@ -11154,7 +11221,7 @@ paths:
       description: |-
         **This endpoint is used to retrieve a set of contacts identified by their IDs.**
 
-        This can be more efficient endpoint to get contacts than making a series of individual `GET` requests to #endpoint:f8xTRGmJGQ5bsgGaR.
+        This can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the "Get a Contact by ID" endpoint.
 
         You can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.
       parameters:
@@ -11165,12 +11232,16 @@ paths:
             description: Array of IDs
             properties:
               ids:
-                maxLength: 100
+                maxItems: 100
                 type: array
                 items:
                   type: string
             required:
               - ids
+            example:
+              ids:
+                - '1234'
+                - '1235'
       responses:
         '200':
           description: ''
@@ -11202,11 +11273,11 @@ paths:
 
         Email addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.
 
-        Email addresses are not case sensitive, and returned email addresses will be all lower case. Empty strings are excluded from the search and will not be returned.
+        Email addresses in the search request do not need to match the case in which they're stored, but the email addresses in the result will be all lower case. Empty strings are excluded from the search and will not be returned.
 
-        This endpoint should be used in place of the #endpoint:5oj27hT9p3TLXNBJP endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.
+        This endpoint should be used in place of the "Search Contacts" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.
 
-        If you need to access a large percentage of your contacts, we recommend exporting your contacts with the #endpoint:aQ42cqyfw3XHCMdfY endpoint and filtering the results client side.
+        If you need to access a large percentage of your contacts, we recommend exporting your contacts with the "Export Contacts" endpoint and filtering the results client side.
 
         This endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. 
 
@@ -11331,6 +11402,169 @@ paths:
                   properties:
                     message:
                       type: string
+      security:
+        - Authorization: []
+  /segments/2.0:
+    post:
+      operationId: POST_segments
+      summary: Create Segment
+      tags:
+        - Segmenting Contacts V2 - Beta
+      description: |-
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+
+        Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/segment_write_v2'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/segment_response'
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+        '404':
+          description: ''
+        '429':
+          description: ''
+        '500':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+      security:
+        - Authorization: []
+    get:
+      operationId: GET_segments
+      summary: Get List of Segments
+      tags:
+        - Segmenting Contacts V2 - Beta
+      description: |-
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+
+        The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.
+
+        `parent_list_ids` | `no_parent_list_id` | `result`
+        -----------------:|:--------------------:|:-------------
+        empty | false | all segments
+        values | false | segments filtered by list_ids
+        values | true | segments filtered by list_ids and segments with no parent list_ids
+        empty | true | segments with no parent list_ids
+      parameters:
+        - name: parent_list_ids
+          in: query
+          description: 'A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.'
+          required: false
+          type: string
+        - name: no_parent_list_id
+          in: query
+          description: If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
+          required: false
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/all_segments_response'
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+        '404':
+          description: ''
+        '500':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+      security:
+        - Authorization: []
+  '/segments/2.0/{segment_id}':
+    parameters:
+      - name: segment_id
+        in: path
+        required: true
+        type: string
+    patch:
+      operationId: PATCH_segments-segment_id
+      summary: Update Segment
+      tags:
+        - Segmenting Contacts V2 - Beta
+      description: |-
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+
+        Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/segment_update'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/segment_response'
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+        '429':
+          description: ''
+        '500':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+      security:
+        - Authorization: []
+    get:
+      operationId: GET_segments-segment_id
+      summary: Get Segment by ID
+      tags:
+        - Segmenting Contacts V2 - Beta
+      description: '**The Segmentation V2 API is currently in private beta. If you''d like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**'
+      parameters:
+        - name: contacts_sample
+          in: query
+          description: Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/segment_response'
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+        '500':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+      security:
+        - Authorization: []
+    delete:
+      operationId: DELETE_segments-segment_id
+      summary: Delete segment
+      tags:
+        - Segmenting Contacts V2 - Beta
+      description: '**The Segmentation V2 API is currently in private beta. If you''d like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**'
+      responses:
+        '202':
+          description: ''
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
+        '404':
+          description: ''
+        '500':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors-seg-v2'
       security:
         - Authorization: []
   /marketing/senders:
@@ -11800,7 +12034,6 @@ paths:
           description: ''
           schema:
             type: object
-            uniqueItems: true
             properties:
               errors:
                 type: array
@@ -11822,12 +12055,11 @@ paths:
           description: ''
           schema:
             type: object
-            uniqueItems: true
+            minProperties: 0
+            maxProperties: 120
             properties:
               custom_fields:
                 type: array
-                minitems: 0
-                manitems: 120
                 items:
                   $ref: '#/definitions/custom_field_definitions_response'
               reserved_fields:
@@ -11982,7 +12214,6 @@ paths:
           description: ''
           schema:
             type: object
-            uniqueItems: true
             properties:
               errors:
                 type: array
@@ -11995,7 +12226,6 @@ paths:
           description: ''
           schema:
             type: object
-            uniqueItems: true
             properties:
               errors:
                 type: array
@@ -12045,7 +12275,7 @@ paths:
           in: body
           schema:
             allOf:
-              - $ref: '#/definitions/segment_write'
+              - $ref: '#/definitions/segment_write_v2'
               - type: object
                 properties:
                   parent_list_id:
@@ -12316,7 +12546,7 @@ paths:
         - name: body
           in: body
           schema:
-            $ref: '#/definitions/segment_write'
+            $ref: '#/definitions/segment_write_v2'
       responses:
         '200':
           description: ''
@@ -12478,7 +12708,7 @@ paths:
         '400':
           description: ''
           schema:
-            $ref: '#/definitions/error_schema'
+            $ref: '#/definitions/global_error_response_schema'
         '401':
           $ref: '#/responses/trait:globalErrors:401'
         '403':
@@ -13157,7 +13387,7 @@ paths:
             required:
               - send_at
             example:
-              send_at: now
+              send_at: '3752-01-28T23:21:52.575Z'
       responses:
         '201':
           description: ''
@@ -13166,6 +13396,7 @@ paths:
             properties:
               send_at:
                 type: string
+                description: ''
                 format: date-time
               status:
                 type: string
@@ -13173,7 +13404,7 @@ paths:
                   - scheduled
           examples:
             application/json:
-              send_at: now
+              send_at: '3752-01-28T23:21:52.575Z'
               status: scheduled
         '404':
           description: ''
@@ -13358,7 +13589,16 @@ paths:
             required:
               - template_id
               - emails
-            example: '{"template_id":"f8f77db8-b9fa-4b3c-9ee8-de3d582016b8","version_id_override":"","sender_id":6060664,"custom_unsubscribe_url":"esse Excepteur ","suppression_group_id":21865513,"emails":["janedoe@example.com","tiramisu@example.com","bundt@example.com"}'
+            example:
+              template_id: f8f77db8-b9fa-4b3c-9ee8-de3d582016b8
+              version_id_override: 7734f757-8eb8-4d22-b7f0-779a72f32986
+              sender_id: 6060664
+              custom_unsubscribe_url: 'https://example.com/unsubscribe'
+              suppression_group_id: 21865513
+              emails:
+                - janedoe@example.com
+                - tiramisu@example.com
+                - bundt@example.com
       responses:
         '202':
           description: ''
@@ -13401,7 +13641,7 @@ paths:
         '400':
           description: ''
           schema:
-            $ref: '#/definitions/error_schema'
+            $ref: '#/definitions/global_error_response_schema'
       security:
         - Authorization: []
   '/marketing/stats/automations/{id}':
@@ -13418,7 +13658,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve stats for a single Automation using its ID.**
 
-        Multiple Automation IDs can be retrieved using the #endpoint:tMC3DWPZFRZKCx45d endpoint. Once you have an ID, this endpoint will return detailed stats for the single automation specified.
+        Multiple Automation IDs can be retrieved using the "Get All Automation Stats" endpoint. Once you have an ID, this endpoint will return detailed stats for the single automation specified.
 
         You may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.
       parameters:
@@ -13489,7 +13729,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve stats for an individual Single Send using a Single Send ID.**
 
-        Multiple Single Send IDs can be retrieved using the #endpoint:CkrCH9JrWPiySTTuu endpoint. Once you have an ID, this endpoint will return detailed stats for the Single Send specified.
+        Multiple Single Send IDs can be retrieved using the "Get All Single Sends Stats" endpoint. Once you have an ID, this endpoint will return detailed stats for the Single Send specified.
 
         You may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.
       parameters:
@@ -13546,6 +13786,8 @@ paths:
           $ref: '#/responses/trait:errorResponse:400'
         '404':
           description: ''
+          schema:
+            $ref: '#/definitions/global_error_response_schema'
       security:
         - Authorization: []
   '/marketing/stats/singlesends/{id}/links':
@@ -13656,6 +13898,8 @@ paths:
             description: CSV data
         '400':
           description: ''
+          schema:
+            $ref: '#/definitions/global_error_response_schema'
       security:
         - Authorization: []
   /senders:
@@ -13667,63 +13911,28 @@ paths:
       description: |-
         **This endpoint allows you to create a new sender identity.**
 
-        *You may create up to 100 unique sender identities.*
-
-        Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+        You may create up to 100 unique sender identities.
       parameters:
         - name: body
           in: body
           schema:
-            type: object
-            properties:
-              nickname:
-                type: string
-                description: A nickname for the sender identity. Not used for sending.
-              from:
-                type: object
+            allOf:
+              - $ref: '#/definitions/sender-id-request'
+              - type: object
                 properties:
-                  email:
-                    type: string
-                    description: This is where the email will appear to originate from for your recipient
-                  name:
-                    type: string
-                    description: This is the name appended to the from email field. IE - Your name or company name.
+                  from:
+                    type: object
+                    required:
+                      - email
+                  reply_to:
+                    type: object
+                    required:
+                      - email
                 required:
-                  - email
-              reply_to:
-                type: object
-                properties:
-                  email:
-                    type: string
-                    description: This is the email that your recipient will reply to.
-                  name:
-                    type: string
-                    description: This is the name appended to the reply to email field. IE - Your name or company name.
-                required:
-                  - email
-              address:
-                type: string
-                description: The physical address of the sender identity.
-              address_2:
-                type: string
-                description: Additional sender identity address information.
-              city:
-                type: string
-                description: The city of the sender identity.
-              state:
-                type: string
-                description: The state of the sender identity.
-              zip:
-                type: string
-                description: The zipcode of the sender identity.
-              country:
-                type: string
-                description: The country of the sender identity.
-            required:
-              - nickname
-              - address
-              - city
-              - country
+                  - nickname
+                  - address
+                  - city
+                  - country
             example:
               nickname: My Sender ID
               from:
@@ -13812,10 +14021,7 @@ paths:
       summary: Get all Sender Identities
       tags:
         - Sender Identities API
-      description: |-
-        **This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**
-
-        Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      description: '**This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**'
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -13855,9 +14061,63 @@ paths:
     parameters:
       - name: sender_id
         in: path
-        description: The ID of the sender identity that you want to update.
+        description: The ID of the sender identity that you want to retrieve.
         required: true
         type: integer
+    get:
+      operationId: GET_v3-senders-sender_id
+      summary: View a Sender Identity
+      tags:
+        - Sender Identities API
+      description: '**This endpoint allows you to retrieve a specific sender identity.**'
+      parameters:
+        - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/senderID'
+          examples:
+            application/json:
+              id: 1
+              nickname: My Sender ID
+              from:
+                email: from@example.com
+                name: Example INC
+              reply_to:
+                email: replyto@example.com
+                name: Example INC
+              address: 123 Elm St.
+              address_2: Apt. 456
+              city: Denver
+              state: Colorado
+              zip: '80202'
+              country: United States
+              verified: true
+              updated_at: 1449872165
+              created_at: 1449872165
+              locked: false
+        '404':
+          description: ''
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    field:
+                      type: string
+          examples:
+            application/json:
+              errors:
+                - message: resource not found
+                  field: id
+      security:
+        - Authorization: []
     patch:
       operationId: PATCH_v3-senders-sender_id
       summary: Update a Sender Identity
@@ -13866,54 +14126,14 @@ paths:
       description: |-
         **This endpoint allows you to update a sender identity.**
 
-        Updates to `from.email` require re-verification. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+        Updates to `from.email` require re-verification.
 
         Partial updates are allowed, but fields that are marked as "required" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.
       parameters:
         - name: body
           in: body
           schema:
-            type: object
-            properties:
-              nickname:
-                type: string
-                description: A nickname for the sender identity. Not used for sending.
-              from:
-                type: object
-                properties:
-                  email:
-                    type: string
-                    description: This is where the email will appear to originate from for your recipient
-                  name:
-                    type: string
-                    description: This is the name appended to the from email field. IE - Your name or company name.
-              reply_to:
-                type: object
-                properties:
-                  email:
-                    type: string
-                    description: This is the email that your recipient will reply to.
-                  name:
-                    type: string
-                    description: This is the name appended to the reply to email field. IE - Your name or company name.
-              address:
-                type: string
-                description: The physical address of the sender identity.
-              address_2:
-                type: string
-                description: Additional sender identity address information.
-              city:
-                type: string
-                description: The city of the sender identity.
-              state:
-                type: string
-                description: The state of the sender identity.
-              zip:
-                type: string
-                description: The zipcode of the sender identity.
-              country:
-                type: string
-                description: The country of the sender identity.
+            $ref: '#/definitions/sender-id-request'
             example:
               nickname: My Sender ID
               from:
@@ -14038,10 +14258,7 @@ paths:
       summary: Delete a Sender Identity
       tags:
         - Sender Identities API
-      description: |-
-        **This endoint allows you to delete one of your sender identities.**
-
-        Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      description: '**This endoint allows you to delete one of your sender identities.**'
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -14090,63 +14307,6 @@ paths:
                   field: id
       security:
         - Authorization: []
-    get:
-      operationId: GET_v3-senders-sender_id
-      summary: View a Sender Identity
-      tags:
-        - Sender Identities API
-      description: |-
-        **This endpoint allows you to retrieve a specific sender identity.**
-
-        Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
-      parameters:
-        - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/senderID'
-          examples:
-            application/json:
-              id: 1
-              nickname: My Sender ID
-              from:
-                email: from@example.com
-                name: Example INC
-              reply_to:
-                email: replyto@example.com
-                name: Example INC
-              address: 123 Elm St.
-              address_2: Apt. 456
-              city: Denver
-              state: Colorado
-              zip: '80202'
-              country: United States
-              verified: true
-              updated_at: 1449872165
-              created_at: 1449872165
-              locked: false
-        '404':
-          description: ''
-          schema:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                    field:
-                      type: string
-          examples:
-            application/json:
-              errors:
-                - message: resource not found
-                  field: id
-      security:
-        - Authorization: []
   '/senders/{sender_id}/resend_verification':
     parameters:
       - name: sender_id
@@ -14159,10 +14319,7 @@ paths:
       summary: Resend Sender Identity Verification
       tags:
         - Sender Identities API
-      description: |-
-        **This enpdoint allows you to resend a sender identity verification email.**
-
-        Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      description: '**This enpdoint allows you to resend a sender identity verification email.**'
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -14643,7 +14800,7 @@ paths:
           schema:
             type: array
             items:
-              type: string
+              type: integer
             example:
               - recipient_id1
               - recipient_id2
@@ -15580,14 +15737,7 @@ paths:
         '201':
           description: ''
           schema:
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              type:
-                type: string
+            $ref: '#/definitions/contactdb_custom_field_with_id'
           examples:
             application/json:
               id: 1
@@ -15599,7 +15749,7 @@ paths:
             "type" : "Returned if custom field type is invalid or not provided"
             "name" : "Returned if custom field name is not provided"
           schema:
-            $ref: '#/definitions/error_schema'
+            $ref: '#/definitions/global_error_response_schema'
           examples:
             application/json:
               errors:
@@ -15827,49 +15977,46 @@ paths:
       tags:
         - Contacts API - Segments
       description: |-
-        <p>
-          Create a segment using search conditions.
-          Body contains a JSON object with <code>conditions</code>, a list of conditions as described below, a unique <code>name</code>, and an optional <code>list_id</code>, which is a valid list ID for a list to limit the search on.
-        </p>
+        **This endpoint allows you to create a new segment.**
 
-        <p>
+
           Valid operators for create and update depend on the type of the field for which you are searching.
-        </p>
 
-        <ul>
-          <li>Dates:
-            <ul>
-              <li>"eq", "ne", "lt" (before), "gt" (after)
-                <ul>
-                  <li>You may use MM/DD/YYYY for day granularity or an epoch for second granularity.</li>
-                </ul>
-              </li>
-              <li>"empty", "not_empty"</li>
-              <li>"is within"
-                <ul>
-                  <li>You may use an <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 date format</a> or the # of days.</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>Text: "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value), "empty", "not_empty"</li>
-          <li>Numbers: "eq", "lt", "gt", "empty", "not_empty"</li>
-          <li>Email Clicks and Opens: "eq" (opened), "ne" (not opened)</li>
-        </ul>
+        **Dates**
+        - "eq", "ne", "lt" (before), "gt" (after)
+            - You may use MM/DD/YYYY for day granularity or an epoch for second granularity.
+        - "empty", "not_empty"
+        - "is within"
+            - You may use an [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601) or the # of days.
 
-        <p>
-          Field values must all be a string.
-        </p>
+        **Text**
+        - "contains"
+        - "eq" (is/equals - matches the full field)
+        - "ne" (is not/not equals - matches any field where the entire field is not the condition value)
+        - "empty"
+        - "not_empty"
 
-        <p>
-          Conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either <code>clicks.campaign_identifier</code> or <code>opens.campaign_identifier</code>.
-          The condition value should be a string containing the id of a completed campaign.
-        </p>
+        **Numbers**
+        - "eq" (is/equals)
+        - "lt" (is less than)
+        - "gt" (is greater than)
+        - "empty"
+        - "not_empty"
 
-        <p>
-          The conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field.
-          The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
-        </p>
+        **Email Clicks and Opens**
+        - "eq" (opened)
+        - "ne" (not opened)
+
+        All field values must be a string.
+
+
+        Conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either `clicks.campaign_identifier` or `opens.campaign_identifier`.
+        The condition value should be a string containing the id of a completed campaign.
+
+
+        The conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field.
+
+        The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
       parameters:
         - name: body
           in: body
@@ -16307,10 +16454,7 @@ paths:
       summary: Retrieve all categories
       tags:
         - Categories
-      description: |-
-        **This endpoint allows you to retrieve a list of all of your categories.**
-
-        Categories can help organize your email analytics by enabling you to “tag” emails by type or broad topic. You can define your own custom categories.
+      description: '**This endpoint allows you to retrieve a list of all of your categories.**'
       parameters:
         - name: limit
           in: query
@@ -16380,10 +16524,6 @@ paths:
         **This endpoint allows you to retrieve the total sum of each email statistic for every category over the given date range.**
 
         If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
-
-        Categories allow you to group your emails together according to broad topics that you define.
-
-        > Category statistics are available for the previous thirteen months only.
       parameters:
         - name: sort_by_metric
           in: query
@@ -16548,10 +16688,6 @@ paths:
         **This endpoint allows you to retrieve all of your email statistics for each of your categories.**
 
         If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
-
-        Categories allow you to group your emails together according to broad topics that you define.
-
-        > Category statistics are available for the previous thirteen months only.
       parameters:
         - name: start_date
           in: query
@@ -16690,9 +16826,7 @@ paths:
       description: |-
         **This endpoint allows you to create a campaign.**
 
-        Our Marketing Campaigns API lets you create, manage, send, and schedule campaigns.
-
-        Note: In order to send or schedule the campaign, you will be required to provide a subject, sender ID, content (we suggest both html and plain text), and at least one list or segment ID. This information is not required when you create a campaign.
+        In order to send or schedule the campaign, you will be required to provide a subject, sender ID, content (we suggest both html and plain text), and at least one list or segment ID. This information is not required when you create a campaign.
       parameters:
         - name: body
           in: body
@@ -16878,10 +17012,7 @@ paths:
       summary: Retrieve a single campaign
       tags:
         - Campaigns API
-      description: |-
-        **This endpoint allows you to retrieve a specific campaign.**
-
-        Our Marketing Campaigns API lets you create, manage, send, and schedule campaigns.
+      description: '**This endpoint allows you to retrieve a specific campaign.**'
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -16965,10 +17096,7 @@ paths:
       summary: Delete a Campaign
       tags:
         - Campaigns API
-      description: |-
-        **This endpoint allows you to delete a specific campaign.**
-
-        Our Marketing Campaigns API lets you create, manage, send, and schedule campaigns.
+      description: '**This endpoint allows you to delete a specific campaign.**'
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -16996,7 +17124,10 @@ paths:
       summary: Update a Campaign
       tags:
         - Campaigns API
-      description: 'Update a campaign. This is especially useful if you only set up the campaign using POST /campaigns, but didn''t set many of the parameters.'
+      description: |-
+        **This endpoint allows you to update a specific campaign.**
+
+        This is especially useful if you only set up the campaign using POST /campaigns, but didn't set many of the parameters.
       parameters:
         - name: body
           in: body
@@ -17146,9 +17277,9 @@ paths:
       tags:
         - Campaigns API
       description: |-
-        **This endpoint allows you to immediately send a campaign at the time you make the API call.**
+        **This endpoint allows you to immediately send an existing campaign.**
 
-        Normally a POST would have a request body, but since this endpoint is telling us to send a resource that is already created, a request body is not needed.
+        Normally a POST request would have a body, but since this endpoint is telling us to send a resource that is already created, a request body is not needed.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -17425,7 +17556,7 @@ paths:
       summary: View Scheduled Time of a Campaign
       tags:
         - Campaigns API
-      description: '**This endpoint allows you to retrieve the date and time that the given campaign has been scheduled to be sent.**'
+      description: '**This endpoint allows you to retrieve the date and time that a campaign has been scheduled to be sent.**'
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -18122,7 +18253,7 @@ paths:
 
         Creating an Inbound Parse setting requires two pieces of information: a `url` and a `hostname`.
 
-        The `hostname` must correspond to a domain authenticated by Twilio SendGrid on your account. If you need to complete domain authentication, you can use the [Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth) or the #endpoint:aXpkWYramCg4ZNEGT endpoint. See "[How to Set Up Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)" for instructions.
+        The `hostname` must correspond to a domain authenticated by Twilio SendGrid on your account. If you need to complete domain authentication, you can use the [Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth) or the "Authenticate a domain" endpoint. See "[How to Set Up Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)" for instructions.
 
         Any email received by the `hostname` will be parsed when you complete this setup. You must also add a Twilio SendGrid MX record to this domain's DNS records. See "[Setting up the Inbound Parse Webhook](https://sendgrid.com/docs/for-developers/parsing-email/setting-up-the-inbound-parse-webhook/)" for full instructions.
 
@@ -18552,8 +18683,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: object
       security:
         - Authorization: []
   /messages:
@@ -18615,7 +18744,7 @@ paths:
           description: The number of messages returned. This parameter must be greater than 0 and less than or equal to 1000
           required: false
           type: number
-          default: '10'
+          default: 10
           minimum: 1
           maximum: 1000
         - name: X-Query-Id
@@ -18856,8 +18985,6 @@ paths:
                             - group_resubscribe
                         processed:
                           description: The date when the event was processed
-                          minimum: 1292453589
-                          maximum: 9999999999
                           type: string
                         reason:
                           type: string
@@ -18990,8 +19117,6 @@ paths:
                         - group_resubscribe
                     processed:
                       description: Date of when event occurred
-                      minimum: 1292453589
-                      maximum: 9999999999
                       type: string
                     reason:
                       type: string
@@ -19279,7 +19404,7 @@ paths:
       tags:
         - CSV (UI only)
         - V3
-      description: '**This endpoint will return a presigned URL that can be used to download the CSV that was requested from the #endpoint:LhbZ87Wq5k9AyFWD6 endpoint.**'
+      description: '**This endpoint will return a presigned URL that can be used to download the CSV that was requested from the "Request a CSV" endpoint.**'
       responses:
         '200':
           description: ''
@@ -22349,7 +22474,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve a specific inbound parse setting by hostname.**
 
-        You can retrieve all your Inbound Parse settings and their associated host names with the #endpoint:b8xyiHYsGatArCnSt endpoint.
+        You can retrieve all your Inbound Parse settings and their associated host names with the "Retrieve all parse settings" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -22381,7 +22506,7 @@ paths:
       description: |-
         **This endpoint allows you to update a specific inbound parse setting by hostname.**
 
-        You can retrieve all your Inbound Parse settings and their associated host names with the #endpoint:b8xyiHYsGatArCnSt endpoint.
+        You can retrieve all your Inbound Parse settings and their associated host names with the "Retrieve all parse settings" endpoint.
       parameters:
         - name: body
           in: body
@@ -22421,7 +22546,7 @@ paths:
       description: |-
         **This endpoint allows you to delete a specific inbound parse setting by hostname.**
 
-        You can retrieve all your Inbound Parse settings and their associated host names with the #endpoint:b8xyiHYsGatArCnSt endpoint.
+        You can retrieve all your Inbound Parse settings and their associated host names with the "Retrieve all parse settings" endpoint.
       parameters:
         - $ref: '#/parameters/trait:onBehalfOfSubuser:on-behalf-of'
       responses:
@@ -22492,20 +22617,20 @@ parameters:
     in: query
     description: A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.
     type: array
-    enum:
-      - ab_variation
-      - ab_phase
     items:
       type: string
+      enum:
+        - ab_variation
+        - ab_phase
   'trait:automationQueryParams:group_by':
     name: group_by
     in: query
     description: Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.
     type: array
-    enum:
-      - step_id
     items:
       type: string
+      enum:
+        - step_id
   'trait:automationQueryParams:step_ids':
     name: step_ids
     in: query
@@ -22520,11 +22645,11 @@ parameters:
     in: query
     description: A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.
     type: array
-    enum:
-      - ab_variation
-      - ab_phase
     items:
       type: string
+      enum:
+        - ab_variation
+        - ab_phase
   'trait:singlesendQueryParams2:ab_variation_id':
     name: ab_variation_id
     in: query
@@ -22610,7 +22735,7 @@ parameters:
     in: query
     description: set to false to return all fields
     type: boolean
-    default: 'true'
+    default: true
   'trait:authorizationHeader:Authorization':
     name: Authorization
     in: header
@@ -22621,7 +22746,7 @@ responses:
   'trait:errorResponse:400':
     description: ''
     schema:
-      $ref: '#/definitions/error_schema'
+      $ref: '#/definitions/global_error_response_schema'
   'trait:pagination:200':
     description: ''
     schema:
@@ -22836,6 +22961,14 @@ responses:
     description: ''
     schema:
       $ref: '#/definitions/sso-error-response'
+  'trait:errors:400':
+    description: ''
+    schema:
+      $ref: '#/definitions/errors-seg-v2'
+  'trait:errors:404':
+    description: ''
+  'trait:errors:500':
+    description: ''
 definitions:
   partner_settings_new_relic:
     title: 'Partner Settings: New Relic'
@@ -23112,69 +23245,31 @@ definitions:
         data: 192.168.1.1
   senderID:
     title: Sender ID
-    type: object
-    properties:
-      id:
-        type: integer
-        description: The unique identifier of the sender identity.
-      nickname:
-        type: string
-        description: A nickname for the sender identity. Not used for sending.
-      from:
-        type: object
+    allOf:
+      - $ref: '#/definitions/sender-id-request'
+      - type: object
         properties:
-          email:
-            type: string
-            description: This is where the email will appear to originate from for your recipient
-          name:
-            type: string
-            description: This is the name appended to the from email field. IE - Your name or company name.
+          id:
+            type: integer
+            description: The unique identifier of the sender identity.
+          verified:
+            type: boolean
+            description: If the sender identity is verified or not. Only verified sender identities can be used to send email.
+          updated_at:
+            type: integer
+            description: The time the sender identity was last updated.
+          created_at:
+            type: integer
+            description: The time the sender identity was created.
+          locked:
+            type: boolean
+            description: 'True when the sender id is associated to a campaign in the Draft, Scheduled, or In Progress status. You cannot update or delete a locked sender identity.'
+      - type: object
         required:
-          - email
-      reply_to:
-        type: object
-        properties:
-          email:
-            type: string
-            description: This is the email that your recipient will reply to.
-          name:
-            type: string
-            description: This is the name appended to the reply to email field. IE - Your name or company name.
-      address:
-        type: string
-        description: The physical address of the sender identity.
-      address_2:
-        type: string
-        description: Additional sender identity address information.
-      city:
-        type: string
-        description: The city of the sender identity.
-      state:
-        type: string
-        description: The state of the sender identity.
-      zip:
-        type: string
-        description: The zipcode of the sender identity.
-      country:
-        type: string
-        description: The country of the sender identity.
-      verified:
-        type: boolean
-        description: If the sender identity is verified or not. Only verified sender identities can be used to send email.
-      updated_at:
-        type: integer
-        description: The time the sender identity was last updated.
-      created_at:
-        type: integer
-        description: The time the sender identity was created.
-      locked:
-        type: boolean
-        description: 'A sender identity is locked when it is associated to a campaign in the Draft, Scheduled, or In Progress status. You cannot update or delete a locked sender identity.'
-    required:
-      - nickname
-      - address
-      - city
-      - country
+          - nickname
+          - address
+          - city
+          - country
     example:
       id: 1
       nickname: My Sender ID
@@ -24688,6 +24783,35 @@ definitions:
       - automatic_security
       - valid
       - dns
+    example:
+      id: 45373692
+      user_id: 66036447
+      subdomain: sub
+      domain: example.com
+      username: jdoe
+      ips:
+        - 127.0.0.1
+      custom_spf: false
+      default: true
+      legacy: false
+      automatic_security: true
+      valid: true
+      dns:
+        mail_cname:
+          valid: true
+          type: cname
+          host: mail.example.com
+          data: u7.wl.sendgrid.net
+        dkim1:
+          valid: true
+          type: cname
+          host: s1._domainkey.example.com
+          data: s1._domainkey.u7.wl.sendgrid.net
+        dkim2:
+          valid: true
+          type: cname
+          host: s2._domainkey.example.com
+          data: s2._domainkey.u7.wl.sendgrid.net
   contactdb_custom_field_with_id_value:
     title: ContactDB Custom field schema.
     allOf:
@@ -25245,7 +25369,6 @@ definitions:
         description: The generated ID for your list.
         minLength: 36
         maxLength: 36
-        format: uuid
       name:
         type: string
         description: The name you gave your list.
@@ -25256,30 +25379,32 @@ definitions:
         $ref: '#/definitions/selfmetadata'
   reserved_field_definitions_response:
     title: reserved_field_definitions_response
-    type: object
-    properties:
-      name:
-        type: string
-        minLength: 1
-        maxLength: 100
-      field_type:
-        type: string
-        enum:
-          - Text
-          - Number
-          - Date
-      read_only:
-        type: boolean
-        default: false
-        description: When `true` this means API consumers are unable to set the value of this field on contacts.
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        field_type:
+          type: string
+          enum:
+            - Text
+            - Number
+            - Date
+        read_only:
+          type: boolean
+          default: false
+          description: When `true` this means API consumers are unable to set the value of this field on contacts.
     required:
       - name
       - field_type
     example:
-      id: _rf20_T
-      name: automation_id
-      field_type: Text
-      read_only: true
+      - id: _rf20_T
+        name: automation_id
+        field_type: Text
+        read_only: true
   custom_field_definitions_response:
     title: custom_field_definitions_response
     type: object
@@ -25447,20 +25572,23 @@ definitions:
     title: contact_response
     type: object
     properties:
-      contact_id:
+      id:
         type: string
         maxLength: 36
         pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
         format: uuid
-      primary_email:
+        description: ID assigned to a contact when added to the system.
+      email:
         type: string
         minLength: 3
         maxLength: 254
         format: email
+        description: Email of the contact. This is a reserved field.
       alternate_emails:
         type: array
         uniqueItems: true
         minItems: 0
+        description: Alternate emails of the contact. This is a reserved field.
         items:
           type: string
           minLength: 3
@@ -25469,37 +25597,46 @@ definitions:
       first_name:
         type: string
         minLength: 1
+        description: First name of the contact. This is a reserved field.
       last_name:
         type: string
         minLength: 1
+        description: Last name of the contact. This is a reserved field.
       address_line_1:
         type: string
         minLength: 0
+        description: First line of address of the contact. This is a reserved field.
       address_line_2:
         type: string
         minLength: 0
+        description: Second line of address of the contact. This is a reserved field.
       city:
         type: string
         minLength: 0
         pattern: '^[a-zA-Z\u0080-\u024F\s\/\-\)\(\`\.\"\'']+$'
+        description: City associated with the contact. This is a reserved field.
       state_province_region:
         type: string
         minLength: 0
+        description: State associated with the contact. This is a reserved field.
       postal_code:
         type: integer
+        description: Zipcode associated with the address of the contact. This is a reserved field.
       country:
         type: string
         minLength: 0
+        description: Country associated with the address of the contact. This is a reserved field.
       list_ids:
         type: array
         uniqueItems: true
-        description: IDs of all lists the contact is part of.
+        description: IDs of all lists the contact is part of
         items:
           type: string
           format: uuid
       custom_fields:
         type: object
         minProperties: 0
+        description: The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
         properties:
           custom_field_name1:
             type: string
@@ -25507,9 +25644,18 @@ definitions:
           custom_field_name2:
             type: string
             minLength: 0
+          '':
+            type: string
+      segment_ids:
+        type: array
+        uniqueItems: true
+        description: IDs of all segments the contact is part of
+        items:
+          type: string
+          format: uuid
     required:
-      - contact_id
-      - primary_email
+      - id
+      - email
       - alternate_emails
       - first_name
       - last_name
@@ -25520,6 +25666,23 @@ definitions:
       - postal_code
       - country
       - custom_fields
+    example:
+      id: 47d23ab0-d895-4359-a0d1-ffc7a6fc7e70
+      email: abcd@gmail.com
+      alternate_emails:
+        - abcd@yahoo.com
+        - abcd@hotmail.com
+      first_name: Ab
+      last_name: Cd
+      address_line_1: street address / P.O. box / CompanyName / c/o
+      address_line_2: 'apartment, suite, unit, building, floor etc'
+      city: Redwood City
+      state_province_region: CA
+      postal_code: 94063
+      country: USA
+      custom_fields:
+        custom_field_name1: custom_field_value1
+        custom_field_name2: custom_field_value2
   TNE-senderID:
     title: Sender ID Response Body
     allOf:
@@ -26395,7 +26558,6 @@ definitions:
     properties:
       results:
         type: array
-        default: ''
         description: ''
         items:
           type: object
@@ -26453,7 +26615,6 @@ definitions:
     properties:
       results:
         type: array
-        default: index
         description: This is the index of the link's location in the email contents.
         items:
           type: object
@@ -26898,7 +27059,7 @@ definitions:
             description: AST representation of the query DSL
         required:
           - contacts_sample
-      - $ref: '#/definitions/segment_write'
+      - $ref: '#/definitions/segment_write_v2'
     example:
       id: 58567a46-305e-48d1-b4f8-a006c906920e
       contacts_count: 9266921
@@ -26992,6 +27153,9 @@ definitions:
       require_valid_cert:
         type: boolean
         description: Indicates if you want to require your recipients to have a valid certificate.
+    example:
+      require_tls: true
+      require_valid_cert: true
   singlesend_response:
     title: singlesend_response
     allOf:
@@ -27412,6 +27576,257 @@ definitions:
       name:
         type: string
         description: The name of the IP pool.
+    example:
+      name: sunt sint enim
+  sender-id-request:
+    title: Sender ID Request
+    type: object
+    properties:
+      nickname:
+        type: string
+        description: A nickname for the sender identity. Not used for sending.
+      from:
+        type: object
+        properties:
+          email:
+            type: string
+            description: The email address from which your recipient will receive emails.
+          name:
+            type: string
+            description: The name appended to the from email field. Typically your name or company name.
+      reply_to:
+        type: object
+        properties:
+          email:
+            type: string
+            description: The email address to which your recipient will reply.
+          name:
+            type: string
+            description: The name appended to the reply to email field. Typically your name or company name.
+      address:
+        type: string
+        description: The physical address of the sender identity.
+      address_2:
+        type: string
+        description: Additional sender identity address information.
+      city:
+        type: string
+        description: The city of the sender identity.
+      state:
+        type: string
+        description: The state of the sender identity.
+      zip:
+        type: string
+        description: The zipcode of the sender identity.
+      country:
+        type: string
+        description: The country of the sender identity.
+    example:
+      nickname: My Sender ID
+      from:
+        email: from@example.com
+        name: Example INC
+      reply_to:
+        email: replyto@example.com
+        name: Example INC
+      address: 123 Elm St.
+      address_2: Apt. 456
+      city: Denver
+      state: Colorado
+      zip: '80202'
+      country: United States
+  segment_status_response:
+    title: segment_status_response
+    type: object
+    description: Segment status indicates whether the segment's contacts will be updated periodically
+    properties:
+      query_validation:
+        type: string
+        description: 'Status of query validation. PENDING, VALID, or INVALID'
+      error_message:
+        type: string
+        description: Describes any errors that were encountered during query validation
+    required:
+      - query_validation
+  all_segments_response:
+    title: all_segments_response
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 36
+        maxLength: 36
+        format: uuid
+        description: ID assigned to the segment when created.
+      name:
+        type: string
+        minLength: 1
+        maxLength: 100
+        description: Name of the segment.
+      contacts_count:
+        type: integer
+        description: Total number of contacts present in the segment
+      created_at:
+        type: string
+        description: ISO8601 timestamp of when the object was created
+      updated_at:
+        type: string
+        description: ISO8601 timestamp of when the object was last updated
+      sample_updated_at:
+        type: string
+        description: ISO8601 timestamp of when the samples were last updated
+      next_sample_update:
+        type: string
+        description: ISO8601 timestamp of when the samples will be next updated
+      parent_list_ids:
+        type: array
+        description: The array of list ids to filter contacts on when building this segment. It allows only one such list id for now. We will support more in future
+        uniqueItems: true
+        items:
+          type: string
+      query_version:
+        type: string
+        description: 'If not set, segment contains a query for use with Segment v1 APIs. If set to ''2'', segment contains a SQL query for use in v2.'
+      _metadata:
+        $ref: '#/definitions/_metadata'
+      status:
+        $ref: '#/definitions/segment_status_response'
+    required:
+      - id
+      - name
+      - contacts_count
+      - created_at
+      - updated_at
+      - sample_updated_at
+      - next_sample_update
+      - parent_list_ids
+      - query_version
+      - status
+  segment_summary_v2:
+    title: segment_summary
+    type: object
+    description: ''
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/segment_summary'
+  segment_response:
+    title: segment_response
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 36
+        maxLength: 36
+        format: uuid
+        description: ID assigned to the segment when created.
+      name:
+        type: string
+        minLength: 1
+        maxLength: 100
+        description: Name of the segment.
+      query_dsl:
+        type: string
+        description: SQL query which will filter contacts based on the conditions provided
+      contacts_count:
+        type: integer
+        description: Total number of contacts present in the segment
+      contacts_sample:
+        type: array
+        description: A subset of all contacts that are in this segment
+        items:
+          $ref: '#/definitions/contact_response'
+      created_at:
+        type: string
+        description: ISO8601 timestamp of when the object was created
+      updated_at:
+        type: string
+        description: ISO8601 timestamp of when the object was last updated
+      sample_updated_at:
+        type: string
+        description: ISO8601 timestamp of when the samples were last updated
+      next_sample_update:
+        type: string
+        description: ISO8601 timestamp of when the samples will be next updated
+      parent_list_ids:
+        type: array
+        description: The array of list ids to filter contacts on when building this segment. It allows only one such list id for now. We will support more in future
+        uniqueItems: true
+        items:
+          type: string
+      query_version:
+        type: string
+        description: 'If not set, segment contains a Query for use with Segment v1 APIs. If set to ''2'', segment contains a SQL query for use in v2.'
+      status:
+        $ref: '#/definitions/segment_status_response'
+    required:
+      - id
+      - name
+      - query_dsl
+      - contacts_count
+      - contacts_sample
+      - created_at
+      - updated_at
+      - sample_updated_at
+      - next_sample_update
+      - parent_list_ids
+      - query_version
+      - status
+  errors-seg-v2:
+    title: errors-seg
+    type: object
+    description: 'If the request is incorrect, an array of errors will be returned.'
+    properties:
+      errors:
+        type: array
+        items:
+          type: object
+          properties:
+            field:
+              type: string
+              description: the field in the request body that is incorrect
+            message:
+              type: string
+              description: a description of what is specifically wrong with the field passed in the request
+          required:
+            - field
+            - message
+    required:
+      - errors
+  segment_write_v2:
+    title: segment_write
+    type: object
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 100
+        description: Name of the segment.
+      parent_list_ids:
+        type: array
+        description: The array of list ids to filter contacts on when building this segment. It allows only one such list id for now. We will support more in future
+        uniqueItems: true
+        items:
+          type: string
+      query_dsl:
+        type: string
+        description: SQL query which will filter contacts based on the conditions provided
+    required:
+      - name
+      - query_dsl
+  segment_update:
+    title: segment_update
+    type: object
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 100
+        description: Name of the segment.
+      query_dsl:
+        type: string
+        description: SQL query which will filter contacts based on the conditions provided
   abbv-message:
     title: Abbv. Message
     type: object
@@ -27522,8 +27937,6 @@ definitions:
                 - group_resubscribe
             processed:
               description: Date of when event occurred
-              minimum: 1292453589
-              maximum: 9999999999
               type: string
             reason:
               type: string
@@ -27647,8 +28060,6 @@ definitions:
           - group_resubscribe
       processed:
         description: Date of when event occurred
-        minimum: 1292453589
-        maximum: 9999999999
         type: string
       reason:
         type: string
