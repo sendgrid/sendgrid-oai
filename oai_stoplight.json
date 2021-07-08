@@ -10523,12 +10523,22 @@
                                     "maxLength": 64
                                 },
                                 "ips": {
-                                    "type": "array",
                                     "description": "The IP addresses that belong to this pool.",
+                                    "type": "array",
                                     "items": {
                                         "type": "string"
                                     }
                                 }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "pool_name": "Sample",
+                                "ips": [
+                                    "192.168.1.1",
+                                    "192.158.1.2",
+                                    "192.138.2.1"
+                                ]
                             }
                         }
                     },
@@ -14158,7 +14168,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. \n\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to confirm your contacts have been updated or added, you can use the \"Get Contacts by Emails\" endpoint.\n\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the \"Create Custom Field Definition\" endpoint.\n\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the \"Import Contacts Status\" endpoint.\n\nThe email field is case sensitive. If you add an email with capital letters then try to use the \"Get Contacts by Emails\" endpoint, you will need to apply the same case you used when updating or adding the contact.\n\nIf the contact already exists in the system, any entries you submit via this endpoint will update the existing contact. The contact to update will be determined by the `email` field and any fields omitted from the request will remain as they were.",
+                "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. \n\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to get the resulting contact's ID or confirm your contacts have been updated or added, you can use the \"Get Contacts by Emails\" endpoint. \n\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the \"Create Custom Field Definition\" endpoint.\n\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the \"Import Contacts Status\" endpoint.\n\nIf the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. The contact to update will be determined only by the `email` field and any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.\n\nThe email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.",
                 "parameters": [
                     {
                         "name": "body",
@@ -14796,7 +14806,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint returns the full details and all fields for the specified contact**.",
+                "description": "**This endpoint returns the full details and all fields for the specified contact**.\n\nThe \"Get Contacts by Emails\" endpoint can be used to get the ID of a contact.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -14842,7 +14852,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**Use this endpoint to locate contacts**.\n\nThe request body's `query` field accepts valid [SGQL](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) for searching for a contact.\n\nOnly the first 50 contacts that meet the search criteria will be returned.\n\nIf the query takes longer than 20 seconds, a `408 Request Timeout` status will be returned.\n\nFormatting the `created_at` and `updated_at` values as Unix timestamps is deprecated. Instead they are returned as ISO format as string.",
+                "description": "**Use this endpoint to locate contacts**.\n\nThe request body's `query` field accepts valid [SGQL](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) for searching for a contact.\n\nBecause contact emails are stored in lower case, using SGQL to search by email address requires the provided email address to be in lower case. The SGQL `lower()` function can be used for this.\n\nOnly the first 50 contacts that meet the search criteria will be returned.\n\nIf the query takes longer than 20 seconds, a `408 Request Timeout` status will be returned.\n\nFormatting the `created_at` and `updated_at` values as Unix timestamps is deprecated. Instead they are returned as ISO format as string.",
                 "parameters": [
                     {
                         "name": "body",
@@ -15335,7 +15345,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses are not case sensitive, and returned email addresses will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the \"Search Contacts\" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the \"Export Contacts\" endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.",
+                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses in the search request do not need to match the case in which they're stored, but the email addresses in the result will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the \"Search Contacts\" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the \"Export Contacts\" endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.",
                 "parameters": [
                     {
                         "name": "body",
@@ -15505,6 +15515,293 @@
                 ],
                 "x-stoplight": {
                     "id": "POST_marketing-contacts-search-emails",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                }
+            }
+        },
+        "/segments/2.0": {
+            "post": {
+                "operationId": "POST_segments",
+                "summary": "Create Segment",
+                "tags": [
+                    "Segmenting Contacts V2 - Beta"
+                ],
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/segment_write_v2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/segment_response"
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "429": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "x-stoplight": {
+                    "id": "POST_segments",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                }
+            },
+            "get": {
+                "operationId": "GET_segments",
+                "summary": "Get List of Segments",
+                "tags": [
+                    "Segmenting Contacts V2 - Beta"
+                ],
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
+                "parameters": [
+                    {
+                        "name": "parent_list_ids",
+                        "in": "query",
+                        "description": "A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_parent_list_id",
+                        "in": "query",
+                        "description": "If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/all_segments_response"
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "x-stoplight": {
+                    "id": "GET_segments",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                }
+            }
+        },
+        "/segments/2.0/{segment_id}": {
+            "parameters": [
+                {
+                    "name": "segment_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "patch": {
+                "operationId": "PATCH_segments-segment_id",
+                "summary": "Update Segment",
+                "tags": [
+                    "Segmenting Contacts V2 - Beta"
+                ],
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/segment_update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/segment_response"
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    },
+                    "429": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "x-stoplight": {
+                    "id": "PATCH_segments-segment_id",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                }
+            },
+            "get": {
+                "operationId": "GET_segments-segment_id",
+                "summary": "Get Segment by ID",
+                "tags": [
+                    "Segmenting Contacts V2 - Beta"
+                ],
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+                "parameters": [
+                    {
+                        "name": "contacts_sample",
+                        "in": "query",
+                        "description": "Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.",
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/segment_response"
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    },
+                    "500": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "x-stoplight": {
+                    "id": "GET_segments-segment_id",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "DELETE_segments-segment_id",
+                "summary": "Delete segment",
+                "tags": [
+                    "Segmenting Contacts V2 - Beta"
+                ],
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+                "responses": {
+                    "202": {
+                        "description": ""
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/errors-seg-v2"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "x-stoplight": {
+                    "id": "DELETE_segments-segment_id",
                     "beforeScript": null,
                     "afterScript": null,
                     "public": true,
@@ -16694,7 +16991,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/segment_write"
+                                    "$ref": "#/definitions/segment_write_v2"
                                 },
                                 {
                                     "type": "object",
@@ -17103,7 +17400,7 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/segment_write"
+                            "$ref": "#/definitions/segment_write_v2"
                         }
                     }
                 ],
@@ -26517,11 +26814,11 @@
         "/user/webhooks/parse/settings": {
             "get": {
                 "operationId": "GET_user-webhooks-parse-settings",
-                "summary": "Retrieve Parse Webhook settings",
+                "summary": "Retrieve all parse settings",
                 "tags": [
                     "Webhooks"
                 ],
-                "description": "**This endpoint allows you to retrieve your current inbound parse webhook settings.**\n\nSendGrid can parse the attachments and contents of incoming emails. The Parse API will POST the parsed email to a URL that you specify. For more information, see our Inbound [Parse Webhook documentation](https://sendgrid.com/docs/for-developers/parsing-email/inbound-email/).",
+                "description": "**This endpoint allows you to retrieve all of your current inbound parse settings.**",
                 "parameters": [
                     {
                         "$ref": "#/parameters/trait:onBehalfOfSubuser:on-behalf-of"
@@ -26532,39 +26829,12 @@
                         "description": "",
                         "schema": {
                             "type": "object",
-                            "required": [
-                                "result"
-                            ],
                             "properties": {
                                 "result": {
                                     "type": "array",
-                                    "description": "The array containing the parse webhook settings.",
+                                    "description": "The list of your current inbound parse settings.",
                                     "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "hostname": {
-                                                "type": "string",
-                                                "description": "The hostname of the URL where you would like your parsed emails to be posted."
-                                            },
-                                            "url": {
-                                                "type": "string",
-                                                "description": "The URL where you want your parsed emails to be posted."
-                                            },
-                                            "spam_check": {
-                                                "type": "boolean",
-                                                "description": "Indicates if the parsed content will be checked for spam."
-                                            },
-                                            "send_raw": {
-                                                "type": "boolean",
-                                                "description": "Indicates if the raw content that was parsed will be posted."
-                                            }
-                                        },
-                                        "required": [
-                                            "hostname",
-                                            "url",
-                                            "spam_check",
-                                            "send_raw"
-                                        ]
+                                        "$ref": "#/definitions/parse-setting"
                                     }
                                 }
                             }
@@ -26573,14 +26843,26 @@
                             "application/json": {
                                 "result": [
                                     {
-                                        "hostname": "eiusmod est aliqua",
-                                        "url": "consequat minim",
-                                        "spam_check": false,
+                                        "url": "http://mydomain.com/parse",
+                                        "hostname": "mail.mydomain.com",
+                                        "spam_check": true,
                                         "send_raw": true
                                     }
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:globalErrors:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:globalErrors:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:globalErrors:404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:globalErrors:500"
                     }
                 },
                 "security": [
@@ -26594,9 +26876,9 @@
                     "afterScript": null,
                     "public": true,
                     "mock": {
-                        "enabled": false,
+                        "dynamic": false,
                         "statusCode": 200,
-                        "dynamic": false
+                        "enabled": false
                     }
                 }
             },
@@ -34310,6 +34592,18 @@
             "schema": {
                 "$ref": "#/definitions/sso-error-response"
             }
+        },
+        "trait:errors:400": {
+            "description": "",
+            "schema": {
+                "$ref": "#/definitions/errors-seg-v2"
+            }
+        },
+        "trait:errors:404": {
+            "description": ""
+        },
+        "trait:errors:500": {
+            "description": ""
         }
     },
     "definitions": {
@@ -37952,8 +38246,7 @@
                     "type": "string",
                     "description": "The generated ID for your list.",
                     "minLength": 36,
-                    "maxLength": 36,
-                    "format": "uuid"
+                    "maxLength": 36
                 },
                 "name": {
                     "type": "string",
@@ -38274,22 +38567,25 @@
             "title": "contact_response",
             "type": "object",
             "properties": {
-                "contact_id": {
+                "id": {
                     "type": "string",
                     "maxLength": 36,
                     "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
-                    "format": "uuid"
+                    "format": "uuid",
+                    "description": "ID assigned to a contact when added to the system."
                 },
-                "primary_email": {
+                "email": {
                     "type": "string",
                     "minLength": 3,
                     "maxLength": 254,
-                    "format": "email"
+                    "format": "email",
+                    "description": "Email of the contact. This is a reserved field."
                 },
                 "alternate_emails": {
                     "type": "array",
                     "uniqueItems": true,
                     "minItems": 0,
+                    "description": "Alternate emails of the contact. This is a reserved field.",
                     "items": {
                         "type": "string",
                         "minLength": 3,
@@ -38299,40 +38595,48 @@
                 },
                 "first_name": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "description": "First name of the contact. This is a reserved field."
                 },
                 "last_name": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "description": "Last name of the contact. This is a reserved field."
                 },
                 "address_line_1": {
                     "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "description": "First line of address of the contact. This is a reserved field."
                 },
                 "address_line_2": {
                     "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "description": "Second line of address of the contact. This is a reserved field."
                 },
                 "city": {
                     "type": "string",
                     "minLength": 0,
-                    "pattern": "^[a-zA-Z\\u0080-\\u024F\\s\\/\\-\\)\\(\\`\\.\\\"\\']+$"
+                    "pattern": "^[a-zA-Z\\u0080-\\u024F\\s\\/\\-\\)\\(\\`\\.\\\"\\']+$",
+                    "description": "City associated with the contact. This is a reserved field."
                 },
                 "state_province_region": {
                     "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "description": "State associated with the contact. This is a reserved field."
                 },
                 "postal_code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Zipcode associated with the address of the contact. This is a reserved field."
                 },
                 "country": {
                     "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "description": "Country associated with the address of the contact. This is a reserved field."
                 },
                 "list_ids": {
                     "type": "array",
                     "uniqueItems": true,
-                    "description": "IDs of all lists the contact is part of.",
+                    "description": "IDs of all lists the contact is part of",
                     "items": {
                         "type": "string",
                         "format": "uuid"
@@ -38341,6 +38645,7 @@
                 "custom_fields": {
                     "type": "object",
                     "minProperties": 0,
+                    "description": "The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.",
                     "properties": {
                         "custom_field_name1": {
                             "type": "string",
@@ -38349,13 +38654,25 @@
                         "custom_field_name2": {
                             "type": "string",
                             "minLength": 0
+                        },
+                        "": {
+                            "type": "string"
                         }
+                    }
+                },
+                "segment_ids": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "description": "IDs of all segments the contact is part of",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
             "required": [
-                "contact_id",
-                "primary_email",
+                "id",
+                "email",
                 "alternate_emails",
                 "first_name",
                 "last_name",
@@ -38367,6 +38684,26 @@
                 "country",
                 "custom_fields"
             ],
+            "example": {
+                "id": "47d23ab0-d895-4359-a0d1-ffc7a6fc7e70",
+                "email": "abcd@gmail.com",
+                "alternate_emails": [
+                    "abcd@yahoo.com",
+                    "abcd@hotmail.com"
+                ],
+                "first_name": "Ab",
+                "last_name": "Cd",
+                "address_line_1": "street address / P.O. box / CompanyName / c/o",
+                "address_line_2": "apartment, suite, unit, building, floor etc",
+                "city": "Redwood City",
+                "state_province_region": "CA",
+                "postal_code": 94063,
+                "country": "USA",
+                "custom_fields": {
+                    "custom_field_name1": "custom_field_value1",
+                    "custom_field_name2": "custom_field_value2"
+                }
+            },
             "x-stoplight": {
                 "id": "contact_response",
                 "name": "contact_response",
@@ -40199,7 +40536,7 @@
                     ]
                 },
                 {
-                    "$ref": "#/definitions/segment_write"
+                    "$ref": "#/definitions/segment_write_v2"
                 }
             ],
             "example": {
@@ -41114,6 +41451,294 @@
             "x-stoplight": {
                 "id": "sender-id-request",
                 "name": "Sender ID Request",
+                "public": true
+            }
+        },
+        "segment_status_response": {
+            "title": "segment_status_response",
+            "type": "object",
+            "description": "Segment status indicates whether the segment's contacts will be updated periodically",
+            "properties": {
+                "query_validation": {
+                    "type": "string",
+                    "description": "Status of query validation. PENDING, VALID, or INVALID"
+                },
+                "error_message": {
+                    "type": "string",
+                    "description": "Describes any errors that were encountered during query validation"
+                }
+            },
+            "required": [
+                "query_validation"
+            ],
+            "x-stoplight": {
+                "id": "segment_status_response",
+                "name": "segment_status_response",
+                "public": true
+            }
+        },
+        "all_segments_response": {
+            "title": "all_segments_response",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 36,
+                    "maxLength": 36,
+                    "format": "uuid",
+                    "description": "ID assigned to the segment when created."
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "Name of the segment."
+                },
+                "contacts_count": {
+                    "type": "integer",
+                    "description": "Total number of contacts present in the segment"
+                },
+                "created_at": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the object was created"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the object was last updated"
+                },
+                "sample_updated_at": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the samples were last updated"
+                },
+                "next_sample_update": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the samples will be next updated"
+                },
+                "parent_list_ids": {
+                    "type": "array",
+                    "description": "The array of list ids to filter contacts on when building this segment. It allows only one such list id for now. We will support more in future",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "query_version": {
+                    "type": "string",
+                    "description": "If not set, segment contains a query for use with Segment v1 APIs. If set to '2', segment contains a SQL query for use in v2."
+                },
+                "_metadata": {
+                    "$ref": "#/definitions/_metadata"
+                },
+                "status": {
+                    "$ref": "#/definitions/segment_status_response"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "contacts_count",
+                "created_at",
+                "updated_at",
+                "sample_updated_at",
+                "next_sample_update",
+                "parent_list_ids",
+                "query_version",
+                "status"
+            ],
+            "x-stoplight": {
+                "id": "all_segments_response",
+                "name": "all_segments_response",
+                "public": true
+            }
+        },
+        "segment_summary_v2": {
+            "title": "segment_summary",
+            "type": "object",
+            "description": "",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/segment_summary"
+                    }
+                }
+            },
+            "x-stoplight": {
+                "id": "segment_summary_v2",
+                "name": "segment_summary",
+                "public": true
+            }
+        },
+        "segment_response": {
+            "title": "segment_response",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 36,
+                    "maxLength": 36,
+                    "format": "uuid",
+                    "description": "ID assigned to the segment when created."
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "Name of the segment."
+                },
+                "query_dsl": {
+                    "type": "string",
+                    "description": "SQL query which will filter contacts based on the conditions provided"
+                },
+                "contacts_count": {
+                    "type": "integer",
+                    "description": "Total number of contacts present in the segment"
+                },
+                "contacts_sample": {
+                    "type": "array",
+                    "description": "A subset of all contacts that are in this segment",
+                    "items": {
+                        "$ref": "#/definitions/contact_response"
+                    }
+                },
+                "created_at": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the object was created"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the object was last updated"
+                },
+                "sample_updated_at": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the samples were last updated"
+                },
+                "next_sample_update": {
+                    "type": "string",
+                    "description": "ISO8601 timestamp of when the samples will be next updated"
+                },
+                "parent_list_ids": {
+                    "type": "array",
+                    "description": "The array of list ids to filter contacts on when building this segment. It allows only one such list id for now. We will support more in future",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "query_version": {
+                    "type": "string",
+                    "description": "If not set, segment contains a Query for use with Segment v1 APIs. If set to '2', segment contains a SQL query for use in v2."
+                },
+                "status": {
+                    "$ref": "#/definitions/segment_status_response"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "query_dsl",
+                "contacts_count",
+                "contacts_sample",
+                "created_at",
+                "updated_at",
+                "sample_updated_at",
+                "next_sample_update",
+                "parent_list_ids",
+                "query_version",
+                "status"
+            ],
+            "x-stoplight": {
+                "id": "segment_response",
+                "name": "segment_response",
+                "public": true
+            }
+        },
+        "errors-seg-v2": {
+            "title": "errors-seg",
+            "type": "object",
+            "description": "If the request is incorrect, an array of errors will be returned.",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "field": {
+                                "type": "string",
+                                "description": "the field in the request body that is incorrect"
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "a description of what is specifically wrong with the field passed in the request"
+                            }
+                        },
+                        "required": [
+                            "field",
+                            "message"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "errors"
+            ],
+            "x-stoplight": {
+                "id": "errors-seg-v2",
+                "name": "errors-seg",
+                "public": true
+            }
+        },
+        "segment_write_v2": {
+            "title": "segment_write",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "Name of the segment."
+                },
+                "parent_list_ids": {
+                    "type": "array",
+                    "description": "The array of list ids to filter contacts on when building this segment. It allows only one such list id for now. We will support more in future",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "query_dsl": {
+                    "type": "string",
+                    "description": "SQL query which will filter contacts based on the conditions provided"
+                }
+            },
+            "required": [
+                "name",
+                "query_dsl"
+            ],
+            "x-stoplight": {
+                "id": "segment_write_v2",
+                "name": "segment_write",
+                "public": true
+            }
+        },
+        "segment_update": {
+            "title": "segment_update",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "Name of the segment."
+                },
+                "query_dsl": {
+                    "type": "string",
+                    "description": "SQL query which will filter contacts based on the conditions provided"
+                }
+            },
+            "x-stoplight": {
+                "id": "segment_update",
+                "name": "segment_update",
                 "public": true
             }
         },
@@ -42657,9 +43282,79 @@
                             {
                                 "_id": "POST_marketing-contacts-search-emails",
                                 "type": "endpoints"
+                            },
+                            {
+                                "_id": "tip",
+                                "type": "docTextSections"
                             }
                         ],
                         "name": "Contacts"
+                    },
+                    {
+                        "divider": false,
+                        "items": [
+                            {
+                                "_id": "segment_status_response",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "all_segments_response",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "segment_summary_v2",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "contact_response",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "segment_response",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "errors-seg-v2",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "segment_write_v2",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "segment_update",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "_metadata",
+                                "type": "schemas"
+                            },
+                            {
+                                "_id": "POST_segments",
+                                "type": "endpoints"
+                            },
+                            {
+                                "_id": "errors",
+                                "type": "traits"
+                            },
+                            {
+                                "_id": "PATCH_segments-segment_id",
+                                "type": "endpoints"
+                            },
+                            {
+                                "_id": "GET_segments",
+                                "type": "endpoints"
+                            },
+                            {
+                                "_id": "GET_segments-segment_id",
+                                "type": "endpoints"
+                            },
+                            {
+                                "_id": "DELETE_segments-segment_id",
+                                "type": "endpoints"
+                            }
+                        ],
+                        "name": "Segmenting Contacts V2 - Beta"
                     },
                     {
                         "divider": false,
@@ -44006,6 +44701,12 @@
                 "id": "on-behalf-of",
                 "name": "On Behalf of Subuser",
                 "content": "Use the *on-behalf-of* header to make calls for a particular subuser through the parent account. Use this header to automate bulk updates, or to administer a subuser without changing the authentication in your code.\n\nTo use the feature, add the *on-behalf-of* header:\n\n`on-behalf-of: << subuser username >>`\n\nThis header generates the API call as if the subuser account was making the call.\n\nWhen authenticating using the *on-behalf-of* header, you need to use the API key credentials of the **parent account**. For example:\n\n```curl --request GET \\\n  --url 'https://api.sendgrid.com/v3/stats?start_date=2018-02-01&aggregated_by=day' \\\n  --header 'authorization: Bearer << API KEY >>' \\\n  --header 'on-behalf-of: << subuser username >>'\n  ```\n\n**Note**: The *on-behalf-of* header does not work with the mail.send API.",
+                "public": true
+            },
+            "tip": {
+                "id": "tip",
+                "name": "Tip",
+                "content": "Exporting your contacts regularly as a backup to avoid issues is a recommended best practice.",
                 "public": true
             }
         },
