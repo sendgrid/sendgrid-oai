@@ -13718,7 +13718,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13766,7 +13766,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
                 "parameters": [
                     {
                         "name": "parent_list_ids",
@@ -13829,7 +13829,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13874,7 +13874,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
                 "parameters": [
                     {
                         "name": "contacts_sample",
@@ -13915,7 +13915,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
                 "responses": {
                     "202": {
                         "description": ""
