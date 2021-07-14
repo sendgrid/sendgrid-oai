@@ -1,6 +1,13 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-07-14] Version 1.5.1
+--------------------------
+**Library - Docs**
+- [PR #87](https://github.com/sendgrid/sendgrid-oai/pull/87): Fix typo on a documentation link to a form. Thanks to [@maylonpedroso](https://github.com/maylonpedroso)!
+- [PR #86](https://github.com/sendgrid/sendgrid-oai/pull/86): fix contacts endpoint, add v2 segmentation beta docs. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+
 [2021-06-30] Version 1.5.0
 --------------------------
 **Library - Chore**
