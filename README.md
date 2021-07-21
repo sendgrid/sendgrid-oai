@@ -1,7 +1,6 @@
 ![SendGrid Logo](https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
 
 [![BuildStatus](https://travis-ci.com/sendgrid/sendgrid-oai.svg?branch=main)](https://travis-ci.com/sendgrid/sendgrid-oai)
-[![Email Notifications Badge](https://dx.sendgrid.com/badge/oai)](https://dx.sendgrid.com/newsletter/oai)
 [![Twitter Follow](https://img.shields.io/twitter/follow/sendgrid.svg?style=social&label=Follow)](https://twitter.com/sendgrid)
 [![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-oai.svg)](https://github.com/sendgrid/sendgrid-oai/graphs/contributors)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
