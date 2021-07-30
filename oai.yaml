@@ -95,13 +95,13 @@ paths:
                       $ref: '#/definitions/to_email_array'
                     cc:
                       type: array
-                      description: An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recpient's name.
+                      description: An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
                       maxItems: 1000
                       items:
                         $ref: '#/definitions/cc_bcc_email_object'
                     bcc:
                       type: array
-                      description: An array of recipients who will receive a blind carbon copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recpient's name.
+                      description: An array of recipients who will receive a blind carbon copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
                       maxItems: 1000
                       items:
                         $ref: '#/definitions/cc_bcc_email_object'
@@ -11404,7 +11404,7 @@ paths:
                       type: string
       security:
         - Authorization: []
-  /segments/2.0:
+  /marketing/segments/2.0:
     post:
       operationId: POST_segments
       summary: Create Segment
@@ -11483,7 +11483,7 @@ paths:
             $ref: '#/definitions/errors-seg-v2'
       security:
         - Authorization: []
-  '/segments/2.0/{segment_id}':
+  '/marketing/segments/2.0/{segment_id}':
     parameters:
       - name: segment_id
         in: path
