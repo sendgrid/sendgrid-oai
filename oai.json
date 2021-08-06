@@ -31,7 +31,7 @@
                 "tags": [
                     "Mail Send"
                 ],
-                "description": "The Mail Send endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).\n\n## Helper Libraries\n\nTwilio SendGrid provides libraries to help you quickly and easily integrate with the v3 Web API in 7 different languages:\n\n* [C#](https://github.com/sendgrid/sendgrid-csharp) \n* [Go](https://github.com/sendgrid/sendgrid-go)\n* [Java](https://github.com/sendgrid/sendgrid-java)\n* [Node JS](https://github.com/sendgrid/sendgrid-nodejs)\n* [PHP](https://github.com/sendgrid/sendgrid-php)\n* [Python](https://github.com/sendgrid/sendgrid-python)\n* [Ruby](https://github.com/sendgrid/sendgrid-ruby)\n\n## Dynamic Transactional Templates and Handlebars\n\nIn order to send a dynamic template, specify the template ID with the `template_id` parameter. \n\nTo specify handlebar substitutions, define your substitutions in the request JSON with this syntax:\n\n```\n\"dynamic_template_data\": {\n      \"guest\": \"Jane Doe\",\n      \"partysize\": \"4\",\n      \"english\": true,\n      \"date\": \"April 1st, 2021\"\n    }\n```\n\nFor more information about Dynamic Transactional Templates and Handlebars, see our documentation and reference pages.\n\n* [How to send an email with Dynamic Transactional Templates\n](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)\n* [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) \n\n## Mail body compression\n\nMail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).\n\nTo use mail body compression:\n\n1. Add a `Content-Encoding` header, with a value of `gzip`.  \n   a. `Content-Encoding: gzip` \n2. Send the gzip as a data-binary.  \n   a. `--data-binary '@data.json.gz'\n`",
+                "description": "The Mail Send endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).\n\n## Helper Libraries\n\nTwilio SendGrid provides libraries to help you quickly and easily integrate with the v3 Web API in 7 different languages:\n\n* [C#](https://github.com/sendgrid/sendgrid-csharp) \n* [Go](https://github.com/sendgrid/sendgrid-go)\n* [Java](https://github.com/sendgrid/sendgrid-java)\n* [Node JS](https://github.com/sendgrid/sendgrid-nodejs)\n* [PHP](https://github.com/sendgrid/sendgrid-php)\n* [Python](https://github.com/sendgrid/sendgrid-python)\n* [Ruby](https://github.com/sendgrid/sendgrid-ruby)\n\n## Dynamic Transactional Templates and Handlebars\n\nIn order to send a dynamic template, specify the template ID with the `template_id` parameter. \n\nTo specify handlebar substitutions, define your substitutions in the request JSON with this syntax:\n\n```\n\"dynamic_template_data\": {\n      \"guest\": \"Jane Doe\",\n      \"partysize\": \"4\",\n      \"english\": true,\n      \"date\": \"April 1st, 2021\"\n    }\n```\n\nFor more information about Dynamic Transactional Templates and Handlebars, see our documentation and reference pages.\n\n* [How to send an email with Dynamic Transactional Templates\n](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)\n* [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) \n\n## Mail body compression\n\nMail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).\n\nTo use mail body compression:\n\n1. Add a `Content-Encoding` header, with a value of `gzip`.  \n   a. `Content-Encoding: gzip` \n2. Send the gzip as a data-binary.  \n   a. `--data-binary '@data.json.gz'\n`\n\n## reply_to_list\nConsiderations for using this feature:\n\n* reply_to is mutually exclusive with reply_to_list. If both are used, then the API call will be rejected. \n* The reply_to_list object, when used, must at least have an email parameter and may also contain a name parameter.\n* Each email address in the reply_to_list should be unique.\n* There is a limit of 1000 reply_to_list emails per mail/send request.\n* In SMTP calls we will omit any invalid emails\n\n\n### List of 400 error messages:\n\n* reply_to is mutually exclusive with reply_to_list.\n* The reply_to_list object, when used, must at least have an email parameter and may also contain a name parameter\n* Each email address in the reply_to_list should be unique.\n* There is a limit of %d reply_to emails per mail/send request.\n* The reply_to_list email does not contain a valid address.\n* The reply_to_list email exceeds the maximum total length of %d characters.\n* The reply_to_list email parameter is required.",
                 "parameters": [
                     {
                         "name": "body",
@@ -41,267 +41,187 @@
                             "properties": {
                                 "personalizations": {
                                     "type": "array",
-                                    "description": "An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. See our [Personalizations documentation](https://sendgrid.com/docs/for-developers/sending-email/personalizations/) for examples.",
-                                    "uniqueItems": false,
-                                    "maxItems": 1000,
                                     "items": {
                                         "type": "object",
                                         "properties": {
-                                            "from": {
-                                                "$ref": "#/definitions/from_email_object"
-                                            },
                                             "to": {
-                                                "$ref": "#/definitions/to_email_array"
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "email": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
                                             },
                                             "cc": {
                                                 "type": "array",
+<<<<<<< Updated upstream
                                                 "description": "An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.",
                                                 "maxItems": 1000,
+=======
+>>>>>>> Stashed changes
                                                 "items": {
-                                                    "$ref": "#/definitions/cc_bcc_email_object"
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "email": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
                                                 }
                                             },
                                             "bcc": {
                                                 "type": "array",
+<<<<<<< Updated upstream
                                                 "description": "An array of recipients who will receive a blind carbon copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.",
                                                 "maxItems": 1000,
+=======
+>>>>>>> Stashed changes
                                                 "items": {
-                                                    "$ref": "#/definitions/cc_bcc_email_object"
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "email": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
                                                 }
                                             },
-                                            "subject": {
-                                                "type": "string",
-                                                "description": "The subject of your email. See character length requirements according to [RFC 2822](http://stackoverflow.com/questions/1592291/what-is-the-email-subject-length-limit#answer-1592310).",
-                                                "minLength": 1
-                                            },
-                                            "headers": {
+                                            "from": {
                                                 "type": "object",
-                                                "description": "A collection of JSON key/value pairs allowing you to specify handling instructions for your email. You may not overwrite the following headers: `x-sg-id`, `x-sg-eid`, `received`, `dkim-signature`, `Content-Type`, `Content-Transfer-Encoding`, `To`, `From`, `Subject`, `Reply-To`, `CC`, `BCC`"
-                                            },
-                                            "substitutions": {
-                                                "type": "object",
-                                                "description": "Substitutions allow you to insert data without using Dynamic Transactional Templates. This field should **not** be used in combination with a Dynamic Transactional Template, which can be identified by a `template_id` starting with `d-`. This field is a collection of key/value pairs following the pattern \"substitution_tag\":\"value to substitute\". The key/value pairs must be strings. These substitutions will apply to the text and html content of the body of your email, in addition to the `subject` and `reply-to` parameters. The total collective size of your substitutions may not exceed 10,000 bytes per personalization object.",
-                                                "maxProperties": 10000
-                                            },
-                                            "dynamic_template_data": {
-                                                "type": "object",
-                                                "description": "Dynamic template data is available using Handlebars syntax in Dynamic Transactional Templates. This field should be used in combination with a Dynamic Transactional Template, which can be identified by a `template_id` starting with `d-`. This field is a collection of key/value pairs following the pattern \"variable_name\":\"value to insert\"."
-                                            },
-                                            "custom_args": {
-                                                "type": "object",
-                                                "description": "Values that are specific to this personalization that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This field may not exceed 10,000 bytes.",
-                                                "maxProperties": 10000
-                                            },
-                                            "send_at": {
-                                                "type": "integer",
-                                                "description": "A unix timestamp allowing you to specify when your email should be delivered. Scheduling delivery more than 72 hours in advance is forbidden."
+                                                "properties": {
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                }
                                             }
-                                        },
-                                        "required": [
-                                            "to"
-                                        ]
+                                        }
                                     }
                                 },
                                 "from": {
-                                    "$ref": "#/definitions/from_email_object"
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "reply_to": {
-                                    "$ref": "#/definitions/reply_to_email_object"
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "subject": {
-                                    "type": "string",
-                                    "description": "The global or 'message level' subject of your email. This may be overridden by subject lines set in personalizations.",
-                                    "minLength": 1
+                                    "type": "string"
                                 },
                                 "content": {
                                     "type": "array",
-                                    "description": "An array where you can specify the content of your email. You can include multiple [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of content, but you must specify at least one MIME type. To include more than one MIME type, add another object to the array containing the `type` and `value` parameters.",
                                     "items": {
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "type": "string",
-                                                "description": "The MIME type of the content you are including in your email (e.g., `“text/plain”` or `“text/html”`).",
-                                                "minLength": 1
+                                                "type": "string"
                                             },
                                             "value": {
-                                                "type": "string",
-                                                "description": "The actual content of the specified MIME type that you are including in your email.",
-                                                "minLength": 1
+                                                "type": "string"
                                             }
-                                        },
-                                        "required": [
-                                            "type",
-                                            "value"
-                                        ]
+                                        }
                                     }
                                 },
                                 "attachments": {
                                     "type": "array",
-                                    "description": "An array of objects where you can specify any attachments you want to include.",
                                     "items": {
                                         "type": "object",
                                         "properties": {
                                             "content": {
-                                                "type": "string",
-                                                "description": "The Base64 encoded content of the attachment.",
-                                                "minLength": 1
-                                            },
-                                            "type": {
-                                                "type": "string",
-                                                "description": "The MIME type of the content you are attaching (e.g., `“text/plain”` or `“text/html”`).",
-                                                "minLength": 1
+                                                "type": "string"
                                             },
                                             "filename": {
-                                                "type": "string",
-                                                "description": "The attachment's filename."
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
                                             },
                                             "disposition": {
-                                                "type": "string",
-                                                "default": "attachment",
-                                                "description": "The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.",
-                                                "enum": [
-                                                    "inline",
-                                                    "attachment"
-                                                ]
-                                            },
-                                            "content_id": {
-                                                "type": "string",
-                                                "description": "The attachment's content ID. This is used when the disposition is set to `“inline”` and the attachment is an image, allowing the file to be displayed within the body of your email."
+                                                "type": "string"
                                             }
-                                        },
-                                        "required": [
-                                            "content",
-                                            "filename"
-                                        ]
+                                        }
                                     }
-                                },
-                                "template_id": {
-                                    "type": "string",
-                                    "description": "An email template ID. A template that contains a subject and content — either text or html — will override any subject and content values specified at the personalizations or message level."
-                                },
-                                "headers": {
-                                    "description": "An object containing key/value pairs of header names and the value to substitute for them. The key/value pairs must be strings. You must ensure these are properly encoded if they contain unicode characters. These headers cannot be one of the reserved headers.",
-                                    "type": "object"
                                 },
                                 "categories": {
                                     "type": "array",
-                                    "description": "An array of category names for this message. Each category name may not exceed 255 characters. ",
-                                    "uniqueItems": true,
-                                    "maxItems": 10,
                                     "items": {
-                                        "type": "string",
-                                        "maxLength": 255
+                                        "type": "string"
                                     }
                                 },
-                                "custom_args": {
-                                    "description": "Values that are specific to the entire send that will be carried along with the email and its activity data.  Key/value pairs must be strings. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by `custom_args` set at the personalizations level. Total `custom_args` size may not exceed 10,000 bytes.",
-                                    "type": "string"
-                                },
                                 "send_at": {
-                                    "type": "integer",
-                                    "description": "A unix timestamp allowing you to specify when you want your email to be delivered. This may be overridden by the `send_at` parameter set at the personalizations level. Delivery cannot be scheduled more than 72 hours in advance. If you have the flexibility, it's better to schedule mail for off-peak times. Most emails are scheduled and sent at the top of the hour or half hour. Scheduling email to avoid peak times — for example, scheduling at 10:53 — can result in lower deferral rates due to the reduced traffic during off-peak times."
+                                    "type": "integer"
                                 },
                                 "batch_id": {
-                                    "type": "string",
-                                    "description": "An ID representing a batch of emails to be sent at the same time. Including a `batch_id` in your request allows you include this email in that batch. It also enables you to cancel or pause the delivery of that batch. For more information, see the [Cancel Scheduled Sends API](https://sendgrid.com/docs/api-reference/)."
+                                    "type": "string"
                                 },
                                 "asm": {
                                     "type": "object",
-                                    "description": "An object allowing you to specify how to handle unsubscribes.",
                                     "properties": {
                                         "group_id": {
-                                            "type": "integer",
-                                            "description": "The unsubscribe group to associate with this email."
+                                            "type": "integer"
                                         },
                                         "groups_to_display": {
                                             "type": "array",
-                                            "description": "An array containing the unsubscribe groups that you would like to be displayed on the unsubscribe preferences page.",
-                                            "maxItems": 25,
                                             "items": {
                                                 "type": "integer"
                                             }
                                         }
-                                    },
-                                    "required": [
-                                        "group_id"
-                                    ]
+                                    }
                                 },
                                 "ip_pool_name": {
-                                    "type": "string",
-                                    "description": "The IP Pool that you would like to send this email from.",
-                                    "minLength": 2,
-                                    "maxLength": 64
+                                    "type": "string"
                                 },
                                 "mail_settings": {
                                     "type": "object",
-                                    "description": "A collection of different mail settings that you can use to specify how you would like this email to be handled.",
                                     "properties": {
                                         "bypass_list_management": {
                                             "type": "object",
-                                            "description": "Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. This filter cannot be combined with any other bypass filters. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.",
                                             "properties": {
                                                 "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
-                                                }
-                                            }
-                                        },
-                                        "bypass_spam_management": {
-                                            "type": "object",
-                                            "description": "Allows you to bypass the spam report list to ensure that the email is delivered to recipients. Bounce and unsubscribe lists will still be checked; addresses on these other lists will not receive the message. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.",
-                                            "properties": {
-                                                "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
-                                                }
-                                            }
-                                        },
-                                        "bypass_bounce_management": {
-                                            "type": "object",
-                                            "description": "Allows you to bypass the bounce list to ensure that the email is delivered to recipients. Spam report and unsubscribe lists will still be checked; addresses on these other lists will not receive the message. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.",
-                                            "properties": {
-                                                "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
-                                                }
-                                            }
-                                        },
-                                        "bypass_unsubscribe_management": {
-                                            "type": "object",
-                                            "description": "Allows you to bypass the global unsubscribe list to ensure that the email is delivered to recipients. Bounce and spam report lists will still be checked; addresses on these other lists will not receive the message. This filter applies only to global unsubscribes and will not bypass group unsubscribes. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.",
-                                            "properties": {
-                                                "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
+                                                    "type": "boolean"
                                                 }
                                             }
                                         },
                                         "footer": {
                                             "type": "object",
-                                            "description": "The default footer that you would like included on every email.",
                                             "properties": {
                                                 "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
-                                                },
-                                                "text": {
-                                                    "type": "string",
-                                                    "description": "The plain text content of your footer."
-                                                },
-                                                "html": {
-                                                    "type": "string",
-                                                    "description": "The HTML content of your footer."
+                                                    "type": "boolean"
                                                 }
                                             }
                                         },
                                         "sandbox_mode": {
                                             "type": "object",
-                                            "description": "Sandbox Mode allows you to send a test email to ensure that your request body is valid and formatted correctly.",
                                             "properties": {
                                                 "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
+                                                    "type": "boolean"
                                                 }
                                             }
                                         }
@@ -309,97 +229,63 @@
                                 },
                                 "tracking_settings": {
                                     "type": "object",
-                                    "description": "Settings to determine how you would like to track the metrics of how your recipients interact with your email.",
                                     "properties": {
                                         "click_tracking": {
                                             "type": "object",
-                                            "description": "Allows you to track if a recipient clicked a link in your email.",
                                             "properties": {
                                                 "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
+                                                    "type": "boolean"
                                                 },
                                                 "enable_text": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting should be included in the `text/plain` portion of your email."
+                                                    "type": "boolean"
                                                 }
                                             }
                                         },
                                         "open_tracking": {
                                             "type": "object",
-                                            "description": "Allows you to track if the email was opened by including a single pixel image in the body of the content. When the pixel is loaded, Twilio SendGrid can log that the email was opened.",
                                             "properties": {
                                                 "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
+                                                    "type": "boolean"
                                                 },
                                                 "substitution_tag": {
-                                                    "type": "string",
-                                                    "description": "Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel."
+                                                    "type": "string"
                                                 }
                                             }
                                         },
                                         "subscription_tracking": {
                                             "type": "object",
-                                            "description": "Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.",
                                             "properties": {
                                                 "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
-                                                },
-                                                "text": {
-                                                    "type": "string",
-                                                    "description": "Text to be appended to the email with the subscription tracking link. You may control where the link is by using the tag <% %>"
-                                                },
-                                                "html": {
-                                                    "type": "string",
-                                                    "description": "HTML to be appended to the email with the subscription tracking link. You may control where the link is by using the tag <% %>"
-                                                },
-                                                "substitution_tag": {
-                                                    "type": "string",
-                                                    "description": "A tag that will be replaced with the unsubscribe URL. for example: `[unsubscribe_url]`. If this parameter is used, it will override both the `text` and `html` parameters. The URL of the link will be placed at the substitution tag’s location with no additional formatting."
+                                                    "type": "boolean"
                                                 }
                                             }
-                                        },
-                                        "ganalytics": {
-                                            "type": "object",
-                                            "description": "Allows you to enable tracking provided by Google Analytics.",
-                                            "properties": {
-                                                "enable": {
-                                                    "type": "boolean",
-                                                    "description": "Indicates if this setting is enabled."
-                                                },
-                                                "utm_source": {
-                                                    "type": "string",
-                                                    "description": "Name of the referrer source. (e.g. Google, SomeDomain.com, or Marketing Email)"
-                                                },
-                                                "utm_medium": {
-                                                    "type": "string",
-                                                    "description": "Name of the marketing medium. (e.g. Email)"
-                                                },
-                                                "utm_term": {
-                                                    "type": "string",
-                                                    "description": "Used to identify any paid keywords."
-                                                },
-                                                "utm_content": {
-                                                    "type": "string",
-                                                    "description": "Used to differentiate your campaign from advertisements."
-                                                },
-                                                "utm_campaign": {
-                                                    "type": "string",
-                                                    "description": "The name of the campaign."
-                                                }
+                                        }
+                                    }
+                                },
+                                "reply_to_list": {
+                                    "type": [
+                                        "string",
+                                        "array"
+                                    ],
+                                    "description": "An array of recipients who will receive replies and/or bounces. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name. You can either choose to use “reply_to” field or “reply_to_list” but not both.",
+                                    "uniqueItems": true,
+                                    "maxItems": 1000,
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "description": "The email address where any replies or bounces will be returned.",
+                                                "format": "email"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "description": "A name or title associated with the `reply_to_list` email address."
                                             }
                                         }
                                     }
                                 }
                             },
-                            "required": [
-                                "personalizations",
-                                "from",
-                                "subject",
-                                "content"
-                            ],
                             "example": {
                                 "personalizations": [
                                     {
@@ -12496,7 +12382,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. \n\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to get the resulting contact's ID or confirm your contacts have been updated or added, you can use the \"Get Contacts by Emails\" endpoint. \n\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the \"Create Custom Field Definition\" endpoint.\n\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the \"Import Contacts Status\" endpoint.\n\nIf the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. The contact to update will be determined only by the `email` field and any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.\n\nThe email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.",
+                "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. \n\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to get the resulting contact's ID or confirm your contacts have been updated or added, you can use the \"Get Contacts by Emails\" endpoint. \n\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the \"Create Custom Field Definition\" endpoint.\n\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the \"Import Contacts Status\" endpoint.\n\nIf the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. The contact to update will be determined only by the `email` field and any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.\n\nThe email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "body",
@@ -12580,7 +12466,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to delete one or more contacts**.\n\nThe query parameter `ids` must set to a comma-separated list of contact IDs for bulk contact deletion.\n\nThe query parameter `delete_all_contacts` must be set to `\"true\"` to delete **all** contacts. \n\nYou must set either `ids` or `delete_all_contacts`.\n\nDeletion jobs are processed asynchronously.",
+                "description": "**This endpoint can be used to delete one or more contacts**.\n\nThe query parameter `ids` must set to a comma-separated list of contact IDs for bulk contact deletion.\n\nThe query parameter `delete_all_contacts` must be set to `\"true\"` to delete **all** contacts. \n\nYou must set either `ids` or `delete_all_contacts`.\n\nDeletion jobs are processed asynchronously.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "delete_all_contacts",
@@ -12656,7 +12542,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint will return up to 50 of the most recent contacts uploaded or attached to a list**. \n\nThis list will then be sorted by email address.\n\nThe full contact count is also returned.\n\nPlease note that pagination of the contacts has been deprecated.",
+                "description": "**This endpoint will return up to 50 of the most recent contacts uploaded or attached to a list**. \n\nThis list will then be sorted by email address.\n\nThe full contact count is also returned.\n\nPlease note that pagination of the contacts has been deprecated.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -12722,7 +12608,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint returns the total number of contacts you have stored.**",
+                "description": "**This endpoint returns the total number of contacts you have stored.**\n\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -12787,7 +12673,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**Use this endpoint to export lists or segments of contacts**.\n\nIf you would just like to have a link to the exported list sent to your email set the `notifications.email` option to `true` in the `POST` payload.\n\nIf you would like to download the list, take the `id` that is returned and use the \"Export Contacts Status\" endpoint to get the `urls`. Once you have the list of URLs, make a `GET` request to each URL provided to download your CSV file(s).\n\nYou specify the segements and or/contact lists you wish to export by providing the relevant IDs in, respectively, the `segment_ids` and `list_ids` fields in the request body.\n\nThe lists will be provided in either JSON or CSV files. To specify which of these you would required, set the request body `file_type` field to `json` or `csv`.\n\nYou can also specify a maximum file size (in MB). If the export file is larger than this, it will be split into multiple files.",
+                "description": "**Use this endpoint to export lists or segments of contacts**.\n\nIf you would just like to have a link to the exported list sent to your email set the `notifications.email` option to `true` in the `POST` payload.\n\nIf you would like to download the list, take the `id` that is returned and use the \"Export Contacts Status\" endpoint to get the `urls`. Once you have the list of URLs, make a `GET` request to each URL provided to download your CSV file(s).\n\nYou specify the segements and or/contact lists you wish to export by providing the relevant IDs in, respectively, the `segment_ids` and `list_ids` fields in the request body.\n\nThe lists will be provided in either JSON or CSV files. To specify which of these you would required, set the request body `file_type` field to `json` or `csv`.\n\nYou can also specify a maximum file size (in MB). If the export file is larger than this, it will be split into multiple files.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "body",
@@ -12894,7 +12780,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**Use this endpoint to retrieve details of all current exported jobs**.\n\nIt will return an array of objects, each of which records an export job in flight or recently completed. \n\nEach object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files — there will be more than one if you specified a maximum file size in your initial export request.\n\nUse this endpoint if you have exports in flight but do not know their IDs, which are required for the \"Export Contacts Status\" endpoint.",
+                "description": "**Use this endpoint to retrieve details of all current exported jobs**.\n\nIt will return an array of objects, each of which records an export job in flight or recently completed. \n\nEach object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files — there will be more than one if you specified a maximum file size in your initial export request.\n\nUse this endpoint if you have exports in flight but do not know their IDs, which are required for the \"Export Contacts Status\" endpoint.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -13068,7 +12954,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint returns the full details and all fields for the specified contact**.\n\nThe \"Get Contacts by Emails\" endpoint can be used to get the ID of a contact.",
+                "description": "**This endpoint returns the full details and all fields for the specified contact**.\n\nThe \"Get Contacts by Emails\" endpoint can be used to get the ID of a contact.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -13103,7 +12989,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**Use this endpoint to locate contacts**.\n\nThe request body's `query` field accepts valid [SGQL](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) for searching for a contact.\n\nBecause contact emails are stored in lower case, using SGQL to search by email address requires the provided email address to be in lower case. The SGQL `lower()` function can be used for this.\n\nOnly the first 50 contacts that meet the search criteria will be returned.\n\nIf the query takes longer than 20 seconds, a `408 Request Timeout` status will be returned.\n\nFormatting the `created_at` and `updated_at` values as Unix timestamps is deprecated. Instead they are returned as ISO format as string.",
+                "description": "**Use this endpoint to locate contacts**.\n\nThe request body's `query` field accepts valid [SGQL](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) for searching for a contact.\n\nBecause contact emails are stored in lower case, using SGQL to search by email address requires the provided email address to be in lower case. The SGQL `lower()` function can be used for this.\n\nOnly the first 50 contacts that meet the search criteria will be returned.\n\nIf the query takes longer than 20 seconds, a `408 Request Timeout` status will be returned.\n\nFormatting the `created_at` and `updated_at` values as Unix timestamps is deprecated. Instead they are returned as ISO format as string.\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13218,7 +13104,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. \n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the \"Get All Field Definitions\" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H 'HEADER_GIVEN'`\n\nIf you'd like to monitor the status of your import job, use the `job_id` and the \"Import Contacts Status\" endpoint.",
+                "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. \n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the \"Get All Field Definitions\" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H 'HEADER_GIVEN'`\n\nIf you'd like to monitor the status of your import job, use the `job_id` and the \"Import Contacts Status\" endpoint.\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13369,7 +13255,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to check the status of a contact import job**. \n\nUse the `job_id` from the \"Improt Contacts,\" \"Add or Update a Contact,\" or \"Delete Contacts\" endpoints as the `id` in the path parameter.\n\nIf there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.\n\nThe job `status` field indicates whether the job is `pending`, `completed`, `errored`, or `failed`. \n\nPending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.\n\nThe `results` object will have fields depending on the job type.",
+                "description": "**This endpoint can be used to check the status of a contact import job**. \n\nUse the `job_id` from the \"Improt Contacts,\" \"Add or Update a Contact,\" or \"Delete Contacts\" endpoints as the `id` in the path parameter.\n\nIf there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.\n\nThe job `status` field indicates whether the job is `pending`, `completed`, `errored`, or `failed`. \n\nPending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.\n\nThe `results` object will have fields depending on the job type.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -13423,7 +13309,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to check the status of a contact export job**. \n\nTo use this call, you will need the `id` from the \"Export Contacts\" call.\n\nIf you would like to download a list, take the `id` that is returned from the \"Export Contacts\" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).",
+                "description": "**This endpoint can be used to check the status of a contact export job**. \n\nTo use this call, you will need the `id` from the \"Export Contacts\" call.\n\nIf you would like to download a list, take the `id` that is returned from the \"Export Contacts\" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -13472,7 +13358,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint is used to retrieve a set of contacts identified by their IDs.**\n\nThis can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the \"Get a Contact by ID\" endpoint.\n\nYou can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.",
+                "description": "**This endpoint is used to retrieve a set of contacts identified by their IDs.**\n\nThis can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the \"Get a Contact by ID\" endpoint.\n\nYou can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13541,7 +13427,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses in the search request do not need to match the case in which they're stored, but the email addresses in the result will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the \"Search Contacts\" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the \"Export Contacts\" endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.",
+                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses in the search request do not need to match the case in which they're stored, but the email addresses in the result will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the \"Search Contacts\" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the \"Export Contacts\" endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13718,7 +13604,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13766,7 +13652,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
                 "parameters": [
                     {
                         "name": "parent_list_ids",
@@ -13829,7 +13715,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
                 "parameters": [
                     {
                         "name": "body",
@@ -13874,7 +13760,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
                 "parameters": [
                     {
                         "name": "contacts_sample",
@@ -13915,7 +13801,7 @@
                 "tags": [
                     "Segmenting Contacts V2 - Beta"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
                 "responses": {
                     "202": {
                         "description": ""
@@ -26884,7 +26770,12 @@
                             ]
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
         "/devices/stats": {
