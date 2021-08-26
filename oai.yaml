@@ -64,7 +64,7 @@ paths:
         ](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)
         * [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) 
 
-        ## Mail body compression
+        ## Mail Body Compression
 
         Mail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).
 
@@ -75,6 +75,28 @@ paths:
         2. Send the gzip as a data-binary.  
            a. `--data-binary '@data.json.gz'
         `
+
+        ## Multiple Reply-To Emails
+
+        Using `reply_to_list` allows senders to include more than one recipient email address to receive reply and/or bounce messages from the recipient of the email.
+
+        ### Usage Considerations
+
+        * `reply_to` is mutually exclusive with `reply_to_list`. If both are used, then the API call will be rejected. 
+        * The `reply_to_list` object, when used, must at least have an email parameter and may also contain a name parameter.
+        * Each email address in the `reply_to_list` should be unique.
+        * There is a limit of 1000 `reply_to_list` emails per mail/send request.
+        * In SMTP calls, we will omit any invalid emails.
+
+        ### Possible 400 Error Messages
+
+        * `reply_to` is mutually exclusive with `reply_to_list`.
+        * The `reply_to_list` object, when used, must at least have an email parameter and may also contain a name parameter.
+        * Each email address in the `reply_to_list` should be unique.
+        * There is a limit of X `reply_to` emails per mail/send request.
+        * The `reply_to_list` email does not contain a valid address.
+        * The `reply_to_list` email exceeds the maximum total length of X characters.
+        * The `reply_to_list` email parameter is required.
       parameters:
         - name: body
           in: body
@@ -132,6 +154,23 @@ paths:
                 $ref: '#/definitions/from_email_object'
               reply_to:
                 $ref: '#/definitions/reply_to_email_object'
+              reply_to_list:
+                type: array
+                description: An array of recipients who will receive replies and/or bounces. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name. You can either choose to use “reply_to” field or “reply_to_list” but not both.
+                uniqueItems: true
+                maxItems: 1000
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      description: The email address where any replies or bounces will be returned.
+                      format: email
+                    name:
+                      type: string
+                      description: A name or title associated with the `reply_to_list` email address.
+                  required:
+                    - email
               subject:
                 type: string
                 description: The global or 'message level' subject of your email. This may be overridden by subject lines set in personalizations.
@@ -10503,6 +10542,8 @@ paths:
         If the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. The contact to update will be determined only by the `email` field and any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.
 
         The email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       parameters:
         - name: body
           in: body
@@ -10567,6 +10608,8 @@ paths:
         You must set either `ids` or `delete_all_contacts`.
 
         Deletion jobs are processed asynchronously.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       parameters:
         - name: delete_all_contacts
           in: query
@@ -10624,6 +10667,8 @@ paths:
         The full contact count is also returned.
 
         Please note that pagination of the contacts has been deprecated.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       responses:
         '200':
           description: ''
@@ -10665,7 +10710,11 @@ paths:
       summary: Get Total Contact Count
       tags:
         - Contacts
-      description: '**This endpoint returns the total number of contacts you have stored.**'
+      description: |-
+        **This endpoint returns the total number of contacts you have stored.**
+
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       responses:
         '200':
           description: ''
@@ -10721,6 +10770,8 @@ paths:
         The lists will be provided in either JSON or CSV files. To specify which of these you would required, set the request body `file_type` field to `json` or `csv`.
 
         You can also specify a maximum file size (in MB). If the export file is larger than this, it will be split into multiple files.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       parameters:
         - name: body
           in: body
@@ -10799,6 +10850,8 @@ paths:
         Each object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files — there will be more than one if you specified a maximum file size in your initial export request.
 
         Use this endpoint if you have exports in flight but do not know their IDs, which are required for the "Export Contacts Status" endpoint.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       responses:
         '200':
           description: ''
@@ -10917,6 +10970,8 @@ paths:
         **This endpoint returns the full details and all fields for the specified contact**.
 
         The "Get Contacts by Emails" endpoint can be used to get the ID of a contact.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       responses:
         '200':
           description: ''
@@ -10950,6 +11005,7 @@ paths:
         If the query takes longer than 20 seconds, a `408 Request Timeout` status will be returned.
 
         Formatting the `created_at` and `updated_at` values as Unix timestamps is deprecated. Instead they are returned as ISO format as string.
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       parameters:
         - name: body
           in: body
@@ -11040,6 +11096,7 @@ paths:
         `curl --upload-file "file/path.csv" "URL_GIVEN" -H 'HEADER_GIVEN'`
 
         If you'd like to monitor the status of your import job, use the `job_id` and the "Import Contacts Status" endpoint.
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       parameters:
         - name: body
           in: body
@@ -11140,7 +11197,7 @@ paths:
       description: |-
         **This endpoint can be used to check the status of a contact import job**. 
 
-        Use the `job_id` from the "Improt Contacts," "Add or Update a Contact," or "Delete Contacts" endpoints as the `id` in the path parameter.
+        Use the `job_id` from the "Import Contacts," "Add or Update a Contact," or "Delete Contacts" endpoints as the `id` in the path parameter.
 
         If there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.
 
@@ -11149,6 +11206,8 @@ paths:
         Pending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.
 
         The `results` object will have fields depending on the job type.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       responses:
         '200':
           description: ''
@@ -11188,6 +11247,8 @@ paths:
         To use this call, you will need the `id` from the "Export Contacts" call.
 
         If you would like to download a list, take the `id` that is returned from the "Export Contacts" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       responses:
         '200':
           description: ''
@@ -11224,6 +11285,8 @@ paths:
         This can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the "Get a Contact by ID" endpoint.
 
         You can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       parameters:
         - name: body
           in: body
@@ -11284,6 +11347,8 @@ paths:
         This endpoint returns a `404` status code when no contacts are found for the provided email address(es).
 
         A `400` status code is returned if any searched addresses are invalid.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       parameters:
         - name: body
           in: body
@@ -20280,6 +20345,8 @@ paths:
                       opens: 0
                       unique_clicks: 0
                       unique_opens: 0
+      security:
+        - Authorization: []
   /devices/stats:
     get:
       operationId: GET_devices-stats
