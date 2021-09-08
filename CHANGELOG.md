@@ -1,6 +1,13 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-09-08] Version 1.7.0
+--------------------------
+**Library - Feature**
+- [PR #93](https://github.com/sendgrid/sendgrid-oai/pull/93): add SendGrid OpenAPI v3.0.3 support. Thanks to [@fefi95](https://github.com/fefi95)!
+- [PR #92](https://github.com/sendgrid/sendgrid-oai/pull/92): add reply_to_list. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+
 [2021-08-11] Version 1.6.0
 --------------------------
 **Library - Feature**
