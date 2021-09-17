@@ -198,7 +198,7 @@
                 "tags": [
                     "Mail Send"
                 ],
-                "description": "The Mail Send endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).\n\n## Helper Libraries\n\nTwilio SendGrid provides libraries to help you quickly and easily integrate with the v3 Web API in 7 different languages:\n\n* [C#](https://github.com/sendgrid/sendgrid-csharp) \n* [Go](https://github.com/sendgrid/sendgrid-go)\n* [Java](https://github.com/sendgrid/sendgrid-java)\n* [Node JS](https://github.com/sendgrid/sendgrid-nodejs)\n* [PHP](https://github.com/sendgrid/sendgrid-php)\n* [Python](https://github.com/sendgrid/sendgrid-python)\n* [Ruby](https://github.com/sendgrid/sendgrid-ruby)\n\n## Dynamic Transactional Templates and Handlebars\n\nIn order to send a dynamic template, specify the template ID with the `template_id` parameter. \n\nTo specify handlebar substitutions, define your substitutions in the request JSON with this syntax:\n\n```\n\"dynamic_template_data\": {\n      \"guest\": \"Jane Doe\",\n      \"partysize\": \"4\",\n      \"english\": true,\n      \"date\": \"April 1st, 2021\"\n    }\n```\n\nFor more information about Dynamic Transactional Templates and Handlebars, see our documentation and reference pages.\n\n* [How to send an email with Dynamic Transactional Templates\n](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)\n* [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) \n\n## Mail body compression\n\nMail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).\n\nTo use mail body compression:\n\n1. Add a `Content-Encoding` header, with a value of `gzip`.  \n   a. `Content-Encoding: gzip` \n2. Send the gzip as a data-binary.  \n   a. `--data-binary '@data.json.gz'\n`",
+                "description": "The Mail Send endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).\n\n## Helper Libraries\n\nTwilio SendGrid provides libraries to help you quickly and easily integrate with the v3 Web API in 7 different languages:\n\n* [C#](https://github.com/sendgrid/sendgrid-csharp) \n* [Go](https://github.com/sendgrid/sendgrid-go)\n* [Java](https://github.com/sendgrid/sendgrid-java)\n* [Node JS](https://github.com/sendgrid/sendgrid-nodejs)\n* [PHP](https://github.com/sendgrid/sendgrid-php)\n* [Python](https://github.com/sendgrid/sendgrid-python)\n* [Ruby](https://github.com/sendgrid/sendgrid-ruby)\n\n## Dynamic Transactional Templates and Handlebars\n\nIn order to send a dynamic template, specify the template ID with the `template_id` parameter. \n\nTo specify handlebar substitutions, define your substitutions in the request JSON with this syntax:\n\n```\n\"dynamic_template_data\": {\n      \"guest\": \"Jane Doe\",\n      \"partysize\": \"4\",\n      \"english\": true,\n      \"date\": \"April 1st, 2021\"\n    }\n```\n\nFor more information about Dynamic Transactional Templates and Handlebars, see our documentation and reference pages.\n\n* [How to send an email with Dynamic Transactional Templates\n](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)\n* [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) \n\n## Mail Body Compression\n\nMail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).\n\nTo use mail body compression:\n\n1. Add a `Content-Encoding` header, with a value of `gzip`.  \n   a. `Content-Encoding: gzip` \n2. Send the gzip as a data-binary.  \n   a. `--data-binary '@data.json.gz'\n`\n\n## Multiple Reply-To Emails\n\nUsing `reply_to_list` allows senders to include more than one recipient email address to receive reply and/or bounce messages from the recipient of the email.\n\n### Usage Considerations\n\n* `reply_to` is mutually exclusive with `reply_to_list`. If both are used, then the API call will be rejected. \n* The `reply_to_list` object, when used, must at least have an email parameter and may also contain a name parameter.\n* Each email address in the `reply_to_list` should be unique.\n* There is a limit of 1000 `reply_to_list` emails per mail/send request.\n* In SMTP calls, we will omit any invalid emails.\n\n### Possible 400 Error Messages\n\n* `reply_to` is mutually exclusive with `reply_to_list`.\n* The `reply_to_list` object, when used, must at least have an email parameter and may also contain a name parameter.\n* Each email address in the `reply_to_list` should be unique.\n* There is a limit of X `reply_to` emails per mail/send request.\n* The `reply_to_list` email does not contain a valid address.\n* The `reply_to_list` email exceeds the maximum total length of X characters.\n* The `reply_to_list` email parameter is required.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -273,6 +273,29 @@
                                     },
                                     "reply_to": {
                                         "$ref": "#/components/schemas/reply_to_email_object"
+                                    },
+                                    "reply_to_list": {
+                                        "type": "array",
+                                        "description": "An array of recipients who will receive replies and/or bounces. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name. You can either choose to use “reply_to” field or “reply_to_list” but not both.",
+                                        "uniqueItems": true,
+                                        "maxItems": 1000,
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "email": {
+                                                    "type": "string",
+                                                    "description": "The email address where any replies or bounces will be returned.",
+                                                    "format": "email"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "A name or title associated with the `reply_to_list` email address."
+                                                }
+                                            },
+                                            "required": [
+                                                "email"
+                                            ]
+                                        }
                                     },
                                     "subject": {
                                         "type": "string",
@@ -15352,7 +15375,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to delete one or more contacts**.\n\nThe query parameter `ids` must set to a comma-separated list of contact IDs for bulk contact deletion.\n\nThe query parameter `delete_all_contacts` must be set to `\"true\"` to delete **all** contacts. \n\nYou must set either `ids` or `delete_all_contacts`.\n\nDeletion jobs are processed asynchronously.",
+                "description": "**This endpoint can be used to delete one or more contacts**.\n\nThe query parameter `ids` must set to a comma-separated list of contact IDs for bulk contact deletion.\n\nThe query parameter `delete_all_contacts` must be set to `\"true\"` to delete **all** contacts. \n\nYou must set either `ids` or `delete_all_contacts`.\n\nDeletion jobs are processed asynchronously.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "parameters": [
                     {
                         "name": "delete_all_contacts",
@@ -15449,7 +15472,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint will return up to 50 of the most recent contacts uploaded or attached to a list**. \n\nThis list will then be sorted by email address.\n\nThe full contact count is also returned.\n\nPlease note that pagination of the contacts has been deprecated.",
+                "description": "**This endpoint will return up to 50 of the most recent contacts uploaded or attached to a list**. \n\nThis list will then be sorted by email address.\n\nThe full contact count is also returned.\n\nPlease note that pagination of the contacts has been deprecated.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -15536,7 +15559,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint returns the total number of contacts you have stored.**",
+                "description": "**This endpoint returns the total number of contacts you have stored.**\n\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -16115,7 +16138,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. \n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the \"Get All Field Definitions\" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H 'HEADER_GIVEN'`\n\nIf you'd like to monitor the status of your import job, use the `job_id` and the \"Import Contacts Status\" endpoint.",
+                "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. \n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the \"Get All Field Definitions\" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H 'HEADER_GIVEN'`\n\nIf you'd like to monitor the status of your import job, use the `job_id` and the \"Import Contacts Status\" endpoint.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -16289,7 +16312,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to check the status of a contact import job**. \n\nUse the `job_id` from the \"Improt Contacts,\" \"Add or Update a Contact,\" or \"Delete Contacts\" endpoints as the `id` in the path parameter.\n\nIf there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.\n\nThe job `status` field indicates whether the job is `pending`, `completed`, `errored`, or `failed`. \n\nPending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.\n\nThe `results` object will have fields depending on the job type.",
+                "description": "**This endpoint can be used to check the status of a contact import job**. \n\nUse the `job_id` from the \"Import Contacts,\" \"Add or Update a Contact,\" or \"Delete Contacts\" endpoints as the `id` in the path parameter.\n\nIf there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.\n\nThe job `status` field indicates whether the job is `pending`, `completed`, `errored`, or `failed`. \n\nPending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.\n\nThe `results` object will have fields depending on the job type.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -16362,7 +16385,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint can be used to check the status of a contact export job**. \n\nTo use this call, you will need the `id` from the \"Export Contacts\" call.\n\nIf you would like to download a list, take the `id` that is returned from the \"Export Contacts\" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).",
+                "description": "**This endpoint can be used to check the status of a contact export job**. \n\nTo use this call, you will need the `id` from the \"Export Contacts\" call.\n\nIf you would like to download a list, take the `id` that is returned from the \"Export Contacts\" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "responses": {
                     "200": {
                         "description": "",
@@ -16428,7 +16451,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint is used to retrieve a set of contacts identified by their IDs.**\n\nThis can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the \"Get a Contact by ID\" endpoint.\n\nYou can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.",
+                "description": "**This endpoint is used to retrieve a set of contacts identified by their IDs.**\n\nThis can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the \"Get a Contact by ID\" endpoint.\n\nYou can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -16514,7 +16537,7 @@
                 "tags": [
                     "Contacts"
                 ],
-                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses in the search request do not need to match the case in which they're stored, but the email addresses in the result will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the \"Search Contacts\" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the \"Export Contacts\" endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.",
+                "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched `email` address(es), including any `alternate_emails`.** \n\nEmail addresses are unique to a contact, meaning this endpoint can treat an email address as a primary key to search by. The contact object associated with the address, whether it is their `email` or one of their `alternate_emails` will be returned if matched.\n\nEmail addresses in the search request do not need to match the case in which they're stored, but the email addresses in the result will be all lower case. Empty strings are excluded from the search and will not be returned.\n\nThis endpoint should be used in place of the \"Search Contacts\" endpoint when you can provide exact email addresses and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nIf you need to access a large percentage of your contacts, we recommend exporting your contacts with the \"Export Contacts\" endpoint and filtering the results client side.\n\nThis endpoint returns a `200` status code when any contacts match the address(es) you supplied. When searching multiple addresses in a single request, it is possible that some addresses will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the email address(es) that are not found. \n\nThis endpoint returns a `404` status code when no contacts are found for the provided email address(es).\n\nA `400` status code is returned if any searched addresses are invalid.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -16716,9 +16739,9 @@
                 "operationId": "POST_segments",
                 "summary": "Create Segment",
                 "tags": [
-                    "Segmenting Contacts V2 - Beta"
+                    "Segmenting Contacts V2"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "description": "Segment `name` has to be unique. A user can not create a new segment with an existing segment name.",
                 "requestBody": {
                     "$ref": "#/components/requestBodies/segment_write_v2"
                 },
@@ -16779,9 +16802,9 @@
                 "operationId": "GET_segments",
                 "summary": "Get List of Segments",
                 "tags": [
-                    "Segmenting Contacts V2 - Beta"
+                    "Segmenting Contacts V2"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
+                "description": "The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
                 "parameters": [
                     {
                         "name": "parent_list_ids",
@@ -16869,9 +16892,9 @@
                 "operationId": "PATCH_segments-segment_id",
                 "summary": "Update Segment",
                 "tags": [
-                    "Segmenting Contacts V2 - Beta"
+                    "Segmenting Contacts V2"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**\n\nSegment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+                "description": "Segment `name` has to be unique. A user can not create a new segment with an existing segment name.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -16935,9 +16958,9 @@
                 "operationId": "GET_segments-segment_id",
                 "summary": "Get Segment by ID",
                 "tags": [
-                    "Segmenting Contacts V2 - Beta"
+                    "Segmenting Contacts V2"
                 ],
-                "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+                "description": "",
                 "parameters": [
                     {
                         "name": "contacts_sample",
@@ -32710,6 +32733,11 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
                 "x-stoplight": {
                     "id": "GET_geo-stats",
                     "public": true,
