@@ -30351,7 +30351,7 @@
                                                     "msg_id": "434512dfg",
                                                     "subject": "something sad",
                                                     "to_email": "reject@test.com",
-                                                    "status": "not delivered",
+                                                    "status": "not_delivered",
                                                     "opens_count": 0,
                                                     "clicks_count": 0,
                                                     "last_event_time": "2017-10-13T18:56:21Z",
@@ -30492,7 +30492,7 @@
                                                 "msg_id": "in aliquip id aliqua",
                                                 "subject": "est incididunt adipisicing pariatur",
                                                 "to_email": "send@test.com",
-                                                "status": "not delivered",
+                                                "status": "not_delivered",
                                                 "template_id": "123e4567-e89b-12d3-a456-426655440000",
                                                 "asm_group_id": 11376349,
                                                 "teammate": "",
@@ -30691,7 +30691,7 @@
                                             "description": "Quick summary of the status of a message",
                                             "enum": [
                                                 "processed",
-                                                "not delivered",
+                                                "not_delivered",
                                                 "delivered"
                                             ]
                                         },
@@ -30850,7 +30850,7 @@
                                         "msg_id": "in aliquip id aliqua",
                                         "subject": "est incididunt adipisicing pariatur",
                                         "to_email": "send@test.com",
-                                        "status": "not delivered",
+                                        "status": "not_delivered",
                                         "template_id": "123e4567-e89b-12d3-a456-426655440000",
                                         "asm_group_id": 11376349,
                                         "teammate": "",
@@ -46492,7 +46492,7 @@
                         "enum": [
                             "processed",
                             "delivered",
-                            "not delivered"
+                            "not_delivered"
                         ]
                     }
                 },
@@ -47449,7 +47449,7 @@
                         "description": "Quick summary of the status of a message",
                         "enum": [
                             "processed",
-                            "not delivered",
+                            "not_delivered",
                             "delivered"
                         ]
                     },
@@ -47608,7 +47608,7 @@
                     "msg_id": "in aliquip id aliqua",
                     "subject": "est incididunt adipisicing pariatur",
                     "to_email": "send@test.com",
-                    "status": "not delivered",
+                    "status": "not_delivered",
                     "template_id": "123e4567-e89b-12d3-a456-426655440000",
                     "asm_group_id": 11376349,
                     "teammate": "",
