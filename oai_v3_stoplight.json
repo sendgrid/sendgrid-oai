@@ -47449,8 +47449,8 @@
                         "description": "Quick summary of the status of a message",
                         "enum": [
                             "processed",
-                            "not_delivered",
                             "delivered"
+                            "not_delivered",
                         ]
                     },
                     "template_id": {
