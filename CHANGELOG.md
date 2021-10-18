@@ -1,6 +1,12 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-09-22] Version 1.8.0
+--------------------------
+**Library - Feature**
+- [PR #95](https://github.com/sendgrid/sendgrid-oai/pull/95): add reply_to_list to v3. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+
 [2021-09-08] Version 1.7.0
 --------------------------
 **Library - Feature**
