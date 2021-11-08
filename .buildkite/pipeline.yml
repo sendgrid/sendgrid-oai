@@ -1,1 +1,9 @@
-# Pipeline defined here
+steps:
+  - label: ":spectral:"
+    plugins:
+      - docker#v3.9.0:
+          image: node
+    commands:
+      - "npm ci"
+      - "./node_modules/.bin/spectral lint oai_v3_stoplight.json"
+    timeout_in_minutes: 15
