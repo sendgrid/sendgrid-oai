@@ -4,3 +4,9 @@ temp.json
 pyvenv.cfg
 bin
 lib
+
+# Node, npm, and yarn
+node_modules
+.npm
+.yarn/*
+.env

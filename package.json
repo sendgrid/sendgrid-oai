@@ -1,0 +1,10 @@
+{
+  "name": "@twilio/sendgrid-oai",
+  "repository": {
+    "type": "git",
+    "url": "git@code.hq.twilio.com:twilio/sendgrid-oai.git"
+  },
+  "devDependencies": {
+    "@stoplight/spectral-cli": "^6.1.0"
+  }
+}
