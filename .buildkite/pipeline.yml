@@ -1,9 +1,8 @@
 steps:
-  - label: ":spectral:"
+  - label: "Lint OpenAPI with Spectral"
     plugins:
       - docker#v3.9.0:
           image: node
     commands:
-      - "npm ci"
-      - "./node_modules/.bin/spectral lint oai_v3_stoplight.json"
-    timeout_in_minutes: 15
+      - make lint
+    timeout_in_minutes: 10
