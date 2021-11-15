@@ -8,4 +8,5 @@ jobs:
     steps:
       - uses: actions/first-interaction@v1
         with:
-          issue-message: "Ahoy! Thank you for opening your first issue here! If this request is regarding troubleshooting your application, please reach out to the support team via [https://support.twilio.com](https://support.twilio.com)."
+          repo-token: ${{ secrets.TOKEN }}
+          issue-message: "Ahoy! Thank you for opening your first issue here! If this request is regarding troubleshooting your application, please reach out to the support team via [https://support.twilio.com](https://support.twilio.com). Please note that this repo accepts Issues; however external Pull Requests cannot be accepted because the code is generated using Twilio SendGrid's tooling."
