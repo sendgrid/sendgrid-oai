@@ -1,4 +1,5 @@
-name: Tests
+name: Run Spectral Lint
+
 on:
   push:
     branches: ["*"]
@@ -10,15 +11,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
-    name: Tests
+  build:
+    name: Run Spectral
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout sendgrid-oai
         uses: actions/checkout@v2
 
-      - name: Lint with Spectral
+      - name: Lint
         uses: stoplightio/spectral-action@v0.8.0
         with:
           file_glob: "oai*.{json,yml,yaml}"
