@@ -11,8 +11,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build: Run Spectral
-    name: 
+  build:
+    name: Run Spectral
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
