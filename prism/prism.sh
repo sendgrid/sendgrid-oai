@@ -2,7 +2,7 @@
 set -e
 
 rm -rf prism && mkdir -p prism && cd prism
-git clone --depth 1 https://github.com/sendgrid/sendgrid-oai .
+git clone https://github.com/sendgrid/sendgrid-oai .
 git checkout gh-actions
 cd prism
 
