@@ -1,0 +1,6 @@
+{
+  "name": "@sendgrid/sendgrid-oai",
+  "dependencies": {
+    "@stoplight/spectral": "^6.1.0"
+  }
+}
