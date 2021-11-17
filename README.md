@@ -12,6 +12,8 @@ If you have an interesting use case for these files or have a request, please [c
 
 This project has been moved into pre-pilot in preparation to support OpenAPI v3. The spec may not be accurate at this stage, it is currently in active development but unsupported. If you've identified a mismatch between Twilio SendGrid's API behavior and this specification, [please open an issue](https://github.com/sendgrid/sendgrid-oai/issues/new).
 
+This project currently lints the `oai_v3_stoplight.js` file only in preparation for support of OpenAPI v3. The other `oai*.{json,yaml}` files are not validated and should not be relied on.
+
 # Announcements
 
 **The default branch name for this repository has been changed to `main` as of 07/20/2020.**

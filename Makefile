@@ -4,7 +4,7 @@ install:
 	npm install
 
 spectral: install
-	./node_modules/.bin/spectral lint oai*.{json,yml,yaml}
+	./node_modules/.bin/spectral lint oai_v3_stoplight.json
 
 test: spectral
 
