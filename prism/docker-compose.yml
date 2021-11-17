@@ -18,5 +18,8 @@ services:
       - prism
     volumes:
       - ./nginx:/etc/nginx
+    ports:
+      - 80:80
+      - 443:443
   prism:
     build: ./
