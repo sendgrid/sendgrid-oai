@@ -14,6 +14,7 @@ services:
       default:
         aliases:
           - api.sendgrid.com
+    restart: always
     depends_on:
       - prism
     volumes:
