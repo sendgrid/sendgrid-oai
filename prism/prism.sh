@@ -2,7 +2,7 @@
 set -e
 
 rm -rf prism && mkdir -p prism && cd prism
-git clone --branch gh-actions https://github.com/sendgrid/sendgrid-oai .
+git clone --branch prism-updated https://github.com/sendgrid/sendgrid-oai .
 cd prism
 
 docker-compose build --parallel
