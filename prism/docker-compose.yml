@@ -14,13 +14,9 @@ services:
       default:
         aliases:
           - api.sendgrid.com
-    restart: always
     depends_on:
       - prism
     volumes:
       - ./nginx:/etc/nginx
-    ports:
-      - 80:80
-      - 443:443
   prism:
     build: ./
