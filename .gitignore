@@ -1,5 +1,11 @@
 temp.json
 
+# Node and npm
+node_modules
+.npm
+.yarn/*
+.env
+
 # Python and venv
 pyvenv.cfg
 bin
