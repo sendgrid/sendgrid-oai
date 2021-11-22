@@ -1,0 +1,1393 @@
+{
+    "teammates": {
+        "post": {
+            "operationId": "POST_v3-teammates",
+            "summary": "Invite teammate",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to invite a Teammate to your account via email.**\n\nYou can set a Teammate's initial permissions using the `scopes` array in the request body. Teammate's will receive a minimum set of scopes from Twilio SendGrid that are necessary for the Teammate to function.\n\n**Note:** A teammate invite will expire after 7 days, but you may resend the invitation at any time to reset the expiration date.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "description": "New teammate's email",
+                                    "minLength": 5,
+                                    "maxLength": 255,
+                                    "pattern": "^.*@.*\\..*"
+                                },
+                                "scopes": {
+                                    "type": "array",
+                                    "description": "Set to specify list of scopes that teammate should have. Should be empty if teammate is an admin.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "is_admin": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Set to true if teammate should be an admin user"
+                                }
+                            },
+                            "required": [
+                                "email",
+                                "scopes",
+                                "is_admin"
+                            ],
+                            "example": {
+                                "email": "teammate1@example.com",
+                                "scopes": [
+                                    "user.profile.read",
+                                    "user.profile.update"
+                                ],
+                                "is_admin": false
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "description": "Token to identify invite"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Teammate's email address"
+                                    },
+                                    "scopes": {
+                                        "type": "array",
+                                        "description": "Initial set of permissions to give to teammate if they accept the invite",
+                                        "items": {}
+                                    },
+                                    "is_admin": {
+                                        "type": "boolean",
+                                        "description": "Set to true if teammate should have admin privileges"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "email": "teammate1@example.com",
+                                        "scopes": [
+                                            "user.profile.read",
+                                            "user.profile.update"
+                                        ],
+                                        "is_admin": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_v3-teammates",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_v3-teammates",
+            "summary": "Retrieve all teammates",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all current Teammates.**\n\nYou can limit the number of results returned using the `limit` query paramater. To return results from a specific Teammate, use the `offset` paramter. The Response Headers will include pagination info.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Number of items to return",
+                    "schema": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 500,
+                        "default": 500
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Paging offset",
+                    "schema": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "default": 0
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "username": {
+                                                    "type": "string",
+                                                    "description": "Teammate's username"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "description": "Teammate's email"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "description": "Teammate's first name"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "description": "Teammate's last name"
+                                                },
+                                                "user_type": {
+                                                    "type": "string",
+                                                    "description": "Indicate the type of user: owner user, teammate admin user, or normal teammate",
+                                                    "enum": [
+                                                        "admin",
+                                                        "owner",
+                                                        "teammate"
+                                                    ]
+                                                },
+                                                "is_admin": {
+                                                    "type": "boolean",
+                                                    "description": "Set to true if teammate has admin privileges"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's phone number"
+                                                },
+                                                "website": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's website"
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's address"
+                                                },
+                                                "address2": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's address"
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's city"
+                                                },
+                                                "state": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's state"
+                                                },
+                                                "zip": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's zip"
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "description": "(optional) Teammate's country"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "results": [
+                                            {
+                                                "username": "teammate1",
+                                                "email": "teammate1@example.com",
+                                                "first_name": "Jane",
+                                                "last_name": "Doe",
+                                                "user_type": "owner",
+                                                "is_admin": true,
+                                                "phone": "123-345-3453",
+                                                "website": "www.example.com",
+                                                "company": "ACME Inc.",
+                                                "address": "123 Acme St",
+                                                "address2": "",
+                                                "city": "City",
+                                                "state": "CA",
+                                                "country": "USA",
+                                                "zip": "12345"
+                                            },
+                                            {
+                                                "username": "teammate2",
+                                                "email": "teammate2@example.com",
+                                                "first_name": "John",
+                                                "last_name": "Doe",
+                                                "user_type": "teammate",
+                                                "is_admin": false,
+                                                "phone": "123-345-3453",
+                                                "website": "www.example.com",
+                                                "company": "ACME Inc.",
+                                                "address": "123 Acme St",
+                                                "address2": "",
+                                                "city": "City",
+                                                "state": "CA",
+                                                "country": "USA",
+                                                "zip": "12345"
+                                            },
+                                            {
+                                                "username": "teammate3",
+                                                "email": "teammate3@example.com",
+                                                "first_name": "Steve",
+                                                "last_name": "Doe",
+                                                "user_type": "admin",
+                                                "is_admin": true,
+                                                "phone": "123-345-3453",
+                                                "website": "www.example.com",
+                                                "company": "ACME Inc.",
+                                                "address": "123 Acme St",
+                                                "address2": "",
+                                                "city": "City",
+                                                "state": "CA",
+                                                "country": "USA",
+                                                "zip": "12345"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_v3-teammates",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "teammates_pending_{token}_resend": {
+        "parameters": [
+            {
+                "name": "token",
+                "in": "path",
+                "description": "The token for the invite that you want to resend.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_v3-teammates-pending-token-resend",
+            "summary": "Resend teammate invite",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to resend a Teammate invitation.**\n\nTeammate invitations will expire after 7 days. Resending an invitation will reset the expiration date.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "description": "ID to identify invite"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Teammate's email address"
+                                    },
+                                    "scopes": {
+                                        "type": "array",
+                                        "description": "Initial set of permissions to give to teammate if they accept the invite",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "is_admin": {
+                                        "type": "boolean",
+                                        "description": "Set to true if teammate should have admin privileges"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "pending_id": "abc123abc",
+                                        "email": "teammate1@example.com",
+                                        "scopes": [
+                                            "user.profile.read",
+                                            "user.profile.update"
+                                        ],
+                                        "is_admin": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "invalid pending key",
+                                                "field": "pending_key"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_v3-teammates-pending-token-resend",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "scopes_requests": {
+        "get": {
+            "operationId": "GET_v3-scopes-requests",
+            "summary": "Retrieve access requests",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all recent access requests.**\n\nThe Response Header's `link` parameter will include pagination info.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Optional field to limit the number of results returned.",
+                    "schema": {
+                        "type": "integer",
+                        "default": 50
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Optional beginning point in the list to retrieve from.",
+                    "schema": {
+                        "type": "integer",
+                        "default": 0
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "Request ID"
+                                        },
+                                        "scope_group_name": {
+                                            "type": "string",
+                                            "description": "Name of group of scopes associated to page teammate is requesting access to"
+                                        },
+                                        "username": {
+                                            "type": "string",
+                                            "description": "Teammate's username"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "description": "Teammate's email"
+                                        },
+                                        "first_name": {
+                                            "type": "string",
+                                            "description": "Teammate's first name"
+                                        },
+                                        "last_name": {
+                                            "type": "string",
+                                            "description": "Teammate's last name"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "id": 1,
+                                            "scope_group_name": "Mail Settings",
+                                            "username": "teammate1",
+                                            "email": "teammate1@example.com",
+                                            "first_name": "Teammate",
+                                            "last_name": "One"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "scope_group_name": "Stats",
+                                            "username": "teammate2",
+                                            "email": "teammate2@example.com",
+                                            "first_name": "Teammate",
+                                            "last_name": "Two"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_v3-scopes-requests",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "teammates_pending": {
+        "get": {
+            "operationId": "GET_v3-teammates-pending",
+            "summary": "Retrieve all pending teammates",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all pending Teammate invitations.**\n\nEach teammate invitation is valid for 7 days. Users may resend the invitation to refresh the expiration date.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "email": {
+                                                    "type": "string",
+                                                    "description": "Email address teammate invite will be sent to"
+                                                },
+                                                "scopes": {
+                                                    "type": "array",
+                                                    "description": "List of permissions to give teammate if they accept",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "is_admin": {
+                                                    "type": "boolean",
+                                                    "description": "Set to true to indicate teammate should have the same set of permissions as parent user"
+                                                },
+                                                "token": {
+                                                    "type": "string",
+                                                    "description": "Invitation token used to identify user"
+                                                },
+                                                "expiration_date": {
+                                                    "type": "integer",
+                                                    "description": "timestamp indicates when invite will expire. Expiration is 7 days after invite creation"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "email": "user1@example.com",
+                                                "scopes": [
+                                                    "user.profile.read",
+                                                    "user.profile.edit"
+                                                ],
+                                                "is_admin": false,
+                                                "pending_id": "abcd123abc",
+                                                "expiration_date": 1456424263
+                                            },
+                                            {
+                                                "email": "user2@example.com",
+                                                "scopes": [],
+                                                "is_admin": true,
+                                                "pending_id": "bcde234bcd",
+                                                "expiration_date": 1456424263
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_v3-teammates-pending",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "teammates_{username}": {
+        "parameters": [
+            {
+                "name": "username",
+                "in": "path",
+                "description": "The username of the teammate that you want to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_v3-teammates-username",
+            "summary": "Retrieve specific teammate",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific Teammate by username.**\n\nYou can retrieve the username's for each of your Teammates using the \"Retrieve all Teammates\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "description": "Teammate's username"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "description": "Teammate's first name"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "description": "Teammate's last name"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Teammate's email"
+                                    },
+                                    "scopes": {
+                                        "type": "array",
+                                        "description": "Scopes associated to teammate",
+                                        "items": {}
+                                    },
+                                    "user_type": {
+                                        "type": "string",
+                                        "description": "Indicate the type of user: account owner, teammate admin user, or normal teammate",
+                                        "enum": [
+                                            "admin",
+                                            "owner",
+                                            "teammate"
+                                        ]
+                                    },
+                                    "is_admin": {
+                                        "type": "boolean",
+                                        "description": "Set to true if teammate has admin privileges"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's phone number"
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's website"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's address"
+                                    },
+                                    "address2": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's address"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's city"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's state"
+                                    },
+                                    "zip": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's zip"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's country"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "username": "teammate1",
+                                        "first_name": "Jane",
+                                        "last_name": "Doe",
+                                        "email": "teammate1@example.com",
+                                        "scopes": [
+                                            "user.profile.read",
+                                            "user.profile.update",
+                                            "..."
+                                        ],
+                                        "user_type": "admin",
+                                        "is_admin": true,
+                                        "phone": "123-345-3453",
+                                        "website": "www.example.com",
+                                        "company": "ACME Inc.",
+                                        "address": "123 Acme St",
+                                        "address2": "",
+                                        "city": "City",
+                                        "state": "CA",
+                                        "country": "USA",
+                                        "zip": "12345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_v3-teammates-username",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_v3-teammates-username",
+            "summary": "Update teammate's permissions",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to update a teammate\u2019s permissions.**\n\nTo turn a teammate into an admin, the request body should contain an `is_admin` set to `true`. Otherwise, set `is_admin` to `false` and pass in all the scopes that a teammate should have.\n\n**Only the parent user or other admin teammates can update another teammate\u2019s permissions.**\n\n**Admin users can only update permissions.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "scopes": {
+                                    "type": "array",
+                                    "description": "Provide list of scopes that should be given to teammate. If specifying list of scopes, is_admin should be set to False.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "is_admin": {
+                                    "type": "boolean",
+                                    "description": "Set to True if this teammate should be promoted to an admin user. If True, scopes should be an empty array."
+                                }
+                            },
+                            "required": [
+                                "scopes",
+                                "is_admin"
+                            ],
+                            "example": {
+                                "scopes": [
+                                    "user.profile.read",
+                                    "user.profile.edit"
+                                ],
+                                "is_admin": false
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "description": "Teammate's username"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "description": "Teammate's first name"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "description": "Teammate's last name"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Teammate's email address"
+                                    },
+                                    "scopes": {
+                                        "type": "array",
+                                        "description": "Scopes given to teammate",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "user_type": {
+                                        "type": "string",
+                                        "description": "Indicate the type of user: owner user, teammate admin user, or normal teammate",
+                                        "enum": [
+                                            "admin",
+                                            "owner",
+                                            "teammate"
+                                        ]
+                                    },
+                                    "is_admin": {
+                                        "type": "boolean",
+                                        "description": "Set to true if teammate has admin priveleges"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's phone number"
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's website"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's address"
+                                    },
+                                    "address2": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's address"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's city"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's state"
+                                    },
+                                    "zip": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's zip"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "description": "(optional) Teammate's country"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "username": "teammate1",
+                                        "first_name": "Jane",
+                                        "last_name": "Doe",
+                                        "email": "teammate1@example.com",
+                                        "scopes": [
+                                            "user.profile.read",
+                                            "user.profile.edit"
+                                        ],
+                                        "user_type": "teammate",
+                                        "is_admin": false,
+                                        "phone": "123-345-3453",
+                                        "website": "www.example.com",
+                                        "company": "ACME Inc.",
+                                        "address": "123 Acme St",
+                                        "address2": "",
+                                        "city": "City",
+                                        "state": "CA",
+                                        "country": "USA",
+                                        "zip": "12345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "one or more of given scopes are invalid",
+                                                "field": "scopes"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "username not found",
+                                                "field": "username"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_v3-teammates-username",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_v3-teammates-username",
+            "summary": "Delete teammate",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to delete a teammate.**\n\n**Only the parent user or an admin teammate can delete another teammate.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "username not found",
+                                                "field": "username"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_v3-teammates-username",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "scopes_requests_{request_id}_approve": {
+        "parameters": [
+            {
+                "name": "request_id",
+                "in": "path",
+                "description": "The ID of the request that you want to approve.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "patch": {
+            "operationId": "PATCH_v3-scopes-requests-approve-id",
+            "summary": "Approve access request",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to approve an access attempt.**\n\n**Note:** Only teammate admins may approve another teammate\u2019s access request.",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "scope_group_name": {
+                                        "type": "string",
+                                        "description": "name of feature teammate will be given access to"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "scope_group_name": "Stats"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_v3-scopes-requests-approve-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "scopes_requests_{request_id}": {
+        "parameters": [
+            {
+                "name": "request_id",
+                "in": "path",
+                "description": "The ID of the request that you want to deny.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "delete": {
+            "operationId": "DELETE_v3-scopes-requests-request_id",
+            "summary": "Deny access request",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to deny an attempt to access your account.**\n\n**Note:** Only teammate admins may delete a teammate's access request.",
+            "responses": {
+                "204": {
+                    "description": ""
+                },
+                "401": {
+                    "description": ""
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Cannot find request",
+                                                "field": "request_id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_v3-scopes-requests-request_id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "teammates_pending_{token}": {
+        "parameters": [
+            {
+                "name": "token",
+                "in": "path",
+                "description": "The token for the invite you want to delete.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "delete": {
+            "operationId": "DELETE_v3-teammates-pending-token",
+            "summary": "Delete pending teammate",
+            "tags": [
+                "Teammates"
+            ],
+            "description": "**This endpoint allows you to delete a pending teammate invite.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": ""
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_v3-teammates-pending-token",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

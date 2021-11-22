@@ -1,0 +1,647 @@
+{
+    "subusers": {
+        "get": {
+            "operationId": "GET_subusers",
+            "summary": "List all Subusers",
+            "tags": [
+                "Subusers API"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all of your subusers.**\n\nYou can choose to retrieve specific subusers as well as limit the results that come back from the API.",
+            "parameters": [
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "The username of this subuser.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "The number of results you would like to get in each request.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The number of subusers to skip.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/subuser"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "disabled": false,
+                                            "email": "example@example.com",
+                                            "id": 1234,
+                                            "username": "example_subuser"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "email": "example2@example.com",
+                                            "id": 1234,
+                                            "username": "example_subuser2"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Unexpected error in API call. See HTTP response body for details.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_subusers",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "post": {
+            "operationId": "POST_subusers",
+            "summary": "Create Subuser",
+            "tags": [
+                "Subusers API"
+            ],
+            "description": "**This endpoint allows you to create a new subuser.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string",
+                                    "description": "The username for this subuser."
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "description": "The email address of the subuser.",
+                                    "format": "email"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "description": "The password this subuser will use when logging into SendGrid."
+                                },
+                                "ips": {
+                                    "type": "array",
+                                    "description": "The IP addresses that should be assigned to this subuser.",
+                                    "items": {
+                                        "type": "string",
+                                        "format": "ipv4"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "username",
+                                "email",
+                                "password",
+                                "ips"
+                            ],
+                            "example": {
+                                "username": "John@example.com",
+                                "email": "John@example.com",
+                                "password": "johns_password",
+                                "ips": [
+                                    "1.1.1.1",
+                                    "2.2.2.2"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/subuser_post"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "username": "example_subuser",
+                                        "user_id": 1234,
+                                        "email": "example@example.com",
+                                        "signup_session_token": "",
+                                        "authorization_token": "",
+                                        "credit_allocation": {
+                                            "type": "unlimited"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "username exists"
+                                            },
+                                            {
+                                                "message": "unable to validate IPs at this time"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "you dont have permission to access this resource"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "unable to validate IPs at this time"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_subusers",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "subusers_{subuser_name}": {
+        "parameters": [
+            {
+                "name": "subuser_name",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "patch": {
+            "operationId": "PATCH_subusers-subuser_name",
+            "summary": "Enable/disable a subuser",
+            "tags": [
+                "Subusers API"
+            ],
+            "description": "**This endpoint allows you to enable or disable a subuser.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "disabled": {
+                                    "type": "boolean",
+                                    "description": "Whether or not this subuser is disabled. True means disabled, False means enabled."
+                                }
+                            },
+                            "example": {
+                                "disabled": false
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "invalid username"
+                                            },
+                                            {
+                                                "message": "no fields provided"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "unable to enable user"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_subusers-subusername",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_subusers-subuser_name",
+            "summary": "Delete a subuser",
+            "tags": [
+                "Subusers API"
+            ],
+            "description": "**This endpoint allows you to delete a subuser.**\n\nThis is a permanent action. Once deleted, a subuser cannot be retrieved.",
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_subusers-subusername",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "subusers_reputations": {
+        "get": {
+            "operationId": "GET_subusers-reputations",
+            "summary": "Retrieve Subuser Reputations",
+            "tags": [
+                "Subusers API"
+            ],
+            "description": "**This endpoint allows you to request the reputations for your subusers.**\n\nSubuser sender reputations give a good idea how well a sender is doing with regards to how recipients and recipient servers react to the mail that is being received. When a bounce, spam report, or other negative action happens on a sent email, it will affect your sender rating.",
+            "parameters": [
+                {
+                    "name": "usernames",
+                    "in": "query",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "reputation": {
+                                            "type": "number",
+                                            "description": "The sender reputation this subuser has attained."
+                                        },
+                                        "username": {
+                                            "type": "string",
+                                            "description": "The subuser that has this reputation.f"
+                                        }
+                                    },
+                                    "required": [
+                                        "reputation",
+                                        "username"
+                                    ]
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "username": "example_subuser",
+                                            "reputation": 99
+                                        },
+                                        {
+                                            "username": "example_subuser2",
+                                            "reputation": 95.2
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_subusers-reputations",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "subusers_{subuser_name}_ips": {
+        "parameters": [
+            {
+                "name": "subuser_name",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "put": {
+            "operationId": "PUT_subusers-subuser_name-ips",
+            "summary": "Update IPs assigned to a subuser",
+            "tags": [
+                "Subusers API"
+            ],
+            "description": "**This endpoint allows you update your subusers' assigned IP.**\n\nEach subuser should be assigned to an IP address from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have one or more of their own IP addresses as well. \n\nMore information:\n\n* [How to request more IPs](https://sendgrid.com/docs/ui/account-and-settings/dedicated-ip-addresses/)\n* [Setup Reverse DNS](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/)",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "description": "The IP addresses you would like to assign to the subuser.",
+                            "items": {
+                                "type": "string",
+                                "format": "ipv4"
+                            },
+                            "example": [
+                                "127.0.0.1"
+                            ]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ips": {
+                                        "type": "array",
+                                        "description": "The IP addresses that are assigned to the subuser.",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "ipv4"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "ips": [
+                                            "127.0.0.1"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PUT_subusers-subusername-ips",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

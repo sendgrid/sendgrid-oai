@@ -1,0 +1,459 @@
+{
+    "templates": {
+        "post": {
+            "operationId": "POST_templates",
+            "summary": "Create a transactional template.",
+            "tags": [
+                "Transactional Templates"
+            ],
+            "description": "**This endpoint allows you to create a transactional template.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name for the new transactional template.",
+                                    "maxLength": 100
+                                },
+                                "generation": {
+                                    "type": "string",
+                                    "description": "Defines whether the template supports dynamic replacement.",
+                                    "enum": [
+                                        "legacy",
+                                        "dynamic"
+                                    ],
+                                    "default": "legacy"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "example_name",
+                                "generation": "dynamic"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "733ba07f-ead1-41fc-933a-3976baa23716",
+                                        "name": "example_name",
+                                        "generation": "legacy",
+                                        "updated_at ": "2021-04-28 13:12:46",
+                                        "versions": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_templates",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_templates",
+            "summary": "Retrieve paged transactional templates.",
+            "tags": [
+                "Transactional Templates"
+            ],
+            "description": "**This endpoint allows you to retrieve all transactional templates.**",
+            "parameters": [
+                {
+                    "name": "generations",
+                    "in": "query",
+                    "description": "Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "legacy",
+                            "dynamic",
+                            "legacy,dynamic"
+                        ],
+                        "default": "legacy"
+                    }
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The number of templates to be returned in each page of results",
+                    "required": true,
+                    "schema": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 200
+                    }
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "A token corresponding to a specific page of results, as provided by metadata",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "description": "",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/transactional-templates-template-lean"
+                                        }
+                                    },
+                                    "_metadata": {
+                                        "$ref": "../../components/schemas.json#/_metadata"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "id": "fae7c985-eb92-4b47-9987-28ec29dbc698",
+                                                "name": "example_name",
+                                                "generation": "legacy",
+                                                "updated_at ": "2020-11-12 12:00:09",
+                                                "versions": []
+                                            }
+                                        ],
+                                        "_metadata": {
+                                            "self": "https://api.sendgrid.com/v3/templates",
+                                            "count": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "": {
+                                                    "type": "string"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_templates",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "templates_{template_id}": {
+        "parameters": [
+            {
+                "name": "template_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_templates-template_id",
+            "summary": "Duplicate a transactional template.",
+            "tags": [
+                "Transactional Templates"
+            ],
+            "description": "**This endpoint allows you to duplicate a transactional template.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name for the new transactional template.",
+                                    "maxLength": 100
+                                }
+                            },
+                            "example": {
+                                "name": "example_name"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "733ba07f-ead1-41fc-933a-3976baa23716",
+                                        "name": "example_name",
+                                        "generation": "dynamic",
+                                        "updated_at ": "2020-12-12 58:26:65",
+                                        "versions": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_templates-templateid",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_templates-template_id",
+            "summary": "Retrieve a single transactional template.",
+            "tags": [
+                "Transactional Templates"
+            ],
+            "description": "**This endpoint allows you to retrieve a single transactional template.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "40da60e6-66f3-4223-9406-ba58b7f55a62",
+                                        "name": "Duis in dolor",
+                                        "generation": "legacy",
+                                        "updated_at ": "2020-12-12 58:26:65",
+                                        "versions": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_templates-templateid",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "enabled": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_templates-template_id",
+            "summary": "Edit a transactional template.",
+            "tags": [
+                "Transactional Templates"
+            ],
+            "description": "**This endpoint allows you to edit the name of a transactional template.**\n\nTo edit the template itself, [create a new transactional template version](https://sendgrid.api-docs.io/v3.0/transactional-templates-versions/create-a-new-transactional-template-version).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name of the transactional template.",
+                                    "maxLength": 100
+                                }
+                            },
+                            "example": {
+                                "name": "new_example_name"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "733ba07f-ead1-41fc-933a-3976baa23716",
+                                        "name": "new_example_name",
+                                        "generation": "legacy",
+                                        "updated_at ": "2021-04-28 13:12:46",
+                                        "versions": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_templates-templateid",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "enabled": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_templates-template_id",
+            "summary": "Delete a template.",
+            "tags": [
+                "Transactional Templates"
+            ],
+            "description": "**This endpoint allows you to delete a transactional template.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_templates-templateid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

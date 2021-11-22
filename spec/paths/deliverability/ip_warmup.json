@@ -1,0 +1,324 @@
+{
+    "ips_warmup": {
+        "post": {
+            "operationId": "POST_ips-warmup",
+            "summary": "Start warming up an IP address",
+            "tags": [
+                "IP Warmup"
+            ],
+            "description": "**This endpoint allows you to put an IP address into warmup mode.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ip": {
+                                    "type": "string",
+                                    "description": "The IP address that you want to begin warming up."
+                                }
+                            },
+                            "example": {
+                                "ip": "0.0.0.0"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/ip_warmup_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "ip": "0.0.0.0",
+                                            "start_date": 1409616000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "The errors that were encountered.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message explaining why the IP couldn't entered into warmup mode."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "resource not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_ips-warmup",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_ips-warmup",
+            "summary": "Retrieve all IPs currently in warmup",
+            "tags": [
+                "IP Warmup"
+            ],
+            "description": "**This endpoint allows you to retrieve all of your IP addresses that are currently warming up.**",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/ip_warmup_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "ip": "0.0.0.0",
+                                            "start_date": 1409616000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_ips-warmup",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "ips_warmup_{ip_address}": {
+        "parameters": [
+            {
+                "name": "ip_address",
+                "in": "path",
+                "description": "The IP address that you want to retrieve the warmup status for.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_ips-warmup-ip_address",
+            "summary": "Retrieve the warmup status for a specific IP address",
+            "tags": [
+                "IP Warmup"
+            ],
+            "description": "**This endpoint allows you to retrieve the warmup status for a specific IP address.**\n\nYou can retrieve all of your warming IPs using the \"Retrieve all IPs currently in warmup\" endpoint.",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/ip_warmup_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "ip": "0.0.0.0",
+                                            "start_date": 1409616000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "The errors that were encountered.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message explaining why the warmup status could not be retrieved."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "resource not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_ips-warmup-ipaddress",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_ips-warmup-ip_address",
+            "summary": "Stop warming up an IP address",
+            "tags": [
+                "IP Warmup"
+            ],
+            "description": "**This endpoint allows you to remove an IP address from warmup mode.**\n\nYour request will return a 204 status code if the specified IP was successfully removed from warmup mode. To retrieve details of the IP\u2019s warmup status *before* removing it from warmup mode, call the  \"Retrieve the warmpup status for a specific IP address\" endpoint.",
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "The errors that were encountered.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message explaining why the IP couldn't be removed from warmup."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "resource not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_ips-warmup-ipaddress",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

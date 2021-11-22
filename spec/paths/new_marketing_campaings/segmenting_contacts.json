@@ -1,0 +1,851 @@
+{
+    "marketing_segments": {
+        "post": {
+            "operationId": "POST_marketing-segments",
+            "summary": "Create Segment",
+            "tags": [
+                "segmenting contacts",
+                "Segmenting Contacts"
+            ],
+            "description": "**This endpoint allows you to create a segment.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "../../components/schemas.json#/segment_write_v2"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "parent_list_id": {
+                                            "type": "string",
+                                            "minLength": 36,
+                                            "maxLength": 36,
+                                            "format": "uuid",
+                                            "description": "The id of the list if this segment is a child of a list.  This implies the query is rewritten as `(${query_dsl}) AND CONTAINS(list_ids, ${parent_list_id})`"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/full-segment"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "864feb2e-5e93-47bf-b63e-21746c988105",
+                                        "contacts_count": 0,
+                                        "created_at": "2921-01-27T19:33:36.479Z",
+                                        "sample_updated_at": "3407-09-25T04:25:02.140Z",
+                                        "updated_at": "4389-06-21T16:59:51.403Z",
+                                        "contact_summary": {
+                                            "contact_id": "1a541ca7-9fef-42c8-8947-f3f8a3b33ffe",
+                                            "primary_email": "D8OsYF5ok@YtX.kcg",
+                                            "first_name": "exercitation Duis nisi",
+                                            "last_name": "aut",
+                                            "address_line_1": "ut sunt Duis eu",
+                                            "address_line_2": "in culpa esse non",
+                                            "city": "\u00d4X\u01ab\u024b\u0184\u0159",
+                                            "state_province_region": "consequat culpa in",
+                                            "postal_code": -88086402,
+                                            "country": "eiusmod",
+                                            "custom_fields": {
+                                                "custom_field_name2": "dolore cillum",
+                                                "custom_field_name1": "est mollit officia adipisicing dolo"
+                                            },
+                                            "list_ids": [
+                                                "c856a255-12f1-4b55-8564-218fd7eb34a7",
+                                                "130c8813-0d6f-4b9e-b154-736bb9db2ff8",
+                                                "c245021d-4444-4086-a498-3ffee7fa8cdf"
+                                            ]
+                                        },
+                                        "contacts_sample": [
+                                            {
+                                                "id": "e70eac25-1431-4231-bccd-1cfab432301e",
+                                                "email": "KLTF@SurgGzlAxCPOqhOUHYNBLsfpfE.trh",
+                                                "alternate_emails": [
+                                                    "dTeJZgU5uN9UYSo@nfIB.ijxg"
+                                                ],
+                                                "first_name": "ullamco esse culpa do",
+                                                "last_name": "officia laboris veniam consequat",
+                                                "address_line_1": "in occaecat labore est tempor",
+                                                "address_line_2": "magna adipisicing",
+                                                "city": "\u019e\u00f3",
+                                                "state_province_region": "culpa ut",
+                                                "postal_code": -75218567,
+                                                "country": "voluptate in in reprehenderit aliquip",
+                                                "custom_fields": {
+                                                    "custom_field_name1": "amet deserunt mollit",
+                                                    "custom_field_name2": "minim consequat id"
+                                                }
+                                            },
+                                            {
+                                                "id": "db637d33-bce1-462c-ae9c-91ec4f761de6",
+                                                "email": "t7N5TjDmKhC0@gfdifW.ua",
+                                                "alternate_emails": [
+                                                    "gQol@Xcfilli.hc",
+                                                    "n4K7OdaVQh@YfsnF.ie",
+                                                    "TdnvS3nMStREn@miFjGzNDCPZWhiswJNxrFnOYdUAZEpesQ.yxpu",
+                                                    "xRzGDTTzzbYK@eJ.wpgb",
+                                                    "iI1rOpx2ct@aZhuYGZBxJLZ.phr"
+                                                ],
+                                                "first_name": "ea et eu",
+                                                "last_name": "velit Ut laborum ipsu",
+                                                "address_line_1": "labore",
+                                                "address_line_2": "non",
+                                                "city": "\u0114\u0238\u0105\u009f\u00c2\u00b8\u0220\u024fb\u0244",
+                                                "state_province_region": "deserunt dolore",
+                                                "postal_code": -95171713,
+                                                "country": "do",
+                                                "list_ids": [
+                                                    "c712288b-2300-4069-bef4-2e05b5948ec3",
+                                                    "9003ef29-5eb7-4951-898b-1b102e490d6e"
+                                                ],
+                                                "custom_fields": {
+                                                    "custom_field_name1": "amet deserunt mollit",
+                                                    "custom_field_name2": "minim consequat id"
+                                                }
+                                            }
+                                        ],
+                                        "name": "aute amet deserunt adipisicing",
+                                        "query_dsl": "email LIKE %twilio.com",
+                                        "next_sample_update": "culpa sit occaecat fugiat quis"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_marketing-segments",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 201
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_marketing-segments",
+            "summary": "Get List of Segments",
+            "tags": [
+                "segmenting contacts",
+                "Segmenting Contacts"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of segments.**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
+            "parameters": [
+                {
+                    "name": "parent_list_ids",
+                    "in": "query",
+                    "description": "A comma separated list of list ids to be used when searching for segments with the specified parent_list_id, no more than 50 is allowed",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "no_parent_list_id",
+                    "in": "query",
+                    "description": "If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.",
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "results": {
+                                        "type": "array",
+                                        "uniqueItems": true,
+                                        "minItems": 0,
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/segment_summary"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "results"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "results": [
+                                            {
+                                                "id": "12099613-91e5-4d09-a900-df7626325288",
+                                                "contacts_count": 78434802,
+                                                "created_at": "2921-01-27T19:33:36.479Z",
+                                                "sample_updated_at": "4685-11-26T07:05:04.660Z",
+                                                "updated_at": "2883-07-10T13:13:37.697Z"
+                                            },
+                                            {
+                                                "id": "60c37015-3734-4c8e-b293-68cfa2ae4fa5",
+                                                "contacts_count": 34177253,
+                                                "created_at": "2575-07-26T23:17:20.984Z",
+                                                "sample_updated_at": "3074-09-04T09:49:58.127Z",
+                                                "updated_at": "5116-10-15T07:37:40.838Z",
+                                                "parent_list_id": "fd38af3d-3f69-4947-8dca-5fa967e7be82",
+                                                "name": "amet"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_marketing-segments",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "marketing_segments_{segment_id}": {
+        "parameters": [
+            {
+                "name": "segment_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid",
+                    "minLength": 36,
+                    "maxLength": 36
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_marketing-segments-segment_id",
+            "summary": "Get Segment by ID",
+            "tags": [
+                "segmenting contacts",
+                "Segmenting Contacts"
+            ],
+            "description": "**This endpoint allows you to retrieve a single segment by ID.**",
+            "parameters": [
+                {
+                    "name": "query_json",
+                    "in": "query",
+                    "description": "Defaults to `false`.  Set to `true` to return the parsed SQL AST as a JSON object in the field `query_json`",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/full-segment"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "3b049926-0a54-4a91-83f0-086ace63c530",
+                                        "contacts_count": -83213117,
+                                        "created_at": "2921-01-27T19:33:36.479Z",
+                                        "sample_updated_at": "3407-09-25T04:25:02.140Z",
+                                        "updated_at": "4389-06-21T16:59:51.403Z",
+                                        "contacts_sample": [
+                                            {
+                                                "id": "e70eac25-1431-4231-bccd-1cfab432301e",
+                                                "email": "KLTF@SurgGzlAxCPOqhOUHYNBLsfpfE.trh",
+                                                "alternate_emails": [
+                                                    "dTeJZgU5uN9UYSo@nfIB.ijxg"
+                                                ],
+                                                "first_name": "ullamco esse culpa do",
+                                                "last_name": "officia laboris veniam consequat",
+                                                "address_line_1": "in occaecat labore est tempor",
+                                                "address_line_2": "magna adipisicing",
+                                                "city": "\u019e\u00f3",
+                                                "state_province_region": "culpa ut",
+                                                "postal_code": -75218567,
+                                                "country": "voluptate in in reprehenderit aliquip",
+                                                "custom_fields": {
+                                                    "custom_field_name1": "amet deserunt mollit",
+                                                    "custom_field_name2": "minim consequat id"
+                                                }
+                                            },
+                                            {
+                                                "id": "db637d33-bce1-462c-ae9c-91ec4f761de6",
+                                                "email": "t7N5TjDmKhC0@gfdifW.ua",
+                                                "alternate_emails": [
+                                                    "gQol@Xcfilli.hc",
+                                                    "n4K7OdaVQh@YfsnF.ie",
+                                                    "TdnvS3nMStREn@miFjGzNDCPZWhiswJNxrFnOYdUAZEpesQ.yxpu",
+                                                    "xRzGDTTzzbYK@eJ.wpgb",
+                                                    "iI1rOpx2ct@aZhuYGZBxJLZ.phr"
+                                                ],
+                                                "first_name": "ea et eu",
+                                                "last_name": "velit Ut laborum ipsu",
+                                                "address_line_1": "labore",
+                                                "address_line_2": "non",
+                                                "city": "\u0114\u0238\u0105\u009f\u00c2\u00b8\u0220\u024fb\u0244",
+                                                "state_province_region": "deserunt dolore",
+                                                "postal_code": -95171713,
+                                                "country": "do",
+                                                "list_ids": [
+                                                    "c712288b-2300-4069-bef4-2e05b5948ec3",
+                                                    "9003ef29-5eb7-4951-898b-1b102e490d6e"
+                                                ],
+                                                "custom_fields": {
+                                                    "custom_field_name1": "amet deserunt mollit",
+                                                    "custom_field_name2": "minim consequat id"
+                                                }
+                                            }
+                                        ],
+                                        "name": "enim et anim",
+                                        "query_dsl": "nostrud"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "field"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_marketing-segments-segmentid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_marketing-segments-segment_id",
+            "summary": "Update Segment",
+            "tags": [
+                "segmenting contacts",
+                "Segmenting Contacts"
+            ],
+            "description": "**This endpoint allows you to update a segment.**\n\nSegment `name` needs to be unique. A user can not update a segment name to an existing one.",
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/segment_write_v2"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/full-segment"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "5fff6250-b766-4959-a183-2e1fa565c4ce",
+                                        "contacts_count": -35493018,
+                                        "created_at": "2014-12-23T17:18:52.907Z",
+                                        "sample_updated_at": "2146-04-13T16:46:32.328Z",
+                                        "updated_at": "4389-06-21T16:59:51.403Z",
+                                        "contacts_sample": [
+                                            {
+                                                "id": "4cff9fdf-1bee-44f7-95dc-a101f9ed3cfe",
+                                                "email": "exmS@KIzibBSmaUUHQa.uvv",
+                                                "alternate_emails": [
+                                                    "qXP-RD97fLl@oEDaUynqnNRHJHdoJAWVGXwvI.qlv",
+                                                    "W0ngFWmR@WcQuSbPFVPZvLrjCFadfimFi.eqf",
+                                                    "mYBC0ea5UxFI@qwO.jh",
+                                                    "Nhf1OmY@KCSjTQsXYpbKrBUsQFHrnLuY.oef"
+                                                ],
+                                                "first_name": "consequat nulla in",
+                                                "last_name": "irure nostrud elit eu",
+                                                "address_line_1": "deserunt cillum aliqua nostrud ullamco",
+                                                "address_line_2": "sint",
+                                                "city": "\u0177(\u00e7",
+                                                "state_province_region": "minim",
+                                                "postal_code": 62721676,
+                                                "country": "consectetur quis voluptate",
+                                                "custom_fields": {
+                                                    "custom_field_name1": "dolor aute irure Excepteur"
+                                                },
+                                                "list_ids": [
+                                                    "f9d5987d-7a01-4a66-b77e-1f08a392304b",
+                                                    "b4e3b028-01d4-428b-9ef5-24bcd90fa02c",
+                                                    "fedab84f-9aa5-449d-99e2-7b1361f8ee61"
+                                                ]
+                                            },
+                                            {
+                                                "id": "093a66b8-bca8-4d8a-b32a-091d939c1928",
+                                                "email": "atNeYGC4nbF42@VOCUWuGaYr.ystm",
+                                                "alternate_emails": [
+                                                    "Zs6vnQbMU@XTamDsXEGJWBMMEacOc.hitv",
+                                                    "Epl@ySBrQCFJZnjggkAYLu.ppta"
+                                                ],
+                                                "first_name": "est",
+                                                "last_name": "in",
+                                                "address_line_1": "culpa eu eiusmod sint",
+                                                "address_line_2": "sed velit sint",
+                                                "city": "B\u010aJ",
+                                                "state_province_region": "Lorem Ut aliqua elit",
+                                                "postal_code": 33736880,
+                                                "country": "in laboris Excepteur consequat",
+                                                "custom_fields": {
+                                                    "custom_field_name2": "culpa Excepteur",
+                                                    "custom_field_name1": "esse magna Ut"
+                                                }
+                                            },
+                                            {
+                                                "id": "08939f9c-2c87-4639-bd07-16d41f90a5eb",
+                                                "email": "Jx660QHClqRrC@SavQvcdRpJlLqepwoEUCm.ar",
+                                                "alternate_emails": [
+                                                    "S8u@ZVGjHsXdSWtlhhad.ximc",
+                                                    "GA1MN72v3uA@MPDvMUmTYjwFCsEaGnFnvVzJVqUTl.ehws"
+                                                ],
+                                                "first_name": "sed eu veli",
+                                                "last_name": "aliqua sit culpa",
+                                                "address_line_1": "occaecat aute enim",
+                                                "address_line_2": "ipsum quis in",
+                                                "city": "\u024c\u017f\u0115\u011d\u0224\u00b6\u01d5",
+                                                "state_province_region": "ut nisi sed esse",
+                                                "postal_code": -66445052,
+                                                "custom_fields": {
+                                                    "custom_field_name1": "dolor aute irure Excepteur"
+                                                },
+                                                "country": "occaecat veniam"
+                                            },
+                                            {
+                                                "id": "0667ed97-7b7b-44aa-a115-0301067660d7",
+                                                "email": "AnoFtJq@IolRDmfj.njt",
+                                                "alternate_emails": [
+                                                    "F5WhHCA3oL6Ix@wOKzwIsvHbFi.mrlc"
+                                                ],
+                                                "first_name": "do mollit velit",
+                                                "last_name": "voluptate dolor",
+                                                "address_line_1": "et incididunt",
+                                                "address_line_2": "veniam quis non exercitation Duis",
+                                                "city": "\u01f2\u0190\u0239\u0172\u01c6",
+                                                "state_province_region": "occaecat",
+                                                "postal_code": -19694583,
+                                                "country": "reprehenderit",
+                                                "custom_fields": {
+                                                    "custom_field_name1": "dolor aute irure Excepteur"
+                                                },
+                                                "list_ids": [
+                                                    "ffd225a8-2008-4457-87af-1cffff5b1ccb"
+                                                ]
+                                            },
+                                            {
+                                                "id": "449767ca-d446-45f1-aa9b-432f441b5ca1",
+                                                "email": "kF4@gYYdAxzetJrWszLAHuBUTu.rzq",
+                                                "alternate_emails": [
+                                                    "ksqbx6BInlB@ouWBjjxwFBwVQjdnEKXy.xi",
+                                                    "TAe7F2m8dFlF@SirYykzbe.aj",
+                                                    "T9c2Y@HjVQY.zz",
+                                                    "p7ShfET@vMMnTUqoqngPSEqbpyoeWN.jlqn",
+                                                    "0VJSIhIUT2k@mJXVtdZVKKswW.xoca"
+                                                ],
+                                                "first_name": "irure laboris minim",
+                                                "last_name": "id nostrud aliqua sit",
+                                                "address_line_1": "dolor",
+                                                "address_line_2": "elit ex labore sunt aliquip",
+                                                "city": "\u00dd\u01d8\u017a\u019d\u01dd\u0189\u0091\u019d\u0090",
+                                                "state_province_region": "nostrud Duis non nulla laborum",
+                                                "postal_code": 60466925,
+                                                "country": "id sunt nisi",
+                                                "custom_fields": {
+                                                    "custom_field_name2": "enim quis",
+                                                    "custom_field_name1": "amet"
+                                                },
+                                                "list_ids": [
+                                                    "2870627c-b9ea-4dcf-bde0-36c3e0e3eca9",
+                                                    "575d86aa-4dcc-4b7d-b7de-ded856913198",
+                                                    "fb82a17f-5777-439d-9b8c-2c565c8ddf20"
+                                                ]
+                                            }
+                                        ],
+                                        "name": "List Name",
+                                        "query_dsl": "Email LIKE %twilio.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "field"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_marketing-segments-segmentid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_marketing-segments-segment_id",
+            "summary": "Delete Segment",
+            "tags": [
+                "segmenting contacts",
+                "Segmenting Contacts"
+            ],
+            "description": "**This endpoint allows you to delete a segment by `segment_id`.**\n\nNote that deleting a segment does not delete the contacts associated with the segment by default. Contacts associated with a deleted segment will remain in your list of all contacts and any other segments they belong to.",
+            "responses": {
+                "202": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "field"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_marketing-segments-segmentid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 202
+                }
+            }
+        }
+    }
+}

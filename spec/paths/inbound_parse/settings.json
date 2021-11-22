@@ -1,0 +1,331 @@
+{
+    "user_webhooks_parse_settings": {
+        "get": {
+            "operationId": "GET_user-webhooks-parse-settings",
+            "summary": "Retrieve all parse settings",
+            "tags": [
+                "Webhooks"
+            ],
+            "description": "**This endpoint allows you to retrieve all of your current inbound parse settings.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "description": "The list of your current inbound parse settings.",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/parse-setting"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "url": "http://mydomain.com/parse",
+                                                "hostname": "mail.mydomain.com",
+                                                "spam_check": true,
+                                                "send_raw": true
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_user-webhooks-parse-settings",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "statusCode": 200,
+                    "enabled": false
+                }
+            }
+        },
+        "post": {
+            "operationId": "POST_user-webhooks-parse-settings",
+            "summary": "Create a parse setting",
+            "tags": [
+                "Settings - Inbound Parse"
+            ],
+            "description": "**This endpoint allows you to create a new inbound parse setting.**\n\nCreating an Inbound Parse setting requires two pieces of information: a `url` and a `hostname`.\n\nThe `hostname` must correspond to a domain authenticated by Twilio SendGrid on your account. If you need to complete domain authentication, you can use the [Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth) or the \"Authenticate a domain\" endpoint. See \"[How to Set Up Domain Authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)\" for instructions.\n\nAny email received by the `hostname` will be parsed when you complete this setup. You must also add a Twilio SendGrid MX record to this domain's DNS records. See \"[Setting up the Inbound Parse Webhook](https://sendgrid.com/docs/for-developers/parsing-email/setting-up-the-inbound-parse-webhook/)\" for full instructions.\n\nThe `url` represents a location where the parsed message data will be delivered. Twilio SendGrid will make an HTTP POST request to this `url` with the message data. The `url` must be publicly reachable, and your application must return a `200` status code to signal that the message data has been received.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/parse-setting"
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/parse-setting"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "url": "http://email.myhostname.com",
+                                        "hostname": "myhostname.com",
+                                        "spam_check": false,
+                                        "send_raw": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_user-webhooks-parse-settings",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "user_webhooks_parse_settings_{hostname}": {
+        "parameters": [
+            {
+                "name": "hostname",
+                "in": "path",
+                "description": "The hostname associated with the inbound parse setting that you would like to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_user-webhooks-parse-settings-hostname",
+            "summary": "Retrieve a specific parse setting",
+            "tags": [
+                "Settings - Inbound Parse"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the \"Retrieve all parse settings\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/parse-setting"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "url": "http://mydomain.com/parse",
+                                        "hostname": "mail.mydomain.com",
+                                        "spam_check": true,
+                                        "send_raw": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_user-webhooks-parse-settings-hostname",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_user-webhooks-parse-settings-hostname",
+            "summary": "Update a parse setting",
+            "tags": [
+                "Settings - Inbound Parse"
+            ],
+            "description": "**This endpoint allows you to update a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the \"Retrieve all parse settings\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/parse-setting"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/parse-setting"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "url": "http://mydomain.com/parse",
+                                        "hostname": "mail.mydomain.com",
+                                        "spam_check": true,
+                                        "send_raw": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_user-webhooks-parse-settings-hostname",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "statusCode": 200,
+                    "enabled": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_user-webhooks-parse-settings-hostname",
+            "summary": "Delete a parse setting",
+            "tags": [
+                "Settings - Inbound Parse"
+            ],
+            "description": "**This endpoint allows you to delete a specific inbound parse setting by hostname.**\n\nYou can retrieve all your Inbound Parse settings and their associated host names with the \"Retrieve all parse settings\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_user-webhooks-parse-settings-hostname",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

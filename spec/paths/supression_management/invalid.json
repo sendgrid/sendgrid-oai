@@ -1,0 +1,274 @@
+{
+    "suppression_invalid_emails": {
+        "get": {
+            "operationId": "GET_suppression-invalid_emails",
+            "summary": "Retrieve all invalid emails",
+            "tags": [
+                "Invalid Emails API"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all invalid email addresses.**",
+            "parameters": [
+                {
+                    "name": "start_time",
+                    "in": "query",
+                    "description": "Refers start of the time range in unix timestamp when an invalid email was created (inclusive).",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "end_time",
+                    "in": "query",
+                    "description": "Refers end of the time range in unix timestamp when an invalid email was created (inclusive).",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limit the number of results to be displayed per page.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Paging offset. The point in the list to begin displaying results.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "description": "The list of invalid email addresses.",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/invalid-email"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1449953655,
+                                            "email": "user1@example.com",
+                                            "reason": "Mail domain mentioned in email address is unknown"
+                                        },
+                                        {
+                                            "created": 1449939373,
+                                            "email": "user2@example.com",
+                                            "reason": "Mail domain mentioned in email address is unknown"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_suppression-invalidemails",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-invalid_emails",
+            "summary": "Delete invalid emails",
+            "tags": [
+                "Invalid Emails API"
+            ],
+            "description": "**This endpoint allows you to remove email addresses from your invalid email address list.**\n\nThere are two options for deleting invalid email addresses: \n\n1) You can delete all invalid email addresses by setting `delete_all` to true in the request body.\n2) You can delete some invalid email addresses by specifying certain addresses in an array in the request body.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "delete_all": {
+                                    "type": "boolean",
+                                    "description": "Indicates if you want to remove all email address from the invalid emails list."
+                                },
+                                "emails": {
+                                    "type": "array",
+                                    "description": "The list of specific email addresses that you want to remove.",
+                                    "items": {
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "delete_all": false,
+                                "emails": [
+                                    "example1@example.com",
+                                    "example2@example.com"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_suppression-invalidemails",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "suppression_invalid_emails_{email}": {
+        "parameters": [
+            {
+                "name": "email",
+                "in": "path",
+                "description": "The specific email address of the invalid email entry that you want to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_suppression-invalid_emails-email",
+            "summary": "Retrieve a specific invalid email",
+            "tags": [
+                "Invalid Emails API"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific invalid email addresses.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "description": "A specific invalid email.",
+                                "minItems": 0,
+                                "maxItems": 1,
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/invalid-email"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1454433146,
+                                            "email": "test1@example.com",
+                                            "reason": "Mail domain mentioned in email address is unknown"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_suppression-invalidemails-email",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-invalid_emails-email",
+            "summary": "Delete a specific invalid email",
+            "tags": [
+                "Invalid Emails API"
+            ],
+            "description": "**This endpoint allows you to remove a specific email address from the invalid email address list.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_suppression-invalidemails-email",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,328 @@
+{
+    "sso_integrations": {
+        "post": {
+            "operationId": "POST_sso-integrations",
+            "summary": "Create an SSO Integration",
+            "tags": [
+                "Single Sign-On Settings"
+            ],
+            "description": "**This endpoint allows you to create an SSO integration.**",
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/create-integration-request"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-integration"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "name": "Twilio SendGrid",
+                                        "enabled": true,
+                                        "signin_url": "https://example.okta.com/home/examplecompany/yokpGWsmpRUcuvXFb4x6/nfaVADNhuHvvReAEV4x6",
+                                        "signout_url": "https://example.okta.com/login/signout?fromURI=exampleappurl",
+                                        "entity_id": "http://www.okta.com/${org.externalKey}",
+                                        "last_updated": 1621288964
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "POST_sso-integrations",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_sso-integrations",
+            "summary": "Get All SSO Integrations",
+            "tags": [
+                "Single Sign-On Settings"
+            ],
+            "description": "**This endpoint allows you to retrieve all SSO integrations tied to your Twilio SendGrid account.**\n\nThe IDs returned by this endpoint can be used by the APIs additional endpoints to modify your SSO integrations.",
+            "parameters": [
+                {
+                    "name": "si",
+                    "in": "query",
+                    "description": "If this parameter is set to `true`, the response will include the `completed_integration` field.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/sso-integration"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "name": "Twilio SendGrid",
+                                            "enabled": true,
+                                            "signin_url": "https://example.okta.com/home/examplecompany/yokpGWsmpRUcuvXFb4x6/nfaVADNhuHvvReAEV4x6",
+                                            "signout_url": "https://example.okta.com/login/signout?fromURI=exampleappurl",
+                                            "entity_id": "http://www.okta.com/${org.externalKey}",
+                                            "last_updated": 1621288520,
+                                            "completed_integration": true,
+                                            "id": "b0b98502-9408-4b24-9e3d-31ed7cb15312",
+                                            "single_signon_url": "https://api.sendgrid.com/v3/public/sso/saml/response/id/b0b98502-9408-4b24-9e3d-31ed7cb15312",
+                                            "audience_url": "https://api.sendgrid.com/v3/public/sso/saml/response/id/b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "GET_sso-integrations",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "sso_integrations_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_sso-integrations-id",
+            "summary": "Get an SSO Integration",
+            "tags": [
+                "Single Sign-On Settings"
+            ],
+            "description": "**This endpoint allows you to retrieve an SSO integration by ID.**\n\nYou can retrieve the IDs for your configurations from the response provided by the \"Get All SSO Integrations\" endpoint.",
+            "parameters": [
+                {
+                    "name": "si",
+                    "in": "query",
+                    "description": "If this parameter is set to `true`, the response will include the `completed_integration` field.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-integration"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "name": "Twilio SendGrid",
+                                        "enabled": true,
+                                        "signin_url": "https://example.okta.com/home/examplecompany/yokpGWsmpRUcuvXFb4x6/nfaVADNhuHvvReAEV4x6",
+                                        "signout_url": "https://example.okta.com/login/signout?fromURI=exampleappurl",
+                                        "entity_id": "http://www.okta.com/${org.externalKey}",
+                                        "last_updated": 1621288964,
+                                        "completed_integration": true,
+                                        "id": "b0b98502-9408-4b24-9e3d-31ed7cb15312",
+                                        "audience_url": "https://api.sendgrid.com/v3/public/sso/saml/response/id/b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "GET_sso-integrations-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_sso-integrations-id",
+            "summary": "Update an SSO Integration",
+            "tags": [
+                "Single Sign-On Settings"
+            ],
+            "description": "**This endpoint allows you to modify an exisiting SSO integration.**\n\nYou can retrieve the IDs for your configurations from the response provided by the \"Get All SSO Integrations\" endpoint.",
+            "parameters": [
+                {
+                    "name": "si",
+                    "in": "query",
+                    "description": "If this parameter is set to `true`, the response will include the `completed_integration` field.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/create-integration-request"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-integration"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "name": "Twilio SendGrid",
+                                        "enabled": true,
+                                        "signin_url": "https://example.okta.com/home/examplecompany/yokpGWsmpRUcuvXFb4x6/nfaVADNhuHvvReAEV4x6",
+                                        "signout_url": "https://example.okta.com/login/signout?fromURI=exampleappurl",
+                                        "entity_id": "http://www.okta.com/${org.externalKey}",
+                                        "last_updated": 1621288964,
+                                        "id": "b0b98502-9408-4b24-9e3d-31ed7cb15312",
+                                        "single_signon_url": "https://api.sendgrid.com/v3/public/sso/saml/response/id/b0b98502-9408-4b24-9e3d-31ed7cb15312",
+                                        "audience_url": "https://api.sendgrid.com/v3/public/sso/saml/response/id/b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "PATCH_sso-integrations-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_sso-integrations-id",
+            "summary": "Delete an SSO Integration",
+            "tags": [
+                "Single Sign-On Settings"
+            ],
+            "description": "**This endpoint allows you to delete an IdP configuration by ID.**\n\nYou can retrieve the IDs for your configurations from the response provided by the \"Get All SSO Integrations\" endpoint.",
+            "responses": {
+                "204": {
+                    "description": ""
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "DELETE_sso-integrations-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

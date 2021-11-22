@@ -1,0 +1,1288 @@
+{
+    "whitelabel_domains": {
+        "get": {
+            "operationId": "GET_whitelabel-domains",
+            "summary": "List all authenticated domains",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all domains you have authenticated.**",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Number of domains to return.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Paging offset.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "exclude_subusers",
+                    "in": "query",
+                    "description": "Exclude subuser domains from the result.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "The username associated with an authenticated domain.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "domain",
+                    "in": "query",
+                    "description": "Search for authenticated domains.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/domain-authentication-200-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "id": 1,
+                                            "user_id": 7,
+                                            "subdomain": "mail",
+                                            "domain": "example.com",
+                                            "username": "jane@example.com",
+                                            "ips": [
+                                                "192.168.1.1",
+                                                "192.168.1.2"
+                                            ],
+                                            "custom_spf": true,
+                                            "default": true,
+                                            "legacy": false,
+                                            "automatic_security": true,
+                                            "valid": true,
+                                            "dns": {
+                                                "mail_cname": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "mail.example.com",
+                                                    "data": "u7.wl.sendgrid.net"
+                                                },
+                                                "dkim1": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "s1._domainkey.example.com",
+                                                    "data": "s1._domainkey.u7.wl.sendgrid.net"
+                                                },
+                                                "dkim2": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "s2._domainkey.example.com",
+                                                    "data": "s2._domainkey.u7.wl.sendgrid.net"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": 2,
+                                            "user_id": 8,
+                                            "subdomain": "new",
+                                            "domain": "example2.com",
+                                            "username": "john@example2.com",
+                                            "ips": [],
+                                            "custom_spf": false,
+                                            "default": true,
+                                            "legacy": false,
+                                            "automatic_security": true,
+                                            "valid": false,
+                                            "dns": {
+                                                "mail_cname": {
+                                                    "valid": false,
+                                                    "type": "mx",
+                                                    "host": "news.example2.com",
+                                                    "data": "sendgrid.net"
+                                                },
+                                                "dkim1": {
+                                                    "valid": false,
+                                                    "type": "txt",
+                                                    "host": "example2.com",
+                                                    "data": "k=rsa; t=s; p=publicKey"
+                                                },
+                                                "dkim2": {
+                                                    "valid": false,
+                                                    "type": "txt",
+                                                    "host": "example2.com",
+                                                    "data": "k=rsa; t=s p=publicKey"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_whitelabel-domains",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "post": {
+            "operationId": "POST_whitelabel-domains",
+            "summary": "Authenticate a domain",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to authenticate a domain.**\n\nIf you are authenticating a domain for a subuser, you have two options:\n1. Use the \"username\" parameter. This allows you to authenticate a domain on behalf of your subuser. This means the subuser is able to see and modify the authenticated domain.\n2. Use the Association workflow (see Associate Domain section). This allows you to authenticate a domain created by the parent to a subuser. This means the subuser will default to the assigned domain, but will not be able to see or modify that authenticated domain. However, if the subuser authenticates their own domain it will overwrite the assigned domain.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "domain": {
+                                    "type": "string",
+                                    "description": "Domain being authenticated."
+                                },
+                                "subdomain": {
+                                    "type": "string",
+                                    "description": "The subdomain to use for this authenticated domain."
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "description": "The username associated with this domain."
+                                },
+                                "ips": {
+                                    "type": "array",
+                                    "description": "The IP addresses that will be included in the custom SPF record for this authenticated domain.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "custom_spf": {
+                                    "type": "boolean",
+                                    "description": "Specify whether to use a custom SPF or allow SendGrid to manage your SPF. This option is only available to authenticated domains set up for manual security."
+                                },
+                                "default": {
+                                    "type": "boolean",
+                                    "description": "Whether to use this authenticated domain as the fallback if no authenticated domains match the sender's domain."
+                                },
+                                "automatic_security": {
+                                    "type": "boolean",
+                                    "description": "Whether to allow SendGrid to manage your SPF records, DKIM keys, and DKIM key rotation."
+                                },
+                                "custom_dkim_selector": {
+                                    "type": "string",
+                                    "description": "Add a custom DKIM selector. Accepts three letters or numbers."
+                                }
+                            },
+                            "required": [
+                                "domain"
+                            ],
+                            "example": {
+                                "domain": "example.com",
+                                "subdomain": "news",
+                                "username": "john@example.com",
+                                "ips": [
+                                    "192.168.1.1",
+                                    "192.168.1.2"
+                                ],
+                                "custom_spf": true,
+                                "default": true,
+                                "automatic_security": false
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/authentication_domain"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 302183,
+                                        "user_id": 1446226,
+                                        "subdomain": "example",
+                                        "domain": "example.com",
+                                        "username": "mbernier",
+                                        "ips": [],
+                                        "custom_spf": false,
+                                        "default": true,
+                                        "legacy": false,
+                                        "automatic_security": true,
+                                        "valid": false,
+                                        "dns": {
+                                            "mail_cname": {
+                                                "valid": false,
+                                                "type": "cname",
+                                                "host": "example.example.com",
+                                                "data": "u1446226.wl.sendgrid.net"
+                                            },
+                                            "dkim1": {
+                                                "valid": false,
+                                                "type": "cname",
+                                                "host": "s1._domainkey.example.com",
+                                                "data": "s1.domainkey.u1446226.wl.sendgrid.net"
+                                            },
+                                            "dkim2": {
+                                                "valid": false,
+                                                "type": "cname",
+                                                "host": "s2._domainkey.example.com",
+                                                "data": "s2.domainkey.u1446226.wl.sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_whitelabel-domains",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_domains_{domain_id}": {
+        "parameters": [
+            {
+                "name": "domain_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_whitelabel-domains-domain_id",
+            "summary": "Retrieve an authenticated domain",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific authenticated domain.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/authentication_domain"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 45373692,
+                                        "user_id": 66036447,
+                                        "subdomain": "sub",
+                                        "domain": "example.com",
+                                        "username": "jdoe",
+                                        "ips": [
+                                            "127.0.0.1"
+                                        ],
+                                        "custom_spf": false,
+                                        "default": true,
+                                        "legacy": false,
+                                        "automatic_security": true,
+                                        "valid": true,
+                                        "dns": {
+                                            "mail_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "mail.example.com",
+                                                "data": "u7.wl.sendgrid.net"
+                                            },
+                                            "dkim1": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "s1._domainkey.example.com",
+                                                "data": "s1._domainkey.u7.wl.sendgrid.net"
+                                            },
+                                            "dkim2": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "s2._domainkey.example.com",
+                                                "data": "s2._domainkey.u7.wl.sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_whitelabel-domains-domainid",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_whitelabel-domains-domain_id",
+            "summary": "Update an authenticated domain",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to update the settings for an authenticated domain.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "default": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Indicates whether this is the default authenticated domain."
+                                },
+                                "custom_spf": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Indicates whether to generate a custom SPF record for manual security."
+                                }
+                            },
+                            "example": {
+                                "default": false,
+                                "custom_spf": true
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/domain-authentication-200-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "id": 1,
+                                            "user_id": 7,
+                                            "subdomain": "mail",
+                                            "domain": "example.com",
+                                            "username": "jane@example.com",
+                                            "ips": [
+                                                "192.168.1.1",
+                                                "192.168.1.2"
+                                            ],
+                                            "custom_spf": true,
+                                            "default": true,
+                                            "legacy": false,
+                                            "automatic_security": true,
+                                            "valid": true,
+                                            "dns": {
+                                                "mail_cname": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "mail.example.com",
+                                                    "data": "u7.wl.sendgrid.net"
+                                                },
+                                                "dkim1": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "s1._domainkey.example.com",
+                                                    "data": "s1._domainkey.u7.wl.sendgrid.net"
+                                                },
+                                                "dkim2": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "s2._domainkey.example.com",
+                                                    "data": "s2._domainkey.u7.wl.sendgrid.net"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": 2,
+                                            "user_id": 8,
+                                            "subdomain": "new",
+                                            "domain": "example2.com",
+                                            "username": "john@example2.com",
+                                            "ips": [],
+                                            "custom_spf": false,
+                                            "default": true,
+                                            "legacy": false,
+                                            "automatic_security": true,
+                                            "valid": false,
+                                            "dns": {
+                                                "mail_cname": {
+                                                    "valid": false,
+                                                    "type": "mx",
+                                                    "host": "news.example2.com",
+                                                    "data": "sendgrid.net"
+                                                },
+                                                "dkim1": {
+                                                    "valid": false,
+                                                    "type": "txt",
+                                                    "host": "example2.com",
+                                                    "data": "k=rsa; t=s; p=publicKey"
+                                                },
+                                                "dkim2": {
+                                                    "valid": false,
+                                                    "type": "txt",
+                                                    "host": "example2.com",
+                                                    "data": "k=rsa; t=s p=publicKey"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_whitelabel-domains-domainid",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_whitelabel-domains-domain_id",
+            "summary": "Delete an authenticated domain.",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to delete an authenticated domain.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_whitelabel-domains-domainid",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_domains_default": {
+        "get": {
+            "operationId": "GET_whitelabel-domains-default",
+            "summary": "Get the default authentication",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to retrieve the default authentication for a domain.**\n\nWhen creating or updating a domain authentication, you can set the domain as a default. The default domain will be used to send all mail. If you have multiple authenticated domains, the authenticated domain matching the domain of the From address will be used, and the default will be overridden.\n\nThis endpoint will return a default domain and its details only if a default is set. You are not required to set a default. If you do not set a default domain, this endpoint will return general information about your domain authentication status.",
+            "parameters": [
+                {
+                    "name": "domain",
+                    "in": "query",
+                    "description": "The domain to find a default authentication.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/domain-authentication-200-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "id": 1,
+                                            "user_id": 7,
+                                            "subdomain": "mail",
+                                            "domain": "example.com",
+                                            "username": "jane@example.com",
+                                            "ips": [
+                                                "192.168.1.1",
+                                                "192.168.1.2"
+                                            ],
+                                            "custom_spf": true,
+                                            "default": true,
+                                            "legacy": false,
+                                            "automatic_security": true,
+                                            "valid": true,
+                                            "dns": {
+                                                "mail_cname": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "mail.example.com",
+                                                    "data": "u7.wl.sendgrid.net"
+                                                },
+                                                "dkim1": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "s1._domainkey.example.com",
+                                                    "data": "s1._domainkey.u7.wl.sendgrid.net"
+                                                },
+                                                "dkim2": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "s2._domainkey.example.com",
+                                                    "data": "s2._domainkey.u7.wl.sendgrid.net"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_whitelabel-domains-default",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_domains_{id}_ips": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "ID of the domain to which you are adding an IP",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_whitelabel-domains-id-ips",
+            "summary": "Add an IP to an authenticated domain",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to add an IP address to an authenticated domain.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ip": {
+                                    "type": "string",
+                                    "description": "IP to associate with the domain. Used for manually specifying IPs for custom SPF."
+                                }
+                            },
+                            "required": [
+                                "ip"
+                            ],
+                            "example": {
+                                "ip": "192.168.0.1"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/domain_authentication_domain_spf"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "john@example.com",
+                                        "user_id": 7,
+                                        "ips": [],
+                                        "custom_spf": true,
+                                        "default": false,
+                                        "legacy": false,
+                                        "automatic_security": false,
+                                        "valid": false,
+                                        "dns": {
+                                            "mail_server": {
+                                                "host": "mail.example.com",
+                                                "type": "mx",
+                                                "data": "sendgrid.net",
+                                                "valid": false
+                                            },
+                                            "subdomain_spf": {
+                                                "host": "mail.example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 ip4:192.168.1.1 ip4:192.168.0.1 -all",
+                                                "valid": false
+                                            },
+                                            "domain_spf": {
+                                                "host": "example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 include:mail.example.com -all",
+                                                "valid": false
+                                            },
+                                            "dkim": {
+                                                "host": "s1._domainkey.example.com",
+                                                "type": "txt",
+                                                "data": "k=rsa; t=s; p=publicKey",
+                                                "valid": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_whitelabel-domains-id-ips",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_domains_{id}_ips_{ip}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "ID of the domain to delete the IP from.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            {
+                "name": "ip",
+                "in": "path",
+                "description": "IP to remove from the domain.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "delete": {
+            "operationId": "DELETE_whitelabel-domains-id-ips-ip",
+            "summary": "Remove an IP from an authenticated domain.",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to remove an IP address from that domain's authentication.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/domain_authentication_domain_spf"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "mail@example.com",
+                                        "user_id": 7,
+                                        "ips": [],
+                                        "custom_spf": true,
+                                        "default": false,
+                                        "legacy": false,
+                                        "automatic_security": false,
+                                        "valid": false,
+                                        "dns": {
+                                            "mail_server": {
+                                                "host": "mail.example.com",
+                                                "type": "mx",
+                                                "data": "sendgrid.net",
+                                                "valid": false
+                                            },
+                                            "subdomain_spf": {
+                                                "host": "mail.example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 ip4:192.168.1.1 ip4:192.168.0.1 -all",
+                                                "valid": false
+                                            },
+                                            "domain_spf": {
+                                                "host": "example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 include:mail.example.com -all",
+                                                "valid": false
+                                            },
+                                            "dkim": {
+                                                "host": "s1._domainkey.example.com",
+                                                "type": "txt",
+                                                "data": "k=rsa; t=s; p=publicKey",
+                                                "valid": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_whitelabel-domains-id-ips-ip",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_domains_{id}_validate": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "ID of the domain to validate.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_whitelabel-domains-id-validate",
+            "summary": "Validate a domain authentication.",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to validate an authenticated domain. If it fails, it will return an error message describing why the domain could not be validated.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "The ID of the authenticated domain."
+                                    },
+                                    "valid": {
+                                        "type": "boolean",
+                                        "description": "Indicates if this is a valid authenticated domain."
+                                    },
+                                    "validation_results": {
+                                        "type": "object",
+                                        "description": "The individual DNS records that are checked when validating, including the reason for any invalid DNS records.",
+                                        "properties": {
+                                            "mail_cname": {
+                                                "type": "object",
+                                                "description": "The CNAME record for the authenticated domain.",
+                                                "properties": {
+                                                    "valid": {
+                                                        "type": "boolean",
+                                                        "description": "Indicates if this DNS record is valid."
+                                                    },
+                                                    "reason": {
+                                                        "description": "The reason this record is invalid.",
+                                                        "nullable": true,
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "dkim1": {
+                                                "type": "object",
+                                                "description": "A DNS record for this authenticated domain.",
+                                                "properties": {
+                                                    "valid": {
+                                                        "type": "boolean",
+                                                        "description": "Indicates if the DNS record is valid."
+                                                    },
+                                                    "reason": {
+                                                        "nullable": true,
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "dkim2": {
+                                                "type": "object",
+                                                "description": "A DNS record for this authenticated domain.",
+                                                "properties": {
+                                                    "valid": {
+                                                        "type": "boolean",
+                                                        "description": "Indicates if the DNS record is valid."
+                                                    },
+                                                    "reason": {
+                                                        "nullable": true,
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "spf": {
+                                                "type": "object",
+                                                "description": "The SPF record for the authenticated domain.",
+                                                "properties": {
+                                                    "valid": {
+                                                        "type": "boolean",
+                                                        "description": "Indicates if the SPF record is valid."
+                                                    },
+                                                    "reason": {
+                                                        "nullable": true,
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "valid": true,
+                                        "validation_resuts": {
+                                            "mail_cname": {
+                                                "valid": false,
+                                                "reason": "Expected your MX record to be \"mx.sendgrid.net\" but found \"example.com\"."
+                                            },
+                                            "dkim1": {
+                                                "valid": true,
+                                                "reason": null
+                                            },
+                                            "dkim2": {
+                                                "valid": true,
+                                                "reason": null
+                                            },
+                                            "spf": {
+                                                "valid": true,
+                                                "reason": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message explaining the reason for the error."
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "internal error getting TXT"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_whitelabel-domains-id-validate",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_domains_subuser": {
+        "get": {
+            "operationId": "GET_whitelabel-domains-subuser",
+            "summary": "List the authenticated domain associated with the given user.",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.",
+            "parameters": [
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "Username for the subuser to find associated authenticated domain.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/domain_authentication_domain_spf"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "mail@example.com",
+                                        "user_id": 7,
+                                        "ips": [],
+                                        "custom_spf": true,
+                                        "default": false,
+                                        "legacy": false,
+                                        "automatic_security": false,
+                                        "valid": false,
+                                        "dns": {
+                                            "mail_server": {
+                                                "host": "mail.example.com",
+                                                "type": "mx",
+                                                "data": "sendgrid.net",
+                                                "valid": false
+                                            },
+                                            "subdomain_spf": {
+                                                "host": "mail.example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 ip4:192.168.1.1 ip4:192.168.0.1 -all",
+                                                "valid": false
+                                            },
+                                            "domain_spf": {
+                                                "host": "example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 include:mail.example.com -all",
+                                                "valid": false
+                                            },
+                                            "dkim": {
+                                                "host": "s1._domainkey.example.com",
+                                                "type": "txt",
+                                                "data": "k=rsa; t=s; p=publicKey",
+                                                "valid": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_whitelabel-domains-subuser",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_whitelabel-domains-subuser",
+            "summary": "Disassociate an authenticated domain from a given user.",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to disassociate a specific authenticated domain from a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.",
+            "parameters": [
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "Username for the subuser to find associated authenticated domain.",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_whitelabel-domains-subuser",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_domains_{domain_id}_subuser": {
+        "parameters": [
+            {
+                "name": "domain_id",
+                "in": "path",
+                "description": "ID of the authenticated domain to associate with the subuser",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_whitelabel-domains-domain_id-subuser",
+            "summary": "Associate a authenticated domain with a given user.",
+            "tags": [
+                "Domain Authentication"
+            ],
+            "description": "**This endpoint allows you to associate a specific authenticated domain with a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string",
+                                    "description": "Username to associate with the authenticated domain."
+                                }
+                            },
+                            "required": [
+                                "username"
+                            ],
+                            "example": {
+                                "username": "jdoe"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/domain_authentication_domain_spf"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "mail@example.com",
+                                        "user_id": 7,
+                                        "ips": [],
+                                        "custom_spf": true,
+                                        "default": false,
+                                        "legacy": false,
+                                        "automatic_security": false,
+                                        "valid": false,
+                                        "dns": {
+                                            "mail_server": {
+                                                "host": "mail.example.com",
+                                                "type": "mx",
+                                                "data": "sendgrid.net",
+                                                "valid": false
+                                            },
+                                            "subdomain_spf": {
+                                                "host": "mail.example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 ip4:192.168.1.1 ip4:192.168.0.1 -all",
+                                                "valid": false
+                                            },
+                                            "domain_spf": {
+                                                "host": "example.com",
+                                                "type": "txt",
+                                                "data": "v=spf1 include:mail.example.com -all",
+                                                "valid": false
+                                            },
+                                            "dkim": {
+                                                "host": "s1._domainkey.example.com",
+                                                "type": "txt",
+                                                "data": "k=rsa; t=s; p=publicKey",
+                                                "valid": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_whitelabel-domains-domainid-subuser",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

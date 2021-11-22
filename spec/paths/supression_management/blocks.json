@@ -1,0 +1,267 @@
+{
+    "suppression_blocks": {
+        "get": {
+            "operationId": "GET_suppression-blocks",
+            "summary": "Retrieve all blocks",
+            "tags": [
+                "Blocks API"
+            ],
+            "description": "**This endpoint allows you to retrieve all email addresses that are currently on your blocks list.**",
+            "parameters": [
+                {
+                    "name": "start_time",
+                    "in": "query",
+                    "description": "The start of the time range when a blocked email was created (inclusive). This is a unix timestamp.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "end_time",
+                    "in": "query",
+                    "description": "The end of the time range when a blocked email was created (inclusive). This is a unix timestamp.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limit the number of results to be displayed per page.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The point in the list to begin displaying results.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/blocks-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1443651154,
+                                            "email": "example@example.com",
+                                            "reason": "error dialing remote address: dial tcp 10.57.152.165:25: no route to host",
+                                            "status": "4.0.0"
+                                        },
+                                        {
+                                            "created": 1443651155,
+                                            "email": "example1@example.com",
+                                            "reason": "unable to resolve MX record for example.com: servfail",
+                                            "status": "4.0.0"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_suppression-blocks",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-blocks",
+            "summary": "Delete blocks",
+            "tags": [
+                "Blocks API"
+            ],
+            "description": "**This endpoint allows you to delete all email addresses on your blocks list.**\n\nThere are two options for deleting blocked emails: \n\n1. You can delete all blocked emails by setting `delete_all` to `true` in the request body. \n2. You can delete a selection of blocked emails by specifying the email addresses in the `emails` array of the request body.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "delete_all": {
+                                    "type": "boolean",
+                                    "description": "Indicates if you want to delete all blocked email addresses."
+                                },
+                                "emails": {
+                                    "type": "array",
+                                    "description": "The specific blocked email addresses that you want to delete.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "delete_all": false,
+                                "emails": [
+                                    "example1@example.com",
+                                    "example2@example.com"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_suppression-blocks",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "enabled": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "suppression_blocks_{email}": {
+        "parameters": [
+            {
+                "name": "email",
+                "in": "path",
+                "description": "The email address of the specific block.",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "email"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_suppression-blocks-email",
+            "summary": "Retrieve a specific block",
+            "tags": [
+                "Blocks API"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific email address from your blocks list.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/blocks-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1443651154,
+                                            "email": "example@example.com",
+                                            "reason": "error dialing remote address: dial tcp 10.57.152.165:25: no route to host",
+                                            "status": "4.0.0"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_suppression-blocks-email",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-blocks-email",
+            "summary": "Delete a specific block",
+            "tags": [
+                "Blocks API"
+            ],
+            "description": "**This endpoint allows you to delete a specific email address from your blocks list.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_suppression-blocks-email",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

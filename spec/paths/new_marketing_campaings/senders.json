@@ -1,0 +1,151 @@
+{
+    "marketing_senders": {
+        "post": {
+            "operationId": "POST_marketing-senders",
+            "summary": "Create a Sender Identity",
+            "tags": [
+                "Senders"
+            ],
+            "description": "**This endpoint allows you to create a new sender identity.**\n\n*You may create up to 100 unique sender identities.*\n\nSender identities are required to be verified before use. If your domain has been authenticated, a new sender identity will auto verify on creation. Otherwise an email will be sent to the `from.email`.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nickname": {
+                                    "type": "string",
+                                    "description": "A nickname for the sender identity. Not used for sending."
+                                },
+                                "from": {
+                                    "type": "object",
+                                    "required": [
+                                        "email",
+                                        "name"
+                                    ],
+                                    "properties": {
+                                        "email": {
+                                            "type": "string",
+                                            "description": "This is where the email will appear to originate from for your recipient"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "This is the name appended to the from email field. IE - Your name or company name."
+                                        }
+                                    }
+                                },
+                                "reply_to": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "string",
+                                            "description": "This is the email that your recipient will reply to."
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "This is the name appended to the reply to email field. IE - Your name or company name."
+                                        }
+                                    },
+                                    "required": [
+                                        "email"
+                                    ]
+                                },
+                                "address": {
+                                    "type": "string",
+                                    "description": "The physical address of the sender identity."
+                                },
+                                "address_2": {
+                                    "type": "string",
+                                    "description": "Additional sender identity address information."
+                                },
+                                "city": {
+                                    "type": "string",
+                                    "description": "The city of the sender identity."
+                                },
+                                "state": {
+                                    "type": "string",
+                                    "description": "The state of the sender identity."
+                                },
+                                "zip": {
+                                    "type": "string",
+                                    "description": "The zipcode of the sender identity."
+                                },
+                                "country": {
+                                    "type": "string",
+                                    "description": "The country of the sender identity."
+                                }
+                            },
+                            "required": [
+                                "nickname",
+                                "from",
+                                "address",
+                                "city",
+                                "country"
+                            ],
+                            "example": {
+                                "nickname": "Example Orders",
+                                "from": {
+                                    "email": "orders@example.com",
+                                    "name": "Example Orders"
+                                },
+                                "reply_to": {
+                                    "email": "support@example.com",
+                                    "name": "Example Support"
+                                },
+                                "address": "1234 Fake St.",
+                                "address_2": "",
+                                "city": "San Francisco",
+                                "state": "CA",
+                                "zip": "94105",
+                                "country": "United States"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/senderID"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_marketing-senders",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

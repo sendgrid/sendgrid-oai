@@ -1,0 +1,337 @@
+{
+    "marketing_segments_2.0": {
+        "post": {
+            "operationId": "POST_segments",
+            "summary": "Create Segment",
+            "tags": [
+                "Segmenting Contacts V2"
+            ],
+            "description": "Segment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/segment_write_v2"
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/segment_response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
+                },
+                "429": {
+                    "description": ""
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_segments",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_segments",
+            "summary": "Get List of Segments",
+            "tags": [
+                "Segmenting Contacts V2"
+            ],
+            "description": "The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
+            "parameters": [
+                {
+                    "name": "parent_list_ids",
+                    "in": "query",
+                    "description": "A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "no_parent_list_id",
+                    "in": "query",
+                    "description": "If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.",
+                    "required": false,
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/all_segments_response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_segments",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "marketing_segments_2.0_{segment_id}": {
+        "parameters": [
+            {
+                "name": "segment_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "patch": {
+            "operationId": "PATCH_segments-segment_id",
+            "summary": "Update Segment",
+            "tags": [
+                "Segmenting Contacts V2"
+            ],
+            "description": "Segment `name` has to be unique. A user can not create a new segment with an existing segment name.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/segment_update"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/segment_response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                },
+                "429": {
+                    "description": ""
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_segments-segment_id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_segments-segment_id",
+            "summary": "Get Segment by ID",
+            "tags": [
+                "Segmenting Contacts V2"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "contacts_sample",
+                    "in": "query",
+                    "description": "Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/segment_response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_segments-segment_id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_segments-segment_id",
+            "summary": "Delete segment",
+            "tags": [
+                "Segmenting Contacts V2 - Beta"
+            ],
+            "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+            "responses": {
+                "202": {
+                    "description": ""
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/errors-seg-v2"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_segments-segment_id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

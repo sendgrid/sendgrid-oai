@@ -1,0 +1,639 @@
+{
+    "api_keys": {
+        "post": {
+            "operationId": "create-api-keys",
+            "summary": "Create API keys",
+            "tags": [
+                "API Keys"
+            ],
+            "description": "**This endpoint allows you to create a new API Key for the user.**\n\nTo create your initial SendGrid API Key, you should [use the SendGrid App](https://app.sendgrid.com/settings/api_keys). Once you have created a first key with scopes to manage additional API keys, you can use this API for all other key management.\n\n> There is a limit of 100 API Keys on your account.\n\nA JSON request body containing a `name` property is required when making requests to this endpoint. If the number of maximum keys, 100, is reached, a `403` status will be returned.\n\nThough the `name` field is required, it does not need to be unique. A unique API key ID will be generated for each key you create and returned in the response body.\n\nIt is not necessary to pass a `scopes` field to the API when creating a key, but you should be aware that omitting the `scopes` field from your request will create a key with \"Full Access\" permissions by default.\n\nSee the [API Key Permissions List](https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-authorization) for all available scopes. An API key's scopes can be updated after creation using the \"Update API keys\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name you will use to describe this API Key."
+                                },
+                                "scopes": {
+                                    "type": "array",
+                                    "description": "The individual permissions that you are giving to this API Key.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "My API Key",
+                                "scopes": [
+                                    "mail.send",
+                                    "alerts.create",
+                                    "alerts.read"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "api_key": {
+                                        "type": "string"
+                                    },
+                                    "api_key_id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "scopes": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "api_key": "SG.xxxxxxxx.yyyyyyyy",
+                                        "api_key_id": "xxxxxxxx",
+                                        "name": "My API Key",
+                                        "scopes": [
+                                            "mail.send",
+                                            "alerts.create",
+                                            "alerts.read"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "create-api-keys",
+                "public": true,
+                "mock": {
+                    "statusCode": 201,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_api_keys",
+            "summary": "Retrieve all API Keys belonging to the authenticated user",
+            "tags": [
+                "API Keys"
+            ],
+            "description": "**This endpoint allows you to retrieve all API Keys that belong to the authenticated user.**\n\nA successful response from this API will include all available API keys' names and IDs.\n\nFor security reasons, there is not a way to retrieve the key itself after it's created. If you lose your API key, you must create a new one. Only the \"Create API keys\" endpoint will return a key to you and only at the time of creation.\n\nAn `api_key_id` can be used to update or delete the key, as well as retrieve the key's details, such as its scopes.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/api_key_name_id"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "name": "API Key Name",
+                                                "api_key_id": "some-apikey-id"
+                                            },
+                                            {
+                                                "name": "API Key Name 2",
+                                                "api_key_id": "another-apikey-id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_apikeys",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "api_keys_{api_key_id}": {
+        "parameters": [
+            {
+                "name": "api_key_id",
+                "in": "path",
+                "description": "",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_api_keys-api_key_id",
+            "summary": "Retrieve an existing API Key",
+            "tags": [
+                "API Keys"
+            ],
+            "description": "**This endpoint allows you to retrieve a single API key using an `api_key_id`.**\n\nThe endpoint will return a key's name, ID, and scopes. If the API Key ID does not, exist a `404` status will be returned.\n\nSee the [API Key Permissions List](https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-authorization) for all available scopes. An API key's scopes can be updated after creation using the \"Update API keys\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/api_key_name_id_scopes"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "name": "API Key Name",
+                                                "api_key_id": "some-apikey-id"
+                                            },
+                                            {
+                                                "name": "API Key Name 2",
+                                                "api_key_id": "another-apikey-id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_apikeys-apikeyid",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_api_keys-api_key_id",
+            "summary": "Update API key name",
+            "tags": [
+                "API Keys"
+            ],
+            "description": "**This endpoint allows you to update the name of an existing API Key.**\n\nYou must pass this endpoint a JSON request body with a `name` property, which will be used to rename the key associated with the `api_key_id` passed in the URL.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The new name of the API Key."
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "A New Hope"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/api_key_name_id"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "api_key_id": "qfTQ6KG0QBiwWdJ0-pCLCA",
+                                        "name": "A New Hope"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_apikeys-apikeyid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "put": {
+            "operationId": "PUT_api_keys-api_key_id",
+            "summary": "Update API key name and scopes",
+            "tags": [
+                "API Keys"
+            ],
+            "description": "**This endpoint allows you to update the name and scopes of a given API key.**\n\nYou must pass this endpoint a JSON request body with a `name` field and a `scopes` array containing at least one scope. The `name` and `scopes` fields will be used to update the key associated with the `api_key_id` in the request URL.\n\nIf you need to update a key's scopes only, pass the `name` field with the key's existing name; the `name` will not be modified. If you need to update a key's name only, use the \"Update API key name\" endpoint.\n\nSee the [API Key Permissions List](https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-authorization) for all available scopes.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "scopes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "Profiles key",
+                                "scopes": [
+                                    "user.profile.read",
+                                    "user.profile.update"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/api_key_name_id_scopes"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "api_key_id": "qfTQ6KG0QBiwWdJ0-pCLCA",
+                                        "name": "Profiles Key",
+                                        "scopes": [
+                                            "user.profile.read",
+                                            "user.profile.update"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PUT_apikeys-apikeyid",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_api_keys-api_key_id",
+            "summary": "Delete API keys",
+            "tags": [
+                "API Keys"
+            ],
+            "description": "**This endpoint allows you to revoke an existing API Key using an `api_key_id`**\n\nAuthentications using a revoked API Key will fail after after some small propogation delay. If the API Key ID does not exist, a `404` status will be returned.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": ""
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_apiKeysErrors_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_apikeys-apikeyid",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "scopes": {
+        "get": {
+            "operationId": "GET_scopes",
+            "summary": "Retrieve a list of scopes for which this user has access.",
+            "tags": [
+                "API Key Permissions"
+            ],
+            "description": "**This endpoint returns a list of all scopes that this user has access to.**\n\nAPI Keys are used to authenticate with [SendGrid's v3 API](https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-authorization).\n\nAPI Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access.\n\nThis endpoint returns all the scopes assigned to the key you use to authenticate with it. To retrieve the scopes assigned to another key, you can pass an API key ID to the \"Retrieve an existing API key\" endpoint.\n\nFor a more detailed explanation of how you can use API Key permissions, please visit our [API Keys documentation](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "scopes": {
+                                        "type": "array",
+                                        "description": "The list of scopes for which this user has access.",
+                                        "uniqueItems": true,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "scopes"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "scopes": [
+                                            "mail.send",
+                                            "alerts.create",
+                                            "alerts.read"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "description": "This empty field is returned instead of the list of scopes if the user making the call doesn't have the authorization required.",
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Explains why the scopes cannot be returned."
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_scopes",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "statusCode": 200,
+                    "enabled": false
+                }
+            }
+        }
+    }
+}

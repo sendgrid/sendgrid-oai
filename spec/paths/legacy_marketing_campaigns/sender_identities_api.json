@@ -1,0 +1,870 @@
+{
+    "senders": {
+        "post": {
+            "operationId": "POST_senders",
+            "summary": "Create a Sender Identity",
+            "tags": [
+                "Sender Identities API"
+            ],
+            "description": "**This endpoint allows you to create a new sender identity.**\n\nYou may create up to 100 unique sender identities.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "../../components/schemas.json#/sender-id-request"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "from": {
+                                            "type": "object",
+                                            "required": [
+                                                "email"
+                                            ]
+                                        },
+                                        "reply_to": {
+                                            "type": "object",
+                                            "required": [
+                                                "email"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "nickname",
+                                        "address",
+                                        "city",
+                                        "country"
+                                    ]
+                                }
+                            ],
+                            "example": {
+                                "nickname": "My Sender ID",
+                                "from": {
+                                    "email": "from@example.com",
+                                    "name": "Example INC"
+                                },
+                                "reply_to": {
+                                    "email": "replyto@example.com",
+                                    "name": "Example INC"
+                                },
+                                "address": "123 Elm St.",
+                                "address_2": "Apt. 456",
+                                "city": "Denver",
+                                "state": "Colorado",
+                                "zip": "80202",
+                                "country": "United States"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/senderID"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "nickname": "My Sender ID",
+                                        "from": {
+                                            "email": "from@example.com",
+                                            "name": "Example INC"
+                                        },
+                                        "reply_to": {
+                                            "email": "replyto@example.com",
+                                            "name": "Example INC"
+                                        },
+                                        "address": "123 Elm St.",
+                                        "address_2": "Apt. 456",
+                                        "city": "Denver",
+                                        "state": "Colorado",
+                                        "zip": "80202",
+                                        "country": "United States",
+                                        "verified": true,
+                                        "updated_at": 1449872165,
+                                        "created_at": 1449872165,
+                                        "locked": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "The JSON you have submitted cannot be parsed.",
+                                                "field": ""
+                                            },
+                                            {
+                                                "message": "You've reached your limit of 100 sender identities. Please delete one or more and try again.",
+                                                "field": ""
+                                            },
+                                            {
+                                                "message": "nickname is required.",
+                                                "field": "nickname"
+                                            },
+                                            {
+                                                "message": "You already have a sender identity with the same nickname.",
+                                                "field": "nickname"
+                                            },
+                                            {
+                                                "message": "from_name is required.",
+                                                "field": "from_name"
+                                            },
+                                            {
+                                                "message": "from_email is required.",
+                                                "field": "from_email"
+                                            },
+                                            {
+                                                "message": "From email is not a valid email address.",
+                                                "field": "from_email"
+                                            },
+                                            {
+                                                "message": "reply_to is required.",
+                                                "field": "reply_to"
+                                            },
+                                            {
+                                                "message": "Reply to email is not a valid email address.",
+                                                "field": "reply_to"
+                                            },
+                                            {
+                                                "message": "address is required.",
+                                                "field": "address"
+                                            },
+                                            {
+                                                "message": "city is required.",
+                                                "field": "city"
+                                            },
+                                            {
+                                                "message": "country is required.",
+                                                "field": "country"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_senders",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_v3-senders",
+            "summary": "Get all Sender Identities",
+            "tags": [
+                "Sender Identities API"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/senderID"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "id": 1,
+                                                "nickname": "My Sender ID",
+                                                "from": {
+                                                    "email": "from@example.com",
+                                                    "name": "Example INC"
+                                                },
+                                                "reply_to": {
+                                                    "email": "replyto@example.com",
+                                                    "name": "Example INC"
+                                                },
+                                                "address": "123 Elm St.",
+                                                "address_2": "Apt. 456",
+                                                "city": "Denver",
+                                                "state": "Colorado",
+                                                "zip": "80202",
+                                                "country": "United States",
+                                                "verified": true,
+                                                "updated_at": 1449872165,
+                                                "created_at": 1449872165,
+                                                "locked": false
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_v3-senders",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "senders_{sender_id}": {
+        "parameters": [
+            {
+                "name": "sender_id",
+                "in": "path",
+                "description": "The ID of the sender identity that you want to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_v3-senders-sender_id",
+            "summary": "View a Sender Identity",
+            "tags": [
+                "Sender Identities API"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific sender identity.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/senderID"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "nickname": "My Sender ID",
+                                        "from": {
+                                            "email": "from@example.com",
+                                            "name": "Example INC"
+                                        },
+                                        "reply_to": {
+                                            "email": "replyto@example.com",
+                                            "name": "Example INC"
+                                        },
+                                        "address": "123 Elm St.",
+                                        "address_2": "Apt. 456",
+                                        "city": "Denver",
+                                        "state": "Colorado",
+                                        "zip": "80202",
+                                        "country": "United States",
+                                        "verified": true,
+                                        "updated_at": 1449872165,
+                                        "created_at": 1449872165,
+                                        "locked": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "resource not found",
+                                                "field": "id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_v3-senders-sender_id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_v3-senders-sender_id",
+            "summary": "Update a Sender Identity",
+            "tags": [
+                "Sender Identities API"
+            ],
+            "description": "**This endpoint allows you to update a sender identity.**\n\nUpdates to `from.email` require re-verification.\n\nPartial updates are allowed, but fields that are marked as \"required\" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/sender-id-request"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/senderID"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "nickname": "My Sender ID",
+                                        "from": {
+                                            "email": "from@example.com",
+                                            "name": "Example INC"
+                                        },
+                                        "reply_to": {
+                                            "email": "replyto@example.com",
+                                            "name": "Example INC"
+                                        },
+                                        "address": "123 Elm St.",
+                                        "address_2": "Apt. 456",
+                                        "city": "Denver",
+                                        "state": "Colorado",
+                                        "zip": "80202",
+                                        "country": "United States",
+                                        "verified": true,
+                                        "updated_at": 1449872165,
+                                        "created_at": 1449872165,
+                                        "locked": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "The JSON you have submitted cannot be parsed.",
+                                                "field": ""
+                                            },
+                                            {
+                                                "message": "nickname is required.",
+                                                "field": "nickname"
+                                            },
+                                            {
+                                                "message": "You already have a sender identity with the same nickname.",
+                                                "field": "nickname"
+                                            },
+                                            {
+                                                "message": "from_name is required.",
+                                                "field": "from_name"
+                                            },
+                                            {
+                                                "message": "from_email is required.",
+                                                "field": "from_email"
+                                            },
+                                            {
+                                                "message": "From email is not a valid email address.",
+                                                "field": "from_email"
+                                            },
+                                            {
+                                                "message": "reply_to is required.",
+                                                "field": "reply_to"
+                                            },
+                                            {
+                                                "message": "Reply to email is not a valid email address.",
+                                                "field": "reply_to"
+                                            },
+                                            {
+                                                "message": "address is required.",
+                                                "field": "address"
+                                            },
+                                            {
+                                                "message": "city is required.",
+                                                "field": "city"
+                                            },
+                                            {
+                                                "message": "country is required.",
+                                                "field": "country"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "You may only update a sender identity when it is unlocked.",
+                                                "field": "locked"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "resource not found",
+                                                "field": "id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_v3-senders-sender_id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_v3-senders-sender_id",
+            "summary": "Delete a Sender Identity",
+            "tags": [
+                "Sender Identities API"
+            ],
+            "description": "**This endoint allows you to delete one of your sender identities.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "You may only delete a sender identity when it is unlocked.",
+                                                "field": "locked"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "resource not found",
+                                                "field": "id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_v3-senders-sender_id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "senders_{sender_id}_resend_verification": {
+        "parameters": [
+            {
+                "name": "sender_id",
+                "in": "path",
+                "description": "The ID of the sender identity for which you would like to resend a verification email.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_v3-senders-sender_id-resend_verification",
+            "summary": "Resend Sender Identity Verification",
+            "tags": [
+                "Sender Identities API"
+            ],
+            "description": "**This enpdoint allows you to resend a sender identity verification email.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "The Sender Identity is already verified.  No email sent.",
+                                                "field": ""
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "field": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "resource not found",
+                                                "field": "id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_v3-senders-sender_id-resend_verification",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

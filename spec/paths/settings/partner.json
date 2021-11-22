@@ -1,0 +1,231 @@
+{
+    "partner_settings_new_relic": {
+        "patch": {
+            "operationId": "PATCH_partner_settings-new_relic",
+            "summary": "Updates New Relic partner settings.",
+            "tags": [
+                "Settings - Partner"
+            ],
+            "description": "**This endpoint allows you to update or change your New Relic partner settings.**\n\nOur partner settings allow you to integrate your SendGrid account with our partners to increase your SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [Partners documentation](https://sendgrid.com/docs/ui/account-and-settings/partners/).\n\nBy integrating with New Relic, you can send your SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [SendGrid for New Relic documentation](https://sendgrid.com/docs/ui/analytics-and-reporting/tracking-stats-using-new-relic/).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "license_key": {
+                                    "type": "string",
+                                    "description": "The license key for your New Relic account."
+                                },
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "Indicates if this partner setting is enabled."
+                                },
+                                "enable_subuser_statistics": {
+                                    "type": "boolean",
+                                    "description": "Indicates if your subuser statistics will be sent to your New Relic Dashboard."
+                                }
+                            },
+                            "example": {
+                                "license_key": "",
+                                "enabled": true,
+                                "enable_subuser_statistics": true
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/partner_settings_new_relic"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enable_subuser_statistics": true,
+                                        "enabled": true,
+                                        "license_key": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_partnersettings-newrelic",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_partner_settings-new_relic",
+            "summary": "Returns all New Relic partner settings.",
+            "tags": [
+                "Settings - Partner"
+            ],
+            "description": "**This endpoint allows you to retrieve your current New Relic partner settings.**\n\nOur partner settings allow you to integrate your SendGrid account with our partners to increase your SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [Partners documentation](https://sendgrid.com/docs/ui/account-and-settings/partners/).\n\nBy integrating with New Relic, you can send your SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [SendGrid for New Relic documentation](https://sendgrid.com/docs/ui/analytics-and-reporting/tracking-stats-using-new-relic/).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/partner_settings_new_relic"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enable_subuser_statistics": false,
+                                        "enabled": true,
+                                        "license_key": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_partnersettings-newrelic",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "partner_settings": {
+        "get": {
+            "operationId": "GET_partner_settings",
+            "summary": "Returns a list of all partner settings.",
+            "tags": [
+                "Settings - Partner"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all partner settings that you can enable.**\n\nOur partner settings allow you to integrate your SendGrid account with our partners to increase your SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [Partners documentation](https://sendgrid.com/docs/ui/account-and-settings/partners/).",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "The number of settings to return per page.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The paging offset.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "title": {
+                                                    "type": "string",
+                                                    "description": "The title of the partner."
+                                                },
+                                                "enabled": {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if this partner setting has been enabled."
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "The name of the partner setting."
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "A description of this partner setting."
+                                                }
+                                            },
+                                            "required": [
+                                                "title",
+                                                "enabled",
+                                                "name",
+                                                "description"
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "title": "Partner title",
+                                                "enabled": true,
+                                                "name": "partner_name",
+                                                "description": "A description of a partner."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_partnersettings",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "statusCode": 200,
+                    "enabled": false
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,550 @@
+{
+    "tracking_settings": {
+        "get": {
+            "operationId": "GET_tracking_settings",
+            "summary": "Retrieve Tracking Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all tracking settings on your account.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "description": "The list of all tracking settings.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "The name of the event being tracked."
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "description": "The title of the tracking setting."
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "A description about the event that is being tracked."
+                                                },
+                                                "enabled": {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if this tracking setting is currently enabled."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "name": "open",
+                                                "title": "Open Tracking",
+                                                "description": "lorem ipsum... .",
+                                                "enabled": true
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_trackingsettings",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "tracking_settings_click": {
+        "get": {
+            "operationId": "GET_tracking_settings-click",
+            "summary": "Retrieve Click Track Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to retrieve your current click tracking setting.**\n\nClick Tracking overrides all the links and URLs in your emails and points them to either SendGrid\u2019s servers or the domain with which you branded your link. When a customer clicks a link, SendGrid tracks those [clicks](https://sendgrid.com/docs/glossary/clicks/).\n\nClick tracking helps you understand how users are engaging with your communications. SendGrid can track up to 1000 links per email",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/click-tracking"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enable_text": false,
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_trackingsettings-click",
+                "public": true,
+                "mock": {
+                    "dynamic": false,
+                    "statusCode": 200,
+                    "enabled": false
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_tracking_settings-click",
+            "summary": "Update Click Tracking Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to enable or disable your current click tracking setting.**\n\nClick Tracking overrides all the links and URLs in your emails and points them to either SendGrid\u2019s servers or the domain with which you branded your link. When a customer clicks a link, SendGrid tracks those [clicks](https://sendgrid.com/docs/glossary/clicks/).\n\nClick tracking helps you understand how users are engaging with your communications. SendGrid can track up to 1000 links per email",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "The setting you want to use for click tracking."
+                                }
+                            },
+                            "example": {
+                                "enabled": true
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/click-tracking"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enable_text": false,
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_trackingsettings-click",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "tracking_settings_google_analytics": {
+        "get": {
+            "operationId": "GET_tracking_settings-google_analytics",
+            "summary": "Retrieve Google Analytics Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to retrieve your current setting for Google Analytics.**\n\n\nGoogle Analytics helps you understand how users got to your site and what they're doing there. For more information about using Google Analytics, please refer to [Google\u2019s URL Builder](https://support.google.com/analytics/answer/1033867?hl=en) and their article on [\"Best Practices for Campaign Building\"](https://support.google.com/analytics/answer/1037445).\n\nWe default the settings to Google\u2019s recommendations. For more information, see [Google Analytics Demystified](https://sendgrid.com/docs/ui/analytics-and-reporting/google-analytics/).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/google_analytics_settings"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "utm_campaign": "",
+                                        "utm_content": "lotsandlotsofcontent",
+                                        "utm_medium": "",
+                                        "utm_source": "",
+                                        "utm_term": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_trackingsettings-googleanalytics",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_tracking_settings-google_analytics",
+            "summary": "Update Google Analytics Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to update your current setting for Google Analytics.**\n\nGoogle Analytics helps you understand how users got to your site and what they're doing there. For more information about using Google Analytics, please refer to [Google\u2019s URL Builder](https://support.google.com/analytics/answer/1033867?hl=en) and their article on [\"Best Practices for Campaign Building\"](https://support.google.com/analytics/answer/1037445).\n\nWe default the settings to Google\u2019s recommendations. For more information, see [Google Analytics Demystified](https://sendgrid.com/docs/ui/analytics-and-reporting/google-analytics/).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/google_analytics_settings"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/google_analytics_settings"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "utm_campaign": "",
+                                        "utm_content": "lotsandlotsofcontent",
+                                        "utm_medium": "",
+                                        "utm_source": "",
+                                        "utm_term": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_trackingsettings-googleanalytics",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "tracking_settings_open": {
+        "get": {
+            "operationId": "GET_tracking_settings-open",
+            "summary": "Get Open Tracking Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to retrieve your current settings for open tracking.**\n\nOpen Tracking adds an invisible image at the end of the email which can track email opens.\n\nIf the email recipient has images enabled on their email client, a request to SendGrid\u2019s server for the invisible image is executed and an open event is logged.\n\nThese events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Indicates if open tracking is enabled."
+                                    }
+                                },
+                                "required": [
+                                    "enabled"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_trackingsettings-open",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_tracking_settings-open",
+            "summary": "Update Open Tracking Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to update your current settings for open tracking.**\n\nOpen Tracking adds an invisible image at the end of the email which can track email opens.\n\nIf the email recipient has images enabled on their email client, a request to SendGrid\u2019s server for the invisible image is executed and an open event is logged.\n\nThese events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "The new status that you want to set for open tracking."
+                                }
+                            },
+                            "example": {
+                                "enabled": true
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Indicates if open tracking is enabled."
+                                    }
+                                },
+                                "required": [
+                                    "enabled"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_trackingsettings-open",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "tracking_settings_subscription": {
+        "get": {
+            "operationId": "GET_tracking_settings-subscription",
+            "summary": "Retrieve Subscription Tracking Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to retrieve your current settings for subscription tracking.**\n\nSubscription tracking adds links to the bottom of your emails that allows your recipients to subscribe to, or unsubscribe from, your emails.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/subscription_tracking_settings"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "html_content": "<p>Something something unsubscribe <% %> something something</p>\n",
+                                        "landing": "<p>subscribehere</p>\n",
+                                        "plain_content": "Something something unsubscribe <% %> something something",
+                                        "replace": "thetag",
+                                        "url": "http://mydomain.com/parse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_trackingsettings-subscription",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_tracking_settings-subscription",
+            "summary": "Update Subscription Tracking Settings",
+            "tags": [
+                "Settings - Tracking"
+            ],
+            "description": "**This endpoint allows you to update your current settings for subscription tracking.**\n\nSubscription tracking adds links to the bottom of your emails that allows your recipients to subscribe to, or unsubscribe from, your emails.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/subscription_tracking_settings"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/subscription_tracking_settings"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "landing": "landing page html",
+                                        "url": "http://mydomain.com/parse",
+                                        "replace": "replacement tag",
+                                        "html_content": "html content",
+                                        "plain_content": "text content"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_trackingsettings-subscription",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

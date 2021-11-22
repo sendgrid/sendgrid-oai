@@ -1,0 +1,522 @@
+{
+    "whitelabel_ips": {
+        "post": {
+            "operationId": "POST_whitelabel-ips",
+            "summary": "Set up reverse DNS",
+            "tags": [
+                "Reverse DNS"
+            ],
+            "description": "**This endpoint allows you to set up reverse DNS.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ip": {
+                                    "type": "string",
+                                    "description": "The IP address for which you want to set up reverse DNS."
+                                },
+                                "subdomain": {
+                                    "type": "string",
+                                    "description": "The subdomain that will be used to send emails from the IP address. This should be the same as the subdomain used to set up an authenticated domain."
+                                },
+                                "domain": {
+                                    "type": "string",
+                                    "description": "The root, or sending, domain that will be used to send message from the IP address."
+                                }
+                            },
+                            "required": [
+                                "ip",
+                                "domain"
+                            ],
+                            "example": {
+                                "ip": "192.168.1.1",
+                                "subdomain": "email",
+                                "domain": "example.com"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/reverse_dns"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 123,
+                                        "ip": "192.168.1.2",
+                                        "rdns": "o1.email.example.com",
+                                        "users": [],
+                                        "subdomain": "email",
+                                        "domain": "example.com",
+                                        "valid": true,
+                                        "legacy": false,
+                                        "a_record": {
+                                            "valid": true,
+                                            "type": "a",
+                                            "host": "o1.email.example.com",
+                                            "data": "192.168.1.2"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_whitelabel-ips",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_whitelabel-ips",
+            "summary": "Retrieve all reverse DNS records",
+            "tags": [
+                "Reverse DNS"
+            ],
+            "description": "**This endpoint allows you to retrieve all of the Reverse DNS records created by this account.**\n\nYou may include a search key by using the `ip` query string parameter. This enables you to perform a prefix search for a given IP segment (e.g., `?ip=\"192.\"`).\n\nUse the `limit` query string parameter to reduce the number of records returned. All records will be returned if you have fewer records than the specified limit.\n\nThe `offset` query string parameter allows you to specify a non-zero index from which records will be returned. For example, if you have ten records, `?offset=5` will return the last five records (at indexes 5 through 9). The list starts at index zero.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "The maximum number of results to retrieve.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The point in the list of results to begin retrieving IP addresses from.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "ip",
+                    "in": "query",
+                    "description": "The IP address segment that you'd like to use in a prefix search.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/reverse_dns"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "id": 1,
+                                            "ip": "192.168.1.1",
+                                            "rdns": "o1.email.example.com",
+                                            "users": [
+                                                {
+                                                    "username": "john@example.com",
+                                                    "user_id": 7
+                                                },
+                                                {
+                                                    "username": "jane@example.com",
+                                                    "user_id": 8
+                                                }
+                                            ],
+                                            "subdomain": "email",
+                                            "domain": "example.com",
+                                            "valid": true,
+                                            "legacy": false,
+                                            "a_record": {
+                                                "valid": true,
+                                                "type": "a",
+                                                "host": "o1.email.example.com",
+                                                "data": "192.168.1.1"
+                                            }
+                                        },
+                                        {
+                                            "id": 2,
+                                            "ip": "192.168.1.2",
+                                            "rdns": "o2.email.example.com",
+                                            "users": [
+                                                {
+                                                    "username": "john@example.com",
+                                                    "user_id": 7
+                                                },
+                                                {
+                                                    "username": "jane@example2.com",
+                                                    "user_id": 9
+                                                }
+                                            ],
+                                            "subdomain": "email",
+                                            "domain": "example.com",
+                                            "valid": true,
+                                            "legacy": false,
+                                            "a_record": {
+                                                "valid": true,
+                                                "type": "a",
+                                                "host": "o2.email.example.com",
+                                                "data": "192.168.1.2"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_whitelabel-ips",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_ips_{id}_validate": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "The ID of the reverse DNS record that you would like to validate.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_whitelabel-ips-id-validate",
+            "summary": "Validate a reverse DNS record",
+            "tags": [
+                "Reverse DNS"
+            ],
+            "description": "**This endpoint allows you to validate a reverse DNS record.**\n\nAlways check the `valid` property of the response\u2019s `validation_results.a_record` object. This field will indicate whether it was possible to validate the reverse DNS record. If the `validation_results.a_record.valid` is `false`, this indicates only that Twilio SendGrid could not determine the validity your reverse DNS record \u2014 it may still be valid.\n\nIf validity couldn\u2019t be determined, you can check the value of `validation_results.a_record.reason` to find out why.\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"Retrieve all reverse DNS records\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "The ID of the reverse DNS record."
+                                    },
+                                    "valid": {
+                                        "type": "boolean",
+                                        "description": "Indicates if the reverse DNS record is valid.",
+                                        "enum": [
+                                            true,
+                                            false
+                                        ]
+                                    },
+                                    "validation_results": {
+                                        "type": "object",
+                                        "description": "The specific results of the validation.",
+                                        "properties": {
+                                            "a_record": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "valid": {
+                                                        "type": "boolean",
+                                                        "description": "Indicates if the reverse DNS record could be validated.",
+                                                        "enum": [
+                                                            true,
+                                                            false
+                                                        ]
+                                                    },
+                                                    "reason": {
+                                                        "description": "The reason the reverse DNS record could not be validated. Is `null` if the reverse DNS record was validated.",
+                                                        "nullable": true,
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "valid",
+                                                    "reason"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "valid",
+                                    "validation_results"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 123456,
+                                        "valid": false,
+                                        "validation_results": {
+                                            "a_record": {
+                                                "valid": false,
+                                                "reason": "Failed to resolve A Record at o1.ptr4283.example.com: lookup o1.ptr4283.example.com on 192.168.0.10:53: no such host"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Unexpected error in API call. See HTTP response body for details.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "The error messages for the failed validation.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message describing why the reverse DNS could not be validated."
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Reverse DNS record not found."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "The error messages for the failed validation.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message describing why the IP whitelabel could not be validated."
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "internal error getting rDNS"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_whitelabel-ips-id-validate",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "whitelabel_ips_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "The ID of the reverse DNS record that you would like to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_whitelabel-ips-id",
+            "summary": "Retrieve a reverse DNS record",
+            "tags": [
+                "Reverse DNS"
+            ],
+            "description": "**This endpoint allows you to retrieve a reverse DNS record.**\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"Retrieve all reverse DNS records\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/reverse_dns"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 123,
+                                        "ip": "192.168.1.1",
+                                        "rdns": "o1.email.example.com",
+                                        "users": [
+                                            {
+                                                "username": "john@example.com",
+                                                "user_id": 7
+                                            }
+                                        ],
+                                        "subdomain": "email",
+                                        "domain": "example.com",
+                                        "valid": true,
+                                        "legacy": false,
+                                        "a_record": {
+                                            "valid": true,
+                                            "type": "a",
+                                            "host": "o1.email.example.com",
+                                            "data": "192.168.1.1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_whitelabel-ips-id",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_whitelabel-ips-id",
+            "summary": "Delete a reverse DNS record",
+            "tags": [
+                "Reverse DNS"
+            ],
+            "description": "**This endpoint allows you to delete a reverse DNS record.**\n\nA call to this endpoint will respond with a 204 status code if the deletion was successful.\n\nYou can retrieve the IDs associated with all your reverse DNS records using the \"Retrieve all reverse DNS records\" endpoint.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_whitelabel-ips-id",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

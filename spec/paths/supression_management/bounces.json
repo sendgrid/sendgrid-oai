@@ -1,0 +1,327 @@
+{
+    "suppression_bounces": {
+        "get": {
+            "operationId": "GET_suppression-bounces",
+            "summary": "Retrieve all bounces",
+            "tags": [
+                "Bounces API"
+            ],
+            "description": "**This endpoint allows you to retrieve all of your bounces.**",
+            "parameters": [
+                {
+                    "name": "start_time",
+                    "in": "query",
+                    "description": "Refers start of the time range in unix timestamp when a bounce was created (inclusive).",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "end_time",
+                    "in": "query",
+                    "description": "Refers end of the time range in unix timestamp when a bounce was created (inclusive).",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "Accept",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "default": "application/json"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/bounce_response"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1250337600,
+                                            "email": "example@example.com",
+                                            "reason": "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp ",
+                                            "status": "5.1.1"
+                                        },
+                                        {
+                                            "created": 1250337600,
+                                            "email": "example@example.com",
+                                            "reason": "550 5.1.1 <testemail2@testing.com>: Recipient address rejected: User unknown in virtual alias table ",
+                                            "status": "5.1.1"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_suppression-bounces",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-bounces",
+            "summary": "Delete bounces",
+            "tags": [
+                "Bounces API"
+            ],
+            "description": "**This endpoint allows you to delete all emails on your bounces list.**\n\nThere are two options for deleting bounced emails: \n\n1. You can delete all bounced emails by setting `delete_all` to `true` in the request body. \n2. You can delete a selection of bounced emails by specifying the email addresses in the `emails` array of the request body.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "delete_all": {
+                                    "type": "boolean",
+                                    "description": "This parameter allows you to delete **every** email in your bounce list. This should not be used with the emails parameter."
+                                },
+                                "emails": {
+                                    "type": "array",
+                                    "description": "Delete multiple emails from your bounce list at the same time. This should not be used with the delete_all parameter.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "delete_all": false,
+                                "emails": [
+                                    "example@example.com",
+                                    "example2@example.com"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_suppression-bounces",
+                "public": true,
+                "mock": {
+                    "statusCode": 200,
+                    "enabled": false,
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "suppression_bounces_{email}": {
+        "parameters": [
+            {
+                "name": "email",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_suppression-bounces-email",
+            "summary": "Retrieve a Bounce",
+            "tags": [
+                "Bounces API"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific bounce by email address.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/bounce_response"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1443651125,
+                                            "email": "bounce1@test.com",
+                                            "reason": "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp ",
+                                            "status": "5.1.1"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_suppression-bounces-email",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "statusCode": 200,
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-bounces-email",
+            "summary": "Delete a bounce",
+            "tags": [
+                "Bounces API"
+            ],
+            "description": "**This endpoint allows you to remove an email address from your bounce list.**",
+            "parameters": [
+                {
+                    "name": "email_address",
+                    "in": "query",
+                    "description": "The email address you would like to remove from the bounce list.",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "email"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/DELETE_contactdb-lists-list_idBody"
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_suppression-bounces-email",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

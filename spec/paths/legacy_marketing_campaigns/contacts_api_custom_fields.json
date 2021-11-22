@@ -1,0 +1,573 @@
+{
+    "contactdb_custom_fields": {
+        "post": {
+            "operationId": "POST_contactdb-custom_fields",
+            "summary": "Create a Custom Field",
+            "tags": [
+                "Contacts API - Custom Fields"
+            ],
+            "description": "**This endpoint allows you to create a custom field.**\n\n**You can create up to 120 custom fields.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            },
+                            "example": {
+                                "name": "pet",
+                                "type": "text"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/contactdb_custom_field_with_id"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "name": "pet",
+                                        "type": "text"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"\" : \"Returned if request body is invalid JSON\"\n\"type\" : \"Returned if custom field type is invalid or not provided\"\n\"name\" : \"Returned if custom field name is not provided\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "Returned if request body is invalid JSON"
+                                            },
+                                            {
+                                                "field": "type",
+                                                "message": "Returned if custom field type is invalid or not provided"
+                                            },
+                                            {
+                                                "field": "name",
+                                                "message": "Returned if custom field name is not provided"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_contactdb-customfields",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_contactdb-custom_fields",
+            "summary": "Retrieve all custom fields",
+            "tags": [
+                "Contacts API - Custom Fields"
+            ],
+            "description": "**This endpoint allows you to retrieve all custom fields.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "List All Custom Fields response",
+                                "type": "object",
+                                "properties": {
+                                    "custom_fields": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/contactdb_custom_field_with_id"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "custom_fields"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "custom_fields": [
+                                            {
+                                                "id": 6234,
+                                                "name": "age",
+                                                "type": "number"
+                                            },
+                                            {
+                                                "id": 6233,
+                                                "name": "country",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "id": 6235,
+                                                "name": "favorite_color",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "id": 6239,
+                                                "name": "fname",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "id": 6240,
+                                                "name": "lname",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "id": 49439,
+                                                "name": "pet",
+                                                "type": "text"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_contactdb-customfields",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "contactdb_custom_fields_{custom_field_id}": {
+        "parameters": [
+            {
+                "name": "custom_field_id",
+                "in": "path",
+                "description": "The ID of the custom field that you want to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_contactdb-custom_fields-custom_field_id",
+            "summary": "Retrieve a Custom Field",
+            "tags": [
+                "Contacts API - Custom Fields"
+            ],
+            "description": "**This endpoint allows you to retrieve a custom field by ID.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/contactdb_custom_field_with_id"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "name": "pet",
+                                        "type": "text"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "invalid id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"custom_field_id\" : \"Returned if custom_field_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Custom field ID does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_contactdb-customfields-customfieldid",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_contactdb-custom_fields-custom_field_id",
+            "summary": "Delete a Custom Field",
+            "tags": [
+                "Contacts API - Custom Fields"
+            ],
+            "description": "**This endpoint allows you to delete a custom field by ID.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "202": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "message": "Custom Field delete is processing."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"id\" : \"Returned if custom_field_id is not valid\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Custom field in use by one or more segment conditions"
+                                            },
+                                            {
+                                                "message": "Custom field ID does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"custom_field_id\" : \"Returned if custom_field_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Custom field ID does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_contactdb-customfields-customfieldid",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "contactdb_reserved_fields": {
+        "get": {
+            "operationId": "GET_contactdb-reserved_fields",
+            "summary": "Retrieve reserved fields",
+            "tags": [
+                "Contacts API - Custom Fields"
+            ],
+            "description": "**This endpoint allows you to list all fields that are reserved and can't be used for custom field names.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "reserved_fields": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "reserved_fields": [
+                                            {
+                                                "name": "first_name",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "last_name",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "email",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "created_at",
+                                                "type": "date"
+                                            },
+                                            {
+                                                "name": "updated_at",
+                                                "type": "date"
+                                            },
+                                            {
+                                                "name": "last_emailed",
+                                                "type": "date"
+                                            },
+                                            {
+                                                "name": "last_clicked",
+                                                "type": "date"
+                                            },
+                                            {
+                                                "name": "last_opened",
+                                                "type": "date"
+                                            },
+                                            {
+                                                "name": "lists",
+                                                "type": "set"
+                                            },
+                                            {
+                                                "name": "campaigns",
+                                                "type": "set"
+                                            },
+                                            {
+                                                "name": "my_custom_field",
+                                                "type": "text"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_contactdb-reservedfields",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

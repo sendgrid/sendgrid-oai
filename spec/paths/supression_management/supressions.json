@@ -1,0 +1,467 @@
+{
+    "asm_groups_{group_id}_suppressions": {
+        "parameters": [
+            {
+                "name": "group_id",
+                "in": "path",
+                "description": "The id of the unsubscribe group that you are adding suppressions to.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_asm-groups-group_id-suppressions",
+            "summary": "Add suppressions to a suppression group",
+            "tags": [
+                "Suppressions - Suppressions"
+            ],
+            "description": "**This endpoint allows you to add email addresses to an unsubscribe group.**\n\nIf you attempt to add suppressions to a group that has been deleted or does not exist, the suppressions will be added to the global suppressions list.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/suppressions-request"
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "recipient_emails": {
+                                        "type": "array",
+                                        "description": "The email addresses you added to the unsubscribe group",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "email"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "recipient_emails": [
+                                            "test1@example.com",
+                                            "test2@example.com"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_asm-groups-groupid-suppressions",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_asm-groups-group_id-suppressions",
+            "summary": "Retrieve all suppressions for a suppression group",
+            "tags": [
+                "Suppressions - Suppressions"
+            ],
+            "description": "**This endpoint allows you to retrieve all suppressed email addresses belonging to the given group.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "description": "The list of email addresses belonging to the given suppression group.",
+                                "items": {
+                                    "type": "string",
+                                    "format": "email"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        "example@example.com",
+                                        "example2@example.com"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_asm-groups-groupid-suppressions",
+                "public": true,
+                "mock": {
+                    "dynamic": false
+                }
+            }
+        }
+    },
+    "asm_groups_{group_id}_suppressions_search": {
+        "parameters": [
+            {
+                "name": "group_id",
+                "in": "path",
+                "description": "The ID of the suppression group that you would like to search.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_asm-groups-group_id-suppressions-search",
+            "summary": "Search for suppressions within a group",
+            "tags": [
+                "Suppressions - Suppressions"
+            ],
+            "description": "**This endpoint allows you to search a suppression group for multiple suppressions.**\n\nWhen given a list of email addresses and a group ID, this endpoint will only return the email addresses that have been unsubscribed from the given group.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/suppressions-request"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "description": "The email address from your search that do exist in the suppression group.",
+                                "items": {
+                                    "type": "string",
+                                    "format": "email"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        "exists1@example.com",
+                                        "exists2@example.com"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_asm-groups-groupid-suppressions-search",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "asm_suppressions": {
+        "get": {
+            "operationId": "GET_asm-suppressions",
+            "summary": "Retrieve all suppressions",
+            "tags": [
+                "Suppressions - Suppressions"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all suppressions.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "string",
+                                            "description": "The email address that was suppressed."
+                                        },
+                                        "group_id": {
+                                            "type": "integer",
+                                            "description": "The id of the suppression group that this email address belongs to."
+                                        },
+                                        "group_name": {
+                                            "type": "string",
+                                            "description": "The name of the suppression group that this email address belongs to."
+                                        },
+                                        "created_at": {
+                                            "type": "integer",
+                                            "description": "A UNIX timestamp indicating when the suppression was created."
+                                        }
+                                    },
+                                    "required": [
+                                        "email",
+                                        "group_id",
+                                        "group_name",
+                                        "created_at"
+                                    ]
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "email": "test1@example.com",
+                                            "group_id": 1,
+                                            "group_name": "Weekly News",
+                                            "created_at": 1410986704
+                                        },
+                                        {
+                                            "email": "test1@example.com",
+                                            "group_id": 2,
+                                            "group_name": "Daily News",
+                                            "created_at": 1411493671
+                                        },
+                                        {
+                                            "email": "test2@example.com",
+                                            "group_id": 2,
+                                            "group_name": "Daily News",
+                                            "created_at": 1411493671
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_asm-suppressions",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "asm_suppressions_{email}": {
+        "parameters": [
+            {
+                "name": "email",
+                "in": "path",
+                "description": "The email address that you want to search suppression groups for.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_asm-suppressions-email",
+            "summary": "Retrieve all suppression groups for an email address",
+            "tags": [
+                "Suppressions - Suppressions"
+            ],
+            "description": "**This endpoint returns a list of all groups from which the given email address has been unsubscribed.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "suppressions": {
+                                        "type": "array",
+                                        "description": "The array of suppression groups.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "The description of the suppression group."
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "description": "The id of the suppression group."
+                                                },
+                                                "is_default": {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if the suppression group  is set as the default."
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "The name of the suppression group."
+                                                },
+                                                "suppressed": {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if the given email address is suppressed for this group."
+                                                }
+                                            },
+                                            "required": [
+                                                "description",
+                                                "id",
+                                                "is_default",
+                                                "name",
+                                                "suppressed"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "suppressions"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "suppressions": [
+                                            {
+                                                "description": "Optional description.",
+                                                "id": 1,
+                                                "is_default": true,
+                                                "name": "Weekly News",
+                                                "suppressed": true
+                                            },
+                                            {
+                                                "description": "Some daily news.",
+                                                "id": 2,
+                                                "is_default": true,
+                                                "name": "Daily News",
+                                                "suppressed": true
+                                            },
+                                            {
+                                                "description": "An old group.",
+                                                "id": 2,
+                                                "is_default": false,
+                                                "name": "Old News",
+                                                "suppressed": false
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_asm-suppressions-email",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "asm_groups_{group_id}_suppressions_{email}": {
+        "parameters": [
+            {
+                "name": "group_id",
+                "in": "path",
+                "description": "The id of the suppression group that you are removing an email address from.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            {
+                "name": "email",
+                "in": "path",
+                "description": "The email address that you want to remove from the suppression group.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "delete": {
+            "operationId": "DELETE_asm-groups-group_id-suppressions-email",
+            "summary": "Delete a suppression from a suppression group",
+            "tags": [
+                "Suppressions - Suppressions"
+            ],
+            "description": "**This endpoint allows you to remove a suppressed email address from the given suppression group.**\n\nRemoving an address will remove the suppression, meaning email will once again be sent to the previously suppressed addresses. This should be avoided unless a recipient indicates they wish to receive email from you again. You can use our [bypass filters](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) to deliver messages to otherwise suppressed addresses when exceptions are required.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_asm-groups-groupid-suppressions-email",
+                "public": true,
+                "mock": {
+                    "statusCode": 204,
+                    "dynamic": false
+                }
+            }
+        }
+    }
+}

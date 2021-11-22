@@ -1,0 +1,349 @@
+{
+    "sso_certificates": {
+        "post": {
+            "operationId": "POST_sso-certificates",
+            "summary": "Create an SSO Certificate",
+            "tags": [
+                "Certificates"
+            ],
+            "description": "**This endpoint allows you to create an SSO certificate.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                                "public_certificate": {
+                                    "type": "string",
+                                    "description": "This public certificate allows SendGrid to verify that SAML requests it receives are signed by an IdP that it recognizes."
+                                },
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the certificate is enabled."
+                                },
+                                "integration_id": {
+                                    "type": "string",
+                                    "description": "An ID that matches a certificate to a specific IdP integration. This is the `id` returned by the \"Get All SSO Integrations\" endpoint."
+                                }
+                            },
+                            "required": [
+                                "public_certificate",
+                                "integration_id"
+                            ],
+                            "example": {
+                                "public_certificate": "<your x509 certificate>",
+                                "enabled": false,
+                                "integration_id": "b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-certificate-body"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "public_certificate": "<your x509 certificate>",
+                                        "id": 66138975,
+                                        "not_before": 1621289880,
+                                        "not_after": 1621289880,
+                                        "intergration_id": "b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "POST_sso-certificates",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "sso_integrations_{integration_id}_certificates": {
+        "parameters": [
+            {
+                "name": "integration_id",
+                "in": "path",
+                "description": "An ID that matches a certificate to a specific IdP integration.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_sso-integrations-integration_id-certificates",
+            "summary": "Get All SSO Certificates by Integration",
+            "tags": [
+                "Certificates"
+            ],
+            "description": "**This endpoint allows you to retrieve all your IdP configurations by configuration ID.**\n\nThe `integration_id` expected by this endpoint is the `id` returned in the response by the \"Get All SSO Integrations\" endpoint.",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/sso-certificate-body"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "public_certificate": "<your x509 certificate>",
+                                            "id": 66138975,
+                                            "not_before": 1621289880,
+                                            "not_after": 1621289880,
+                                            "intergration_id": "b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "GET_sso-integrations-integrationid-certificates",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "sso_certificates_{cert_id}": {
+        "parameters": [
+            {
+                "name": "cert_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_sso-certificates-cert_id",
+            "summary": "Get an SSO Certificate",
+            "tags": [
+                "Certificates"
+            ],
+            "description": "**This endpoint allows you to retrieve an individual SSO certificate.**",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-certificate-body"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "public_certificate": "<your x509 certificate>",
+                                        "id": 66138975,
+                                        "not_before": 1621289880,
+                                        "not_after": 1621289880,
+                                        "intergration_id": "b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "GET_sso-certificates-certid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_sso-certificates-cert_id",
+            "summary": "Update SSO Certificate",
+            "tags": [
+                "Certificates"
+            ],
+            "description": "**This endpoint allows you to update an existing certificate by ID.**\n\nYou can retrieve a certificate's ID from the response provided by the \"Get All SSO Integrations\" endpoint.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "public_certificate": {
+                                    "type": "string",
+                                    "description": "This public certificate allows SendGrid to verify that SAML requests it receives are signed by an IdP that it recognizes."
+                                },
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether or not the certificate is enabled."
+                                },
+                                "integration_id": {
+                                    "type": "string",
+                                    "description": "An ID that matches a certificate to a specific IdP integration."
+                                }
+                            },
+                            "example": {
+                                "public_certificate": "<your x509 certificate>",
+                                "enabled": false,
+                                "intergration_id": "b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "PATCH_sso-certificates-certid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_sso-certificates-cert_id",
+            "summary": "Delete an SSO Certificate",
+            "tags": [
+                "Certificates"
+            ],
+            "description": "**This endpoint allows you to delete an SSO certificate.**\n\nYou can retrieve a certificate's ID from the response provided by the \"Get All SSO Integrations\" endpoint.",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-certificate-body"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "public_certificate": "<your x509 certificate>",
+                                        "id": 66138975,
+                                        "not_before": 1621289880,
+                                        "not_after": 1621289880,
+                                        "intergration_id": "b0b98502-9408-4b24-9e3d-31ed7cb15312"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            },
+            "x-stoplight": {
+                "id": "DELETE_sso-certificates-certid",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "Authorization": {
+        "name": "Authorization",
+        "type": "apiKey",
+        "in": "header"
+    }
+}

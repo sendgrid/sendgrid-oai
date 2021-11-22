@@ -1,0 +1,867 @@
+{
+    "verified_senders_domains": {
+        "get": {
+            "operationId": "GET_verified_senders-domains",
+            "summary": "Domain Warn List",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint returns a list of domains known to implement DMARC and categorizes them by failure type \u2014 hard failure or soft failure**.\n\nDomains listed as hard failures will not deliver mail when used as a [Sender Identity](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/) due to the domain's DMARC policy settings.\n\nFor example, using a `yahoo.com` email address as a Sender Identity will likely result in the rejection of your mail. For more information about DMARC, see [Everything about DMARC](https://sendgrid.com/docs/ui/sending-email/dmarc/).",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "results": {
+                                        "type": "object",
+                                        "required": [
+                                            "soft_failures",
+                                            "hard_failures"
+                                        ],
+                                        "properties": {
+                                            "soft_failures": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "hard_failures": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "results"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "results": {
+                                            "soft_failures": [
+                                                "gmail.com"
+                                            ],
+                                            "hard_failures": [
+                                                "yahoo.com"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_verifiedsenders-domains",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "verified_senders_steps_completed": {
+        "get": {
+            "operationId": "GET_verified_senders-steps_completed",
+            "summary": "Completed Steps",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint allows you to determine which of SendGrid\u2019s verification processes have been completed for an account**.\n\nThis endpoint returns boolean values, `true` and `false`, for [Domain Authentication](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#domain-authentication), `domain_verified`, and [Single Sender Verification](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/#single-sender-verification), `sender_verified`, for the account.\n\nAn account may have one, both, or neither verification steps completed. If you need to authenticate a domain rather than a Single Sender, see the \"Authenticate a domain\" endpoint.",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "results": {
+                                        "type": "object",
+                                        "properties": {
+                                            "sender_verified": {
+                                                "type": "boolean"
+                                            },
+                                            "domain_verified": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "results": {
+                                            "domain_verified": true,
+                                            "sender_verified": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_verifiedsenders-stepscompleted",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "verified_senders_verify_{token}": {
+        "parameters": [
+            {
+                "name": "token",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_verified_senders-verify-token",
+            "summary": "Verify Sender Request",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint allows you to verify a sender requests.**\n\nThe token is generated by SendGrid and included in a verification email delivered to the address that's pending verification.",
+            "responses": {
+                "204": {
+                    "description": ""
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_verifiedsenders-verify-token",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "verified_senders_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "patch": {
+            "operationId": "PATCH_verified_senders-id",
+            "summary": "Edit Verified Sender",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint allows you to update an existing Sender Identity**.\n\nPass the `id` assigned to a Sender Identity to this endpoint as a path parameter. Include any fields you wish to update in the request body in JSON format.\n\nYou can retrieve the IDs associated with Sender Identities by passing a `GET` request to the Get All Verified Senders endpoint, `/verified_senders`.\n\n**Note:** Unlike a `PUT` request, `PATCH` allows you to update only the fields you wish to edit. Fields that are not passed as part of a request will remain unaltered.",
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/verified-sender-request-schema"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/verified-sender-response-schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1234,
+                                        "nickname": "Example Orders",
+                                        "from_email": "orders@example.com",
+                                        "from_name": "Example Orders",
+                                        "reply_to": "orders@example.com",
+                                        "reply_to_name": "Example Orders",
+                                        "address": "1234 Fake St.",
+                                        "address2": "PO Box 1234",
+                                        "state": "CA",
+                                        "city": "San Francisco",
+                                        "country": "USA",
+                                        "zip": "94105",
+                                        "verified": true,
+                                        "locked": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_verifiedsenders-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_verified_senders-id",
+            "summary": "Delete Verified Sender",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint allows you to delete a Sender Identity**.\n\nPass the `id` assigned to a Sender Identity to this endpoint to delete the Sender Identity from your account.\n\nYou can retrieve the IDs associated with Sender Identities using the \"Get All Verified Senders\" endpoint.",
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_verifiedsenders-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "verified_senders": {
+        "post": {
+            "operationId": "POST_verified_senders",
+            "summary": "Create Verified Sender Request",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint allows you to create a new Sender Identify**.\n\nUpon successful submission of a `POST` request to this endpoint, an identity will be created, and a verification email will be sent to the address assigned to the `from_email` field. You must complete the verification process using the sent email to fully verify the sender.\n\nIf you need to resend the verification email, you can do so with the Resend Verified Sender Request, `/resend/{id}`, endpoint.\n\nIf you need to authenticate a domain rather than a Single Sender, see the [Domain Authentication API](https://sendgrid.api-docs.io/v3.0/domain-authentication/authenticate-a-domain).",
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/verified-sender-request-schema"
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/verified-sender-response-schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1234,
+                                        "nickname": "Example Orders",
+                                        "from_email": "orders@example.com",
+                                        "from_name": "Example Orders",
+                                        "reply_to": "orders@example.com",
+                                        "reply_to_name": "Example Orders",
+                                        "address": "1234 Fake St.",
+                                        "address2": "PO Box 1234",
+                                        "state": "CA",
+                                        "city": "San Francisco",
+                                        "country": "USA",
+                                        "zip": "94105",
+                                        "verified": true,
+                                        "locked": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_verifiedsenders",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_verified_senders",
+            "summary": "Get All Verified Senders",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint allows you to retrieve all the Sender Identities associated with an account.**\n\nThis endpoint will return both verified and unverified senders.\n\nYou can limit the number of results returned using the `limit`, `lastSeenID`, and `id` query string parameters.\n\n* `limit` allows you to specify an exact number of Sender Identities to return.\n* `lastSeenID` will return senders with an ID number occuring after the passed in ID. In other words, the `lastSeenID` provides a starting point from which SendGrid will iterate to find Sender Identities associated with your account.\n* `id` will return information about only the Sender Identity passed in the request.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "lastSeenID",
+                    "in": "query",
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "id",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/verified-sender-response-schema"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "results": [
+                                            {
+                                                "id": 1234,
+                                                "nickname": "Example Orders",
+                                                "from_email": "orders@example.com",
+                                                "from_name": "Example Orders",
+                                                "reply_to": "orders@example.com",
+                                                "reply_to_name": "Example Orders",
+                                                "address": "1234 Fake St.",
+                                                "address2": "PO Box 1234",
+                                                "state": "CA",
+                                                "city": "San Francisco",
+                                                "country": "USA",
+                                                "zip": "94105",
+                                                "verified": true,
+                                                "locked": false
+                                            },
+                                            {
+                                                "id": 1235,
+                                                "nickname": "Example Support",
+                                                "from_email": "support@example.com",
+                                                "from_name": "Example Support",
+                                                "reply_to": "support@example.com",
+                                                "reply_to_name": "Example Support",
+                                                "address": "1234 Fake St.",
+                                                "address2": "PO Box 1234",
+                                                "state": "CA",
+                                                "city": "San Francisco",
+                                                "country": "USA",
+                                                "zip": "94105",
+                                                "verified": true,
+                                                "locked": false
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_verifiedsenders",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "verified_senders_resend_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_verified_senders-resend-id",
+            "summary": "Resend Verified Sender Request",
+            "tags": [
+                "Sender Verification"
+            ],
+            "description": "**This endpoint allows you to resend a verification email to a specified Sender Identity**.\n\nPassing the `id` assigned to a Sender Identity to this endpoint will resend a verification email to the `from_address` associated with the Sender Identity. This can be useful if someone loses their verification email or needs to have it resent for any other reason.\n\nYou can retrieve the IDs associated with Sender Identities by passing a \"Get All Verified Senders\" endpoint.",
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "error_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message",
+                                                "error_id"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_verifiedsenders-resend-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

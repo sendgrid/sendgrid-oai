@@ -1,0 +1,620 @@
+{
+    "marketing_lists": {
+        "post": {
+            "operationId": "POST_mc-lists",
+            "summary": "Create List",
+            "tags": [
+                "Lists"
+            ],
+            "description": "**This endpoint creates a new contacts list.**\n\nOnce you create a list, you can use the UI to [trigger an automation](https://sendgrid.com/docs/ui/sending-email/getting-started-with-automation/#create-an-automation) every time you add a new contact to the list.\n\nA link to the newly created object is in `_metadata`.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Your name for your list",
+                                    "minLength": 1,
+                                    "maxLength": 100
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "list-name"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/list"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "ca7a3796-e8a8-4029-9ccb-df8937940562",
+                                        "name": "list-name",
+                                        "contact_count": 0,
+                                        "_metadata": {
+                                            "self": "https://api.sendgrid.com/v3/marketing/lists/ca7a3796-e8a8-4029-9ccb-df8937940562"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "POST_mc-lists",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "get": {
+            "operationId": "GET_mc-lists",
+            "summary": "Get All Lists",
+            "tags": [
+                "Lists"
+            ],
+            "description": "**This endpoint returns an array of all of your contact lists.**",
+            "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "Maximum number of elements to return. Defaults to 100, returns 1000 max",
+                    "required": false,
+                    "schema": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 1000,
+                        "default": 100
+                    }
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/list"
+                                        }
+                                    },
+                                    "_metadata": {
+                                        "$ref": "../../components/schemas.json#/metadata"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "id": "abc12312-x3y4-1234-abcd-123qwe456rty",
+                                                "name": "list-name",
+                                                "contact_count": 0,
+                                                "_metadata": {
+                                                    "self": "https://api.sendgrid.com/v3/marketing/lists/abc12312-x3y4-1234-abcd-123qwe456rty"
+                                                }
+                                            }
+                                        ],
+                                        "_metadata": {
+                                            "self": "https://api.sendgrid.com/v3/marketing/lists?page_size=100&page_token="
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_mc-lists",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "marketing_lists_{id}_contacts_count": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_mc-lists-id-contacts-count",
+            "summary": "Get List Contact Count",
+            "tags": [
+                "Lists"
+            ],
+            "description": "**This endpoint returns the number of contacts on a specific list.**",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "contact_count": {
+                                        "type": "integer"
+                                    },
+                                    "billable_count": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "contact_count": 0,
+                                        "billable_count:": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_mc-lists-id-contacts-count",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "marketing_lists_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_mc-lists-id",
+            "summary": "Get a List by ID",
+            "tags": [
+                "Lists"
+            ],
+            "description": "**This endpoint returns data about a specific list.**\n\nSetting the optional parameter `contact_sample=true` returns the `contact_sample` in the response body. Up to fifty of the most recent contacts uploaded or attached to a list will be returned, sorted alphabetically, by email address.\n\nThe full contact count is also returned.",
+            "parameters": [
+                {
+                    "name": "contact_sample",
+                    "in": "query",
+                    "description": "Setting this parameter to the true  will cause the contact_sample to be returned",
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "../../components/schemas.json#/list"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "contact_sample": {
+                                                "$ref": "../../components/schemas.json#/contact-details2"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "contact_count": 2,
+                                        "contact_sample": {
+                                            "id": "c3445f88-5c69-4237-86e6-9ec9de958050",
+                                            "list_ids": [
+                                                "199abb98-0af3-4a8d-b371-6811ff85d062"
+                                            ],
+                                            "created_at": "2620-06-16T17:03:54.867Z",
+                                            "updated_at": "4780-12-06T06:51:30.024Z"
+                                        },
+                                        "_metadata": {
+                                            "self": "https://api.sendgrid.com/v3/marketing/lists/199abb98-0af3-4a8d-b371-6811ff85d062"
+                                        },
+                                        "id": "199abb98-0af3-4a8d-b371-6811ff85d062",
+                                        "name": "list-name"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "GET_mc-lists-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "patch": {
+            "operationId": "PATCH_mc-lists-id",
+            "summary": "Update List",
+            "tags": [
+                "Lists"
+            ],
+            "description": "**This endpoint updates the name of a list.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Your name for your list."
+                                }
+                            },
+                            "example": {
+                                "name": "updated-list-name"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/list"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "abc12312-x3y4-1234-abcd-123qwe456rty",
+                                        "name": "updated-list-name",
+                                        "contact_count": 0,
+                                        "_metadata": {
+                                            "self": "https://api.sendgrid.com/v3/marketing/lists/abc12312-x3y4-1234-abcd-123qwe456rty"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "PATCH_mc-lists-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        },
+        "delete": {
+            "operationId": "DELETE_lists-id",
+            "summary": "Delete a list",
+            "tags": [
+                "Lists"
+            ],
+            "description": "**This endpoint allows you to deletes a specific list.**\n\nOptionally, you can also delete contacts associated to the list. The query parameter, `delete_contacts=true`, will delete the list and start an asynchronous job to delete associated contacts.",
+            "parameters": [
+                {
+                    "name": "delete_contacts",
+                    "in": "query",
+                    "description": "Flag indicates that all contacts on the list are also to be deleted.",
+                    "required": false,
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "description": "The delete has been accepted and is processing.",
+                                "properties": {
+                                    "job_id": {
+                                        "type": "string",
+                                        "description": "job_id of the async job"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "job_id": "abc12312-x3y4-1234-abcd-123qwe456rty"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string",
+                                "description": "The delete has been processed. "
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_lists-id",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    },
+    "marketing_lists_{id}_contacts": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "delete": {
+            "operationId": "DELETE_mc-lists-id-contacts",
+            "summary": "Remove Contacts from a List",
+            "tags": [
+                "Lists"
+            ],
+            "description": "**This endpoint allows you to remove contacts from a given list.**\n\nThe contacts will not be deleted. Only their list membership will be changed.",
+            "parameters": [
+                {
+                    "name": "contact_ids",
+                    "in": "query",
+                    "description": "comma separated list of contact ids",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                }
+            ],
+            "responses": {
+                "202": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "description": "The removal is accepted and processing.",
+                                "properties": {
+                                    "job_id": {
+                                        "type": "string",
+                                        "description": "job_id of the async job"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/error"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "description": "If the specified list id does not exist. If the specified contact does not exist."
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "x-stoplight": {
+                "id": "DELETE_mc-lists-id-contacts",
+                "public": true,
+                "mock": {
+                    "enabled": false,
+                    "dynamic": false,
+                    "statusCode": 200
+                }
+            }
+        }
+    }
+}

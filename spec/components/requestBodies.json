@@ -1,0 +1,92 @@
+{
+    "segment_write_v2": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/segment_write_v2"
+                }
+            }
+        }
+    },
+    "design-duplicate-input": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/design-duplicate-input"
+                }
+            }
+        }
+    },
+    "singlesend_request": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/singlesend_request"
+                }
+            }
+        }
+    },
+    "create-integration-request": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/create-integration-request"
+                }
+            }
+        }
+    },
+    "monitor": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/monitor"
+                }
+            }
+        }
+    },
+    "verified-sender-request-schema": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/verified-sender-request-schema"
+                }
+            }
+        }
+    },
+    "DELETE_contactdb-lists-list_idBody": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "nullable": true
+                }
+            }
+        }
+    },
+    "transactional_template_version_create": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/transactional_template_version_create"
+                }
+            }
+        }
+    },
+    "parse-setting": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/parse-setting"
+                }
+            }
+        }
+    },
+    "suppressions-request": {
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/suppressions-request"
+                }
+            }
+        }
+    }
+}
