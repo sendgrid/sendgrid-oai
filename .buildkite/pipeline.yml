@@ -4,5 +4,5 @@ steps:
       - docker#v3.9.0:
           image: node
     commands:
-      - make lint
+      - make spectral
     timeout_in_minutes: 10
