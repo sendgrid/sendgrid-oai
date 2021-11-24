@@ -1,6 +1,12 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-11-30] Version 1.5.0
+--------------------------
+**Library - Chore**
+- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Replace Travis CI with GitHub Actions, Replace Prance OpenAPI validator with Spectral
+- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Support OpenAPI v3.1
+
 [2021-09-22] Version 1.8.0
 --------------------------
 **Library - Feature**
