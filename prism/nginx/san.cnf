@@ -1,8 +1,8 @@
 [ req ]
 default_bits       = 2048
 prompt             = no
+x509_extensions    = v3_req
 distinguished_name = req_distinguished_name
-req_extensions     = req_ext
 
 [ req_distinguished_name ]
 countryName            = US
@@ -13,8 +13,9 @@ organizationalUnitName = SendGrid
 commonName             = *.sendgrid.com
 emailAddress           = team_interfaces@twilio.com
 
-[ req_ext ]
+[v3_req]
 subjectAltName = @alt_names
 
 [alt_names]
 DNS.1   = sendgrid.com
+DNS.2   = www.sendgrid.com
