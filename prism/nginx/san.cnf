@@ -10,12 +10,11 @@ stateOrProvinceName    = California
 localityName           = San Francisco
 organizationName       = Twilio
 organizationalUnitName = SendGrid
-commonName             = api.sendgrid.com
+commonName             = sendgrid.com
 emailAddress           = team_interfaces@twilio.com
 
 [v3_req]
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1   = sendgrid.com
-DNS.2   = www.sendgrid.com
+DNS.1   = *.sendgrid.com
