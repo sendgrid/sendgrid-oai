@@ -19,3 +19,4 @@ subjectAltName = @alt_names
 [alt_names]
 DNS.1   = sendgrid.com
 DNS.2   = www.sendgrid.com
+DNS.3   = api.sendgrid.com
