@@ -1,6 +1,14 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-12-01] Version 1.8.1
+--------------------------
+**Library - Chore**
+- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Replace Travis-CI with GitHub Actions. Thanks to [@astuteape](https://github.com/astuteape)!
+- [PR #102](https://github.com/sendgrid/sendgrid-oai/pull/102): fix nginx ports. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+- [PR #101](https://github.com/sendgrid/sendgrid-oai/pull/101): update prism for GitHub Actions. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+
 [2021-09-22] Version 1.8.0
 --------------------------
 **Library - Feature**
