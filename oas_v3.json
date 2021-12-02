@@ -2,8 +2,8 @@
     "openapi": "3.1.0",
     "info": {
         "version": "",
-        "title": "Email Activity (beta)",
-        "description": "The Beta endpoints for the new Email Activity APIs - functionality is subject to change without notice. You may not have access to this Beta endpoint.\n\nEmail Activity offers filtering and search by event type for two days worth of data. There is an optional add-on to store 60 days worth of data. This add-on also gives you access to the ability to download a CSV of the 60 days worth of email event data. The Beta endpoints for the new Email Activity APIs - functionality is subject to change without notice. You may not have access to this Beta endpoint.\n\nEmail Activity offers filtering and search by event type for two days worth of data. There is an optional add-on to store 60 days worth of data. This add-on also gives you access to the ability to download a CSV of the 60 days worth of email event data."
+        "title": "Twilio SendGrid v3 API",
+        "description": "The Twilio SendGrid v3 API provides a simple, intuitive RESTful interface for sending email at scale, monitoring email engagement data programmatically, managing account settings, and more. This OpenAPI representation of the Twilio SendGrid v3 API allows you to generate helper libraries (in addition to the libraries officially released by Twilio SendGrid) and build mock servers for testing."
     },
     "servers": [
         {
