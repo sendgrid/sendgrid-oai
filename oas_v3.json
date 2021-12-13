@@ -5,6 +5,12 @@
         "title": "Email Activity (beta)",
         "description": "The Beta endpoints for the new Email Activity APIs - functionality is subject to change without notice. You may not have access to this Beta endpoint.\n\nEmail Activity offers filtering and search by event type for two days worth of data. There is an optional add-on to store 60 days worth of data. This add-on also gives you access to the ability to download a CSV of the 60 days worth of email event data. The Beta endpoints for the new Email Activity APIs - functionality is subject to change without notice. You may not have access to this Beta endpoint.\n\nEmail Activity offers filtering and search by event type for two days worth of data. There is an optional add-on to store 60 days worth of data. This add-on also gives you access to the ability to download a CSV of the 60 days worth of email event data."
     },
+    "servers": [
+        {
+            "url": "https://api.sendgrid.com",
+            "description": "The Twilio SendGrid Production API."
+        }
+    ],
     "tags": [
         {
             "name": "Subuser Monitor Settings"
@@ -3268,610 +3274,605 @@
             ]
         }
     },
-    "servers": [
-        {
-            "url": "http://api.sendgrid.com/v3"
-        }
-    ],
     "paths": {
-        "/mail/send": {
+        "/v3/mail/send": {
             "$ref": "./spec/paths/mail_send/mail_send.json#/mail_send"
         },
-        "/api_keys": {
+        "/v3/api_keys": {
             "$ref": "./spec/paths/security/api_keys.json#/api_keys"
         },
-        "/api_keys/{api_key_id}": {
+        "/v3/api_keys/{api_key_id}": {
             "$ref": "./spec/paths/security/api_keys.json#/api_keys_{api_key_id}"
         },
-        "/scopes": {
+        "/v3/scopes": {
             "$ref": "./spec/paths/security/api_keys.json#/scopes"
         },
-        "/user/settings/enforced_tls": {
+        "/v3/user/settings/enforced_tls": {
             "$ref": "./spec/paths/security/settings.json#/user_settings_enforced_tls"
         },
-        "/access_settings/whitelist": {
+        "/v3/access_settings/whitelist": {
             "$ref": "./spec/paths/security/ip_access_management.json#/access_settings_whitelist"
         },
-        "/access_settings/activity": {
+        "/v3/access_settings/activity": {
             "$ref": "./spec/paths/security/ip_access_management.json#/access_settings_activity"
         },
-        "/access_settings/whitelist/{rule_id}": {
+        "/v3/access_settings/whitelist/{rule_id}": {
             "$ref": "./spec/paths/security/ip_access_management.json#/access_settings_whitelist_{rule_id}"
         },
-        "/sso/certificates": {
+        "/v3/sso/certificates": {
             "$ref": "./spec/paths/single_sign_on/certificates.json#/sso_certificates"
         },
-        "/sso/integrations/{integration_id}/certificates": {
+        "/v3/sso/integrations/{integration_id}/certificates": {
             "$ref": "./spec/paths/single_sign_on/certificates.json#/sso_integrations_{integration_id}_certificates"
         },
-        "/sso/certificates/{cert_id}": {
+        "/v3/sso/certificates/{cert_id}": {
             "$ref": "./spec/paths/single_sign_on/certificates.json#/sso_certificates_{cert_id}"
         },
-        "/sso/integrations": {
+        "/v3/sso/integrations": {
             "$ref": "./spec/paths/single_sign_on/settings.json#/sso_integrations"
         },
-        "/sso/integrations/{id}": {
+        "/v3/sso/integrations/{id}": {
             "$ref": "./spec/paths/single_sign_on/settings.json#/sso_integrations_{id}"
         },
-        "/sso/teammates": {
+        "/v3/sso/teammates": {
             "$ref": "./spec/paths/single_sign_on/teammates.json#/sso_teammates"
         },
-        "/sso/teammates/{username}": {
+        "/v3/sso/teammates/{username}": {
             "$ref": "./spec/paths/single_sign_on/teammates.json#/sso_teammates_{username}"
         },
-        "/whitelabel/links": {
+        "/v3/whitelabel/links": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links"
         },
-        "/whitelabel/links/{id}/validate": {
+        "/v3/whitelabel/links/{id}/validate": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links_{id}_validate"
         },
-        "/whitelabel/links/{link_id}/subuser": {
+        "/v3/whitelabel/links/{link_id}/subuser": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links_{link_id}_subuser"
         },
-        "/whitelabel/links/{id}": {
+        "/v3/whitelabel/links/{id}": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links_{id}"
         },
-        "/whitelabel/links/default": {
+        "/v3/whitelabel/links/default": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links_default"
         },
-        "/whitelabel/links/subuser": {
+        "/v3/whitelabel/links/subuser": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links_subuser"
         },
-        "/ips/warmup": {
+        "/v3/ips/warmup": {
             "$ref": "./spec/paths/deliverability/ip_warmup.json#/ips_warmup"
         },
-        "/ips/warmup/{ip_address}": {
+        "/v3/ips/warmup/{ip_address}": {
             "$ref": "./spec/paths/deliverability/ip_warmup.json#/ips_warmup_{ip_address}"
         },
-        "/whitelabel/ips": {
+        "/v3/whitelabel/ips": {
             "$ref": "./spec/paths/deliverability/reverse_dns.json#/whitelabel_ips"
         },
-        "/whitelabel/ips/{id}/validate": {
+        "/v3/whitelabel/ips/{id}/validate": {
             "$ref": "./spec/paths/deliverability/reverse_dns.json#/whitelabel_ips_{id}_validate"
         },
-        "/whitelabel/ips/{id}": {
+        "/v3/whitelabel/ips/{id}": {
             "$ref": "./spec/paths/deliverability/reverse_dns.json#/whitelabel_ips_{id}"
         },
-        "/validations/email": {
+        "/v3/validations/email": {
             "$ref": "./spec/paths/deliverability/email_address_validation.json#/validations_email"
         },
-        "/whitelabel/dns/email": {
+        "/v3/whitelabel/dns/email": {
             "$ref": "./spec/paths/deliverability/email_cname_records.json#/whitelabel_dns_email"
         },
-        "/ips/pools": {
+        "/v3/ips/pools": {
             "$ref": "./spec/paths/deliverability/ip_pools.json#/ips_pools"
         },
-        "/ips/pools/{pool_name}/ips": {
+        "/v3/ips/pools/{pool_name}/ips": {
             "$ref": "./spec/paths/deliverability/ip_pools.json#/ips_pools_{pool_name}_ips"
         },
-        "/ips/pools/{pool_name}": {
+        "/v3/ips/pools/{pool_name}": {
             "$ref": "./spec/paths/deliverability/ip_pools.json#/ips_pools_{pool_name}"
         },
-        "/ips/pools/{pool_name}/ips/{ip}": {
+        "/v3/ips/pools/{pool_name}/ips/{ip}": {
             "$ref": "./spec/paths/deliverability/ip_pools.json#/ips_pools_{pool_name}_ips_{ip}"
         },
-        "/ips": {
+        "/v3/ips": {
             "$ref": "./spec/paths/deliverability/ip_address.json#/ips"
         },
-        "/ips/remaining": {
+        "/v3/ips/remaining": {
             "$ref": "./spec/paths/deliverability/ip_address.json#/ips_remaining"
         },
-        "/ips/assigned": {
+        "/v3/ips/assigned": {
             "$ref": "./spec/paths/deliverability/ip_address.json#/ips_assigned"
         },
-        "/ips/{ip_address}": {
+        "/v3/ips/{ip_address}": {
             "$ref": "./spec/paths/deliverability/ip_address.json#/ips_{ip_address}"
         },
-        "/mail_settings": {
+        "/v3/mail_settings": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings"
         },
-        "/mail_settings/address_whitelist": {
+        "/v3/mail_settings/address_whitelist": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_address_whitelist"
         },
-        "/mail_settings/footer": {
+        "/v3/mail_settings/footer": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_footer"
         },
-        "/mail_settings/forward_spam": {
+        "/v3/mail_settings/forward_spam": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_forward_spam"
         },
-        "/mail_settings/template": {
+        "/v3/mail_settings/template": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_template"
         },
-        "/mail_settings/bounce_purge": {
+        "/v3/mail_settings/bounce_purge": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_bounce_purge"
         },
-        "/mail_settings/forward_bounce": {
+        "/v3/mail_settings/forward_bounce": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_forward_bounce"
         },
-        "/partner_settings/new_relic": {
+        "/v3/partner_settings/new_relic": {
             "$ref": "./spec/paths/settings/partner.json#/partner_settings_new_relic"
         },
-        "/partner_settings": {
+        "/v3/partner_settings": {
             "$ref": "./spec/paths/settings/partner.json#/partner_settings"
         },
-        "/teammates": {
+        "/v3/teammates": {
             "$ref": "./spec/paths/settings/teammate.json#/teammates"
         },
-        "/teammates/pending/{token}/resend": {
+        "/v3/teammates/pending/{token}/resend": {
             "$ref": "./spec/paths/settings/teammate.json#/teammates_pending_{token}_resend"
         },
-        "/scopes/requests": {
+        "/v3/scopes/requests": {
             "$ref": "./spec/paths/settings/teammate.json#/scopes_requests"
         },
-        "/teammates/pending": {
+        "/v3/teammates/pending": {
             "$ref": "./spec/paths/settings/teammate.json#/teammates_pending"
         },
-        "/teammates/{username}": {
+        "/v3/teammates/{username}": {
             "$ref": "./spec/paths/settings/teammate.json#/teammates_{username}"
         },
-        "/scopes/requests/{request_id}/approve": {
+        "/v3/scopes/requests/{request_id}/approve": {
             "$ref": "./spec/paths/settings/teammate.json#/scopes_requests_{request_id}_approve"
         },
-        "/scopes/requests/{request_id}": {
+        "/v3/scopes/requests/{request_id}": {
             "$ref": "./spec/paths/settings/teammate.json#/scopes_requests_{request_id}"
         },
-        "/teammates/pending/{token}": {
+        "/v3/teammates/pending/{token}": {
             "$ref": "./spec/paths/settings/teammate.json#/teammates_pending_{token}"
         },
-        "/alerts": {
+        "/v3/alerts": {
             "$ref": "./spec/paths/settings/alerts.json#/alerts"
         },
-        "/alerts/{alert_id}": {
+        "/v3/alerts/{alert_id}": {
             "$ref": "./spec/paths/settings/alerts.json#/alerts_{alert_id}"
         },
-        "/user/profile": {
+        "/v3/user/profile": {
             "$ref": "./spec/paths/settings/alerts.json#/user_profile"
         },
-        "/user/account": {
+        "/v3/user/account": {
             "$ref": "./spec/paths/settings/alerts.json#/user_account"
         },
-        "/user/email": {
+        "/v3/user/email": {
             "$ref": "./spec/paths/settings/alerts.json#/user_email"
         },
-        "/user/username": {
+        "/v3/user/username": {
             "$ref": "./spec/paths/settings/alerts.json#/user_username"
         },
-        "/user/credits": {
+        "/v3/user/credits": {
             "$ref": "./spec/paths/settings/alerts.json#/user_credits"
         },
-        "/user/password": {
+        "/v3/user/password": {
             "$ref": "./spec/paths/settings/alerts.json#/user_password"
         },
-        "/subusers": {
+        "/v3/subusers": {
             "$ref": "./spec/paths/settings/subusers_api.json#/subusers"
         },
-        "/subusers/{subuser_name}": {
+        "/v3/subusers/{subuser_name}": {
             "$ref": "./spec/paths/settings/subusers_api.json#/subusers_{subuser_name}"
         },
-        "/subusers/reputations": {
+        "/v3/subusers/reputations": {
             "$ref": "./spec/paths/settings/subusers_api.json#/subusers_reputations"
         },
-        "/subusers/{subuser_name}/ips": {
+        "/v3/subusers/{subuser_name}/ips": {
             "$ref": "./spec/paths/settings/subusers_api.json#/subusers_{subuser_name}_ips"
         },
-        "/subusers/{subuser_name}/monitor": {
+        "/v3/subusers/{subuser_name}/monitor": {
             "$ref": "./spec/paths/settings/subuser_monitor_settings.json#/subusers_{subuser_name}_monitor"
         },
-        "/subusers/{subuser_name}/stats/monthly": {
+        "/v3/subusers/{subuser_name}/stats/monthly": {
             "$ref": "./spec/paths/settings/subuser_statistics.json#/subusers_{subuser_name}_stats_monthly"
         },
-        "/subusers/stats/monthly": {
+        "/v3/subusers/stats/monthly": {
             "$ref": "./spec/paths/settings/subuser_statistics.json#/subusers_stats_monthly"
         },
-        "/subusers/stats/sums": {
+        "/v3/subusers/stats/sums": {
             "$ref": "./spec/paths/settings/subuser_statistics.json#/subusers_stats_sums"
         },
-        "/subusers/stats": {
+        "/v3/subusers/stats": {
             "$ref": "./spec/paths/settings/subuser_statistics.json#/subusers_stats"
         },
-        "/whitelabel/domains": {
+        "/v3/whitelabel/domains": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains"
         },
-        "/whitelabel/domains/{domain_id}": {
+        "/v3/whitelabel/domains/{domain_id}": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains_{domain_id}"
         },
-        "/whitelabel/domains/default": {
+        "/v3/whitelabel/domains/default": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains_default"
         },
-        "/whitelabel/domains/{id}/ips": {
+        "/v3/whitelabel/domains/{id}/ips": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains_{id}_ips"
         },
-        "/whitelabel/domains/{id}/ips/{ip}": {
+        "/v3/whitelabel/domains/{id}/ips/{ip}": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains_{id}_ips_{ip}"
         },
-        "/whitelabel/domains/{id}/validate": {
+        "/v3/whitelabel/domains/{id}/validate": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains_{id}_validate"
         },
-        "/whitelabel/domains/subuser": {
+        "/v3/whitelabel/domains/subuser": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains_subuser"
         },
-        "/whitelabel/domains/{domain_id}/subuser": {
+        "/v3/whitelabel/domains/{domain_id}/subuser": {
             "$ref": "./spec/paths/sender_verification/domain_authentication.json#/whitelabel_domains_{domain_id}_subuser"
         },
-        "/verified_senders/domains": {
+        "/v3/verified_senders/domains": {
             "$ref": "./spec/paths/sender_verification/sender_verification.json#/verified_senders_domains"
         },
-        "/verified_senders/steps_completed": {
+        "/v3/verified_senders/steps_completed": {
             "$ref": "./spec/paths/sender_verification/sender_verification.json#/verified_senders_steps_completed"
         },
-        "/verified_senders/verify/{token}": {
+        "/v3/verified_senders/verify/{token}": {
             "$ref": "./spec/paths/sender_verification/sender_verification.json#/verified_senders_verify_{token}"
         },
-        "/verified_senders/{id}": {
+        "/v3/verified_senders/{id}": {
             "$ref": "./spec/paths/sender_verification/sender_verification.json#/verified_senders_{id}"
         },
-        "/verified_senders": {
+        "/v3/verified_senders": {
             "$ref": "./spec/paths/sender_verification/sender_verification.json#/verified_senders"
         },
-        "/verified_senders/resend/{id}": {
+        "/v3/verified_senders/resend/{id}": {
             "$ref": "./spec/paths/sender_verification/sender_verification.json#/verified_senders_resend_{id}"
         },
-        "/designs": {
+        "/v3/designs": {
             "$ref": "./spec/paths/design_library/designs_api.json#/designs"
         },
-        "/designs/{id}": {
+        "/v3/designs/{id}": {
             "$ref": "./spec/paths/design_library/designs_api.json#/designs_{id}"
         },
-        "/designs/pre-builts": {
+        "/v3/designs/pre-builts": {
             "$ref": "./spec/paths/design_library/designs_api.json#/designs_pre-builts"
         },
-        "/designs/pre-builts/{id}": {
+        "/v3/designs/pre-builts/{id}": {
             "$ref": "./spec/paths/design_library/designs_api.json#/designs_pre-builts_{id}"
         },
-        "/marketing/contacts": {
+        "/v3/marketing/contacts": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts"
         },
-        "/marketing/contacts/count": {
+        "/v3/marketing/contacts/count": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_count"
         },
-        "/marketing/contacts/{id}": {
+        "/v3/marketing/contacts/{id}": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_{id}"
         },
-        "/marketing/contacts/search": {
+        "/v3/marketing/contacts/search": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_search"
         },
-        "/marketing/contacts/imports": {
+        "/v3/marketing/contacts/imports": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_imports"
         },
-        "/marketing/contacts/imports/{id}": {
+        "/v3/marketing/contacts/imports/{id}": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_imports_{id}"
         },
-        "/marketing/contacts/exports": {
+        "/v3/marketing/contacts/exports": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_exports"
         },
-        "/marketing/contacts/exports/{id}": {
+        "/v3/marketing/contacts/exports/{id}": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_exports_{id}"
         },
-        "/marketing/contacts/batch": {
+        "/v3/marketing/contacts/batch": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_batch"
         },
-        "/marketing/contacts/search/emails": {
+        "/v3/marketing/contacts/search/emails": {
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_search_emails"
         },
-        "/marketing/segments/2.0": {
+        "/v3/marketing/segments/2.0": {
             "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2_beta.json#/marketing_segments_2.0"
         },
-        "/marketing/segments/2.0/{segment_id}": {
+        "/v3/marketing/segments/2.0/{segment_id}": {
             "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2_beta.json#/marketing_segments_2.0_{segment_id}"
         },
-        "/marketing/senders": {
+        "/v3/marketing/senders": {
             "$ref": "./spec/paths/new_marketing_campaings/senders.json#/marketing_senders"
         },
-        "/marketing/lists": {
+        "/v3/marketing/lists": {
             "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists"
         },
-        "/marketing/lists/{id}/contacts/count": {
+        "/v3/marketing/lists/{id}/contacts/count": {
             "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists_{id}_contacts_count"
         },
-        "/marketing/lists/{id}": {
+        "/v3/marketing/lists/{id}": {
             "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists_{id}"
         },
-        "/marketing/lists/{id}/contacts": {
+        "/v3/marketing/lists/{id}/contacts": {
             "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists_{id}_contacts"
         },
-        "/marketing/field_definitions": {
+        "/v3/marketing/field_definitions": {
             "$ref": "./spec/paths/new_marketing_campaings/custom_fields.json#/marketing_field_definitions"
         },
-        "/marketing/field_definitions/{custom_field_id}": {
+        "/v3/marketing/field_definitions/{custom_field_id}": {
             "$ref": "./spec/paths/new_marketing_campaings/custom_fields.json#/marketing_field_definitions_{custom_field_id}"
         },
-        "/marketing/segments": {
+        "/v3/marketing/segments": {
             "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts.json#/marketing_segments"
         },
-        "/marketing/segments/{segment_id}": {
+        "/v3/marketing/segments/{segment_id}": {
             "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts.json#/marketing_segments_{segment_id}"
         },
-        "/marketing/singlesends": {
+        "/v3/marketing/singlesends": {
             "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends"
         },
-        "/marketing/singlesends/{id}": {
+        "/v3/marketing/singlesends/{id}": {
             "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_{id}"
         },
-        "/marketing/singlesends/search": {
+        "/v3/marketing/singlesends/search": {
             "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_search"
         },
-        "/marketing/singlesends/{id}/schedule": {
+        "/v3/marketing/singlesends/{id}/schedule": {
             "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_{id}_schedule"
         },
-        "/marketing/singlesends/categories": {
+        "/v3/marketing/singlesends/categories": {
             "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_categories"
         },
-        "/marketing/test/send_email": {
+        "/v3/marketing/test/send_email": {
             "$ref": "./spec/paths/new_marketing_campaings/send_test_email.json#/marketing_test_send_email"
         },
-        "/marketing/stats/automations": {
+        "/v3/marketing/stats/automations": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations"
         },
-        "/marketing/stats/automations/{id}": {
+        "/v3/marketing/stats/automations/{id}": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations_{id}"
         },
-        "/marketing/stats/singlesends": {
+        "/v3/marketing/stats/singlesends": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends"
         },
-        "/marketing/stats/singlesends/{id}": {
+        "/v3/marketing/stats/singlesends/{id}": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends_{id}"
         },
-        "/marketing/stats/automations/{id}/links": {
+        "/v3/marketing/stats/automations/{id}/links": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations_{id}_links"
         },
-        "/marketing/stats/singlesends/{id}/links": {
+        "/v3/marketing/stats/singlesends/{id}/links": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends_{id}_links"
         },
-        "/marketing/stats/singlesends/export": {
+        "/v3/marketing/stats/singlesends/export": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends_export"
         },
-        "/marketing/stats/automations/export": {
+        "/v3/marketing/stats/automations/export": {
             "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations_export"
         },
-        "/senders": {
+        "/v3/senders": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/sender_identities_api.json#/senders"
         },
-        "/senders/{sender_id}": {
+        "/v3/senders/{sender_id}": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/sender_identities_api.json#/senders_{sender_id}"
         },
-        "/senders/{sender_id}/resend_verification": {
+        "/v3/senders/{sender_id}/resend_verification": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/sender_identities_api.json#/senders_{sender_id}_resend_verification"
         },
-        "/contactdb/lists": {
+        "/v3/contactdb/lists": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_lists.json#/contactdb_lists"
         },
-        "/contactdb/lists/{list_id}": {
+        "/v3/contactdb/lists/{list_id}": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_lists.json#/contactdb_lists_{list_id}"
         },
-        "/contactdb/lists/{list_id}/recipients": {
+        "/v3/contactdb/lists/{list_id}/recipients": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_lists.json#/contactdb_lists_{list_id}_recipients"
         },
-        "/contactdb/lists/{list_id}/recipients/{recipient_id}": {
+        "/v3/contactdb/lists/{list_id}/recipients/{recipient_id}": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_lists.json#/contactdb_lists_{list_id}_recipients_{recipient_id}"
         },
-        "/contactdb/recipients": {
+        "/v3/contactdb/recipients": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_recipients.json#/contactdb_recipients"
         },
-        "/contactdb/status": {
+        "/v3/contactdb/status": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_recipients.json#/contactdb_status"
         },
-        "/contactdb/recipients/{recipient_id}": {
+        "/v3/contactdb/recipients/{recipient_id}": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_recipients.json#/contactdb_recipients_{recipient_id}"
         },
-        "/contactdb/recipients/{recipient_id}/lists": {
+        "/v3/contactdb/recipients/{recipient_id}/lists": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_recipients.json#/contactdb_recipients_{recipient_id}_lists"
         },
-        "/contactdb/recipients/billable_count": {
+        "/v3/contactdb/recipients/billable_count": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_recipients.json#/contactdb_recipients_billable_count"
         },
-        "/contactdb/recipients/count": {
+        "/v3/contactdb/recipients/count": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_recipients.json#/contactdb_recipients_count"
         },
-        "/contactdb/recipients/search": {
+        "/v3/contactdb/recipients/search": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_recipients.json#/contactdb_recipients_search"
         },
-        "/contactdb/custom_fields": {
+        "/v3/contactdb/custom_fields": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_custom_fields.json#/contactdb_custom_fields"
         },
-        "/contactdb/custom_fields/{custom_field_id}": {
+        "/v3/contactdb/custom_fields/{custom_field_id}": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_custom_fields.json#/contactdb_custom_fields_{custom_field_id}"
         },
-        "/contactdb/reserved_fields": {
+        "/v3/contactdb/reserved_fields": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_custom_fields.json#/contactdb_reserved_fields"
         },
-        "/contactdb/segments": {
+        "/v3/contactdb/segments": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_segments.json#/contactdb_segments"
         },
-        "/contactdb/segments/{segment_id}": {
+        "/v3/contactdb/segments/{segment_id}": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_segments.json#/contactdb_segments_{segment_id}"
         },
-        "/contactdb/segments/{segment_id}/recipients": {
+        "/v3/contactdb/segments/{segment_id}/recipients": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/contacts_api_segments.json#/contactdb_segments_{segment_id}_recipients"
         },
-        "/campaigns": {
+        "/v3/campaigns": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/api.json#/campaigns"
         },
-        "/campaigns/{campaign_id}": {
+        "/v3/campaigns/{campaign_id}": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/api.json#/campaigns_{campaign_id}"
         },
-        "/campaigns/{campaign_id}/schedules/now": {
+        "/v3/campaigns/{campaign_id}/schedules/now": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/api.json#/campaigns_{campaign_id}_schedules_now"
         },
-        "/campaigns/{campaign_id}/schedules": {
+        "/v3/campaigns/{campaign_id}/schedules": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/api.json#/campaigns_{campaign_id}_schedules"
         },
-        "/campaigns/{campaign_id}/schedules/test": {
+        "/v3/campaigns/{campaign_id}/schedules/test": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/api.json#/campaigns_{campaign_id}_schedules_test"
         },
-        "/templates": {
+        "/v3/templates": {
             "$ref": "./spec/paths/templates/transactional_templates.json#/templates"
         },
-        "/templates/{template_id}": {
+        "/v3/templates/{template_id}": {
             "$ref": "./spec/paths/templates/transactional_templates.json#/templates_{template_id}"
         },
-        "/templates/{template_id}/versions": {
+        "/v3/templates/{template_id}/versions": {
             "$ref": "./spec/paths/templates/transactional_templates_versions.json#/templates_{template_id}_versions"
         },
-        "/templates/{template_id}/versions/{version_id}": {
+        "/v3/templates/{template_id}/versions/{version_id}": {
             "$ref": "./spec/paths/templates/transactional_templates_versions.json#/templates_{template_id}_versions_{version_id}"
         },
-        "/templates/{template_id}/versions/{version_id}/activate": {
+        "/v3/templates/{template_id}/versions/{version_id}/activate": {
             "$ref": "./spec/paths/templates/transactional_templates_versions.json#/templates_{template_id}_versions_{version_id}_activate"
         },
-        "/user/webhooks/event/settings": {
+        "/v3/user/webhooks/event/settings": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings"
         },
-        "/user/webhooks/parse/settings": {
+        "/v3/user/webhooks/parse/settings": {
             "$ref": "./spec/paths/inbound_parse/settings.json#/user_webhooks_parse_settings"
         },
-        "/user/webhooks/parse/stats": {
+        "/v3/user/webhooks/parse/stats": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_parse_stats"
         },
-        "/user/webhooks/event/settings/signed": {
+        "/v3/user/webhooks/event/settings/signed": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_signed"
         },
-        "/user/webhooks/event/test": {
+        "/v3/user/webhooks/event/test": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_test"
         },
-        "/tracking_settings": {
+        "/v3/tracking_settings": {
             "$ref": "./spec/paths/event_tracking/settings_tracking.json#/tracking_settings"
         },
-        "/tracking_settings/click": {
+        "/v3/tracking_settings/click": {
             "$ref": "./spec/paths/event_tracking/settings_tracking.json#/tracking_settings_click"
         },
-        "/tracking_settings/google_analytics": {
+        "/v3/tracking_settings/google_analytics": {
             "$ref": "./spec/paths/event_tracking/settings_tracking.json#/tracking_settings_google_analytics"
         },
-        "/tracking_settings/open": {
+        "/v3/tracking_settings/open": {
             "$ref": "./spec/paths/event_tracking/settings_tracking.json#/tracking_settings_open"
         },
-        "/tracking_settings/subscription": {
+        "/v3/tracking_settings/subscription": {
             "$ref": "./spec/paths/event_tracking/settings_tracking.json#/tracking_settings_subscription"
         },
-        "/stats": {
+        "/v3/stats": {
             "$ref": "./spec/paths/stats/stats.json#/stats"
         },
-        "/geo/stats": {
+        "/v3/geo/stats": {
             "$ref": "./spec/paths/stats/stats.json#/geo_stats"
         },
-        "/devices/stats": {
+        "/v3/devices/stats": {
             "$ref": "./spec/paths/stats/stats.json#/devices_stats"
         },
-        "/clients/stats": {
+        "/v3/clients/stats": {
             "$ref": "./spec/paths/stats/stats.json#/clients_stats"
         },
-        "/clients/{client_type}/stats": {
+        "/v3/clients/{client_type}/stats": {
             "$ref": "./spec/paths/stats/stats.json#/clients_{client_type}_stats"
         },
-        "/mailbox_providers/stats": {
+        "/v3/mailbox_providers/stats": {
             "$ref": "./spec/paths/stats/stats.json#/mailbox_providers_stats"
         },
-        "/browsers/stats": {
+        "/v3/browsers/stats": {
             "$ref": "./spec/paths/stats/stats.json#/browsers_stats"
         },
-        "/categories": {
+        "/v3/categories": {
             "$ref": "./spec/paths/stats/categories.json#/categories"
         },
-        "/categories/stats/sums": {
+        "/v3/categories/stats/sums": {
             "$ref": "./spec/paths/stats/categories.json#/categories_stats_sums"
         },
-        "/categories/stats": {
+        "/v3/categories/stats": {
             "$ref": "./spec/paths/stats/categories.json#/categories_stats"
         },
-        "/suppression/bounces": {
+        "/v3/suppression/bounces": {
             "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces"
         },
-        "/suppression/bounces/{email}": {
+        "/v3/suppression/bounces/{email}": {
             "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces_{email}"
         },
-        "/suppression/blocks": {
+        "/v3/suppression/blocks": {
             "$ref": "./spec/paths/supression_management/blocks.json#/suppression_blocks"
         },
-        "/suppression/blocks/{email}": {
+        "/v3/suppression/blocks/{email}": {
             "$ref": "./spec/paths/supression_management/blocks.json#/suppression_blocks_{email}"
         },
-        "/suppression/spam_reports": {
+        "/v3/suppression/spam_reports": {
             "$ref": "./spec/paths/supression_management/spam_reports.json#/suppression_spam_reports"
         },
-        "/suppression/spam_reports/{email}": {
+        "/v3/suppression/spam_reports/{email}": {
             "$ref": "./spec/paths/supression_management/spam_reports.json#/suppression_spam_reports_{email}"
         },
-        "/asm/suppressions/global": {
+        "/v3/asm/suppressions/global": {
             "$ref": "./spec/paths/supression_management/global_suppressions.json#/asm_suppressions_global"
         },
-        "/suppression/unsubscribes": {
+        "/v3/suppression/unsubscribes": {
             "$ref": "./spec/paths/supression_management/global_suppressions.json#/suppression_unsubscribes"
         },
-        "/asm/suppressions/global/{email}": {
+        "/v3/asm/suppressions/global/{email}": {
             "$ref": "./spec/paths/supression_management/global_suppressions.json#/asm_suppressions_global_{email}"
         },
-        "/asm/groups": {
+        "/v3/asm/groups": {
             "$ref": "./spec/paths/supression_management/unsubscribe_groups.json#/asm_groups"
         },
-        "/asm/groups/{group_id}": {
+        "/v3/asm/groups/{group_id}": {
             "$ref": "./spec/paths/supression_management/unsubscribe_groups.json#/asm_groups_{group_id}"
         },
-        "/asm/groups/{group_id}/suppressions": {
+        "/v3/asm/groups/{group_id}/suppressions": {
             "$ref": "./spec/paths/supression_management/supressions.json#/asm_groups_{group_id}_suppressions"
         },
-        "/asm/groups/{group_id}/suppressions/search": {
+        "/v3/asm/groups/{group_id}/suppressions/search": {
             "$ref": "./spec/paths/supression_management/supressions.json#/asm_groups_{group_id}_suppressions_search"
         },
-        "/asm/suppressions": {
+        "/v3/asm/suppressions": {
             "$ref": "./spec/paths/supression_management/supressions.json#/asm_suppressions"
         },
-        "/asm/suppressions/{email}": {
+        "/v3/asm/suppressions/{email}": {
             "$ref": "./spec/paths/supression_management/supressions.json#/asm_suppressions_{email}"
         },
-        "/asm/groups/{group_id}/suppressions/{email}": {
+        "/v3/asm/groups/{group_id}/suppressions/{email}": {
             "$ref": "./spec/paths/supression_management/supressions.json#/asm_groups_{group_id}_suppressions_{email}"
         },
-        "/suppression/invalid_emails": {
+        "/v3/suppression/invalid_emails": {
             "$ref": "./spec/paths/supression_management/invalid.json#/suppression_invalid_emails"
         },
-        "/suppression/invalid_emails/{email}": {
+        "/v3/suppression/invalid_emails/{email}": {
             "$ref": "./spec/paths/supression_management/invalid.json#/suppression_invalid_emails_{email}"
         },
-        "/user/webhooks/parse/settings/{hostname}": {
+        "/v3/user/webhooks/parse/settings/{hostname}": {
             "$ref": "./spec/paths/inbound_parse/settings.json#/user_webhooks_parse_settings_{hostname}"
         },
-        "/mail/batch": {
+        "/v3/mail/batch": {
             "$ref": "./spec/paths/cancel_scheduled_sends.json#/mail_batch"
         },
-        "/user/scheduled_sends": {
+        "/v3/user/scheduled_sends": {
             "$ref": "./spec/paths/cancel_scheduled_sends.json#/user_scheduled_sends"
         },
-        "/mail/batch/{batch_id}": {
+        "/v3/mail/batch/{batch_id}": {
             "$ref": "./spec/paths/cancel_scheduled_sends.json#/mail_batch_{batch_id}"
         },
-        "/user/scheduled_sends/{batch_id}": {
+        "/v3/user/scheduled_sends/{batch_id}": {
             "$ref": "./spec/paths/cancel_scheduled_sends.json#/user_scheduled_sends_{batch_id}"
         },
-        "/messages": {
+        "/v3/messages": {
             "$ref": "./spec/paths/email_activity.json#/messages"
         },
-        "/messages/{msg_id}": {
+        "/v3/messages/{msg_id}": {
             "$ref": "./spec/paths/email_activity.json#/messages_{msg_id}"
         },
-        "/messages/download": {
+        "/v3/messages/download": {
             "$ref": "./spec/paths/email_activity.json#/messages_download"
         },
-        "/messages/download/{download_uuid}": {
+        "/v3/messages/download/{download_uuid}": {
             "$ref": "./spec/paths/email_activity.json#/messages_download_{download_uuid}"
         }
     },
