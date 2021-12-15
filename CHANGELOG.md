@@ -1,6 +1,12 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2021-12-15] Version 1.8.2
+--------------------------
+**Library - Fix**
+- [PR #104](https://github.com/sendgrid/sendgrid-oai/pull/104): regenerate cert for sendgrid oai. Thanks to [@beebzz](https://github.com/beebzz)!
+
+
 [2021-12-01] Version 1.8.1
 --------------------------
 **Library - Chore**
