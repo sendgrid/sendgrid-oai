@@ -77,15 +77,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "POST_sso-certificates",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         }
     },
@@ -150,15 +141,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "GET_sso-integrations-integrationid-certificates",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         }
     },
@@ -217,15 +199,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "GET_sso-certificates-certid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         },
         "patch": {
@@ -279,15 +252,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "PATCH_sso-certificates-certid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         },
         "delete": {
@@ -333,15 +297,6 @@
                 },
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
-                }
-            },
-            "x-stoplight": {
-                "id": "DELETE_sso-certificates-certid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
                 }
             }
         }

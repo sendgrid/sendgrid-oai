@@ -58,16 +58,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_templates-templateid-versions",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "templates_{template_id}_versions_{version_id}": {
@@ -137,16 +128,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_templates-templateid-versions-versionid",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_templates-template_id-versions-version_id",
@@ -195,16 +177,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_templates-templateid-versions-versionid",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_templates-template_id-versions-version_id",
@@ -227,16 +200,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_templates-templateid-versions-versionid",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "dynamic": false,
-                    "enabled": false
-                }
-            }
+            ]
         }
     },
     "templates_{template_id}_versions_{version_id}_activate": {
@@ -306,16 +270,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_templates-templateid-versions-versionid-activate",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

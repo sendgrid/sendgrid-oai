@@ -62,14 +62,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_asm-groups-groupid-suppressions",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_asm-groups-group_id-suppressions",
@@ -112,14 +105,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_asm-groups-groupid-suppressions",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "asm_groups_{group_id}_suppressions_search": {
@@ -178,16 +164,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_asm-groups-groupid-suppressions-search",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "asm_suppressions": {
@@ -270,16 +247,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_asm-suppressions",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "asm_suppressions_{email}": {
@@ -392,16 +360,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_asm-suppressions-email",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "asm_groups_{group_id}_suppressions_{email}": {
@@ -453,15 +412,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_asm-groups-groupid-suppressions-email",
-                "public": true,
-                "mock": {
-                    "statusCode": 204,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }
