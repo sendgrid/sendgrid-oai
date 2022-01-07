@@ -149,16 +149,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_alerts",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_alerts",
@@ -269,17 +260,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_alerts",
-                "beforeScript": "function (ctx, request) {\n  // Your javascript code here.+\n  request.header.set('User-Agent', 'sendgrid/stoplightLocs');\n}",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "alerts_{alert_id}": {
@@ -382,16 +363,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_alerts-alertid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_alerts-alert_id",
@@ -422,16 +394,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_alerts-alertid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_alerts-alert_id",
@@ -540,16 +503,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_alerts-alertid",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "user_profile": {
@@ -656,16 +610,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-profile",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_user-profile",
@@ -743,16 +688,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_user-profile",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "user_account": {
@@ -811,16 +747,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-account",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "user_email": {
@@ -869,16 +796,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-email",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "put": {
             "operationId": "PUT_user-email",
@@ -943,16 +861,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PUT_user-email",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "user_username": {
@@ -1006,16 +915,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-username",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "put": {
             "operationId": "PUT_user-username",
@@ -1079,16 +979,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PUT_user-username",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "user_credits": {
@@ -1172,16 +1063,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-credits",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "user_password": {
@@ -1241,16 +1123,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PUT_user-password",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }

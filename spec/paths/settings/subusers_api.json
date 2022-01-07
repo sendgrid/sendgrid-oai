@@ -92,14 +92,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_subusers",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "post": {
             "operationId": "POST_subusers",
@@ -273,14 +266,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_subusers",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "subusers_{subuser_name}": {
@@ -403,14 +389,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_subusers-subusername",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_subusers-subuser_name",
@@ -458,14 +437,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_subusers-subusername",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "subusers_reputations": {
@@ -532,14 +504,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_subusers-reputations",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "subusers_{subuser_name}_ips": {
@@ -634,14 +599,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PUT_subusers-subusername-ips",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

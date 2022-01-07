@@ -264,16 +264,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET-messages",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "messages_{msg_id}": {
@@ -855,15 +846,6 @@
                     "Authorization": []
                 }
             ],
-            "x-stoplight": {
-                "id": "GET-v3-messages-msg_id",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            },
             "parameters": [
                 {
                     "$ref": "../components/parameters.json#/trait_authorizationHeader_Authorization"
@@ -1032,16 +1014,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_v3-messages-download",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "messages_download_{download_uuid}": {
@@ -1175,15 +1148,6 @@
                     "Authorization": []
                 }
             ],
-            "x-stoplight": {
-                "id": "GET_v3-messages-download-download_uuid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            },
             "parameters": [
                 {
                     "$ref": "../components/parameters.json#/trait_authorizationHeader_Authorization"

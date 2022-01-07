@@ -149,14 +149,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_contactdb-segments",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_contactdb-segments",
@@ -252,14 +245,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-segments",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_segments_{segment_id}": {
@@ -392,14 +378,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-segments-segmentid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_contactdb-segments-segment_id",
@@ -581,16 +560,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_contactdb-segments-segmentid",
-                "public": false,
-                "mock": {
-                    "statusCode": 200,
-                    "dynamic": false,
-                    "enabled": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_contactdb-segments-segment_id",
@@ -701,16 +671,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_contactdb-segments-segmentid",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 204
-                }
-            }
+            ]
         }
     },
     "contactdb_segments_{segment_id}_recipients": {
@@ -848,14 +809,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-segments-segmentid-recipients",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

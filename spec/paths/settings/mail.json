@@ -157,16 +157,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailsettings",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "mail_settings_address_whitelist": {
@@ -252,16 +243,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_mailsettings-addresswhitelist",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_mail_settings-address_whitelist",
@@ -317,16 +299,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailsettings-addresswhitelist",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "mail_settings_footer": {
@@ -391,16 +364,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_mailsettings-footer",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_mail_settings-footer",
@@ -454,16 +418,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailsettings-footer",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "mail_settings_forward_spam": {
@@ -527,16 +482,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_mailsettings-forwardspam",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_mail_settings-forward_spam",
@@ -589,16 +535,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailsettings-forwardspam",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "mail_settings_template": {
@@ -690,16 +627,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_mailsettings-template",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_mail_settings-template",
@@ -752,16 +680,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailsettings-template",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "mail_settings_bounce_purge": {
@@ -826,16 +745,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_mailsettings-bouncepurge",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_mail_settings-bounce_purge",
@@ -889,16 +799,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailsettings-bouncepurge",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "mail_settings_forward_bounce": {
@@ -962,16 +863,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_mailsettings-forwardbounce",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_mail_settings-forward_bounce",
@@ -1024,16 +916,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailsettings-forwardbounce",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "statusCode": 200,
-                    "enabled": false
-                }
-            }
+            ]
         }
     }
 }

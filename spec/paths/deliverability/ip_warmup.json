@@ -92,16 +92,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_ips-warmup",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_ips-warmup",
@@ -136,16 +127,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips-warmup",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "ips_warmup_{ip_address}": {
@@ -234,16 +216,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips-warmup-ipaddress",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_ips-warmup-ip_address",
@@ -309,16 +282,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_ips-warmup-ipaddress",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

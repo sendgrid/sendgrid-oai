@@ -19,12 +19,7 @@
         "required": [
             "enabled",
             "license_key"
-        ],
-        "x-stoplight": {
-            "id": "partner_settings_new_relic",
-            "name": "Partner Settings: New Relic",
-            "public": true
-        }
+        ]
     },
     "subscription_tracking_settings": {
         "title": "Settings: Subscription Tracking",
@@ -55,11 +50,6 @@
                 "description": "The URL where you would like your users sent to unsubscribe.",
                 "format": "uri"
             }
-        },
-        "x-stoplight": {
-            "id": "subscription_tracking_settings",
-            "name": "Settings: Subscription Tracking",
-            "public": true
         }
     },
     "contactdb_recipient_response": {
@@ -140,11 +130,6 @@
                     ]
                 }
             ]
-        },
-        "x-stoplight": {
-            "id": "contactdb_recipient_response",
-            "name": "ContactDB: Recipient response",
-            "public": true
         }
     },
     "campaign_response": {
@@ -168,12 +153,7 @@
                     "status"
                 ]
             }
-        ],
-        "x-stoplight": {
-            "id": "campaign_response",
-            "name": "Campaigns Response",
-            "public": true
-        }
+        ]
     },
     "contactdb_segments_conditions": {
         "title": "ContactDB: Segments: Conditions",
@@ -208,12 +188,7 @@
             "field",
             "value",
             "operator"
-        ],
-        "x-stoplight": {
-            "id": "contactdb_segments_conditions",
-            "name": "ContactDB: Segments: Conditions",
-            "public": true
-        }
+        ]
     },
     "bounce_response": {
         "title": "Bounce Response",
@@ -242,11 +217,6 @@
             "email": "example@example.com",
             "reason": "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp ",
             "status": "5.1.1"
-        },
-        "x-stoplight": {
-            "id": "bounce_response",
-            "name": "Bounce Response",
-            "public": true
         }
     },
     "contacts": {
@@ -286,11 +256,6 @@
             "zip": {
                 "type": "string"
             }
-        },
-        "x-stoplight": {
-            "id": "contacts",
-            "name": "Contacts",
-            "public": true
         }
     },
     "reverse_dns": {
@@ -412,11 +377,6 @@
                 "host": "o1.email.example.com",
                 "data": "192.168.1.1"
             }
-        },
-        "x-stoplight": {
-            "id": "reverse_dns",
-            "name": "Reverse DNS",
-            "public": true
         }
     },
     "senderID": {
@@ -481,11 +441,6 @@
             "updated_at": 1449872165,
             "created_at": 1449872165,
             "locked": false
-        },
-        "x-stoplight": {
-            "id": "senderID",
-            "name": "Sender ID",
-            "public": true
         }
     },
     "contactdb_custom_field": {
@@ -509,11 +464,6 @@
         "example": {
             "name": "first_name",
             "type": "text"
-        },
-        "x-stoplight": {
-            "id": "contactdb_custom_field",
-            "name": "ContactDB:  Custom Field",
-            "public": true
         }
     },
     "subuser": {
@@ -549,11 +499,6 @@
             "email": "example@example.com",
             "id": 1234,
             "username": "example_subuser"
-        },
-        "x-stoplight": {
-            "id": "subuser",
-            "name": "Subuser",
-            "public": true
         }
     },
     "mail_settings_address_whitelabel": {
@@ -578,11 +523,6 @@
                 "email1@example.com",
                 "example.com"
             ]
-        },
-        "x-stoplight": {
-            "id": "mail_settings_address_whitelabel",
-            "name": "Mail Settings: Address Whitelabel",
-            "public": true
         }
     },
     "link_branding_200_response": {
@@ -725,12 +665,7 @@
             "valid",
             "legacy",
             "dns"
-        ],
-        "x-stoplight": {
-            "id": "link_branding_200_response",
-            "name": "Link Branding 200 Response",
-            "public": true
-        }
+        ]
     },
     "from_email_object": {
         "title": "From Email Object",
@@ -752,11 +687,6 @@
         "example": {
             "email": "jane_doe@example.com",
             "name": "Jane Doe"
-        },
-        "x-stoplight": {
-            "id": "from_email_object",
-            "name": "From Email Object",
-            "public": true
         }
     },
     "api_key_name_id_scopes": {
@@ -795,11 +725,6 @@
                 "sender_verification_legacy",
                 "2fa_required"
             ]
-        },
-        "x-stoplight": {
-            "id": "api_key_name_id_scopes",
-            "name": "API Key Name, ID, and Scopes",
-            "public": true
         }
     },
     "contactdb_segments": {
@@ -854,11 +779,6 @@
                 }
             ],
             "recipient_count": 1234
-        },
-        "x-stoplight": {
-            "id": "contactdb_segments",
-            "name": "ContactDB: Segments",
-            "public": true
         }
     },
     "api_key_name_id": {
@@ -877,11 +797,6 @@
         "example": {
             "api_key_id": "qfTQ6KG0QBiwWdJ0-pCLCA",
             "name": "Mail Send"
-        },
-        "x-stoplight": {
-            "id": "api_key_name_id",
-            "name": "API Key Name and ID",
-            "public": true
         }
     },
     "advanced_stats_opens": {
@@ -897,11 +812,6 @@
                 "type": "integer",
                 "description": "The number of unique recipients who opened your emails."
             }
-        },
-        "x-stoplight": {
-            "id": "advanced_stats_opens",
-            "name": "Stats: Advanced Stats with Opens",
-            "public": true
         }
     },
     "mail_settings_template": {
@@ -920,11 +830,6 @@
         "example": {
             "enabled": false,
             "html_content": "<p><% body %>Example</p>\n"
-        },
-        "x-stoplight": {
-            "id": "mail_settings_template",
-            "name": "Mail Settings: Template",
-            "public": true
         }
     },
     "ip_warmup_response": {
@@ -952,12 +857,7 @@
                 "ip": "0.0.0.0",
                 "start_date": 1409616000
             }
-        ],
-        "x-stoplight": {
-            "id": "ip_warmup_response",
-            "name": "IP Warmup: IP",
-            "public": true
-        }
+        ]
     },
     "monitor": {
         "title": "Create monitor settings request",
@@ -980,11 +880,6 @@
         "example": {
             "email": "example@example.com",
             "frequency": 50000
-        },
-        "x-stoplight": {
-            "id": "monitor",
-            "name": "Monitor Settings",
-            "public": true
         }
     },
     "global_error_response_schema": {
@@ -1026,11 +921,6 @@
                     "message": "error message"
                 }
             ]
-        },
-        "x-stoplight": {
-            "id": "global_error_response_schema",
-            "name": "Global Error Response Schema",
-            "public": true
         }
     },
     "advanced_stats_mailbox_provider": {
@@ -1078,12 +968,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "advanced_stats_mailbox_provider",
-            "name": "Stats: Advanced Stats for Mailbox Provider",
-            "public": true
-        }
+        ]
     },
     "contactdb_custom_field_with_id": {
         "title": "ContactDB Custom field schema with ID.",
@@ -1100,12 +985,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "contactdb_custom_field_with_id",
-            "name": "ContactDB: Custom Field with ID",
-            "public": true
-        }
+        ]
     },
     "ip_pool": {
         "title": "IP Pools: Pool",
@@ -1119,12 +999,7 @@
         },
         "required": [
             "name"
-        ],
-        "x-stoplight": {
-            "id": "ip_pool",
-            "name": "IP Pools: Pool",
-            "public": true
-        }
+        ]
     },
     "google_analytics_settings": {
         "title": "Settings: Google Analytics",
@@ -1162,11 +1037,6 @@
             "utm_term": "",
             "utm_content": "",
             "utm_campaign": "website"
-        },
-        "x-stoplight": {
-            "id": "google_analytics_settings",
-            "name": "Settings: Google Analytics",
-            "public": true
         }
     },
     "event-webhook-response": {
@@ -1248,12 +1118,7 @@
             "open",
             "click",
             "dropped"
-        ],
-        "x-stoplight": {
-            "id": "event-webhook-response",
-            "name": "Webhooks: Event Webhook Response",
-            "public": true
-        }
+        ]
     },
     "user_profile": {
         "title": "User: Profile",
@@ -1316,11 +1181,6 @@
             "state": "CO",
             "website": "http://sendgrid.com",
             "zip": "80202"
-        },
-        "x-stoplight": {
-            "id": "user_profile",
-            "name": "User: Profile",
-            "public": true
         }
     },
     "mail_settings_footer": {
@@ -1344,11 +1204,6 @@
             "enabled": true,
             "html_content": "Example HTML content",
             "plain_content": "Example plain content"
-        },
-        "x-stoplight": {
-            "id": "mail_settings_footer",
-            "name": "Mail Settings: Footer",
-            "public": true
         }
     },
     "category_stats": {
@@ -1517,11 +1372,6 @@
                     "type": "category"
                 }
             ]
-        },
-        "x-stoplight": {
-            "id": "category_stats",
-            "name": "Stats: Category Stats",
-            "public": true
         }
     },
     "parse-setting": {
@@ -1550,11 +1400,6 @@
             "hostname": "myhostname.com",
             "spam_check": false,
             "send_raw": true
-        },
-        "x-stoplight": {
-            "id": "parse-setting",
-            "name": "Parse Setting",
-            "public": true
         }
     },
     "transactional_template": {
@@ -1580,11 +1425,6 @@
                 "message": "Sample warning message"
             },
             "generation": "legacy"
-        },
-        "x-stoplight": {
-            "id": "transactional_template",
-            "name": "Transactional Templates: Template",
-            "public": true
         }
     },
     "contactdb_list": {
@@ -1613,11 +1453,6 @@
             "id": 1,
             "name": "listname",
             "recipient_count": 0
-        },
-        "x-stoplight": {
-            "id": "contactdb_list",
-            "name": "ContactDB: List",
-            "public": true
         }
     },
     "suppression_group": {
@@ -1656,12 +1491,7 @@
             "id",
             "name",
             "description"
-        ],
-        "x-stoplight": {
-            "id": "suppression_group",
-            "name": "Suppressions: Suppression Group",
-            "public": true
-        }
+        ]
     },
     "mail_settings_bounce_purge": {
         "title": "Mail Settings: Bounce Purge",
@@ -1686,11 +1516,6 @@
             "enabled": false,
             "soft_bounces": 1234,
             "hard_bounces": null
-        },
-        "x-stoplight": {
-            "id": "mail_settings_bounce_purge",
-            "name": "Mail Settings: Bounce Purge",
-            "public": true
         }
     },
     "transactional_template_version_output": {
@@ -1713,12 +1538,7 @@
             {
                 "$ref": "./schemas.json#/transactional-templates-version-output-lean"
             }
-        ],
-        "x-stoplight": {
-            "id": "transactional_template_version_output",
-            "name": "Transactional Templates: Version Output",
-            "public": true
-        }
+        ]
     },
     "credentials": {
         "title": "Credentials",
@@ -1754,11 +1574,6 @@
             "phone": "(555) 555-5555",
             "state": "CO",
             "zip": "55555"
-        },
-        "x-stoplight": {
-            "id": "credentials",
-            "name": "Credentials",
-            "public": true
         }
     },
     "mail_settings_forward_spam": {
@@ -1777,11 +1592,6 @@
         "example": {
             "email": "",
             "enabled": true
-        },
-        "x-stoplight": {
-            "id": "mail_settings_forward_spam",
-            "name": "Mail Settings: Forward Spam",
-            "public": true
         }
     },
     "campaign_request": {
@@ -1884,11 +1694,6 @@
             "html_content": "<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>",
             "plain_content": "Check out our summer line!",
             "status": "Draft"
-        },
-        "x-stoplight": {
-            "id": "campaign_request",
-            "name": "Campaigns Request",
-            "public": true
         }
     },
     "subuser_stats": {
@@ -2022,11 +1827,6 @@
                     "type": "subuser"
                 }
             ]
-        },
-        "x-stoplight": {
-            "id": "subuser_stats",
-            "name": "subuser_stats",
-            "public": true
         }
     },
     "user_scheduled_send_status": {
@@ -2056,11 +1856,6 @@
         "example": {
             "batch_id": "HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi",
             "status": "pause"
-        },
-        "x-stoplight": {
-            "id": "user_scheduled_send_status",
-            "name": "User Scheduled Send status",
-            "public": true
         }
     },
     "advanced_stats_clicks_opens": {
@@ -2073,12 +1868,7 @@
             {
                 "$ref": "./schemas.json#/advanced_stats_opens"
             }
-        ],
-        "x-stoplight": {
-            "id": "advanced_stats_clicks_opens",
-            "name": "Stats: Advanced Stats with Clicks and Opens",
-            "public": true
-        }
+        ]
     },
     "contactdb_segments_with_id": {
         "title": "ContactDB:: Segments with ID",
@@ -2098,12 +1888,7 @@
             {
                 "$ref": "./schemas.json#/contactdb_segments"
             }
-        ],
-        "x-stoplight": {
-            "id": "contactdb_segments_with_id",
-            "name": "ContactDB:: Segments with ID",
-            "public": true
-        }
+        ]
     },
     "advanced_stats_clicks": {
         "title": "Stats: Advanced Stats with Clicks",
@@ -2118,11 +1903,6 @@
                 "type": "integer",
                 "description": "The number of unique recipients who clicked links in your emails."
             }
-        },
-        "x-stoplight": {
-            "id": "advanced_stats_clicks",
-            "name": "Stats: Advanced Stats with Clicks",
-            "public": true
         }
     },
     "contactdb_recipient": {
@@ -2189,11 +1969,6 @@
                     ]
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "contactdb_recipient",
-            "name": "ContactDB: Recipient",
-            "public": true
         }
     },
     "mail_settings_patch": {
@@ -2212,11 +1987,6 @@
         "example": {
             "enabled": true,
             "email": "email@example.com"
-        },
-        "x-stoplight": {
-            "id": "mail_settings_patch",
-            "name": "Mail Settings: Patch",
-            "public": true
         }
     },
     "mail_settings_forward_bounce": {
@@ -2236,11 +2006,6 @@
         "example": {
             "enabled": false,
             "email": null
-        },
-        "x-stoplight": {
-            "id": "mail_settings_forward_bounce",
-            "name": "Mail Settings: Forward Bounce",
-            "public": true
         }
     },
     "mail_batch_id": {
@@ -2257,11 +2022,6 @@
         ],
         "example": {
             "batch_id": "HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi"
-        },
-        "x-stoplight": {
-            "id": "mail_batch_id",
-            "name": "Mail Batch ID",
-            "public": true
         }
     },
     "subuser_post": {
@@ -2310,11 +2070,6 @@
             "credit_allocation": {
                 "type": "unlimited"
             }
-        },
-        "x-stoplight": {
-            "id": "subuser_post",
-            "name": "Subuser::POST",
-            "public": true
         }
     },
     "contactdb_recipient_count": {
@@ -2331,11 +2086,6 @@
         ],
         "example": {
             "recipient_count": 1234
-        },
-        "x-stoplight": {
-            "id": "contactdb_recipient_count",
-            "name": "ContactDB: Recipient Count",
-            "public": true
         }
     },
     "contactdb_custom_field_with_id_value": {
@@ -2354,12 +2104,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "contactdb_custom_field_with_id_value",
-            "name": "ContactDB: Custom Field with ID & Value",
-            "public": true
-        }
+        ]
     },
     "transactional_template_version_create": {
         "title": "Transactional Templates: Version Create",
@@ -2425,11 +2170,6 @@
             "subject": "aliquip nulla Ut",
             "editor": "design",
             "plain_content": "labore dolore"
-        },
-        "x-stoplight": {
-            "id": "transactional_template_version_create",
-            "name": "Transactional Templates: Version Create",
-            "public": true
         }
     },
     "transactional-templates-version-output-lean": {
@@ -2484,11 +2224,6 @@
                 "type": "string",
                 "description": "A Thumbnail preview of the template's html content."
             }
-        },
-        "x-stoplight": {
-            "id": "transactional-templates-version-output-lean",
-            "name": "Transactional Templates: Version Output Lean",
-            "public": true
         }
     },
     "transactional-templates-template-lean": {
@@ -2540,11 +2275,6 @@
             "generation": "legacy",
             "updated_at ": "2021-04-28 13:12:46",
             "versions": []
-        },
-        "x-stoplight": {
-            "id": "transactional-templates-template-lean",
-            "name": "Transactional Templates: Template Lean",
-            "public": true
         }
     },
     "custom-fields-by-id": {
@@ -2554,11 +2284,6 @@
             "w1": "2002-10-02T15:00:00Z",
             "w33": 9.5,
             "e2": "Coffee is a beverage that puts one to sleep when not drank."
-        },
-        "x-stoplight": {
-            "id": "custom-fields-by-id",
-            "name": "custom-fields-by-id",
-            "public": true
         }
     },
     "custom-fields-by-name": {
@@ -2568,11 +2293,6 @@
             "birthday": "2002-10-02T15:00:00Z",
             "shoe_size": 9.5,
             "favoriteQuote": "Coffee is a beverage that puts one to sleep when not drank."
-        },
-        "x-stoplight": {
-            "id": "custom-fields-by-name",
-            "name": "custom-fields-by-name",
-            "public": true
         }
     },
     "contact-details": {
@@ -2641,12 +2361,7 @@
             "list_ids",
             "created_at",
             "updated_at"
-        ],
-        "x-stoplight": {
-            "id": "contact-details",
-            "name": "contact-details",
-            "public": true
-        }
+        ]
     },
     "contact-import": {
         "title": "contact-import",
@@ -2702,11 +2417,6 @@
                 "description": "The ISO8601 timestamp when the job was finished.",
                 "type": "string"
             }
-        },
-        "x-stoplight": {
-            "id": "contact-import",
-            "name": "contact-import",
-            "public": true
         }
     },
     "single-contact-request": {
@@ -2769,11 +2479,6 @@
                     }
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "single-contact-request",
-            "name": "single contact request",
-            "public": true
         }
     },
     "contact-export": {
@@ -2833,12 +2538,7 @@
             "created_at",
             "updated_at",
             "expires_at"
-        ],
-        "x-stoplight": {
-            "id": "contact-export",
-            "name": "contact-export",
-            "public": true
-        }
+        ]
     },
     "contact-summary": {
         "title": "contact-summary",
@@ -2882,12 +2582,7 @@
             "list_ids",
             "created_at",
             "updated_at"
-        ],
-        "x-stoplight": {
-            "id": "contact-summary",
-            "name": "contact-summary",
-            "public": true
-        }
+        ]
     },
     "contact-request": {
         "title": "contact-request",
@@ -2953,12 +2648,7 @@
         },
         "required": [
             "email"
-        ],
-        "x-stoplight": {
-            "id": "contact-request",
-            "name": "contact-request",
-            "public": true
-        }
+        ]
     },
     "contact-details2": {
         "title": "contact-details2",
@@ -3055,12 +2745,7 @@
             "list_ids",
             "created_at",
             "updated_at"
-        ],
-        "x-stoplight": {
-            "id": "contact-details2",
-            "name": "contact-details2",
-            "public": true
-        }
+        ]
     },
     "selfmetadata": {
         "title": "selfMetadata",
@@ -3070,11 +2755,6 @@
                 "type": "string",
                 "description": "A link to this object."
             }
-        },
-        "x-stoplight": {
-            "id": "selfmetadata",
-            "name": "selfMetadata",
-            "public": true
         }
     },
     "error": {
@@ -3096,12 +2776,7 @@
         },
         "required": [
             "message"
-        ],
-        "x-stoplight": {
-            "id": "error",
-            "name": "error",
-            "public": true
-        }
+        ]
     },
     "link": {
         "title": "Link",
@@ -3113,11 +2788,6 @@
             "href": {
                 "type": "string"
             }
-        },
-        "x-stoplight": {
-            "id": "link",
-            "name": "Link",
-            "public": true
         }
     },
     "metadata": {
@@ -3143,11 +2813,6 @@
                 "type": "number",
                 "description": "The number of items in the entire list, i.e., across all pages."
             }
-        },
-        "x-stoplight": {
-            "id": "metadata",
-            "name": "metadata",
-            "public": true
         }
     },
     "webhook": {
@@ -3168,12 +2833,7 @@
         "required": [
             "url",
             "nonce"
-        ],
-        "x-stoplight": {
-            "id": "webhook",
-            "name": "webhook",
-            "public": true
-        }
+        ]
     },
     "list": {
         "title": "list",
@@ -3196,11 +2856,6 @@
             "_metadata": {
                 "$ref": "./schemas.json#/selfmetadata"
             }
-        },
-        "x-stoplight": {
-            "id": "list",
-            "name": "list",
-            "public": true
         }
     },
     "reserved_field_definitions_response": {
@@ -3240,12 +2895,7 @@
                 "field_type": "Text",
                 "read_only": true
             }
-        ],
-        "x-stoplight": {
-            "id": "reserved_field_definitions_response",
-            "name": "reserved_field_definitions_response",
-            "public": true
-        }
+        ]
     },
     "custom_field_definitions_response": {
         "title": "custom_field_definitions_response",
@@ -3277,11 +2927,6 @@
             "id": "a1_D",
             "name": "custom_field_name",
             "field_type": "Date"
-        },
-        "x-stoplight": {
-            "id": "custom_field_definitions_response",
-            "name": "custom_field_definitions_response",
-            "public": true
         }
     },
     "segment_write": {
@@ -3301,12 +2946,7 @@
         "required": [
             "name",
             "query_dsl"
-        ],
-        "x-stoplight": {
-            "id": "segment_write",
-            "name": "segment_write",
-            "public": true
-        }
+        ]
     },
     "segment_summary": {
         "title": "segment_summary",
@@ -3359,12 +2999,7 @@
             "created_at",
             "sample_updated_at",
             "updated_at"
-        ],
-        "x-stoplight": {
-            "id": "segment_summary",
-            "name": "segment_summary",
-            "public": true
-        }
+        ]
     },
     "segment_query_json": {
         "title": "segment_query_json",
@@ -3493,11 +3128,6 @@
                     }
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "segment_query_json",
-            "name": "segment_query_json",
-            "public": true
         }
     },
     "contact_response": {
@@ -3640,11 +3270,6 @@
                 "custom_field_name1": "custom_field_value1",
                 "custom_field_name2": "custom_field_value2"
             }
-        },
-        "x-stoplight": {
-            "id": "contact_response",
-            "name": "contact_response",
-            "public": true
         }
     },
     "TNE-senderID": {
@@ -3694,12 +3319,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "TNE-senderID",
-            "name": "Sender ID Response Body",
-            "public": true
-        }
+        ]
     },
     "api-error": {
         "title": "error",
@@ -3719,12 +3339,7 @@
             "message",
             "field",
             "error_id"
-        ],
-        "x-stoplight": {
-            "id": "api-error",
-            "name": "error",
-            "public": true
-        }
+        ]
     },
     "api-errors": {
         "title": "errors",
@@ -3736,11 +3351,6 @@
                     "$ref": "./schemas.json#/api-error"
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "api-errors",
-            "name": "errors",
-            "public": true
         }
     },
     "_metadata": {
@@ -3763,11 +3373,6 @@
                 "type": "integer",
                 "minimum": 0
             }
-        },
-        "x-stoplight": {
-            "id": "_metadata",
-            "name": "_metadata",
-            "public": true
         }
     },
     "design-input": {
@@ -3805,11 +3410,6 @@
             "subject": "Getting Started",
             "html_content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html data-editor-version=\"2\" class=\"sg-campaigns\" xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\">\n      <!--[if !mso]><!-->\n      <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\">\n      <!--<![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n      <xml>\n        <o:OfficeDocumentSettings>\n          <o:AllowPNG/>\n          <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n      </xml>\n      <![endif]-->\n      <!--[if (gte mso 9)|(IE)]>\n  <style type=\"text/css\">\n    body {width: 600px;margin: 0 auto;}\n    table {border-collapse: collapse;}\n    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}\n    img {-ms-interpolation-mode: bicubic;}\n  </style>\n<![endif]-->\n      <style type=\"text/css\">\n    body, p, div {\n      font-family: arial,helvetica,sans-serif;\n      font-size: 14px;\n    }\n    body {\n      color: #000000;\n    }\n    body a {\n      color: #1188E6;\n      text-decoration: none;\n    }\n    p { margin: 0; padding: 0; }\n    table.wrapper {\n      width:100% !important;\n      table-layout: fixed;\n      -webkit-font-smoothing: antialiased;\n      -webkit-text-size-adjust: 100%;\n      -moz-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n    img.max-width {\n      max-width: 100% !important;\n    }\n    .column.of-2 {\n      width: 50%;\n    }\n    .column.of-3 {\n      width: 33.333%;\n    }\n    .column.of-4 {\n      width: 25%;\n    }\n    ul ul ul ul  {\n      list-style-type: disc !important;\n    }\n    ol ol {\n      list-style-type: lower-roman !important;\n    }\n    ol ol ol {\n      list-style-type: lower-latin !important;\n    }\n    ol ol ol ol {\n      list-style-type: decimal !important;\n    }\n    @media screen and (max-width:480px) {\n      .preheader .rightColumnContent,\n      .footer .rightColumnContent {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent div,\n      .preheader .rightColumnContent span,\n      .footer .rightColumnContent div,\n      .footer .rightColumnContent span {\n        text-align: left !important;\n      }\n      .preheader .rightColumnContent,\n      .preheader .leftColumnContent {\n        font-size: 80% !important;\n        padding: 5px 0;\n      }\n      table.wrapper-mobile {\n        width: 100% !important;\n        table-layout: fixed;\n      }\n      img.max-width {\n        height: auto !important;\n        max-width: 100% !important;\n      }\n      a.bulletproof-button {\n        display: block !important;\n        width: auto !important;\n        font-size: 80%;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n      }\n      .columns {\n        width: 100% !important;\n      }\n      .column {\n        display: block !important;\n        width: 100% !important;\n        padding-left: 0 !important;\n        padding-right: 0 !important;\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n      }\n      .social-icon-column {\n        display: inline-block !important;\n      }\n    }\n  </style>\n      <!--user entered Head Start--><!--End Head user entered-->\n    </head>\n    <body>\n      <center class=\"wrapper\" data-link-color=\"#1188E6\" data-body-style=\"font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;\">\n        <div class=\"webkit\">\n          <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" class=\"wrapper\" bgcolor=\"#FFFFFF\">\n            <tr>\n              <td valign=\"top\" bgcolor=\"#FFFFFF\" width=\"100%\">\n                <table width=\"100%\" role=\"content-container\" class=\"outer\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                  <tr>\n                    <td width=\"100%\">\n                      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                        <tr>\n                          <td>\n                            <!--[if mso]>\n    <center>\n    <table><tr><td width=\"600\">\n  <![endif]-->\n                                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:100%; max-width:600px;\" align=\"center\">\n                                      <tr>\n                                        <td role=\"modules-container\" style=\"padding:0px 0px 0px 0px; color:#000000; text-align:left;\" bgcolor=\"#FFFFFF\" width=\"100%\" align=\"left\"><table class=\"module preheader preheader-hide\" role=\"module\" data-type=\"preheader\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;\">\n    <tr>\n      <td role=\"module-content\">\n        <p></p>\n      </td>\n    </tr>\n  </table><table class=\"module\" role=\"module\" data-type=\"text\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"table-layout: fixed;\" data-muid=\"41f90842-501c-4f08-96c9-17c0f74cb841\" data-mc-module-version=\"2019-10-22\">\n    <tbody>\n      <tr>\n        <td style=\"padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;\" height=\"100%\" valign=\"top\" bgcolor=\"\" role=\"module-content\"><div><div style=\"font-family: inherit; text-align: inherit\">Ahoy, World!</div><div></div></div></td>\n      </tr>\n    </tbody>\n  </table><div data-role=\"module-unsubscribe\" class=\"module\" role=\"module\" data-type=\"unsubscribe\" style=\"color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;\" data-muid=\"4e838cf3-9892-4a6d-94d6-170e474d21e5\"><div class=\"Unsubscribe--addressLine\"><p class=\"Unsubscribe--senderName\" style=\"font-size:12px; line-height:20px;\">{{Sender_Name}}</p><p style=\"font-size:12px; line-height:20px;\"><span class=\"Unsubscribe--senderAddress\">{{Sender_Address}}</span>, <span class=\"Unsubscribe--senderCity\">{{Sender_City}}</span>, <span class=\"Unsubscribe--senderState\">{{Sender_State}}</span> <span class=\"Unsubscribe--senderZip\">{{Sender_Zip}}</span></p></div><p style=\"font-size:12px; line-height:20px;\"><a class=\"Unsubscribe--unsubscribeLink\" href=\"{{{unsubscribe}}}\" target=\"_blank\" style=\"\">Unsubscribe</a> - <a href=\"{{{unsubscribe_preferences}}}\" target=\"_blank\" class=\"Unsubscribe--unsubscribePreferences\" style=\"\">Unsubscribe Preferences</a></p></div></td>\n                                      </tr>\n                                    </table>\n                                    <!--[if mso]>\n                                  </td>\n                                </tr>\n                              </table>\n                            </center>\n                            <![endif]-->\n                          </td>\n                        </tr>\n                      </table>\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n          </table>\n        </div>\n      </center>\n    </body>\n  </html>",
             "plain_content": "Ahoy, World!\n\n{{Sender_Name}}\n\n{{Sender_Address}} , {{Sender_City}} , {{Sender_State}} {{Sender_Zip}}\n\nUnsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )"
-        },
-        "x-stoplight": {
-            "id": "design-input",
-            "name": "Design Input",
-            "public": true
         }
     },
     "design-output": {
@@ -3821,12 +3421,7 @@
             {
                 "$ref": "./schemas.json#/design-input"
             }
-        ],
-        "x-stoplight": {
-            "id": "design-output",
-            "name": "Design Output",
-            "public": true
-        }
+        ]
     },
     "design-output-summary": {
         "title": "Design Output - Summary",
@@ -3908,11 +3503,6 @@
                 "self": "https://api.sendgrid.com/v3/designs?page_token=vHdvHCg0w1F-TmWJcPNpTEnFY2aPEmRBHONwOgZ6TgJbX2_I",
                 "count": 3
             }
-        },
-        "x-stoplight": {
-            "id": "design-output-summary",
-            "name": "Design Output - Summary",
-            "public": true
         }
     },
     "design-duplicate-input": {
@@ -3936,11 +3526,6 @@
         "example": {
             "name": "Ahoy, Cake or Pie Cafe!",
             "editor": "design"
-        },
-        "x-stoplight": {
-            "id": "design-duplicate-input",
-            "name": "Design Duplicate Design Input",
-            "public": true
         }
     },
     "contact-details3": {
@@ -4029,12 +3614,7 @@
             "segment_ids",
             "created_at",
             "updated_at"
-        ],
-        "x-stoplight": {
-            "id": "contact-details3",
-            "name": "contact-details3",
-            "public": true
-        }
+        ]
     },
     "transactional-template-warning": {
         "title": "Warning",
@@ -4047,11 +3627,6 @@
         },
         "example": {
             "message": "A sample warning message."
-        },
-        "x-stoplight": {
-            "id": "transactional-template-warning",
-            "name": "Warning",
-            "public": true
         }
     },
     "errors": {
@@ -4087,12 +3662,7 @@
         },
         "required": [
             "errors"
-        ],
-        "x-stoplight": {
-            "id": "errors",
-            "name": "errors",
-            "public": true
-        }
+        ]
     },
     "singlesends-response": {
         "title": "singlesends-response",
@@ -4147,12 +3717,7 @@
         "required": [
             "results",
             "_metadata"
-        ],
-        "x-stoplight": {
-            "id": "singlesends-response",
-            "name": "singlesends-response",
-            "public": true
-        }
+        ]
     },
     "automations-response": {
         "title": "automations-response",
@@ -4195,12 +3760,7 @@
         },
         "required": [
             "results"
-        ],
-        "x-stoplight": {
-            "id": "automations-response",
-            "name": "automations-response",
-            "public": true
-        }
+        ]
     },
     "metrics": {
         "title": "metrics",
@@ -4256,12 +3816,7 @@
             "unique_clicks",
             "unique_opens",
             "unsubscribes"
-        ],
-        "x-stoplight": {
-            "id": "metrics",
-            "name": "metrics",
-            "public": true
-        }
+        ]
     },
     "singlesend_search": {
         "title": "singlesend_search",
@@ -4294,11 +3849,6 @@
                     "type": "string"
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "singlesend_search",
-            "name": "singlesend_search",
-            "public": true
         }
     },
     "singlesend_request": {
@@ -4412,12 +3962,7 @@
         },
         "required": [
             "name"
-        ],
-        "x-stoplight": {
-            "id": "singlesend_request",
-            "name": "singlesend_request",
-            "public": true
-        }
+        ]
     },
     "singlesend_schedule": {
         "title": "singlesend-schedule",
@@ -4439,12 +3984,7 @@
         },
         "required": [
             "send_at"
-        ],
-        "x-stoplight": {
-            "id": "singlesend_schedule",
-            "name": "singlesend-schedule",
-            "public": true
-        }
+        ]
     },
     "singlesend_warning": {
         "title": "singlesend_warning",
@@ -4467,11 +4007,6 @@
                     }
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "singlesend_warning",
-            "name": "singlesend_warning",
-            "public": true
         }
     },
     "to_email_array": {
@@ -4499,12 +4034,7 @@
                 "email": "john_doe@example.com",
                 "name": "John Doe"
             }
-        ],
-        "x-stoplight": {
-            "id": "to_email_array",
-            "name": "To Email Array",
-            "public": true
-        }
+        ]
     },
     "event-webhook-update-oauth-request": {
         "title": "Webhooks: Event Webhook Update with OAuth Request",
@@ -4589,12 +4119,7 @@
             "open",
             "click",
             "dropped"
-        ],
-        "x-stoplight": {
-            "id": "event-webhook-update-oauth-request",
-            "name": "Webhooks: Event Webhook Update with OAuth Request",
-            "public": true
-        }
+        ]
     },
     "webhooks-event-webhook-request": {
         "title": "Webhooks: Event Webhook Request",
@@ -4675,12 +4200,7 @@
             "open",
             "click",
             "dropped"
-        ],
-        "x-stoplight": {
-            "id": "webhooks-event-webhook-request",
-            "name": "Webhooks: Event Webhook Request",
-            "public": true
-        }
+        ]
     },
     "reply_to_email_object": {
         "title": "Reply_to Email Object",
@@ -4702,11 +4222,6 @@
         "example": {
             "email": "jane_doe@example.com",
             "name": "Jane Doe"
-        },
-        "x-stoplight": {
-            "id": "reply_to_email_object",
-            "name": "Reply_to Email Object",
-            "public": true
         }
     },
     "automations-link-stats-response": {
@@ -4758,12 +4273,7 @@
             "results",
             "total_clicks",
             "_metadata"
-        ],
-        "x-stoplight": {
-            "id": "automations-link-stats-response",
-            "name": "automations-link-stats-response",
-            "public": true
-        }
+        ]
     },
     "link-tracking-metadata": {
         "title": "link tracking metadata",
@@ -4788,11 +4298,6 @@
                 "type": "number",
                 "description": "The number of items in the entire list, i.e., across all pages."
             }
-        },
-        "x-stoplight": {
-            "id": "link-tracking-metadata",
-            "name": "link tracking metadata",
-            "public": true
         }
     },
     "singlesends-link-stats-response": {
@@ -4853,12 +4358,7 @@
         "required": [
             "results",
             "_metadata"
-        ],
-        "x-stoplight": {
-            "id": "singlesends-link-stats-response",
-            "name": "singlesends-link-stats-response",
-            "public": true
-        }
+        ]
     },
     "domain-authentication-200-response": {
         "title": "Domain Authentication 200 Response",
@@ -4965,12 +4465,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "domain-authentication-200-response",
-            "name": "Domain Authentication 200 Response",
-            "public": true
-        }
+        ]
     },
     "abtest_summary": {
         "title": "abTest_summary",
@@ -5024,11 +4519,6 @@
             "winner_selected_at",
             "expiration_date"
         ],
-        "x-stoplight": {
-            "id": "abtest_summary",
-            "name": "abTest_summary",
-            "public": true
-        },
         "nullable": true,
         "type": "object"
     },
@@ -5096,12 +4586,7 @@
             "is_abtest",
             "updated_at",
             "created_at"
-        ],
-        "x-stoplight": {
-            "id": "singlesend_response_short",
-            "name": "singlesend_response_short",
-            "public": true
-        }
+        ]
     },
     "cc_bcc_email_object": {
         "title": "CC BCC Email Object",
@@ -5123,11 +4608,6 @@
         "example": {
             "email": "jane_doe@example.com",
             "name": "Jane Doe"
-        },
-        "x-stoplight": {
-            "id": "cc_bcc_email_object",
-            "name": "CC BCC Email Object",
-            "public": true
         }
     },
     "verified-sender-request-schema": {
@@ -5198,11 +4678,6 @@
             "city": "San Francisco",
             "country": "USA",
             "zip": "94105"
-        },
-        "x-stoplight": {
-            "id": "verified-sender-request-schema",
-            "name": "Verified Sender Request Schema",
-            "public": true
         }
     },
     "verified-sender-response-schema": {
@@ -5267,11 +4742,6 @@
             "zip": "94105",
             "verified": true,
             "locked": false
-        },
-        "x-stoplight": {
-            "id": "verified-sender-response-schema",
-            "name": "Verified Sender Response Schema",
-            "public": true
         }
     },
     "ip-access-response": {
@@ -5325,11 +4795,6 @@
                     "updated_at": 1441824715
                 }
             ]
-        },
-        "x-stoplight": {
-            "id": "ip-access-response",
-            "name": "IP Access Response",
-            "public": true
         }
     },
     "stats-advanced-global-stats": {
@@ -5391,12 +4856,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "stats-advanced-global-stats",
-            "name": "Stats: Advanced Global Stats",
-            "public": true
-        }
+        ]
     },
     "stats-advanced-stats-base-schema": {
         "title": "Stats: Advanced Stats Base Schema",
@@ -5421,11 +4881,6 @@
                     }
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "stats-advanced-stats-base-schema",
-            "name": "Stats: Advanced Stats Base Schema",
-            "public": true
         }
     },
     "full-segment": {
@@ -5490,11 +4945,6 @@
             "query_dsl": "cillum eiusmod",
             "parent_list_id": "2357714d-3d82-4c80-826c-b44a4147f81c",
             "next_sample_update": ""
-        },
-        "x-stoplight": {
-            "id": "full-segment",
-            "name": "full_segment",
-            "public": true
         }
     },
     "senders-id-request-body": {
@@ -5569,12 +5019,7 @@
             "address",
             "city",
             "country"
-        ],
-        "x-stoplight": {
-            "id": "senders-id-request-body",
-            "name": "Senders ID Request Body",
-            "public": true
-        }
+        ]
     },
     "enforced-tls-request-response": {
         "title": "Enforced TLS Request Response",
@@ -5592,11 +5037,6 @@
         "example": {
             "require_tls": true,
             "require_valid_cert": true
-        },
-        "x-stoplight": {
-            "id": "enforced-tls-request-response",
-            "name": "Enforced TLS Request Response",
-            "public": true
         }
     },
     "singlesend_response": {
@@ -5681,11 +5121,6 @@
                     "f2fe66a1-43f3-4e3a-87b1-c6a600d805f0"
                 ]
             }
-        },
-        "x-stoplight": {
-            "id": "singlesend_response",
-            "name": "singlesend_response",
-            "public": true
         }
     },
     "design-common-fields": {
@@ -5719,12 +5154,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "design-common-fields",
-            "name": "Design Common Fields",
-            "public": true
-        }
+        ]
     },
     "invalid-email": {
         "title": "Invalid Email",
@@ -5748,11 +5178,6 @@
             "created": 1620141015,
             "email": "invalid@example.com",
             "reason": "Mail domain mentioned in email address is unknown"
-        },
-        "x-stoplight": {
-            "id": "invalid-email",
-            "name": "Invalid Email",
-            "public": true
         }
     },
     "email-activity-response-common-fields": {
@@ -5787,11 +5212,6 @@
                     "not_delivered"
                 ]
             }
-        },
-        "x-stoplight": {
-            "id": "email-activity-response-common-fields",
-            "name": "Email Activity Response Common Fields",
-            "public": true
         }
     },
     "suppressions-request": {
@@ -5815,11 +5235,6 @@
                 "test1@example.com",
                 "test2@example.com"
             ]
-        },
-        "x-stoplight": {
-            "id": "suppressions-request",
-            "name": "Suppressions Request Body",
-            "public": true
         }
     },
     "suppression-group-request-base": {
@@ -5840,11 +5255,6 @@
                 "type": "boolean",
                 "description": "Indicates if you would like this to be your default suppression group."
             }
-        },
-        "x-stoplight": {
-            "id": "suppression-group-request-base",
-            "name": "Suppression Group Request Base",
-            "public": true
         }
     },
     "sso-certificate-body": {
@@ -5878,11 +5288,6 @@
             "not_before": 1621289880,
             "not_after": 1621289880,
             "intergration_id": "b0b98502-9408-4b24-9e3d-31ed7cb15312"
-        },
-        "x-stoplight": {
-            "id": "sso-certificate-body",
-            "name": "Single Sign-On Certificate Body",
-            "public": true
         }
     },
     "sso-integration": {
@@ -5915,12 +5320,7 @@
                     "last_updated"
                 ]
             }
-        ],
-        "x-stoplight": {
-            "id": "sso-integration",
-            "name": "Single Sign-On Integration",
-            "public": true
-        }
+        ]
     },
     "create-integration-request": {
         "title": "Create Integration Request",
@@ -5957,12 +5357,7 @@
             "signin_url",
             "signout_url",
             "entity_id"
-        ],
-        "x-stoplight": {
-            "id": "create-integration-request",
-            "name": "Create Integration Request",
-            "public": true
-        }
+        ]
     },
     "sso-teammate-response": {
         "title": "Single Sign-On Teammate Response",
@@ -5983,12 +5378,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "sso-teammate-response",
-            "name": "Single Sign-On Teammate Response",
-            "public": true
-        }
+        ]
     },
     "sso-teammate-request": {
         "title": "Single Sign-On Teammate Request",
@@ -6011,12 +5401,7 @@
                     "scopes"
                 ]
             }
-        ],
-        "x-stoplight": {
-            "id": "sso-teammate-request",
-            "name": "Single Sign-On Teammate Request",
-            "public": true
-        }
+        ]
     },
     "sso-teammates-patch-response": {
         "title": "Single Sign-On Teammates PATCH Response",
@@ -6085,12 +5470,7 @@
                     }
                 }
             }
-        ],
-        "x-stoplight": {
-            "id": "sso-teammates-patch-response",
-            "name": "Single Sign-On Teammates PATCH Response",
-            "public": true
-        }
+        ]
     },
     "sso-error-response": {
         "title": "SSO Error Response",
@@ -6109,11 +5489,6 @@
                     "type": "string"
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "sso-error-response",
-            "name": "SSO Error Response",
-            "public": true
         }
     },
     "click-tracking": {
@@ -6136,11 +5511,6 @@
         "example": {
             "enable_text": false,
             "enabled": false
-        },
-        "x-stoplight": {
-            "id": "click-tracking",
-            "name": "Settings: Click Tracking",
-            "public": true
         }
     },
     "sso-teammate-common-fields": {
@@ -6173,12 +5543,7 @@
             "first_name",
             "last_name",
             "email"
-        ],
-        "x-stoplight": {
-            "id": "sso-teammate-common-fields",
-            "name": "Single Sing-On Teammate Common Fields",
-            "public": true
-        }
+        ]
     },
     "spam-reports-response": {
         "title": "Spam Reports Response",
@@ -6217,12 +5582,7 @@
                 "email": "user2@example.com",
                 "ip": "10.63.202.100"
             }
-        ],
-        "x-stoplight": {
-            "id": "spam-reports-response",
-            "name": "Spam Reports Response",
-            "public": true
-        }
+        ]
     },
     "blocks-response": {
         "title": "Blocks Response",
@@ -6262,12 +5622,7 @@
                 "reason": "error dialing remote address: dial tcp 10.57.152.165:25: no route to host",
                 "status": "4.0.0"
             }
-        ],
-        "x-stoplight": {
-            "id": "blocks-response",
-            "name": "Blocks Response",
-            "public": true
-        }
+        ]
     },
     "ip_pool_response": {
         "title": "IP Pools: Pool Resp",
@@ -6280,11 +5635,6 @@
         },
         "example": {
             "name": "sunt sint enim"
-        },
-        "x-stoplight": {
-            "id": "ip_pool_response",
-            "name": "IP Pools: Pool Resp",
-            "public": true
         }
     },
     "sender-id-request": {
@@ -6362,11 +5712,6 @@
             "state": "Colorado",
             "zip": "80202",
             "country": "United States"
-        },
-        "x-stoplight": {
-            "id": "sender-id-request",
-            "name": "Sender ID Request",
-            "public": true
         }
     },
     "segment_status_response": {
@@ -6385,12 +5730,7 @@
         },
         "required": [
             "query_validation"
-        ],
-        "x-stoplight": {
-            "id": "segment_status_response",
-            "name": "segment_status_response",
-            "public": true
-        }
+        ]
     },
     "all_segments_response": {
         "title": "all_segments_response",
@@ -6459,12 +5799,7 @@
             "parent_list_ids",
             "query_version",
             "status"
-        ],
-        "x-stoplight": {
-            "id": "all_segments_response",
-            "name": "all_segments_response",
-            "public": true
-        }
+        ]
     },
     "segment_summary_v2": {
         "title": "segment_summary",
@@ -6477,11 +5812,6 @@
                     "$ref": "./schemas.json#/segment_summary"
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "segment_summary_v2",
-            "name": "segment_summary",
-            "public": true
         }
     },
     "segment_response": {
@@ -6561,12 +5891,7 @@
             "parent_list_ids",
             "query_version",
             "status"
-        ],
-        "x-stoplight": {
-            "id": "segment_response",
-            "name": "segment_response",
-            "public": true
-        }
+        ]
     },
     "errors-seg-v2": {
         "title": "errors-seg",
@@ -6596,12 +5921,7 @@
         },
         "required": [
             "errors"
-        ],
-        "x-stoplight": {
-            "id": "errors-seg-v2",
-            "name": "errors-seg",
-            "public": true
-        }
+        ]
     },
     "segment_write_v2": {
         "title": "segment_write",
@@ -6629,12 +5949,7 @@
         "required": [
             "name",
             "query_dsl"
-        ],
-        "x-stoplight": {
-            "id": "segment_write_v2",
-            "name": "segment_write",
-            "public": true
-        }
+        ]
     },
     "segment_update": {
         "title": "segment_update",
@@ -6650,11 +5965,6 @@
                 "type": "string",
                 "description": "SQL query which will filter contacts based on the conditions provided"
             }
-        },
-        "x-stoplight": {
-            "id": "segment_update",
-            "name": "segment_update",
-            "public": true
         }
     },
     "abbv-message": {
@@ -7005,11 +6315,6 @@
     },
     "global_empty_request": {
         "title": "Global: Request Empty Body",
-        "x-stoplight": {
-            "id": "global:empty_request",
-            "name": "Global: Request Empty Body",
-            "public": true
-        },
         "nullable": true
     },
     "domain_authentication_domain_spf": {
@@ -7198,21 +6503,11 @@
             "automatic_security",
             "valid",
             "dns"
-        ],
-        "x-stoplight": {
-            "id": "domain_authentication:domain_spf",
-            "name": "Domain Authentication",
-            "public": true
-        }
+        ]
     },
     "global_id": {
         "title": "Global: ID",
-        "type": "integer",
-        "x-stoplight": {
-            "id": "global:id",
-            "name": "Global: ID",
-            "public": true
-        }
+        "type": "integer"
     },
     "authentication_domain": {
         "title": "Domain Authentication - Mandatory Subdomain",
@@ -7410,11 +6705,6 @@
                     "data": "s2._domainkey.u7.wl.sendgrid.net"
                 }
             }
-        },
-        "x-stoplight": {
-            "id": "authentication::domain",
-            "name": "Domain Authentication - Mandatory Subdomain",
-            "public": true
         }
     }
 }

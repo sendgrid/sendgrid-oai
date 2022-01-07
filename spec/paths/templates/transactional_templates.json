@@ -71,16 +71,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_templates",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_templates",
@@ -205,16 +196,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_templates",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "templates_{template_id}": {
@@ -286,16 +268,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_templates-templateid",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_templates-template_id",
@@ -336,16 +309,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_templates-templateid",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_templates-template_id",
@@ -405,16 +369,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_templates-templateid",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_templates-template_id",
@@ -444,16 +399,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_templates-templateid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }
