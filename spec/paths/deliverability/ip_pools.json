@@ -52,16 +52,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_ips-pools",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_ips-pools",
@@ -101,16 +92,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips-pools",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "ips_pools_{pool_name}_ips": {
@@ -246,16 +228,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_ips-pools-poolname-ips",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "ips_pools_{pool_name}": {
@@ -359,16 +332,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips-pools-poolname",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "put": {
             "operationId": "PUT_ips-pools-pool_name",
@@ -459,16 +423,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PUT_ips-pools-poolname",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "dynamic": false,
-                    "enabled": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_ips-pools-pool_name",
@@ -516,16 +471,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_ips-pools-poolname",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "ips_pools_{pool_name}_ips_{ip}": {
@@ -595,16 +541,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_ips-pools-poolname-ips-ip",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

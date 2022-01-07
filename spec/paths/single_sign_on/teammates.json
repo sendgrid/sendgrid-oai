@@ -54,15 +54,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "POST_sso-teammates",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         }
     },
@@ -170,15 +161,6 @@
                 },
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
-                }
-            },
-            "x-stoplight": {
-                "id": "PATCH_sso-teammates-username",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
                 }
             }
         }

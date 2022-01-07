@@ -76,16 +76,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_suppression-spamreports",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_suppression-spam_reports",
@@ -145,16 +136,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_suppression-spamreports",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "suppression_spam_reports_{email}": {
@@ -209,16 +191,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_suppression-spamreports-email",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "dynamic": false,
-                    "enabled": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_suppression-spam_reports-email",
@@ -249,16 +222,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_suppression-spamreports-email",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

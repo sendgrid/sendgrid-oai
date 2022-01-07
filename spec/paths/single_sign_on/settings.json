@@ -48,15 +48,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "POST_sso-integrations",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         },
         "get": {
@@ -122,15 +113,6 @@
                 },
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
-                }
-            },
-            "x-stoplight": {
-                "id": "GET_sso-integrations",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
                 }
             }
         }
@@ -204,15 +186,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "GET_sso-integrations-id",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         },
         "patch": {
@@ -276,15 +249,6 @@
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
                 }
-            },
-            "x-stoplight": {
-                "id": "PATCH_sso-integrations-id",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
             }
         },
         "delete": {
@@ -312,15 +276,6 @@
                 },
                 "500": {
                     "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
-                }
-            },
-            "x-stoplight": {
-                "id": "DELETE_sso-integrations-id",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
                 }
             }
         }
