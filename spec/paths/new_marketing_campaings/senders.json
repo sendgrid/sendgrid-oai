@@ -136,16 +136,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_marketing-senders",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }

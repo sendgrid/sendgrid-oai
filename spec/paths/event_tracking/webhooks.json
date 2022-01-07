@@ -49,16 +49,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-webhooks-event-settings",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_user-webhooks-event-settings",
@@ -118,16 +109,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_user-webhooks-event-settings",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "user_webhooks_parse_settings": {
@@ -194,16 +176,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-webhooks-parse-settings",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "statusCode": 200,
-                    "enabled": false
-                }
-            }
+            ]
         },
         "post": {
             "operationId": "POST_user-webhooks-parse-settings",
@@ -258,16 +231,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_user-webhooks-parse-settings",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "user_webhooks_parse_stats": {
@@ -700,16 +664,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-webhooks-parse-stats",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "user_webhooks_event_settings_signed": {
@@ -757,16 +712,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-webhooks-event-settings-signed",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_user-webhooks-event-settings-signed",
@@ -987,16 +933,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_user-webhooks-event-settings-signed",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "user_webhooks_event_test": {
@@ -1054,16 +991,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_user-webhooks-event-test",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }

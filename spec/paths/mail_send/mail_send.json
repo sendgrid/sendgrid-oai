@@ -535,16 +535,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_mail-send",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "statusCode": 200,
-                    "enabled": false
-                }
-            }
+            ]
         }
     }
 }

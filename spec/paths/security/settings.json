@@ -48,16 +48,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-settings-enforcedtls",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_user-settings-enforced_tls",
@@ -116,16 +107,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_user-settings-enforcedtls",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

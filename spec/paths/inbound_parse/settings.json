@@ -63,16 +63,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-webhooks-parse-settings",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "statusCode": 200,
-                    "enabled": false
-                }
-            }
+            ]
         },
         "post": {
             "operationId": "POST_user-webhooks-parse-settings",
@@ -127,16 +118,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_user-webhooks-parse-settings",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "user_webhooks_parse_settings_{hostname}": {
@@ -201,16 +183,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_user-webhooks-parse-settings-hostname",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_user-webhooks-parse-settings-hostname",
@@ -265,16 +238,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_user-webhooks-parse-settings-hostname",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "statusCode": 200,
-                    "enabled": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_user-webhooks-parse-settings-hostname",
@@ -316,16 +280,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_user-webhooks-parse-settings-hostname",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }

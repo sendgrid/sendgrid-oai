@@ -80,14 +80,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_whitelabel-ips",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_whitelabel-ips",
@@ -200,16 +193,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_whitelabel-ips",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "whitelabel_ips_{id}_validate": {
@@ -397,14 +381,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_whitelabel-ips-id-validate",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "whitelabel_ips_{id}": {
@@ -472,14 +449,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_whitelabel-ips-id",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_whitelabel-ips-id",
@@ -509,14 +479,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_whitelabel-ips-id",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

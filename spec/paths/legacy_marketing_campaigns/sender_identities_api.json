@@ -189,16 +189,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_senders",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_v3-senders",
@@ -266,16 +257,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_v3-senders",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "senders_{sender_id}": {
@@ -382,16 +364,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_v3-senders-sender_id",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_v3-senders-sender_id",
@@ -610,16 +583,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_v3-senders-sender_id",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_v3-senders-sender_id",
@@ -726,16 +690,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_v3-senders-sender_id",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "senders_{sender_id}_resend_verification": {
@@ -855,16 +810,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_v3-senders-sender_id-resend_verification",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }

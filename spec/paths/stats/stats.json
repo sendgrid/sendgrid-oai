@@ -249,16 +249,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_stats",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "geo_stats": {
@@ -817,16 +808,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_geo-stats",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "devices_stats": {
@@ -1311,16 +1293,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_devices-stats",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "clients_stats": {
@@ -1422,14 +1395,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_clients-stats",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "clients_{client_type}_stats": {
@@ -1548,14 +1514,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_clients-clienttype-stats",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "mailbox_providers_stats": {
@@ -2356,16 +2315,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_mailboxproviders-stats",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "browsers_stats": {
@@ -2497,16 +2447,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_browsers-stats",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

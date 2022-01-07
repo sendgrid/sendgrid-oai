@@ -147,16 +147,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_ips",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_ips",
@@ -321,14 +312,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "ips_remaining": {
@@ -398,16 +382,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips-remaining",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "ips_assigned": {
@@ -479,14 +454,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips-assigned",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "ips_{ip_address}": {
@@ -588,16 +556,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_ips-ipaddress",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }

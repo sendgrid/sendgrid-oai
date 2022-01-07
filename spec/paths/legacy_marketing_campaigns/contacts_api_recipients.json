@@ -143,14 +143,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_contactdb-recipients",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_contactdb-recipients",
@@ -260,14 +253,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_contactdb-recipients",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_contactdb-recipients",
@@ -356,14 +342,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_contactdb-recipients",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_contactdb-recipients",
@@ -453,14 +432,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-recipients",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_status": {
@@ -531,16 +503,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-status",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "contactdb_recipients_{recipient_id}": {
@@ -625,14 +588,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-recipients-recipientid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_contactdb-recipients-recipient_id",
@@ -728,14 +684,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_contactdb-recipients-recipientid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_recipients_{recipient_id}_lists": {
@@ -865,14 +814,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-recipients-recipientid-lists",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_recipients_billable_count": {
@@ -933,16 +875,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-recipients-billablecount",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "contactdb_recipients_count": {
@@ -1003,14 +936,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-recipients-count",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_recipients_search": {
@@ -1130,14 +1056,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-recipients-search",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "post": {
             "operationId": "POST_contactdb-recipients-search",
@@ -1343,16 +1262,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_contactdb-recipients-search",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }
