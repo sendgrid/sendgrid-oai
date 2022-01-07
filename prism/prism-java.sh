@@ -2,9 +2,9 @@
 set -e
 
 rm -rf prism && mkdir -p prism && cd prism
-git clone --depth 1 https://github.com/sendgrid/sendgrid-oai .
+git clone --branch sendgrid-java-cert https://github.com/sendgrid/sendgrid-oai .
 cd prism/nginx
-rm cert.crt && rm cert.key && rm san.conf
+rm cert.crt && rm cert.key && rm san.cnf
 mv java_cert.crt cert.crt && mv java_cert.key cert.key
 cd ..
 
