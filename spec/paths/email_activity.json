@@ -31,22 +31,6 @@
                     }
                 },
                 {
-                    "name": "X-Query-Id",
-                    "in": "header",
-                    "required": false,
-                    "schema": {
-                        "type": "string"
-                    }
-                },
-                {
-                    "name": "X-Cursor",
-                    "in": "header",
-                    "required": false,
-                    "schema": {
-                        "type": "string"
-                    }
-                },
-                {
                     "$ref": "../components/parameters.json#/trait_authorizationHeader_Authorization"
                 }
             ],
