@@ -1,6 +1,12 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2022-01-12] Version 1.8.3
+--------------------------
+**Library - Fix**
+- [PR #105](https://github.com/sendgrid/sendgrid-oai/pull/105): add non-SAN cert for sendgrid-java. Thanks to [@beebzz](https://github.com/beebzz)!
+
+
 [2021-12-15] Version 1.8.2
 --------------------------
 **Library - Fix**
