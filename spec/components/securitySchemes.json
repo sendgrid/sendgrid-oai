@@ -1,6 +1,7 @@
 {
     "Authorization": {
-        "type": "http",
-        "scheme": "bearer"
+        "name": "Authorization",
+        "type": "apiKey",
+        "in": "header"
     }
 }
