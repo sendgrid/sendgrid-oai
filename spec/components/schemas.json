@@ -5038,7 +5038,11 @@
                 "format": "float",
                 "description": "The minimum required TLS certificate version.",
                 "default": 1.1,
-                "enum": [1.1, 1.2, 1.3]
+                "enum": [
+                    1.1,
+                    1.2,
+                    1.3
+                ]
             }
         },
         "example": {
