@@ -122,16 +122,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_categories",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "categories_stats_sums": {
@@ -338,16 +329,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_categories-stats-sums",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "categories_stats": {
@@ -547,16 +529,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_categories-stats",
-                "public": true,
-                "mock": {
-                    "statusCode": 200,
-                    "enabled": false,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

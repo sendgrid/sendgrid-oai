@@ -109,16 +109,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_accesssettings-whitelist",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_access_settings-whitelist",
@@ -186,16 +177,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_accesssettings-whitelist",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_access_settings-whitelist",
@@ -263,16 +245,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_accesssettings-whitelist",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "access_settings_activity": {
@@ -395,16 +368,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_accesssettings-activity",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "statusCode": 200,
-                    "enabled": false
-                }
-            }
+            ]
         }
     },
     "access_settings_whitelist_{rule_id}": {
@@ -457,16 +421,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_accesssettings-whitelist-ruleid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_access_settings-whitelist-rule_id",
@@ -497,16 +452,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_accesssettings-whitelist-ruleid",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "dynamic": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     }
 }

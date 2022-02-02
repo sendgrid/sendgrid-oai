@@ -39489,7 +39489,7 @@
                         "url": "/alerts",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],
@@ -39523,7 +39523,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39559,7 +39559,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39599,7 +39599,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39636,7 +39636,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39689,7 +39689,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39728,7 +39728,7 @@
                         "url": "/user/webhooks/parse/settings",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],
@@ -39766,7 +39766,7 @@
                         "url": "/user/webhooks/parse/settings/{hostname}",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],
@@ -39801,7 +39801,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39841,7 +39841,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39883,7 +39883,7 @@
                         "url": "/user/webhooks/parse/settings/{hostname}",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],

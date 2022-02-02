@@ -110,14 +110,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_contactdb-lists",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "get": {
             "operationId": "GET_contactdb-lists",
@@ -172,14 +165,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-lists",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_contactdb-lists",
@@ -271,14 +257,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_contactdb-lists",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_lists_{list_id}": {
@@ -402,14 +381,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-lists-listid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "patch": {
             "operationId": "PATCH_contactdb-lists-list_id",
@@ -535,14 +507,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "PATCH_contactdb-lists-listid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_contactdb-lists-list_id",
@@ -656,14 +621,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_contactdb-lists-listid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_lists_{list_id}_recipients": {
@@ -852,14 +810,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_contactdb-lists-listid-recipients",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "post": {
             "operationId": "POST_contactdb-lists-list_id-recipients",
@@ -987,14 +938,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_contactdb-lists-listid-recipients",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "contactdb_lists_{list_id}_recipients_{recipient_id}": {
@@ -1120,14 +1064,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_contactdb-lists-listid-recipients-recipientid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_contactdb-lists-list_id-recipients-recipient_id",
@@ -1252,14 +1189,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_contactdb-lists-listid-recipients-recipientid",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

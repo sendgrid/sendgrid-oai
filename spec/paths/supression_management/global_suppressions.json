@@ -54,14 +54,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "POST_asm-suppressions-global",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "suppression_unsubscribes": {
@@ -157,16 +150,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_suppression-unsubscribes",
-                "public": true,
-                "mock": {
-                    "dynamic": false,
-                    "enabled": false,
-                    "statusCode": 200
-                }
-            }
+            ]
         }
     },
     "asm_suppressions_global_{email}": {
@@ -227,14 +211,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_asm-suppressions-global-email",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_asm-suppressions-global-email",
@@ -264,14 +241,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_asm-suppressions-global-email",
-                "public": true,
-                "mock": {
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }

@@ -80,16 +80,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_suppression-invalidemails",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_suppression-invalid_emails",
@@ -150,16 +141,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_suppression-invalidemails",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     },
     "suppression_invalid_emails_{email}": {
@@ -219,16 +201,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "GET_suppression-invalidemails-email",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         },
         "delete": {
             "operationId": "DELETE_suppression-invalid_emails-email",
@@ -259,16 +232,7 @@
                 {
                     "Authorization": []
                 }
-            ],
-            "x-stoplight": {
-                "id": "DELETE_suppression-invalidemails-email",
-                "public": true,
-                "mock": {
-                    "enabled": false,
-                    "statusCode": 200,
-                    "dynamic": false
-                }
-            }
+            ]
         }
     }
 }
