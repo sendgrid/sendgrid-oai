@@ -23222,7 +23222,7 @@
                                         "id": "fae7c985-eb92-4b47-9987-28ec29dbc698",
                                         "name": "example_name",
                                         "generation": "legacy",
-                                        "updated_at ": "2020-11-12 12:00:09",
+                                        "updated_at": "2020-11-12 12:00:09",
                                         "versions": []
                                     }
                                 ],
@@ -23315,7 +23315,7 @@
                                 "id": "733ba07f-ead1-41fc-933a-3976baa2371",
                                 "name": "example_name",
                                 "generation": "dynamic",
-                                "updated_at ": "2019-03-13T11:52:41.009Z",
+                                "updated_at": "2019-03-13T11:52:41.009Z",
                                 "versions": []
                             }
                         }
@@ -23350,7 +23350,7 @@
                                 "id": "40da60e6-66f3-4223-9406-ba58b7f55a62",
                                 "name": "Duis in dolor",
                                 "generation": "legacy",
-                                "updated_at ": "2020-12-12 58:26:65",
+                                "updated_at": "2020-12-12 58:26:65",
                                 "versions": []
                             }
                         }
@@ -32576,7 +32576,7 @@
             "example": {
                 "id": "33feeff2-5069-43fe-8853-428651e5be79",
                 "name": "example_name",
-                "updated_at ": "2021-04-28 13:12:46",
+                "updated_at": "2021-04-28 13:12:46",
                 "warning": {
                     "message": "Sample warning message"
                 },
@@ -33645,7 +33645,7 @@
                         "dynamic"
                     ]
                 },
-                "updated_at ": {
+                "updated_at": {
                     "type": "string",
                     "description": "The date and time that this transactional template version was updated.",
                     "pattern": "^(\\d{4}-\\d{2}-\\d{2}) ((\\d{2}):(\\d{2}):(\\d{2}))$"
@@ -33662,13 +33662,13 @@
                 "id",
                 "name",
                 "generation",
-                "updated_at "
+                "updated_at"
             ],
             "example": {
                 "id": "0c314114-a2b7-4523-8cbc-a293d7d19007",
                 "name": "example_name",
                 "generation": "legacy",
-                "updated_at ": "2021-04-28 13:12:46",
+                "updated_at": "2021-04-28 13:12:46",
                 "versions": []
             }
         },
