@@ -1,6 +1,12 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2022-02-09] Version 1.8.4
+--------------------------
+**Library - Chore**
+- [PR #106](https://github.com/sendgrid/sendgrid-oai/pull/106): merge test and deploy workflows. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+
 [2022-01-12] Version 1.8.3
 --------------------------
 **Library - Fix**
