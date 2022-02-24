@@ -117,11 +117,7 @@
                                 }
                             },
                             "example": {
-                                "delete_all": false,
-                                "emails": [
-                                    "example@example.com",
-                                    "example2@example.com"
-                                ]
+                                "delete_all": false
                             }
                         }
                     }
