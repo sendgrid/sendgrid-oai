@@ -92,7 +92,7 @@
             "tags": [
                 "Bounces API"
             ],
-            "description": "**This endpoint allows you to delete all emails on your bounces list.**\n\nThere are two options for deleting bounced emails: \n\n1. You can delete all bounced emails by setting `delete_all` to `true` in the request body. \n2. You can delete a selection of bounced emails by specifying the email addresses in the `emails` array of the request body.",
+            "description": "**This endpoint allows you to delete all emails on your bounces list.**\n\nThere are two options for deleting bounced emails: \n\n1. You can delete all bounced emails by setting `delete_all` to `true` in the request body. \n2. You can delete a selection of bounced emails by specifying the email addresses in the `emails` array of the request body. \n\n**WARNING:** You can not have both `emails` and `delete_all` set.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -117,11 +117,7 @@
                                 }
                             },
                             "example": {
-                                "delete_all": false,
-                                "emails": [
-                                    "example@example.com",
-                                    "example2@example.com"
-                                ]
+                                "delete_all": false
                             }
                         }
                     }
