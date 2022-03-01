@@ -128,7 +128,7 @@
     "categories_stats_sums": {
         "get": {
             "operationId": "GET_categories-stats-sums",
-            "summary": "Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?]",
+            "summary": "Retrieve sums of email stats for each category.",
             "tags": [
                 "Categories"
             ],
@@ -386,26 +386,6 @@
                     "required": true,
                     "schema": {
                         "type": "string"
-                    }
-                },
-                {
-                    "name": "limit",
-                    "in": "query",
-                    "description": "The number of results to include.",
-                    "required": false,
-                    "schema": {
-                        "type": "integer",
-                        "maximum": 500,
-                        "default": 500
-                    }
-                },
-                {
-                    "name": "offset",
-                    "in": "query",
-                    "description": "The number of results to skip.",
-                    "required": false,
-                    "schema": {
-                        "type": "integer"
                     }
                 },
                 {
