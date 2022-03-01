@@ -1,13 +1,11 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
-<<<<<<< HEAD
-[2021-11-30] Version 1.5.0
+[2022-03-01] Version 1.8.5
 --------------------------
-**Library - Chore**
-- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Replace Travis CI with GitHub Actions, Replace Prance OpenAPI validator with Spectral
-- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Support OpenAPI v3.1
-=======
+**Library - Feature**
+- [PR #112](https://github.com/sendgrid/sendgrid-oai/pull/112): Add Beta OpenAPI v3.1 specification.
+
 [2022-02-09] Version 1.8.4
 --------------------------
 **Library - Chore**
@@ -33,7 +31,6 @@ All the notable changes to this project will be documented in this file.
 - [PR #102](https://github.com/sendgrid/sendgrid-oai/pull/102): fix nginx ports. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
 - [PR #101](https://github.com/sendgrid/sendgrid-oai/pull/101): update prism for GitHub Actions. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
 
->>>>>>> upstream/main
 
 [2021-09-22] Version 1.8.0
 --------------------------
