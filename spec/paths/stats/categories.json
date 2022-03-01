@@ -177,6 +177,26 @@
                     }
                 },
                 {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limits the number of results returned.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 5
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The point in the list to begin retrieving results.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 0
+                    }
+                },
+                {
                     "name": "aggregated_by",
                     "in": "query",
                     "description": "How to group the statistics. Must be either \"day\", \"week\", or \"month\".",
@@ -366,26 +386,6 @@
                     "required": true,
                     "schema": {
                         "type": "string"
-                    }
-                },
-                {
-                    "name": "limit",
-                    "in": "query",
-                    "description": "The number of results to include.",
-                    "required": false,
-                    "schema": {
-                        "type": "integer",
-                        "maximum": 500,
-                        "default": 500
-                    }
-                },
-                {
-                    "name": "offset",
-                    "in": "query",
-                    "description": "The number of results to skip.",
-                    "required": false,
-                    "schema": {
-                        "type": "integer"
                     }
                 },
                 {
