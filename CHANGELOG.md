@@ -1,8 +1,6 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
-[2022-03-01] Version 1.8.5
---------------------------
 **Library - Feature**
 - [PR #112](https://github.com/sendgrid/sendgrid-oai/pull/112): Add Beta OpenAPI v3.1 specification.
 

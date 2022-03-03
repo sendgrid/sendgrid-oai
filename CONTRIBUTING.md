@@ -6,7 +6,7 @@ Hello! Thank you for choosing to help contribute to one of the Twilio SendGrid o
 
 The Beta OpenAPI v3.1 specification is generated internally by Twilio SendGrid tooling. For this reason, we cannot accept Pull Requests against any of these future-facing files: [oas_v3.json](./oas_v3.json), [all files in the /spec directory](./spec).
 
-We do, however, welcome any [Issues](https://github.com/sendgrid/sendgrid-oai/issues) you report, and we will gladly add them to our internal backlog. Please tag any issues related to the Beta OpenAPI v3.1 work with the `oas v3.1: beta` label.
+We do, however, welcome any [Issues](https://github.com/sendgrid/sendgrid-oai/issues) you report, and we will gladly add them to our internal backlog.
 
 Note: DO NOT include your credentials in ANY code examples, descriptions, or media you make public.
 

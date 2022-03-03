@@ -5,7 +5,7 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-oai.svg)](https://github.com/sendgrid/sendgrid-oai/graphs/contributors)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**This is an OpenAPI version representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
+**This is an OpenAPI representation of the [SendGrid v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).**
 
 If you have an interesting use case for these files or have a request, please [create an issue](https://github.com/sendgrid/sendgrid-oai/issues).
 
@@ -62,7 +62,7 @@ Each directory in the [spec](./spec) directory is organized to match the structu
 
 The OpenAPI v3.1 specification is generated internally by Twilio SendGrid tooling. For this reason, we cannot accept Pull Requests against any of the future-facing files: [oas_v3.json](./oas_v3.json), [all files in the /spec directory](./spec).
 
-We do, however, welcome any [Issues](https://github.com/sendgrid/sendgrid-oai/issues) you report, and we will gladly add them to our internal backlog. Please tag any issues related to the Beta OpenAPI v3.1 work with the `oas v3.1: beta` label.
+We do, however, welcome any [Issues](https://github.com/sendgrid/sendgrid-oai/issues) you report, and we will gladly add them to our internal backlog.
 
 # Announcements
 
