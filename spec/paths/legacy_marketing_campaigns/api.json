@@ -1,0 +1,1538 @@
+{
+    "campaigns": {
+        "post": {
+            "operationId": "POST_campaigns",
+            "summary": "Create a Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to create a campaign.**\n\nIn order to send or schedule the campaign, you will be required to provide a subject, sender ID, content (we suggest both html and plain text), and at least one list or segment ID. This information is not required when you create a campaign.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/campaign_request"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/campaign_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 986724,
+                                        "title": "March Newsletter",
+                                        "subject": "New Products for Spring!",
+                                        "sender_id": 124451,
+                                        "list_ids": [
+                                            110,
+                                            124
+                                        ],
+                                        "segment_ids": [
+                                            110
+                                        ],
+                                        "categories": [
+                                            "spring line"
+                                        ],
+                                        "suppression_group_id": 42,
+                                        "custom_unsubscribe_url": "",
+                                        "ip_pool": "marketing",
+                                        "html_content": "<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>",
+                                        "plain_content": "Check out our spring line!",
+                                        "status": "Draft"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"title\": \"title can't be blank\"\n\"title\": \"title is too long (maximum is 100 characters)\"\n\"categories\": \"categories exceeds 10 category limit\"\n\"html_content\": \"html_content exceeds the 1MB limit\"\n\"plain_content\": \"plain_content exceeds the 1MB limit\"\n\"sender_id\": \"sender_id does not exist\"\n\"sender_id\": \"sender_id is not a verified sender identity\"\n\"list_ids\": \"list_ids do not all exist\"\n\"segment_ids\": \"segment_ids do not all exist\"\n\"ip_pool\": \"The ip pool you provided is invalid\"\n\"suppression_group_id\": \"suppression_group_id does not exist\"\n\"unsubscribes\": \"Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.\"\n\"\": \"The JSON you have submitted cannot be parsed.\"\n\"\": \"You've reached your limit of 250 campaigns. Please delete one or more and try again.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "title",
+                                                "message": "title can't be blank"
+                                            },
+                                            {
+                                                "field": "title",
+                                                "message": "title is too long (maximum is 100 characters)"
+                                            },
+                                            {
+                                                "field": "categories",
+                                                "message": "categories exceeds 10 category limit"
+                                            },
+                                            {
+                                                "field": "html_content",
+                                                "message": "html_content exceeds the 1MB limit"
+                                            },
+                                            {
+                                                "field": "plain_content",
+                                                "message": "plain_content exceeds the 1MB limit"
+                                            },
+                                            {
+                                                "field": "sender_id",
+                                                "message": "sender_id does not exist"
+                                            },
+                                            {
+                                                "field": "sender_id",
+                                                "message": "sender_id is not a verified sender identity"
+                                            },
+                                            {
+                                                "field": "list_ids",
+                                                "message": "list_ids do not all exist"
+                                            },
+                                            {
+                                                "field": "segment_ids",
+                                                "message": "segment_ids do not all exist"
+                                            },
+                                            {
+                                                "field": "ip_pool",
+                                                "message": "The ip pool you provided is invalid"
+                                            },
+                                            {
+                                                "field": "suppression_group_id",
+                                                "message": "suppression_group_id does not exist"
+                                            },
+                                            {
+                                                "field": "unsubscribes",
+                                                "message": "Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "The JSON you have submitted cannot be parsed."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "You've reached your limit of 250 campaigns. Please delete one or more and try again."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_campaigns",
+            "summary": "Retrieve all Campaigns",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all of your campaigns.**\n\nReturns campaigns in reverse order they were created (newest first).\n\nReturns an empty array if no campaigns exist.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "The number of results you would like to receive at a time.",
+                    "schema": {
+                        "type": "integer",
+                        "default": 10
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The index of the first campaign to return, where 0 is the first campaign.",
+                    "schema": {
+                        "type": "integer",
+                        "default": 0
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/campaign_response"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "id": 986724,
+                                                "title": "March Newsletter",
+                                                "subject": "New Products for Spring!",
+                                                "sender_id": 124451,
+                                                "list_ids": [
+                                                    110,
+                                                    124
+                                                ],
+                                                "segment_ids": [
+                                                    110
+                                                ],
+                                                "categories": [
+                                                    "spring line"
+                                                ],
+                                                "suppression_group_id": 42,
+                                                "custom_unsubscribe_url": "",
+                                                "ip_pool": "marketing",
+                                                "html_content": "<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>",
+                                                "plain_content": "Check out our spring line!",
+                                                "status": "Draft"
+                                            },
+                                            {
+                                                "id": 986723,
+                                                "title": "February Newsletter",
+                                                "subject": "Final Winter Product Sale!",
+                                                "sender_id": 124451,
+                                                "list_ids": [
+                                                    110,
+                                                    124
+                                                ],
+                                                "segment_ids": [
+                                                    110
+                                                ],
+                                                "categories": [
+                                                    "winter line"
+                                                ],
+                                                "suppression_group_id": 42,
+                                                "custom_unsubscribe_url": "",
+                                                "ip_pool": "marketing",
+                                                "html_content": "<html><head><title></title></head><body><p>Last call for winter clothes!</p></body></html>",
+                                                "plain_content": "Last call for winter clothes!",
+                                                "status": "Sent"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "campaigns_{campaign_id}": {
+        "parameters": [
+            {
+                "name": "campaign_id",
+                "in": "path",
+                "description": "The id of the campaign you would like to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_campaigns-campaign_id",
+            "summary": "Retrieve a single campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific campaign.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "categories": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "custom_unsubscribe_url": {
+                                        "type": "string"
+                                    },
+                                    "html_content": {
+                                        "type": "string"
+                                    },
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "ip_pool": {
+                                        "type": "string"
+                                    },
+                                    "list_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "plain_content": {
+                                        "type": "string"
+                                    },
+                                    "segment_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "sender_id": {
+                                        "type": "integer"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "subject": {
+                                        "type": "string"
+                                    },
+                                    "suppression_group_id": {
+                                        "type": "integer"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "categories": [
+                                            "spring line"
+                                        ],
+                                        "custom_unsubscribe_url": "",
+                                        "html_content": "<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>",
+                                        "id": 986724,
+                                        "ip_pool": "marketing",
+                                        "list_ids": [
+                                            110
+                                        ],
+                                        "plain_content": "Check out our spring line!",
+                                        "segment_ids": [
+                                            110
+                                        ],
+                                        "sender_id": 124451,
+                                        "status": "Draft",
+                                        "subject": "New Products for Spring!",
+                                        "suppression_group_id": 42,
+                                        "title": "March Newsletter"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_campaigns-campaign_id",
+            "summary": "Delete a Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to delete a specific campaign.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_campaigns-campaign_id",
+            "summary": "Update a Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to update a specific campaign.**\n\nThis is especially useful if you only set up the campaign using POST /campaigns, but didn't set many of the parameters.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Update a Campaign request",
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "description": "The title of the campaign."
+                                },
+                                "subject": {
+                                    "type": "string",
+                                    "description": "The subject line for your campaign."
+                                },
+                                "categories": {
+                                    "type": "array",
+                                    "description": "The categories you want to tag on this campaign.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "html_content": {
+                                    "type": "string",
+                                    "description": "The HTML content of this campaign."
+                                },
+                                "plain_content": {
+                                    "type": "string",
+                                    "description": "The plain content of this campaign."
+                                }
+                            },
+                            "required": [
+                                "title",
+                                "subject",
+                                "categories",
+                                "html_content",
+                                "plain_content"
+                            ],
+                            "example": {
+                                "title": "May Newsletter",
+                                "subject": "New Products for Summer!",
+                                "categories": [
+                                    "summer line"
+                                ],
+                                "html_content": "<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>",
+                                "plain_content": "Check out our summer line!"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/campaign_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 986724,
+                                        "title": "May Newsletter",
+                                        "subject": "New Products for Summer!",
+                                        "sender_id": 124451,
+                                        "list_ids": [
+                                            110,
+                                            124
+                                        ],
+                                        "segment_ids": [
+                                            110
+                                        ],
+                                        "categories": [
+                                            "summer line"
+                                        ],
+                                        "suppression_group_id": 42,
+                                        "custom_unsubscribe_url": "",
+                                        "ip_pool": "marketing",
+                                        "html_content": "<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>",
+                                        "plain_content": "Check out our summer line!",
+                                        "status": "Draft"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"title\": \"title can't be blank\"\n\"title\": \"title is too long (maximum is 100 characters)\"\n\"categories\": \"categories exceeds 10 category limit\"\n\"html_content\": \"html_content exceeds the 1MB limit\"\n\"plain_content\": \"plain_content exceeds the 1MB limit\"\n\"sender_id\": \"sender_id does not exist\"\n\"sender_id\": \"sender_id is not a verified sender identity\"\n\"list_ids\": \"list_ids do not all exist\"\n\"segment_ids\": \"segment_ids do not all exist\"\n\"ip_pool\": \"The ip pool you provided is invalid\"\n\"suppression_group_id\": \"suppression_group_id does not exist\"\n\"unsubscribes\": \"Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.\"\n\"\": \"The JSON you have submitted cannot be parsed.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "title",
+                                                "message": "title can't be blank"
+                                            },
+                                            {
+                                                "field": "title",
+                                                "message": "title is too long (maximum is 100 characters)"
+                                            },
+                                            {
+                                                "field": "categories",
+                                                "message": "categories exceeds 10 category limit"
+                                            },
+                                            {
+                                                "field": "html_content",
+                                                "message": "html_content exceeds the 1MB limit"
+                                            },
+                                            {
+                                                "field": "plain_content",
+                                                "message": "plain_content exceeds the 1MB limit"
+                                            },
+                                            {
+                                                "field": "sender_id",
+                                                "message": "sender_id does not exist"
+                                            },
+                                            {
+                                                "field": "sender_id",
+                                                "message": "sender_id is not a verified sender identity"
+                                            },
+                                            {
+                                                "field": "list_ids",
+                                                "message": "list_ids do not all exist"
+                                            },
+                                            {
+                                                "field": "segment_ids",
+                                                "message": "segment_ids do not all exist"
+                                            },
+                                            {
+                                                "field": "ip_pool",
+                                                "message": "The ip pool you provided is invalid"
+                                            },
+                                            {
+                                                "field": "suppression_group_id",
+                                                "message": "suppression_group_id does not exist"
+                                            },
+                                            {
+                                                "field": "unsubscribes",
+                                                "message": "Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "The JSON you have submitted cannot be parsed."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "\"\": \"You may only update a campaign when it is in draft mode.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "You may only update a campaign when it is in draft mode."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "campaigns_{campaign_id}_schedules_now": {
+        "parameters": [
+            {
+                "name": "campaign_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_campaigns-campaign_id-schedules-now",
+            "summary": "Send a Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to immediately send an existing campaign.**\n\nNormally a POST request would have a body, but since this endpoint is telling us to send a resource that is already created, a request body is not needed.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "Send a Campaign response",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "status"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1234,
+                                        "status": "Scheduled"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"subject\": \"subject can't be blank\"\n\"sender_id\": \"sender_id can't be blank\"\n\"plain_content\": \"plain_content can't be blank, please provide plain text or html content\"\n\"list_ids\": \"You must select at least 1 segment or 1 list to send to.\"\n\"unsubscribe_tag\": \"An [unsubscribe] tag in both your html and plain content is required to send a campaign.\"\n\"suppression_group_id\": \"Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.\"\n\"\": \"You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "subject",
+                                                "message": "subject can't be blank"
+                                            },
+                                            {
+                                                "field": "sender_id",
+                                                "message": "sender_id can't be blank"
+                                            },
+                                            {
+                                                "field": "plain_content",
+                                                "message": "plain_content can't be blank, please provide plain text or html content"
+                                            },
+                                            {
+                                                "field": "list_id",
+                                                "message": "You must select at least 1 segment or 1 list to send to."
+                                            },
+                                            {
+                                                "field": "unsubscribe_tag",
+                                                "message": "An [unsubscribe] tag in both your html and plain content is required to send a campaign."
+                                            },
+                                            {
+                                                "field": "suppression_group_id",
+                                                "message": "Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "\"\": \"You may only send a campaign when it is in draft mode.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "You may only send a campaign when it is in draft mode."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "campaigns_{campaign_id}_schedules": {
+        "parameters": [
+            {
+                "name": "campaign_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_campaigns-campaign_id-schedules",
+            "summary": "Schedule a Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to schedule a specific date and time for your campaign to be sent.**\n\nIf you have the flexibility, it's better to schedule mail for off-peak times. Most emails are scheduled and sent at the top of the hour or half hour. Scheduling email to avoid those times (for example, scheduling at 10:53) can result in lower deferral rates because it won't be going through our servers at the same times as everyone else's mail.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Schedule a Campaign request",
+                            "type": "object",
+                            "properties": {
+                                "send_at": {
+                                    "type": "integer",
+                                    "description": "The unix timestamp for the date and time you would like your campaign to be sent out."
+                                }
+                            },
+                            "required": [
+                                "send_at"
+                            ],
+                            "example": {
+                                "send_at": 1489771528
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "Schedule a Campaign response",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "The campaign ID."
+                                    },
+                                    "send_at": {
+                                        "type": "integer",
+                                        "description": "The date time you scheduled your campaign to be sent."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "The status of your campaign.",
+                                        "enum": [
+                                            "Scheduled"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "send_at",
+                                    "status"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1234,
+                                        "send_at": 1489771528,
+                                        "status": "Scheduled"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"subject\": \"subject can't be blank\"\n\"sender_id\": \"sender_id can't be blank\"\n\"plain_content\": \"plain_content can't be blank, please provide plain text or html content\"\n\"list_ids\": \"You must select at least 1 segment or 1 list to send to.\"\n\"send_at\": \"Please choose a future time for sending your campaign.\"\n\"unsubscribe_tag\": \"An [unsubscribe] tag in both your html and plain content is required to send a campaign.\"\n\"suppression_group_id\": \"Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.\"\n\"\": \"The JSON you have submitted cannot be parsed.\"\n\"\":\"You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "subject",
+                                                "message": "subject can't be blank"
+                                            },
+                                            {
+                                                "field": "sender_id",
+                                                "message": "sender_id can't be blank"
+                                            },
+                                            {
+                                                "field": "plain_content",
+                                                "message": "plain_content can't be blank, please provide plain text or html content"
+                                            },
+                                            {
+                                                "field": "list_id",
+                                                "message": "You must select at least 1 segment or 1 list to send to."
+                                            },
+                                            {
+                                                "field": "unsubscribe_tag",
+                                                "message": "An [unsubscribe] tag in both your html and plain content is required to send a campaign."
+                                            },
+                                            {
+                                                "field": "suppression_group_id",
+                                                "message": "Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "\"\": \"You cannot POST to a campaign that has already sent or scheduled. However you can update a scheduled campaign with a PATCH.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "You cannot POST to a campaign that has already sent or scheduled. However you can update a scheduled campaign with a PATCH."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_campaigns-campaign_id-schedules",
+            "summary": "Update a Scheduled Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows to you change the scheduled time and date for a campaign to be sent.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Update a Scheduled Campaign request",
+                            "type": "object",
+                            "properties": {
+                                "send_at": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            },
+                            "required": [
+                                "send_at"
+                            ],
+                            "example": {
+                                "send_at": 1489451436
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "Update a Scheduled Campaign response",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "The campaign ID"
+                                    },
+                                    "send_at": {
+                                        "type": "integer",
+                                        "description": "The unix timestamp to send the campaign."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "The status of the schedule."
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "send_at",
+                                    "status"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"\": \"The JSON you have submitted cannot be parsed.\"\n\"send_at\": \"Please choose a future time for sending your campaign.\"\n\"\":\"You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "send_at",
+                                                "message": "Please choose a future time for sending your campaign."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "The JSON you have submitted cannot be parsed."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "You do not have enough credits to send this campaign. Upgrade your plan to send https://app.sendgrid.com/settings/billing"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "\"send_at\": \"You cannot update the send_at value of non-scheduled campaign.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "send_at",
+                                                "message": "You cannot update the send_at value of non-scheduled campaign."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_campaigns-campaign_id-schedules",
+            "summary": "View Scheduled Time of a Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to retrieve the date and time that a campaign has been scheduled to be sent.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "View Scheduled Time of a Campaign response",
+                                "type": "object",
+                                "properties": {
+                                    "send_at": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    }
+                                },
+                                "required": [
+                                    "send_at"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "send_at": 1490778528
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_campaigns-campaign_id-schedules",
+            "summary": "Unschedule a Scheduled Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to unschedule a campaign that has already been scheduled to be sent.**\n\nA successful unschedule will return a 204.\nIf the specified campaign is in the process of being sent, the only option is to cancel (a different method).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "\"\": \"This campaign is already In Progress.\"\n\"\": \"This campaign is already Sent.\"\n\"\": \"This campaign is already Paused.\"\n\"\": \"This campaign is already Canceled.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "This campaign is already In Progress."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "This campaign is already Sent."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "This campaign is already Paused."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "This campaign is already Canceled."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "campaigns_{campaign_id}_schedules_test": {
+        "parameters": [
+            {
+                "name": "campaign_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_campaigns-campaign_id-schedules-test",
+            "summary": "Send a Test Campaign",
+            "tags": [
+                "Campaigns API"
+            ],
+            "description": "**This endpoint allows you to send a test campaign.**\n\nTo send to multiple addresses, use an array for the JSON \"to\" value [\"one@address\",\"two@address\"]",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "to": {
+                                    "type": "string",
+                                    "description": "The email address that should receive the test campaign.",
+                                    "format": "email"
+                                }
+                            },
+                            "required": [
+                                "to"
+                            ],
+                            "example": {
+                                "to": "your.email@example.com"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "Send a Test Campaign request",
+                                "type": "object",
+                                "properties": {
+                                    "to": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "to"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"\": \"The JSON you have submitted cannot be parsed.\"\n\"to\": \"Please provide an email address to which the test should be sent.\"\n\"to\": \"You can only send tests to 10 addresses at a time.\"\n\"subject\": \"Please add a subject to your campaign before sending a test.\"\n\"plain_content\": \"Plain content and html content can't both be blank. Please set one of these values before sending a test.\"\n\"sender_id\": \"Please assign a sender identity to your campaign before sending a test.\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "send_at",
+                                                "message": "Please choose a future time for sending your campaign."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "The JSON you have submitted cannot be parsed."
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"\": \"not found\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

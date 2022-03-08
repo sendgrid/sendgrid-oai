@@ -1,0 +1,761 @@
+{
+    "subusers_{subuser_name}_stats_monthly": {
+        "parameters": [
+            {
+                "name": "subuser_name",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_subusers-subuser_name-stats-monthly",
+            "summary": "Retrieve the monthly email statistics for a single subuser",
+            "tags": [
+                "Subuser Statistics"
+            ],
+            "description": "**This endpoint allows you to retrive the monthly email statistics for a specific subuser.**\n\nWhen using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:\n`bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.",
+            "parameters": [
+                {
+                    "name": "date",
+                    "in": "query",
+                    "description": "The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "sort_by_metric",
+                    "in": "query",
+                    "description": "The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "default": "delivered"
+                    }
+                },
+                {
+                    "name": "sort_by_direction",
+                    "in": "query",
+                    "description": "The direction you want to sort.",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "desc",
+                            "asc"
+                        ],
+                        "default": "desc"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Optional field to limit the number of results returned.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 5
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Optional beginning point in the list to retrieve from.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 0
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/subuser_stats"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "date": "2016-02-01",
+                                        "stats": [
+                                            {
+                                                "first_name": "John",
+                                                "last_name": "Doe",
+                                                "metrics": {
+                                                    "blocks": 0,
+                                                    "bounce_drops": 0,
+                                                    "bounces": 0,
+                                                    "clicks": 5,
+                                                    "deferred": 0,
+                                                    "delivered": 0,
+                                                    "invalid_emails": 0,
+                                                    "opens": 10,
+                                                    "processed": 10,
+                                                    "requests": 10,
+                                                    "spam_report_drops": 0,
+                                                    "spam_reports": 0,
+                                                    "unique_clicks": 0,
+                                                    "unique_opens": 0,
+                                                    "unsubscribe_drops": 0,
+                                                    "unsubscribes": 0
+                                                },
+                                                "name": "user1",
+                                                "type": "subuser"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "subusers_stats_monthly": {
+        "get": {
+            "operationId": "GET_subusers-stats-monthly",
+            "summary": "Retrieve monthly stats for all subusers",
+            "tags": [
+                "Subuser Statistics"
+            ],
+            "description": "**This endpoint allows you to retrieve the monthly email statistics for all subusers over the given date range.**\n\nWhen using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:\n`bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.",
+            "parameters": [
+                {
+                    "name": "date",
+                    "in": "query",
+                    "description": "The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "subuser",
+                    "in": "query",
+                    "description": "A substring search of your subusers.",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "sort_by_metric",
+                    "in": "query",
+                    "description": "The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "blocks",
+                            "bounces",
+                            "clicks",
+                            "delivered",
+                            "opens",
+                            "requests",
+                            "unique_clicks",
+                            "unique_opens",
+                            "unsubscribes"
+                        ],
+                        "default": "delivered"
+                    }
+                },
+                {
+                    "name": "sort_by_direction",
+                    "in": "query",
+                    "description": "The direction you want to sort.",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "desc",
+                            "asc"
+                        ],
+                        "default": "desc"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Optional field to limit the number of results returned.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 5
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Optional beginning point in the list to retrieve from.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 0
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/subuser_stats"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "date": "2016-02-01",
+                                        "stats": [
+                                            {
+                                                "first_name": "John",
+                                                "last_name": "Doe",
+                                                "metrics": {
+                                                    "blocks": 0,
+                                                    "bounce_drops": 0,
+                                                    "bounces": 0,
+                                                    "clicks": 0,
+                                                    "deferred": 0,
+                                                    "delivered": 0,
+                                                    "invalid_emails": 0,
+                                                    "opens": 1,
+                                                    "processed": 0,
+                                                    "requests": 100,
+                                                    "spam_report_drops": 0,
+                                                    "spam_reports": 99,
+                                                    "unique_clicks": 0,
+                                                    "unique_opens": 0,
+                                                    "unsubscribe_drops": 0,
+                                                    "unsubscribes": 0
+                                                },
+                                                "name": "user1",
+                                                "type": "subuser"
+                                            },
+                                            {
+                                                "first_name": "Jane",
+                                                "last_name": "Doe",
+                                                "metrics": {
+                                                    "blocks": 0,
+                                                    "bounce_drops": 0,
+                                                    "bounces": 0,
+                                                    "clicks": 5,
+                                                    "deferred": 0,
+                                                    "delivered": 0,
+                                                    "invalid_emails": 0,
+                                                    "opens": 10,
+                                                    "processed": 10,
+                                                    "requests": 10,
+                                                    "spam_report_drops": 0,
+                                                    "spam_reports": 0,
+                                                    "unique_clicks": 0,
+                                                    "unique_opens": 0,
+                                                    "unsubscribe_drops": 0,
+                                                    "unsubscribes": 0
+                                                },
+                                                "name": "user2",
+                                                "type": "subuser"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "subusers_stats_sums": {
+        "get": {
+            "operationId": "GET_subusers-stats-sums",
+            "summary": "Retrieve the totals for each email statistic metric for all subusers.",
+            "tags": [
+                "Subuser Statistics"
+            ],
+            "description": "**This endpoint allows you to retrieve the total sums of each email statistic metric for all subusers over the given date range.**",
+            "parameters": [
+                {
+                    "name": "sort_by_direction",
+                    "in": "query",
+                    "description": "The direction you want to sort. ",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "desc",
+                            "asc"
+                        ],
+                        "default": "desc"
+                    }
+                },
+                {
+                    "name": "start_date",
+                    "in": "query",
+                    "description": "The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "end_date",
+                    "in": "query",
+                    "description": "The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limits the number of results returned per page.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 5
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The point in the list to begin retrieving results from.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer",
+                        "default": 0
+                    }
+                },
+                {
+                    "name": "aggregated_by",
+                    "in": "query",
+                    "description": "How to group the statistics. Defaults to today. Must follow format YYYY-MM-DD.",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "sort_by_metric",
+                    "in": "query",
+                    "description": "The metric that you want to sort by.  Must be a single metric.",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "default": "delivered"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/category_stats"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "date": "2015-10-11",
+                                        "stats": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "subusers_stats": {
+        "get": {
+            "operationId": "GET_subusers-stats",
+            "summary": "Retrieve email statistics for your subusers.",
+            "tags": [
+                "Subuser Statistics"
+            ],
+            "description": "**This endpoint allows you to retrieve the email statistics for the given subusers.**\n\nYou may retrieve statistics for up to 10 different subusers by including an additional _subusers_ parameter for each additional subuser.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limits the number of results returned per page.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The point in the list to begin retrieving results from.",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "aggregated_by",
+                    "in": "query",
+                    "description": "How to group the statistics. Must be either \"day\", \"week\", or \"month\".",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "day",
+                            "week",
+                            "month"
+                        ]
+                    }
+                },
+                {
+                    "name": "subusers",
+                    "in": "query",
+                    "description": "The subuser you want to retrieve statistics for. You may include this parameter up to 10 times to retrieve statistics for multiple subusers.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "start_date",
+                    "in": "query",
+                    "description": "The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "end_date",
+                    "in": "query",
+                    "description": "The end date of the statistics to retrieve. Defaults to today.",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/category_stats"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "date": "2015-10-01",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-02",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-03",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-04",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-05",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-06",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-07",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-08",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-09",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "date": "2015-10-10",
+                                            "stats": [
+                                                {
+                                                    "type": "subuser",
+                                                    "name": "Matt_subuser",
+                                                    "metrics": {
+                                                        "blocks": 0,
+                                                        "bounce_drops": 0,
+                                                        "bounces": 0,
+                                                        "clicks": 0,
+                                                        "deferred": 0,
+                                                        "delivered": 0,
+                                                        "invalid_emails": 0,
+                                                        "opens": 0,
+                                                        "processed": 0,
+                                                        "requests": 0,
+                                                        "spam_report_drops": 0,
+                                                        "spam_reports": 0,
+                                                        "unique_clicks": 0,
+                                                        "unique_opens": 0,
+                                                        "unsubscribe_drops": 0,
+                                                        "unsubscribes": 0
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

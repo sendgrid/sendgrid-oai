@@ -1,0 +1,446 @@
+{
+    "mail_batch": {
+        "post": {
+            "operationId": "POST_mail-batch",
+            "summary": "Create a batch ID",
+            "tags": [
+                "Cancel Scheduled Sends"
+            ],
+            "description": "**This endpoint allows you to generate a new batch ID.**\n\nOnce a `batch_id` is created, you can associate it with a scheduled send using the `/mail/send` endpoint. Passing the `batch_id` as a field in the `/mail/send` request body will assign the ID to the send you are creating.\n\nOnce an ID is associated with a scheduled send, the send can be accessed and its send status can be modified using the `batch_id`.",
+            "parameters": [
+                {
+                    "$ref": "../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../components/schemas.json#/mail_batch_id"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "batch_id": "HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../components/responses.json#/trait_cancelScheduledSendsErrors_400"
+                },
+                "401": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "user_scheduled_sends": {
+        "post": {
+            "operationId": "POST_user-scheduled_sends",
+            "summary": "Cancel or pause a scheduled send",
+            "tags": [
+                "Cancel Scheduled Sends"
+            ],
+            "description": "**This endpoint allows you to cancel or pause a scheduled send associated with a `batch_id`.**\n\nPassing this endpoint a `batch_id` and status will cancel or pause the scheduled send.\n\nOnce a scheduled send is set to `pause` or `cancel` you must use the \"Update a scheduled send\" endpoint to change its status or the \"Delete a cancellation or pause from a scheduled send\" endpoint to remove the status. Passing a status change to a scheduled send that has already been paused or cancelled will result in a `400` level status code.\n\nIf the maximum number of cancellations/pauses are added to a send, a `400` level status code will be returned.",
+            "parameters": [
+                {
+                    "$ref": "../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Cancel or pause a scheduled send request",
+                            "type": "object",
+                            "properties": {
+                                "batch_id": {
+                                    "type": "string",
+                                    "description": "The batch ID is the identifier that your scheduled mail sends share.",
+                                    "pattern": "^[a-zA-Z0-9]"
+                                },
+                                "status": {
+                                    "type": "string",
+                                    "default": "pause",
+                                    "description": "The status of the send you would like to implement. This can be pause or cancel. To delete a pause or cancel status see DELETE /v3/user/scheduled_sends/{batch_id}",
+                                    "enum": [
+                                        "pause",
+                                        "cancel"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "batch_id",
+                                "status"
+                            ],
+                            "example": {
+                                "batch_id": "YOUR_BATCH_ID",
+                                "status": "pause"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../components/schemas.json#/user_scheduled_send_status"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../components/responses.json#/trait_cancelScheduledSendsErrors_400"
+                },
+                "401": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_user-scheduled_sends",
+            "summary": "Retrieve all scheduled sends",
+            "tags": [
+                "Cancel Scheduled Sends"
+            ],
+            "description": "**This endpoint allows you to retrieve all cancelled and paused scheduled send information.**\n\nThis endpoint will return only the scheduled sends that are associated with a `batch_id`. If you have scheduled a send using the `/mail/send` endpoint and the `send_at` field but no `batch_id`, the send will be scheduled for delivery; however, it will not be returned by this endpoint. For this reason, you should assign a `batch_id` to any scheduled send you may need to pause or cancel in the future.",
+            "parameters": [
+                {
+                    "$ref": "../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../components/schemas.json#/user_scheduled_send_status"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "batch_id": "QzZmYzLTVWIwYgYzJlM2NhNWI",
+                                            "status": "cancel"
+                                        },
+                                        {
+                                            "batch_id": "mQzZmYzLTVlM2NhNWIwYgYzJl",
+                                            "status": "cancel"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../components/responses.json#/trait_cancelScheduledSendsErrors_400"
+                },
+                "401": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "mail_batch_{batch_id}": {
+        "parameters": [
+            {
+                "name": "batch_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_mail-batch-batch_id",
+            "summary": "Validate batch ID",
+            "tags": [
+                "Cancel Scheduled Sends"
+            ],
+            "description": "**This endpoint allows you to validate a batch ID.**\n\nWhen you pass a valid `batch_id` to this endpoint, it will return a `200` status code and the batch ID itself.\n\nIf you pass an invalid `batch_id` to the endpoint, you will receive a `400` level status code and an error message.\n\nA `batch_id` does not need to be assigned to a scheduled send to be considered valid. A successful response means only that the `batch_id` has been created, but it does not indicate that it has been associated with a send.",
+            "parameters": [
+                {
+                    "$ref": "../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../components/schemas.json#/mail_batch_id"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "batch_id": "HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../components/responses.json#/trait_cancelScheduledSendsErrors_400"
+                },
+                "401": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "user_scheduled_sends_{batch_id}": {
+        "parameters": [
+            {
+                "name": "batch_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_user-scheduled_sends-batch_id",
+            "summary": "Retrieve scheduled send",
+            "tags": [
+                "Cancel Scheduled Sends"
+            ],
+            "description": "**This endpoint allows you to retrieve the cancel/paused scheduled send information for a specific `batch_id`.**",
+            "parameters": [
+                {
+                    "$ref": "../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "title": "Retrieve scheduled send response",
+                                "items": {
+                                    "$ref": "../components/schemas.json#/user_scheduled_send_status"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "batch_id": "HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi",
+                                            "status": "cancel"
+                                        },
+                                        {
+                                            "batch_id": "IbLdyLYULb7Rj8GKSx7u025ouWVlAiMg",
+                                            "status": "pause"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../components/responses.json#/trait_cancelScheduledSendsErrors_400"
+                },
+                "401": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_user-scheduled_sends-batch_id",
+            "summary": "Update a scheduled send",
+            "tags": [
+                "Cancel Scheduled Sends"
+            ],
+            "description": "**This endpoint allows you to update the status of a scheduled send for the given `batch_id`.**\n\nIf you have already set a `cancel` or `pause` status on a scheduled send using the \"Cancel or pause a scheduled send\" endpoint, you can update it's status using this endpoint. Attempting to update a status once it has been set with the \"Cancel or pause a scheduled send\" endpoint will result in a `400` error.",
+            "parameters": [
+                {
+                    "$ref": "../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "The status you would like the scheduled send to have.",
+                                    "enum": [
+                                        "cancel",
+                                        "pause"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "status"
+                            ],
+                            "example": {
+                                "status": "pause"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../components/responses.json#/trait_cancelScheduledSendsErrors_400"
+                },
+                "401": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_user-scheduled_sends-batch_id",
+            "summary": "Delete a cancellation or pause from a scheduled send",
+            "tags": [
+                "Cancel Scheduled Sends"
+            ],
+            "description": "**This endpoint allows you to delete the cancellation/pause of a scheduled send.**\n\nScheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.",
+            "parameters": [
+                {
+                    "$ref": "../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": ""
+                },
+                "400": {
+                    "$ref": "../components/responses.json#/trait_cancelScheduledSendsErrors_400"
+                },
+                "401": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

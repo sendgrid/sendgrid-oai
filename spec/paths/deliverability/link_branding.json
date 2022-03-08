@@ -1,0 +1,804 @@
+{
+    "whitelabel_links": {
+        "post": {
+            "operationId": "POST_whitelabel-links",
+            "summary": "Create a branded link",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to create a new branded link.**\n\nTo create the link branding, supply the root domain and, optionally, the subdomain \u2014 these go into separate fields in your request body. The root domain should match your FROM email address. If you provide a  subdomain, it must be different from the subdomain you used for authenticating your domain.\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "domain": {
+                                    "type": "string",
+                                    "description": "The root domain for the subdomain that you are creating the link branding for. This should match your FROM email address."
+                                },
+                                "subdomain": {
+                                    "type": "string",
+                                    "description": "The subdomain to create the link branding for. Must be different from the subdomain you used for authenticating your domain."
+                                },
+                                "default": {
+                                    "type": "boolean",
+                                    "description": "Indicates if you want to use this link branding as the default or fallback. When setting a new default, the existing default link branding will have its default status removed automatically.",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "domain"
+                            ],
+                            "example": {
+                                "domain": "example.com",
+                                "subdomain": "mail",
+                                "default": true
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/link_branding_200_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "john@example.com",
+                                        "user_id": 7,
+                                        "default": false,
+                                        "valid": true,
+                                        "legacy": false,
+                                        "dns": {
+                                            "domain_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "mail.example.com",
+                                                "data": "sendgrid.net"
+                                            },
+                                            "owner_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "7.example.com",
+                                                "data": "sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_whitelabel-links",
+            "summary": "Retrieve all branded links",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to retrieve all branded links**.\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limits the number of results returned per page.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/link_branding_200_response"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "id": 1,
+                                            "domain": "example.com",
+                                            "subdomain": "mail",
+                                            "username": "john@example.com",
+                                            "user_id": 7,
+                                            "default": true,
+                                            "valid": true,
+                                            "legacy": false,
+                                            "dns": {
+                                                "domain_cname": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "mail.example.com",
+                                                    "data": "sendgrid.net"
+                                                },
+                                                "owner_cname": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "7.example.com",
+                                                    "data": "sendgrid.net"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": 2,
+                                            "domain": "example2.com",
+                                            "subdomain": "news",
+                                            "username": "john@example.com",
+                                            "user_id": 8,
+                                            "default": false,
+                                            "valid": false,
+                                            "legacy": false,
+                                            "dns": {
+                                                "domain_cname": {
+                                                    "valid": true,
+                                                    "type": "cname",
+                                                    "host": "news.example2.com",
+                                                    "data": "sendgrid.net"
+                                                },
+                                                "owner_cname": {
+                                                    "valid": false,
+                                                    "type": "cname",
+                                                    "host": "8.example2.com",
+                                                    "data": "sendgrid.net"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "whitelabel_links_{id}_validate": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "The ID of the branded link that you want to validate.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_whitelabel-links-id-validate",
+            "summary": "Validate a branded link",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to validate a branded link.**\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "The ID of the branded link."
+                                    },
+                                    "valid": {
+                                        "type": "boolean",
+                                        "description": "Indicates if the link branding is valid.",
+                                        "enum": [
+                                            true,
+                                            false
+                                        ]
+                                    },
+                                    "validation_results": {
+                                        "type": "object",
+                                        "description": "The individual validation results for each of the DNS records associated with this branded link.",
+                                        "required": [
+                                            "domain_cname"
+                                        ],
+                                        "properties": {
+                                            "domain_cname": {
+                                                "type": "object",
+                                                "description": "The DNS record generated for the sending domain used for this branded link.",
+                                                "required": [
+                                                    "valid",
+                                                    "reason"
+                                                ],
+                                                "properties": {
+                                                    "valid": {
+                                                        "type": "boolean",
+                                                        "description": "Indicates if this DNS record is valid.",
+                                                        "enum": [
+                                                            true,
+                                                            false
+                                                        ]
+                                                    },
+                                                    "reason": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "description": "Null if the DNS record is valid. If the DNS record is invalid, this will explain why."
+                                                    }
+                                                }
+                                            },
+                                            "owner_cname": {
+                                                "type": "object",
+                                                "description": "The DNS record created to verify the branded link.",
+                                                "properties": {
+                                                    "valid": {
+                                                        "type": "boolean",
+                                                        "description": "Indicates if the DNS record is valid.",
+                                                        "enum": [
+                                                            true,
+                                                            false
+                                                        ]
+                                                    },
+                                                    "reason": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "description": "Null if valid. If the DNS record is invalid, this will explain why."
+                                                    }
+                                                },
+                                                "required": [
+                                                    "valid",
+                                                    "reason"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "valid",
+                                    "validation_results"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "valid": true,
+                                        "validation_results": {
+                                            "domain_cname": {
+                                                "valid": false,
+                                                "reason": "Expected CNAME to match \"sendgrid.net.\" but found \"example.com.\"."
+                                            },
+                                            "owner_cname": {
+                                                "valid": true,
+                                                "reason": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "The reasons why the validation failed.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "The reason why the link whitelabel could not be validated."
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "errors"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "internal error getting CNAME"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "whitelabel_links_{link_id}_subuser": {
+        "parameters": [
+            {
+                "name": "link_id",
+                "in": "path",
+                "description": "The ID of the branded link you want to associate.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_whitelabel-links-link_id-subuser",
+            "summary": "Associate a branded link with a subuser",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to associate a branded link with a subuser account.**\n\nLink branding can be associated with subusers from the parent account. This functionality allows subusers to send mail using their parent's link branding. To associate link branding, the parent account must first create a branded link and validate it. The parent may then associate that branded link with a subuser via the API or the [Subuser Management page of the Twilio SendGrid App](https://app.sendgrid.com/settings/subusers).",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string",
+                                    "description": "The username of the subuser account that you want to associate the branded link with."
+                                }
+                            },
+                            "example": {
+                                "username": "jane@example.com"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/link_branding_200_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "john@example.com",
+                                        "user_id": 7,
+                                        "default": false,
+                                        "valid": true,
+                                        "legacy": false,
+                                        "dns": {
+                                            "domain_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "mail.example.com",
+                                                "data": "sendgrid.net"
+                                            },
+                                            "owner_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "7.example.com",
+                                                "data": "sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "whitelabel_links_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "The ID of the branded link you want to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_whitelabel-links-id",
+            "summary": "Retrieve a branded link",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific branded link by providing its ID.**\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/link_branding_200_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "john@example.com",
+                                        "user_id": 7,
+                                        "default": false,
+                                        "valid": true,
+                                        "legacy": false,
+                                        "dns": {
+                                            "domain_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "mail.example.com",
+                                                "data": "sendgrid.net"
+                                            },
+                                            "owner_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "7.example.com",
+                                                "data": "sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_whitelabel-links-id",
+            "summary": "Update a branded link",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to update a specific branded link. You can use this endpoint to change a branded link's default status.**\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "default": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the branded link is set as the default. When setting a new default, the existing default link branding will have its default status removed automatically.",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            "example": {
+                                "default": true
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/link_branding_200_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "john@example.com",
+                                        "user_id": 7,
+                                        "default": true,
+                                        "valid": true,
+                                        "legacy": false,
+                                        "dns": {
+                                            "domain_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "mail.example.com",
+                                                "data": "sendgrid.net"
+                                            },
+                                            "owner_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "7.example.com",
+                                                "data": "sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_whitelabel-links-id",
+            "summary": "Delete a branded link",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to delete a branded link.**\n\nYour request will receive a response with a 204 status code if the deletion was successful. The call does not return the link's details, so if you wish to record these make sure you call the  \"Retrieve a branded link\" endpoint *before* you request its deletion.\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "whitelabel_links_default": {
+        "get": {
+            "operationId": "GET_whitelabel-links-default",
+            "summary": "Retrieve the default branded link",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to retrieve the default branded link.**\n\nThe default branded link is the actual URL to be used when sending messages. If you have more than one branded link, the default is determined by the following order:\n\n* The validated branded link marked as `default` (set when you call the \"Create a branded link\" endpoint or by calling the \"Update a branded link\" endpoint on an existing link)\n* Legacy branded links (migrated from the whitelabel wizard)\n* Default SendGrid-branded links (i.e., `100.ct.sendgrid.net`)\n\nYou can submit this request as one of your subusers if you include their ID in the `on-behalf-of` header in the request.",
+            "parameters": [
+                {
+                    "name": "domain",
+                    "in": "query",
+                    "description": "The domain to match against when finding the default branded link.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/link_branding_200_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "john@example.com",
+                                        "user_id": 7,
+                                        "default": false,
+                                        "valid": true,
+                                        "legacy": false,
+                                        "dns": {
+                                            "domain_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "mail.example.com",
+                                                "data": "sendgrid.net"
+                                            },
+                                            "owner_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "7.example.com",
+                                                "data": "sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "whitelabel_links_subuser": {
+        "get": {
+            "operationId": "GET_whitelabel-links-subuser",
+            "summary": "Retrieve a subuser's branded link",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to retrieve the branded link associated with a subuser.**\n\nLink branding can be associated with subusers from the parent account. This functionality allows subusers to send mail using their parent's link branding. To associate link branding, the parent account must first create a branded link and then validate it. The parent may then associate that branded link with a subuser via the API or the [Subuser Management page of the Twilio SendGrid App](https://app.sendgrid.com/settings/subusers).",
+            "parameters": [
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "The username of the subuser to retrieve associated branded links for.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/link_branding_200_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "domain": "example.com",
+                                        "subdomain": "mail",
+                                        "username": "john@example.com",
+                                        "user_id": 7,
+                                        "default": false,
+                                        "valid": true,
+                                        "legacy": false,
+                                        "dns": {
+                                            "domain_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "mail.example.com",
+                                                "data": "sendgrid.net"
+                                            },
+                                            "owner_cname": {
+                                                "valid": true,
+                                                "type": "cname",
+                                                "host": "7.example.com",
+                                                "data": "sendgrid.net"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_whitelabel-links-subuser",
+            "summary": "Disassociate a branded link from a subuser",
+            "tags": [
+                "Link branding"
+            ],
+            "description": "**This endpoint allows you to take a branded link away from a subuser.**\n\nLink branding can be associated with subusers from the parent account. This functionality allows subusers to send mail using their parent's link branding. To associate link branding, the parent account must first create a branded link and validate it. The parent may then associate that branded link with a subuser via the API or the [Subuser Management page of the Twilio SendGrid App](https://app.sendgrid.com/settings/subusers).\n\nYour request will receive a response with a 204 status code if the disassociation was successful.",
+            "parameters": [
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "The username of the subuser account that you want to disassociate a branded link from.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

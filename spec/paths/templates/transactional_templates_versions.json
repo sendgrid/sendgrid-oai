@@ -1,0 +1,276 @@
+{
+    "templates_{template_id}_versions": {
+        "parameters": [
+            {
+                "name": "template_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_templates-template_id-versions",
+            "summary": "Create a new transactional template version.",
+            "tags": [
+                "Transactional Templates Versions"
+            ],
+            "description": "**This endpoint allows you to create a new version of a template.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/transactional_template_version_create"
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template_version_output"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "8aefe0ee-f12b-4575-b5b7-c97e21cb36f3",
+                                        "template_id": "ddb96bbc-9b92-425e-8979-99464621b543",
+                                        "active": 1,
+                                        "name": "example_version_name",
+                                        "html_content": "<%body%>",
+                                        "plain_content": "<%body%>",
+                                        "generate_plain_content": true,
+                                        "subject": "<%subject%>",
+                                        "updated_at": "2019-03-13 18:56:33",
+                                        "editor": "code"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "templates_{template_id}_versions_{version_id}": {
+        "parameters": [
+            {
+                "name": "template_id",
+                "in": "path",
+                "description": " The ID of the original template",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            {
+                "name": "version_id",
+                "in": "path",
+                "description": "The ID of the template version",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_templates-template_id-versions-version_id",
+            "summary": "Retrieve a specific transactional template version.",
+            "tags": [
+                "Transactional Templates Versions"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific version of a template.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template_version_output"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "8aefe0ee-f12b-4575-b5b7-c97e21cb36f3",
+                                        "template_id": "ddb96bbc-9b92-425e-8979-99464621b543",
+                                        "active": 1,
+                                        "name": "example_version_name",
+                                        "html_content": "<%body%>",
+                                        "plain_content": "<%body%>",
+                                        "generate_plain_content": true,
+                                        "subject": "<%subject%>",
+                                        "updated_at": "2019-03-13 18:56:33",
+                                        "editor": "code"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_templates-template_id-versions-version_id",
+            "summary": "Edit a transactional template version.",
+            "tags": [
+                "Transactional Templates Versions"
+            ],
+            "description": "**This endpoint allows you to edit the content of your template version.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/transactional_template_version_create"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template_version_output"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "8aefe0ee-f12b-4575-b5b7-c97e21cb36f3",
+                                        "template_id": "ddb96bbc-9b92-425e-8979-99464621b543",
+                                        "active": 1,
+                                        "name": "example_version_name",
+                                        "html_content": "<%body%>",
+                                        "plain_content": "<%body%>",
+                                        "generate_plain_content": true,
+                                        "subject": "<%subject%>",
+                                        "updated_at": "2019-03-13 18:56:33",
+                                        "editor": "code"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_templates-template_id-versions-version_id",
+            "summary": "Delete a transactional template version.",
+            "tags": [
+                "Transactional Templates Versions"
+            ],
+            "description": "**This endpoint allows you to delete a transactional template version.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": ""
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "templates_{template_id}_versions_{version_id}_activate": {
+        "parameters": [
+            {
+                "name": "template_id",
+                "in": "path",
+                "description": "The ID of the original template",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            {
+                "name": "version_id",
+                "in": "path",
+                "description": "The ID of the template version",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_templates-template_id-versions-version_id-activate",
+            "summary": "Activate a transactional template version.",
+            "tags": [
+                "Transactional Templates Versions"
+            ],
+            "description": "**This endpoint allows you to activate a version of one of your templates.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/transactional_template_version_output"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": "8aefe0ee-f12b-4575-b5b7-c97e21cb36f3",
+                                        "template_id": "ddb96bbc-9b92-425e-8979-99464621b543",
+                                        "active": 1,
+                                        "name": "example_version_name",
+                                        "html_content": "<%body%>",
+                                        "plain_content": "<%body%>",
+                                        "generate_plain_content": true,
+                                        "subject": "<%subject%>",
+                                        "updated_at": "2019-03-13 18:56:33",
+                                        "editor": "code"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

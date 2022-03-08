@@ -1,0 +1,168 @@
+{
+    "sso_teammates": {
+        "post": {
+            "operationId": "POST_sso-teammates",
+            "summary": "Create SSO Teammate",
+            "tags": [
+                "Single Sign-On Teammates"
+            ],
+            "description": "**This endpoint allows you to create an SSO Teammate.**\n\nThe email provided for this user will also function as the Teammate\u2019s username.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/sso-teammate-request"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-teammate-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "first_name": "Jane",
+                                        "last_name": "Doe",
+                                        "email": "jane_doe@example.com",
+                                        "is_read_only": true,
+                                        "username": "jane_doe@example.com",
+                                        "is_sso": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            }
+        }
+    },
+    "sso_teammates_{username}": {
+        "parameters": [
+            {
+                "name": "username",
+                "in": "path",
+                "description": "This email address must be the same address assigned to the teammate in your IdP",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "email"
+                }
+            }
+        ],
+        "patch": {
+            "operationId": "PATCH_sso-teammates-username",
+            "summary": "Edit an SSO Teammate",
+            "tags": [
+                "Single Sign-On Teammates"
+            ],
+            "description": "**This endpoint allows you to modify an existing SSO Teammate.**\n\nTo turn a teammate into an admin, the request body should contain the `is_admin` field set to `true`. Otherwise, set `is_admin` to false and pass in all the scopes that a teammate should have.\n\nOnly the parent user and Teammates with admin permissions can update another Teammate\u2019s permissions. Admin users can only update permissions.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "first_name": {
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "type": "string"
+                                },
+                                "scopes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "is_admin": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "example": {
+                                "first_name": "Jane",
+                                "last_name": "Doe",
+                                "email": "jane_doe@example.com",
+                                "scopes": [
+                                    "mail.batch.create",
+                                    "mail.batch.delete",
+                                    "mail.batch.read",
+                                    "mail.batch.update",
+                                    "mail.send"
+                                ],
+                                "is_admin": false
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/sso-teammates-patch-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "first_name": "Jane",
+                                        "last_name": "Doe",
+                                        "email": "jane_doe@example.com",
+                                        "is_admin": false,
+                                        "username": "jane_doe@example.com",
+                                        "is_sso": true,
+                                        "address": "1234 Fake St.",
+                                        "address2": "Suite 5",
+                                        "city": "San Francisco",
+                                        "state": "CA",
+                                        "zip": "94105",
+                                        "Country": "United States",
+                                        "phone": "+15555555555",
+                                        "user_type": "teammate"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_403"
+                },
+                "429": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_429"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_singleSignOnErrorsTrait_500"
+                }
+            }
+        }
+    }
+}

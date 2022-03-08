@@ -1,0 +1,504 @@
+{
+    "marketing_stats_automations": {
+        "get": {
+            "operationId": "getall-automation-stats",
+            "summary": "Get All Automation Stats",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint allows you to retrieve stats for all your Automations.**\n\nBy default, all of your Automations will be returned, but you can specify a selection by passing in a comma-separated list of Automation IDs as the value of the query string parameter `automation_ids`.\n\nResponses are paginated. You can limit the number of responses returned per batch using the `page_size` query string parameter. The default is 50, but you specify a value between 1 and 100.\n\nYou can retrieve a specific page of responses with the `page_token` query string parameter.",
+            "parameters": [
+                {
+                    "name": "automation_ids",
+                    "in": "query",
+                    "description": "This endpoint returns all automation IDs if no `automation_ids` are specified.",
+                    "style": "form",
+                    "explode": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "maxItems": 25
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_size"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_token"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/automations-response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "marketing_stats_automations_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "get-automation-stat",
+            "summary": "Get Automation Stats by ID",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint allows you to retrieve stats for a single Automation using its ID.**\n\nMultiple Automation IDs can be retrieved using the \"Get All Automation Stats\" endpoint. Once you have an ID, this endpoint will return detailed stats for the single automation specified.\n\nYou may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_automationQueryParams_group_by"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_automationQueryParams_step_ids"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_aggregated_by"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_start_date"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_end_date"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_timezone"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_size"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_token"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/automations-response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_errorResponse_400"
+                },
+                "404": {
+                    "description": ""
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "marketing_stats_singlesends": {
+        "get": {
+            "operationId": "getall-singlesend-stats",
+            "summary": "Get All Single Sends Stats",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint allows you to retrieve stats for all your Single Sends.**\n\nBy default, all of your Single Sends will be returned, but you can specify a selection by passing in a comma-separated list of Single Send IDs as the value of the query string parameter `singlesend_ids`.\n\nResponses are paginated. You can limit the number of responses returned per batch using the `page_size` query string parameter. The default is 50, but you specify a value between 1 and 100.\n\nYou can retrieve a specific page of responses with the `page_token` query string parameter.",
+            "parameters": [
+                {
+                    "name": "singlesend_ids",
+                    "in": "query",
+                    "description": "This endpoint returns all Single Send IDs if no IDs are included in `singlesend_ids`.",
+                    "style": "form",
+                    "explode": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "maxItems": 25
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_size"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_token"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/singlesends-response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_errorResponse_400"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "marketing_stats_singlesends_{id}": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "get-singlesend-stat",
+            "summary": "Get Single Send Stats by ID",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint allows you to retrieve stats for an individual Single Send using a Single Send ID.**\n\nMultiple Single Send IDs can be retrieved using the \"Get All Single Sends Stats\" endpoint. Once you have an ID, this endpoint will return detailed stats for the Single Send specified.\n\nYou may constrain the stats returned using the `start_date` and `end_date` query string parameters. You can also use the `group_by` and `aggregated_by` query string parameters to further refine the stats returned.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_aggregated_by"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_start_date"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_end_date"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_baseParams_timezone"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_size"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_token"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_singlesendQueryParams_group_by"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/singlesends-response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_errorResponse_400"
+                },
+                "404": {
+                    "description": ""
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "marketing_stats_automations_{id}_links": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "The ID of the Automation you want to get click tracking stats for. ",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "get-automation-link-stat",
+            "summary": "Get Automation Click Tracking Stats by ID",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint lets you retrieve click-tracking stats for a single Automation**.\n\nThe stats returned list the URLs embedded in your Automation and the number of clicks each one received.\n\nResponses are paginated. You can limit the number of responses returned per batch using the `page_size` query string parameter. The default is 50, but you specify a value between 1 and 100.\n\nYou can retrieve a specific page of responses with the `page_token` query string parameter.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_automationQueryParams_group_by"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_automationQueryParams_step_ids"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_size"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_token"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/automations-link-stats-response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_errorResponse_400"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "marketing_stats_singlesends_{id}_links": {
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "get-singlesend-link-stat",
+            "summary": "Get Single Send Click Tracking Stats by ID",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint lets you retrieve click-tracking stats for one Single Send**.\n\nThe stats returned list the URLs embedded in the specified Single Send and the number of clicks each one received.\n\nResponses are paginated. You can limit the number of responses returned per batch using the `page_size` query string parameter. The default is 50, but you specify a value between 1 and 100.\n\nYou can retrieve a specific page of responses with the `page_token` query string parameter.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_size"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_pagination_page_token"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_singlesendQueryParams2_group_by"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_singlesendQueryParams2_ab_variation_id"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_singlesendQueryParams2_ab_phase_id"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/singlesends-link-stats-response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_errorResponse_400"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "marketing_stats_singlesends_export": {
+        "get": {
+            "operationId": "get-singlesend-stats-export",
+            "summary": "Export Single Send Stats",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint allows you to export Single Send stats as .CSV data**.\n\nYou can specify one Single Send or many: include as many Single Send IDs as you need, separating them with commas, as the value of the `ids` query string paramter.\n\nThe data is returned as plain text response but in .CSV format, so your application making the call can present the information in whatever way is most appropriate, or just save the data as a .csv file.",
+            "parameters": [
+                {
+                    "name": "ids",
+                    "in": "query",
+                    "description": "The IDs of Single Sends for which to export stats.",
+                    "style": "form",
+                    "explode": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "maxItems": 50
+                    }
+                },
+                {
+                    "name": "timezone",
+                    "in": "query",
+                    "description": "The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `\"America/Chicago\"`. This parameter changes the timezone format only; it does not alter which stats are returned.",
+                    "schema": {
+                        "type": "string",
+                        "default": "UTC"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string",
+                                "description": "CSV data"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": ""
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "marketing_stats_automations_export": {
+        "get": {
+            "operationId": "get-automations-stats-export",
+            "summary": "Export Automation Stats",
+            "tags": [
+                "Marketing Campaigns Stats"
+            ],
+            "description": "**This endpoint allows you to export Automation stats as CSV data**.\n\nYou can specify one Automation or many: include as many Automation IDs as you need, separating them with commas, as the value of the `ids` query string paramter.\n\nThe data is returned as plain text response but in CSV format, so your application making the call can present the information in whatever way is most appropriate, or just save the data as a `.csv` file.",
+            "parameters": [
+                {
+                    "name": "ids",
+                    "in": "query",
+                    "description": "The IDs of Automations for which to export stats.",
+                    "style": "form",
+                    "explode": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "maxItems": 50
+                    }
+                },
+                {
+                    "name": "timezone",
+                    "in": "query",
+                    "description": "The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `\"America/Chicago\"`. This parameter changes the timezone format only; it does not alter which stats are returned.",
+                    "schema": {
+                        "type": "string",
+                        "default": "UTC"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string",
+                                "description": "CSV data"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

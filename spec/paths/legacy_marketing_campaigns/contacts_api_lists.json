@@ -1,0 +1,1195 @@
+{
+    "contactdb_lists": {
+        "post": {
+            "operationId": "POST_contactdb-lists",
+            "summary": "Create a List",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to create a list for your recipients.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Create a List request",
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "your list name"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/contactdb_list"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "name": "your list name",
+                                        "recipient_count": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"name\" : \"Returned if list name is a duplicate of an existing list or segment\"\n\"name\" : \"Returned if list name is not a string\"\n\"\" : \"Returned if request body is invalid JSON\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "Returned if request body is invalid JSON"
+                                            },
+                                            {
+                                                "field": "name",
+                                                "message": "Returned if list name is not a string"
+                                            },
+                                            {
+                                                "field": "name",
+                                                "message": "Returned if list name is a duplicate of an existing list or segment"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_contactdb-lists",
+            "summary": "Retrieve all lists",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to retrieve all of your recipient lists. If you don't have any lists, an empty array will be returned.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "List All Lists response",
+                                "type": "object",
+                                "properties": {
+                                    "lists": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/contactdb_list"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "lists"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "lists": [
+                                            {
+                                                "id": 1,
+                                                "name": "the jones",
+                                                "recipient_count": 1
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_contactdb-lists",
+            "summary": "Delete Multiple lists",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to delete multiple recipient lists.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "example": [
+                                1,
+                                2,
+                                3,
+                                4
+                            ]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"id\" : \"Returned if all list ids are not valid\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "list id was invalid"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "contactdb_lists_{list_id}": {
+        "parameters": [
+            {
+                "name": "list_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_contactdb-lists-list_id",
+            "summary": "Retrieve a single list",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to retrieve a single recipient list.**",
+            "parameters": [
+                {
+                    "name": "list_id",
+                    "in": "query",
+                    "description": "The ID of the list to retrieve.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/contactdb_list"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "name": "listname",
+                                        "recipient_count": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"list_id\" : \"Returned if list_id is not valid\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "invalid id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "List ID does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_contactdb-lists-list_id",
+            "summary": "Update a List",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to update the name of one of your recipient lists.**",
+            "parameters": [
+                {
+                    "name": "list_id",
+                    "in": "query",
+                    "description": "The ID of the list you are updating.",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Update a List request",
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The new name for your list. "
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "newlistname"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "The ID of the list"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The new name for the list"
+                                    },
+                                    "recipient_count": {
+                                        "type": "integer",
+                                        "description": "The number of recipients on the list"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1234,
+                                        "name": "2016 iPhone Users",
+                                        "recipient_count": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"name\" : \"Returned if list name is a duplicate of existing list or segment\"\n\"name\" : \"Returned if list name is invalid or not provided\"\n\"list_id\" : \"Returned if list_id is not valid\"\n\"\" : \"Returned if request body is invalid JSON\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "invalid id"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "List ID does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_contactdb-lists-list_id",
+            "summary": "Delete a List",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to delete a specific recipient list with the given ID.**",
+            "parameters": [
+                {
+                    "name": "delete_contacts",
+                    "in": "query",
+                    "description": "Adds the ability to delete all contacts on the list in addition to deleting the list.",
+                    "schema": {
+                        "type": "boolean",
+                        "enum": [
+                            true,
+                            false
+                        ]
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/DELETE_contactdb-lists-list_idBody"
+            },
+            "responses": {
+                "202": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"list_id\" : \"Returned if list_id is not valid\"\n\"delete_contacts\" : \"Returned if delete_contacts is not valid\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "delete_contacts",
+                                                "message": "delete_contacts not a bool"
+                                            },
+                                            {
+                                                "field": "list_id",
+                                                "message": "Returned if list_id is not valid"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "List not found: 5"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "contactdb_lists_{list_id}_recipients": {
+        "parameters": [
+            {
+                "name": "list_id",
+                "in": "path",
+                "description": "The id of the list of recipients you want to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_contactdb-lists-list_id-recipients",
+            "summary": "Retrieve all recipients on a List",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to retrieve all recipients on the list with the given ID.**",
+            "parameters": [
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "Page index of first recipient to return (must be a positive integer)",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "Number of recipients to return at a time (must be a positive integer between 1 and 1000)",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "list_id",
+                    "in": "query",
+                    "description": "The ID of the list whose recipients you are requesting.",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "recipients": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/contactdb_recipient"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "recipients": [
+                                            {
+                                                "created_at": 1433348344,
+                                                "custom_fields": [
+                                                    {
+                                                        "id": 6234,
+                                                        "name": "age",
+                                                        "type": "number",
+                                                        "value": null
+                                                    },
+                                                    {
+                                                        "id": 6233,
+                                                        "name": "country",
+                                                        "type": "text",
+                                                        "value": null
+                                                    },
+                                                    {
+                                                        "id": 6235,
+                                                        "name": "fname",
+                                                        "type": "text",
+                                                        "value": "Example"
+                                                    },
+                                                    {
+                                                        "id": 6239,
+                                                        "name": "lname",
+                                                        "type": "text",
+                                                        "value": "User"
+                                                    },
+                                                    {
+                                                        "id": 6240,
+                                                        "name": "lname",
+                                                        "type": "text",
+                                                        "value": null
+                                                    }
+                                                ],
+                                                "email": "example@example.com",
+                                                "first_name": "Example",
+                                                "id": "ZGVWfyZWsuYmFpbmVzQHNlbmRmCmLkLmNv==",
+                                                "last_clicked": 1438616117,
+                                                "last_emailed": 1438613272,
+                                                "last_name": "User",
+                                                "last_opened": 1438616109,
+                                                "updated_at": 1438616119
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"list_id\" : \"Returned if list_id is not a valid integer\"\n\"page\" : \"Returned if page is not a valid integer\"\n\"page\" : \"Returned if page is less than 1\"\n\"page_size\" : \"Returned if page_size is not a valid integer\"\n\"page_size\" : \"Returned if page_size is less than 1 or greater than 1000\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "Returned if list_id is not a valid integer"
+                                            },
+                                            {
+                                                "field": "page",
+                                                "message": "Returned if page is not a valid integer"
+                                            },
+                                            {
+                                                "field": "page",
+                                                "message": "Returned if page is less than 1"
+                                            },
+                                            {
+                                                "field": "page_size",
+                                                "message": "Returned if page_size is not a valid integer"
+                                            },
+                                            {
+                                                "field": "page_size",
+                                                "message": "Returned if page_size is less than 1 or greater than 1000"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "Returned if list_id is invalid"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "post": {
+            "operationId": "POST_contactdb-lists-list_id-recipients",
+            "summary": "Add Multiple Recipients to a List",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to add multiple recipients to a list.**\n\nAdds existing recipients to a list, passing in the recipient IDs to add. Recipient IDs should be passed exactly as they are returned from recipient endpoints.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "example": [
+                                1,
+                                2
+                            ]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"list_id\" : \"Returned if list_id is not a valid integer\"\n\"\" : \"Returned if no valid recipient ids were passed\"\n\"\" : \"Returned if no recipients were added\"\n\"\" : \"Returned if request body is invalid JSON\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "list_id is invalid"
+                                            },
+                                            {
+                                                "field": "recipient_id",
+                                                "message": "no valid recipients were provided"
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "no recipients were added"
+                                            },
+                                            {
+                                                "field": null,
+                                                "message": "request body is invalid JSON"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"list_id\": \"Returned if list_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "list_id does not exist"
+                                            },
+                                            {
+                                                "field": "recipient_id",
+                                                "message": "recipient_id does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "contactdb_lists_{list_id}_recipients_{recipient_id}": {
+        "parameters": [
+            {
+                "name": "list_id",
+                "in": "path",
+                "description": "The ID of the list that you want to add the recipient to.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            {
+                "name": "recipient_id",
+                "in": "path",
+                "description": "The ID of the recipient you are adding to the list.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_contactdb-lists-list_id-recipients-recipient_id",
+            "summary": "Add a Single Recipient to a List",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to add a single recipient to a list.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"list_id\" : \"Returned if list_id is invalid\"\n\"recipient_id\" : \"Returned if recipient_id is invalid\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "Returned if list_id is invalid"
+                                            },
+                                            {
+                                                "field": "recipient_id",
+                                                "message": "Returned if recipient_id is invalid"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"list_id\" : \"Returned if list_id does not exist\"\n\"recipient_id\" : \"Returned if recipient_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "Returned if list_id does not exist"
+                                            },
+                                            {
+                                                "field": "recipient_id",
+                                                "message": "Returned if recipient_id does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_contactdb-lists-list_id-recipients-recipient_id",
+            "summary": "Delete a Single Recipient from a Single List",
+            "tags": [
+                "Contacts API - Lists"
+            ],
+            "description": "**This endpoint allows you to delete a single recipient from a list.**",
+            "parameters": [
+                {
+                    "name": "list_id",
+                    "in": "query",
+                    "description": "The ID of the list you are taking this recipient away from.",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "recipient_id",
+                    "in": "query",
+                    "description": "The ID of the recipient to take off the list.",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/DELETE_contactdb-lists-list_idBody"
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"list_id\" : \"Returned if list_id is not valid\"\n\"recipient_id\" : \"Returned if recipient_id is not valid\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "Returned if list_id is invalid"
+                                            },
+                                            {
+                                                "field": "recipient_id",
+                                                "message": "no valid recipients were provided"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"list_id\" : \"Returned if list_id does not exist\"\n\"recipient_id\" : \"Returned if recipient_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "list_id",
+                                                "message": "Returned if list_id does not exist"
+                                            },
+                                            {
+                                                "field": "recipient_id",
+                                                "message": "Returned if recipient_id does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

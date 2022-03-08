@@ -1,0 +1,206 @@
+{
+    "validations_email": {
+        "post": {
+            "operationId": "POST_validations-email",
+            "summary": "Validate an email",
+            "tags": [
+                "Email Address Validation"
+            ],
+            "description": "**This endpoint allows you to validate an email address.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "description": "The email address that you want to validate."
+                                },
+                                "source": {
+                                    "type": "string",
+                                    "description": "A one-word classifier for where this validation originated."
+                                }
+                            },
+                            "required": [
+                                "email"
+                            ],
+                            "example": {
+                                "email": "example@example.com",
+                                "source": "signup"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "object",
+                                        "required": [
+                                            "email",
+                                            "verdict",
+                                            "score",
+                                            "local",
+                                            "host",
+                                            "checks",
+                                            "ip_address"
+                                        ],
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "description": "The email being validated",
+                                                "format": "email"
+                                            },
+                                            "verdict": {
+                                                "type": "string",
+                                                "description": "A generic classification of whether or not the email address is valid.",
+                                                "enum": [
+                                                    "Valid",
+                                                    "Risky",
+                                                    "Invalid"
+                                                ]
+                                            },
+                                            "score": {
+                                                "type": "number",
+                                                "description": "A numeric representation of the email validity."
+                                            },
+                                            "local": {
+                                                "type": "string",
+                                                "description": "The local part of the email address."
+                                            },
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The domain of the email address.",
+                                                "format": "hostname"
+                                            },
+                                            "suggestion": {
+                                                "type": "string",
+                                                "description": "A suggested correction in the event of domain name typos (e.g., gmial.com)"
+                                            },
+                                            "checks": {
+                                                "type": "object",
+                                                "description": "Granular checks for email address validity.",
+                                                "required": [
+                                                    "domain",
+                                                    "local_part",
+                                                    "additional"
+                                                ],
+                                                "properties": {
+                                                    "domain": {
+                                                        "type": "object",
+                                                        "description": "Checks on the domain portion of the email address.",
+                                                        "required": [
+                                                            "has_valid_address_syntax",
+                                                            "has_mx_or_a_record",
+                                                            "is_suspected_disposable_address"
+                                                        ],
+                                                        "properties": {
+                                                            "has_valid_address_syntax": {
+                                                                "type": "boolean",
+                                                                "description": "Whether the email address syntax is valid."
+                                                            },
+                                                            "has_mx_or_a_record": {
+                                                                "type": "boolean",
+                                                                "description": "Whether the email has appropriate DNS records to deliver a message. "
+                                                            },
+                                                            "is_suspected_disposable_address": {
+                                                                "type": "boolean",
+                                                                "description": "Whether the domain appears to be from a disposable email address service."
+                                                            }
+                                                        }
+                                                    },
+                                                    "local_part": {
+                                                        "type": "object",
+                                                        "description": "Checks on the local part of the email address.",
+                                                        "required": [
+                                                            "is_suspected_role_address"
+                                                        ],
+                                                        "properties": {
+                                                            "is_suspected_role_address": {
+                                                                "type": "boolean",
+                                                                "description": "Whether the local part of email appears to be a role or group (e.g., hr, admin)"
+                                                            }
+                                                        }
+                                                    },
+                                                    "additional": {
+                                                        "type": "object",
+                                                        "description": "Additional checks on the email address.",
+                                                        "required": [
+                                                            "has_known_bounces",
+                                                            "has_suspected_bounces"
+                                                        ],
+                                                        "properties": {
+                                                            "has_known_bounces": {
+                                                                "type": "boolean",
+                                                                "description": "WHether email sent to this address from your account has bounced."
+                                                            },
+                                                            "has_suspected_bounces": {
+                                                                "type": "boolean",
+                                                                "description": "Whether our model predicts that the email address might bounce."
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "source": {
+                                                "type": "string",
+                                                "description": "The source of the validation, as per the API request."
+                                            },
+                                            "ip_address": {
+                                                "type": "string",
+                                                "description": "The IP address associated with this email."
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "result"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": {
+                                            "email": "cedric@fogowl.com",
+                                            "verdict": "Valid",
+                                            "score": 0.85021,
+                                            "local": "cedric",
+                                            "host": "fogowl.com",
+                                            "checks": {
+                                                "domain": {
+                                                    "has_valid_address_syntax": true,
+                                                    "has_mx_or_a_record": true,
+                                                    "is_suspected_disposable_address": false
+                                                },
+                                                "local_part": {
+                                                    "is_suspected_role_address": false
+                                                },
+                                                "additional": {
+                                                    "has_known_bounces": false,
+                                                    "has_suspected_bounces": false
+                                                }
+                                            },
+                                            "ip_address": "192.168.1.1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

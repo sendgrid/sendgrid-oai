@@ -1,0 +1,113 @@
+{
+    "user_settings_enforced_tls": {
+        "get": {
+            "operationId": "GET_user-settings-enforced_tls",
+            "summary": "Retrieve current Enforced TLS settings.",
+            "tags": [
+                "Settings - Enforced TLS"
+            ],
+            "description": "**This endpoint allows you to retrieve your current Enforced TLS settings.**\n\nThe Enforced TLS settings specify whether or not the recipient is required to support TLS or have a valid certificate.\n\nIf either `require_tls` or `require_valid_cert` is set to `true`, the recipient must support TLS 1.1 or higher or have a valid certificate. If these conditions are not met, Twilio SendGrid will drop the message and send a block event with \u201cTLS required but not supported\u201d as the description.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/enforced-tls-request-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "require_tls": false,
+                                        "require_valid_cert": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_user-settings-enforced_tls",
+            "summary": "Update Enforced TLS settings",
+            "tags": [
+                "Settings - Enforced TLS"
+            ],
+            "description": "**This endpoint allows you to update your Enforced TLS settings.**\n\nTo require TLS from recipients, set `require_tls` to `true`. If either `require_tls` or `require_valid_cert` is set to `true`, the recipient must support TLS 1.1 or higher or have a valid certificate. If these conditions are not met, Twilio SendGrid will drop the message and send a block event with \u201cTLS required but not supported\u201d as the description.\n\n> Twilio SendGrid supports TLS 1.1 and higher and does not support older versions of TLS due to security vulnerabilities.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/enforced-tls-request-response"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/enforced-tls-request-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "require_tls": true,
+                                        "require_valid_cert": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_globalErrors_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

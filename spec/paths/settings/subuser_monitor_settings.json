@@ -1,0 +1,318 @@
+{
+    "subusers_{subuser_name}_monitor": {
+        "parameters": [
+            {
+                "name": "subuser_name",
+                "in": "path",
+                "description": "The name of the subuser for which to retrieve monitor settings.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_subusers-subuser_name-monitor",
+            "summary": "Retrieve monitor settings for a subuser",
+            "tags": [
+                "Subuser Monitor Settings"
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/monitor"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "email": "example@example.com",
+                                        "frequency": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "No monitor settings for this user"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "post": {
+            "operationId": "POST_subusers-subuser_name-monitor",
+            "summary": "Create monitor settings",
+            "tags": [
+                "Subuser Monitor Settings"
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/monitor"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/monitor"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "email": "example@example.com",
+                                        "frequency": 50000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "User already has a monitor"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "put": {
+            "operationId": "PUT_subusers-subuser_name-monitor",
+            "summary": "Update Monitor Settings for a subuser",
+            "tags": [
+                "Subuser Monitor Settings"
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/monitor"
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/monitor"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "email": "example@example.com",
+                                        "frequency": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "email",
+                                                "message": "Email is required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_subusers-subuser_name-monitor",
+            "summary": "Delete monitor settings",
+            "tags": [
+                "Subuser Monitor Settings"
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "No monitor settings for this user"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

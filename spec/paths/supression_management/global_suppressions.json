@@ -1,0 +1,247 @@
+{
+    "asm_suppressions_global": {
+        "post": {
+            "operationId": "POST_asm-suppressions-global",
+            "summary": "Add recipient addresses to the global suppression group.",
+            "tags": [
+                "Suppressions - Global Suppressions"
+            ],
+            "description": "**This endpoint allows you to add one or more email addresses to the global suppressions group.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/suppressions-request"
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "recipient_emails": {
+                                        "type": "array",
+                                        "description": "The email addresses that are globally suppressed",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "email"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "recipient_emails"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "recipient_emails": [
+                                            "test1@example.com",
+                                            "test2@example.com"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "suppression_unsubscribes": {
+        "get": {
+            "operationId": "GET_suppression-unsubscribes",
+            "summary": "Retrieve all global suppressions",
+            "tags": [
+                "Suppressions - Global Suppressions"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all email address that are globally suppressed.**",
+            "parameters": [
+                {
+                    "name": "start_time",
+                    "in": "query",
+                    "description": "Refers start of the time range in unix timestamp when an unsubscribe email was created (inclusive).",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "end_time",
+                    "in": "query",
+                    "description": "Refers end of the time range in unix timestamp when an unsubscribe email was created (inclusive).",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "The number of results to display on each page.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The point in the list of results to begin displaying global suppressions.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "created": {
+                                            "type": "integer",
+                                            "description": "A Unix timestamp indicating when the recipient was added to the global suppression list."
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "description": "The email address of the recipient who is globally suppressed.",
+                                            "format": "email"
+                                        }
+                                    },
+                                    "required": [
+                                        "created",
+                                        "email"
+                                    ]
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1443651141,
+                                            "email": "user1@example.com"
+                                        },
+                                        {
+                                            "created": 1443651154,
+                                            "email": "user2@example.com"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "asm_suppressions_global_{email}": {
+        "parameters": [
+            {
+                "name": "email",
+                "in": "path",
+                "description": "The email address of the global suppression you want to retrieve. Or, if you want to check if an email address is on the global suppressions list, enter that email address here.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_asm-suppressions-global-email",
+            "summary": "Retrieve a Global Suppression",
+            "tags": [
+                "Suppressions - Global Suppressions"
+            ],
+            "description": "**This endpoint allows you to retrieve a global suppression. You can also use this endpoint to confirm if an email address is already globally suppresed.**\n\nIf the email address you include in the URL path parameter `{email}` is already globally suppressed, the response will include that email address. If the address you enter for `{email}` is not globally suppressed, an empty JSON object `{}` will be returned.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "Retrieve a Global Suppression response",
+                                "type": "object",
+                                "properties": {
+                                    "recipient_email": {
+                                        "type": "string",
+                                        "description": "The email address that is globally suppressed. This will be an empty object if the email address you included in your call is not globally suppressed.",
+                                        "format": "email"
+                                    }
+                                },
+                                "required": [
+                                    "recipient_email"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "recipient_email": "test@example.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_asm-suppressions-global-email",
+            "summary": "Delete a Global Suppression",
+            "tags": [
+                "Suppressions - Global Suppressions"
+            ],
+            "description": "**This endpoint allows you to remove an email address from the global suppressions group.**\n\nDeleting a suppression group will remove the suppression, meaning email will once again be sent to the previously suppressed addresses. This should be avoided unless a recipient indicates they wish to receive email from you again. You can use our [bypass filters](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) to deliver messages to otherwise suppressed addresses when exceptions are required.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

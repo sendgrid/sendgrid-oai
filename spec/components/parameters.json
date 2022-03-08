@@ -1,0 +1,273 @@
+{
+    "trait_onBehalfOfSubuser_on-behalf-of": {
+        "name": "on-behalf-of",
+        "in": "header",
+        "schema": {
+            "type": "string",
+            "default": "The subuser's username. This header generates the API call as if the subuser account was making the call."
+        }
+    },
+    "trait_baseParams_aggregated_by": {
+        "name": "aggregated_by",
+        "in": "query",
+        "description": "Dictates how the stats are time-sliced. Currently, `\"total\"` and `\"day\"` are supported.",
+        "schema": {
+            "type": "string",
+            "enum": [
+                "day",
+                "total"
+            ],
+            "default": "total"
+        }
+    },
+    "trait_baseParams_start_date": {
+        "name": "start_date",
+        "in": "query",
+        "description": "Format: `YYYY-MM-DD`. If this parameter is included, the stats' start date is included in the search.",
+        "schema": {
+            "type": "string",
+            "format": "date",
+            "default": "2021-01-01"
+        }
+    },
+    "trait_baseParams_end_date": {
+        "name": "end_date",
+        "in": "query",
+        "description": "Format: `YYYY-MM-DD`.If this parameter is included, the stats' end date is included in the search.",
+        "schema": {
+            "type": "string",
+            "format": "date",
+            "default": "2021-12-31"
+        }
+    },
+    "trait_baseParams_timezone": {
+        "name": "timezone",
+        "in": "query",
+        "description": "[IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented, e.g., \"America/Chicago\".",
+        "schema": {
+            "type": "string",
+            "default": "UTC"
+        }
+    },
+    "trait_pagination_page_size": {
+        "name": "page_size",
+        "in": "query",
+        "description": "The number of elements you want returned on each page.",
+        "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+        }
+    },
+    "trait_pagination_page_token": {
+        "name": "page_token",
+        "in": "query",
+        "description": "The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.",
+        "schema": {
+            "type": "string"
+        }
+    },
+    "trait_singlesendQueryParams_group_by": {
+        "name": "group_by",
+        "in": "query",
+        "description": "A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.",
+        "style": "form",
+        "explode": false,
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "ab_variation",
+                    "ab_phase"
+                ]
+            }
+        }
+    },
+    "trait_automationQueryParams_group_by": {
+        "name": "group_by",
+        "in": "query",
+        "description": "Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.",
+        "style": "form",
+        "explode": false,
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "step_id"
+                ]
+            }
+        }
+    },
+    "trait_automationQueryParams_step_ids": {
+        "name": "step_ids",
+        "in": "query",
+        "description": "Comma-separated list of `step_ids` that you want the link stats for.",
+        "style": "form",
+        "explode": false,
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "uniqueItems": true
+        }
+    },
+    "trait_singlesendQueryParams2_group_by": {
+        "name": "group_by",
+        "in": "query",
+        "description": "A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.",
+        "style": "form",
+        "explode": false,
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "ab_variation",
+                    "ab_phase"
+                ]
+            }
+        }
+    },
+    "trait_singlesendQueryParams2_ab_variation_id": {
+        "name": "ab_variation_id",
+        "in": "query",
+        "schema": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "trait_singlesendQueryParams2_ab_phase_id": {
+        "name": "ab_phase_id",
+        "in": "query",
+        "schema": {
+            "type": "string",
+            "enum": [
+                "test",
+                "send"
+            ]
+        }
+    },
+    "trait_statsAdvancedStatsBaseQueryStrings_start_date": {
+        "name": "start_date",
+        "in": "query",
+        "description": "The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.",
+        "required": true,
+        "schema": {
+            "type": "string"
+        }
+    },
+    "trait_statsAdvancedStatsBaseQueryStrings_end_date": {
+        "name": "end_date",
+        "in": "query",
+        "description": "The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.",
+        "required": false,
+        "schema": {
+            "type": "string"
+        }
+    },
+    "trait_statsAdvancedStatsBaseQueryStrings_aggregated_by": {
+        "name": "aggregated_by",
+        "in": "query",
+        "description": "How to group the statistics. Must be either \"day\", \"week\", or \"month\".",
+        "required": false,
+        "schema": {
+            "type": "string",
+            "enum": [
+                "day",
+                "week",
+                "month"
+            ]
+        }
+    },
+    "trait_statsAdvancedQueryStringsLimitOffset_limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "The number of results to return.",
+        "required": false,
+        "schema": {
+            "type": "integer"
+        }
+    },
+    "trait_statsAdvancedQueryStringsLimitOffset_offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "The point in the list to begin retrieving results.",
+        "required": false,
+        "schema": {
+            "type": "integer"
+        }
+    },
+    "trait_statsAdvancedQueryStringsLimitOffset_aggregated_by": {
+        "name": "aggregated_by",
+        "in": "query",
+        "description": "How to group the statistics. Must be either \"day\", \"week\", or \"month\".",
+        "required": false,
+        "schema": {
+            "type": "string",
+            "enum": [
+                "day",
+                "week",
+                "month"
+            ]
+        }
+    },
+    "trait_statsAdvancedQueryStringsLimitOffset_start_date": {
+        "name": "start_date",
+        "in": "query",
+        "description": "The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.",
+        "required": true,
+        "schema": {
+            "type": "string"
+        }
+    },
+    "trait_statsAdvancedQueryStringsLimitOffset_end_date": {
+        "name": "end_date",
+        "in": "query",
+        "description": "The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.",
+        "required": false,
+        "schema": {
+            "type": "string"
+        }
+    },
+    "trait_designsQueryStrings_page_size": {
+        "name": "page_size",
+        "in": "query",
+        "description": "number of results to return",
+        "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 100
+        }
+    },
+    "trait_designsQueryStrings_page_token": {
+        "name": "page_token",
+        "in": "query",
+        "description": "token corresponding to a specific page of results, as provided by metadata",
+        "schema": {
+            "type": "string"
+        }
+    },
+    "trait_designsQueryStrings_summary": {
+        "name": "summary",
+        "in": "query",
+        "description": "set to false to return all fields",
+        "schema": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "trait_authorizationHeader_Authorization": {
+        "name": "Authorization",
+        "in": "header",
+        "required": true,
+        "schema": {
+            "type": "string",
+            "default": "Bearer <<YOUR_API_KEY_HERE>>"
+        }
+    }
+}

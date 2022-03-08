@@ -19,6 +19,7 @@ Closes #2
 A short description of what this PR does.
 
 ### Checklist
+
 - [x] I acknowledge that all my contributions will be made under the project's license
 - [ ] I have made a material change to the repo (functionality, testing, spelling, grammar)
 - [ ] I have read the [Contribution Guidelines](https://github.com/sendgrid/sendgrid-oai/blob/main/CONTRIBUTING.md) and my PR follows them

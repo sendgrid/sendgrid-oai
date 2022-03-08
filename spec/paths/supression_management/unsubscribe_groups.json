@@ -1,0 +1,305 @@
+{
+    "asm_groups": {
+        "post": {
+            "operationId": "POST_asm-groups",
+            "summary": "Create a new suppression group",
+            "tags": [
+                "Suppressions - Unsubscribe Groups"
+            ],
+            "description": "**This endpoint allows you to create a new suppression group.**\n\nTo add an email address to the suppression group, [create a Suppression](https://sendgrid.api-docs.io/v3.0/suppressions-suppressions/add-suppressions-to-a-suppression-group).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/suppression-group-request-base"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "The ID of the suppression group."
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the suppression group."
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "A brief description of the suppression group."
+                                    },
+                                    "is_default": {
+                                        "type": "boolean",
+                                        "description": "Indicates if this is the default suppression group."
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "name",
+                                    "description",
+                                    "is_default"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 103,
+                                        "name": "Product Suggestions",
+                                        "description": "Suggestions for products our users might like.",
+                                        "is_default": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_asm-groups",
+            "summary": "Retrieve all suppression groups associated with the user.",
+            "tags": [
+                "Suppressions - Unsubscribe Groups"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all suppression groups created by this user.**\n\nThis endpoint can also return information for multiple group IDs that you include in your request. To add a group ID to your request, simply append `?id=123456&id=123456`, with the appropriate group IDs.",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/suppression_group"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "id": 1234,
+                                            "name": "Unsubscribe Group",
+                                            "description": "An Unsubscribe Group",
+                                            "last_email_sent_at": null,
+                                            "is_default": true,
+                                            "unsubscribes": 1234
+                                        },
+                                        {
+                                            "id": 1234,
+                                            "name": "Unsubscribe Group",
+                                            "description": "An Unsubscribe Group",
+                                            "last_email_sent_at": null,
+                                            "is_default": true,
+                                            "unsubscribes": 1234
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "asm_groups_{group_id}": {
+        "parameters": [
+            {
+                "name": "group_id",
+                "in": "path",
+                "description": "The ID of the suppression group you would like to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_asm-groups-group_id",
+            "summary": "Get information on a single suppression group.",
+            "tags": [
+                "Suppressions - Unsubscribe Groups"
+            ],
+            "description": "**This endpoint allows you to retrieve a single suppression group.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "../../components/schemas.json#/suppression-group-request-base"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "description": "The ID of the suppression group."
+                                            },
+                                            "unsubscribes": {
+                                                "type": "integer",
+                                                "description": "The number of unsubscribes, or suppressions, in this group."
+                                            },
+                                            "last_email_sent_at": {
+                                                "nullable": true,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "description": "Our monthly newsletter.",
+                                        "id": 100,
+                                        "is_default": true,
+                                        "last_email_sent_at": null,
+                                        "name": "Newsletters",
+                                        "unsubscribes": 400
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_asm-groups-group_id",
+            "summary": "Update a suppression group.",
+            "tags": [
+                "Suppressions - Unsubscribe Groups"
+            ],
+            "description": "**This endpoint allows you to update or change a suppression group.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "../../components/schemas.json#/suppression-group-request-base"
+                                }
+                            ],
+                            "example": {
+                                "id": 103,
+                                "name": "Item Suggestions",
+                                "description": "Suggestions for items our users might like."
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/suppression_group"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 103,
+                                        "name": "Item Suggestions",
+                                        "description": "Suggestions for items our users might like."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_asm-groups-group_id",
+            "summary": "Delete a Suppression Group",
+            "tags": [
+                "Suppressions - Unsubscribe Groups"
+            ],
+            "description": "**This endpoint allows you to delete a suppression group.**\n\nIf a recipient uses the \"one-click unsubscribe\" option on an email associated with a deleted group, that recipient will be added to the global suppression list.\n\nDeleting a suppression group will remove the suppression, meaning email will once again be sent to the previously suppressed addresses. This should be avoided unless a recipient indicates they wish to receive email from you again. You can use our [bypass filters](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) to deliver messages to otherwise suppressed addresses when exceptions are required.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

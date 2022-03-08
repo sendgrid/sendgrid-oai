@@ -1,0 +1,547 @@
+{
+    "ips_pools": {
+        "post": {
+            "operationId": "POST_ips-pools",
+            "summary": "Create an IP pool",
+            "tags": [
+                "IP Pools"
+            ],
+            "description": "**This endpoint allows you to create an IP pool.**\n\nBefore you can create an IP pool, you need to activate the IP in your SendGrid account: \n\n1. Log into your SendGrid account.  \n1. Navigate to **Settings** and then select **IP Addresses**.  \n1. Find the IP address you want to activate and then click **Edit**.  \n1. Check **Allow my account to send mail using this IP address**.\n1. Click **Save**.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name of your new IP pool.",
+                                    "maxLength": 64
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "marketing"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/ip_pool_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "name": "marketing"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_ips-pools",
+            "summary": "Retrieve all IP pools",
+            "tags": [
+                "IP Pools"
+            ],
+            "description": "**This endpoint allows you to get all of your IP pools.**",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../../components/schemas.json#/ip_pool_response"
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "name": "marketing"
+                                        },
+                                        {
+                                            "name": "transactional"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "ips_pools_{pool_name}_ips": {
+        "parameters": [
+            {
+                "name": "pool_name",
+                "in": "path",
+                "description": "The name of the IP pool you want to add the address to. If the name contains spaces, they must be URL encoded (e.g., \"Test Pool\" becomes \"Test%20Pool\").",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "post": {
+            "operationId": "POST_ips-pools-pool_name-ips",
+            "summary": "Add an IP address to a pool",
+            "tags": [
+                "IP Pools"
+            ],
+            "description": "**This endpoint allows you to add an IP address to an IP pool.**\n\nYou can add the same IP address to multiple pools. It may take up to 60 seconds for your IP address to be added to a pool after your request is made.\n\nBefore you can add an IP to a pool, you need to activate it in your SendGrid account:\n\n1. Log into your SendGrid account.  \n1. Navigate to **Settings** and then select **IP Addresses**.  \n1. Find the IP address you want to activate and then click **Edit**.  \n1. Check **Allow my account to send mail using this IP address**.\n1. Click **Save**.\n\nYou can retrieve all of your available IP addresses from the \"Retrieve all IP addresses\" endpoint.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ip": {
+                                    "type": "string",
+                                    "description": "The IP address that you want to add to the named pool."
+                                }
+                            },
+                            "example": {
+                                "ip": "0.0.0.0"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ip": {
+                                        "type": "string",
+                                        "description": "The IP address."
+                                    },
+                                    "pools": {
+                                        "type": "array",
+                                        "description": "The IP pools that this IP address has been added to.",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "start_date": {
+                                        "type": "integer",
+                                        "description": "A Unix timestamp indicating when the warmup process began for the added IP address."
+                                    },
+                                    "warmup": {
+                                        "type": "boolean",
+                                        "description": "Indicates if the IP address is in warmup."
+                                    }
+                                },
+                                "required": [
+                                    "ip",
+                                    "pools",
+                                    "start_date",
+                                    "warmup"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "ip": "000.00.00.0",
+                                        "pools": [
+                                            "test1"
+                                        ],
+                                        "start_date": 1409616000,
+                                        "warmup": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "description": "The error returned.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message explaining why the IP address could not be added to the IP Pool."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "resource not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "ips_pools_{pool_name}": {
+        "parameters": [
+            {
+                "name": "pool_name",
+                "in": "path",
+                "description": "The name of the IP pool that you want to retrieve the IP addresses for.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_ips-pools-pool_name",
+            "summary": "Retrieve all the IPs in a specified pool",
+            "tags": [
+                "IP Pools"
+            ],
+            "description": "**This endpoint allows you to get all of the IP addresses that are in a specific IP pool.**",
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "pool_name": {
+                                        "type": "string",
+                                        "description": "The name of the IP pool.",
+                                        "maxLength": 64
+                                    },
+                                    "ips": {
+                                        "description": "The IP addresses that belong to this pool.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "pool_name": "Sample",
+                                        "ips": [
+                                            "192.168.1.1",
+                                            "192.158.1.2",
+                                            "192.138.2.1"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string",
+                                                    "description": "The name of the error."
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message explaining why the IP addresses could not be listed."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "error",
+                                                "message": "Unable to locate specified IPs Pool"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "put": {
+            "operationId": "PUT_ips-pools-pool_name",
+            "summary": "Rename an IP pool",
+            "tags": [
+                "IP Pools"
+            ],
+            "description": "**This endpoint allows you to update the name of an IP pool.**",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The new name for your IP pool.",
+                                    "maxLength": 64
+                                }
+                            },
+                            "example": {
+                                "name": "new_pool_name"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/ip_pool_response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "name": "new_pool_name"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "A message explaining why the name of your IP pool could not be updated."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "ip pool not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_ips-pools-pool_name",
+            "summary": "Delete an IP pool",
+            "tags": [
+                "IP Pools"
+            ],
+            "description": "**This endpoint allows you to delete an IP pool.**",
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "error": {
+                                        "type": "string",
+                                        "description": "An error explaining why the pool could not be deleted."
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "error": "Unable to locate specified IPs Pool"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "ips_pools_{pool_name}_ips_{ip}": {
+        "parameters": [
+            {
+                "name": "pool_name",
+                "in": "path",
+                "description": "The name of the IP pool that you are removing the IP address from.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            {
+                "name": "ip",
+                "in": "path",
+                "description": "The IP address that you wish to remove.",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "delete": {
+            "operationId": "DELETE_ips-pools-pool_name-ips-ip",
+            "summary": "Remove an IP address from a pool",
+            "tags": [
+                "IP Pools"
+            ],
+            "description": "**This endpoint allows you to remove an IP address from an IP pool.**",
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "error": {
+                                        "type": "string",
+                                        "description": "An error explaining why the IP address could not be removed from the IP pool."
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "error": "Unable to locate specified IPs Pool"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

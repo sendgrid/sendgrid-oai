@@ -1,0 +1,423 @@
+{
+    "trait_errorResponse_400": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_pagination_200": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "_metadata": {
+                            "$ref": "./schemas.json#/metadata"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_mailSendErrors_400": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_mailSendErrors_413": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_globalErrors_401": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_globalErrors_403": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_globalErrors_404": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_globalErrors_500": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_cancelScheduledSendsErrors_400": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "field": {
+                                        "type": "string"
+                                    },
+                                    "help": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        },
+                        "id": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_apiKeysErrors_400": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_apiKeysErrors_403": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_apiKeysErrors_404": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/global_error_response_schema"
+                }
+            }
+        }
+    },
+    "trait_makoErrorResponse_400": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "error_id": {
+                                        "type": "string",
+                                        "description": "The ID associated with the error."
+                                    },
+                                    "field": {
+                                        "description": "The field that generated the error.",
+                                        "nullable": true,
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "The error message."
+                                    },
+                                    "parameter": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_makoErrorResponse_401": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "error_id": {
+                                        "type": "string",
+                                        "description": "The ID associated with the error."
+                                    },
+                                    "field": {
+                                        "description": "The field that generated the error.",
+                                        "nullable": true,
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "The error message."
+                                    },
+                                    "parameter": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_makoErrorResponse_403": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "error_id": {
+                                        "type": "string",
+                                        "description": "The ID associated with the error."
+                                    },
+                                    "field": {
+                                        "description": "The field that generated the error.",
+                                        "nullable": true,
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "The error message."
+                                    },
+                                    "parameter": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_makoErrorResponse_404": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "error_id": {
+                                        "type": "string",
+                                        "description": "The ID associated with the error."
+                                    },
+                                    "field": {
+                                        "description": "The field that generated the error.",
+                                        "nullable": true,
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "The error message."
+                                    },
+                                    "parameter": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_makoErrorResponse_500": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "error_id": {
+                                        "type": "string",
+                                        "description": "The ID associated with the error."
+                                    },
+                                    "field": {
+                                        "description": "The field that generated the error.",
+                                        "nullable": true,
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "The error message."
+                                    },
+                                    "parameter": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "trait_singleSignOnErrorsTrait_400": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/sso-error-response"
+                }
+            }
+        }
+    },
+    "trait_singleSignOnErrorsTrait_401": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/sso-error-response"
+                }
+            }
+        }
+    },
+    "trait_singleSignOnErrorsTrait_403": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/sso-error-response"
+                }
+            }
+        }
+    },
+    "trait_singleSignOnErrorsTrait_429": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/sso-error-response"
+                }
+            }
+        }
+    },
+    "trait_singleSignOnErrorsTrait_500": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/sso-error-response"
+                }
+            }
+        }
+    },
+    "trait_errors_400": {
+        "description": "",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/errors-seg-v2"
+                }
+            }
+        }
+    },
+    "trait_errors_404": {
+        "description": ""
+    },
+    "trait_errors_500": {
+        "description": ""
+    }
+}

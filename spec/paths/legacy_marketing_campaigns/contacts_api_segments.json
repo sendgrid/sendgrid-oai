@@ -1,0 +1,815 @@
+{
+    "contactdb_segments": {
+        "post": {
+            "operationId": "POST_contactdb-segments",
+            "summary": "Create a Segment",
+            "tags": [
+                "Contacts API - Segments"
+            ],
+            "description": "**This endpoint allows you to create a new segment.**\n\n\n  Valid operators for create and update depend on the type of the field for which you are searching.\n\n**Dates**\n- \"eq\", \"ne\", \"lt\" (before), \"gt\" (after)\n    - You may use MM/DD/YYYY for day granularity or an epoch for second granularity.\n- \"empty\", \"not_empty\"\n- \"is within\"\n    - You may use an [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601) or the # of days.\n\n**Text**\n- \"contains\"\n- \"eq\" (is/equals - matches the full field)\n- \"ne\" (is not/not equals - matches any field where the entire field is not the condition value)\n- \"empty\"\n- \"not_empty\"\n\n**Numbers**\n- \"eq\" (is/equals)\n- \"lt\" (is less than)\n- \"gt\" (is greater than)\n- \"empty\"\n- \"not_empty\"\n\n**Email Clicks and Opens**\n- \"eq\" (opened)\n- \"ne\" (not opened)\n\nAll field values must be a string.\n\n\nConditions using \"eq\" or \"ne\" for email clicks and opens should provide a \"field\" of either `clicks.campaign_identifier` or `opens.campaign_identifier`.\nThe condition value should be a string containing the id of a completed campaign.\n\n\nThe conditions list may contain multiple conditions, joined by an \"and\" or \"or\" in the \"and_or\" field.\n\nThe first condition in the conditions list must have an empty \"and_or\", and subsequent conditions must all specify an \"and_or\".",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/contactdb_segments"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/contactdb_segments_with_id"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "name": "Last Name Miller",
+                                        "list_id": 4,
+                                        "conditions": [
+                                            {
+                                                "field": "last_name",
+                                                "value": "Miller",
+                                                "operator": "eq",
+                                                "and_or": ""
+                                            },
+                                            {
+                                                "field": "last_clicked",
+                                                "value": "01/02/2015",
+                                                "operator": "gt",
+                                                "and_or": "and"
+                                            },
+                                            {
+                                                "field": "clicks.campaign_identifier",
+                                                "value": "513",
+                                                "operator": "eq",
+                                                "and_or": "or"
+                                            }
+                                        ],
+                                        "recipient_count": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"name\" : \"Returned if the name is not valid\"\n\"list_id\" : \"Returned if the list_id is not valid\"\n\"and_or\" : \"Returned if and_or and set value is not passed into the request body\"\n\"and_or\" : \"Returned if and_or is set on the only condition passed\"\n\"and_or\" : \"Returned if and_or is set on all conditions\"\n\"and_or\" : \"Returned if and_or is not set on more than one condition and less than all conditions\"\n\"operator\" : \"Returned if operator and set value is not passed into the request body\"\n\"value\" : \"Returned if value and set value is not passed into the request body\"\n\"field\" : \"Returned if field and set value is not passed into the request body\"\n\"\" : \"Returned if request body is not valid json\"\n\"\" : \"Returned if invalid value is passed into one of the request body parameters\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "request body is not valid json"
+                                            },
+                                            {
+                                                "message": "invalid value is passed into one of the request body parameters"
+                                            },
+                                            {
+                                                "field": "field",
+                                                "message": "field and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "value",
+                                                "message": "value and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "operator",
+                                                "message": "operator and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or is not set on more than one condition and less than all conditions"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or is set on all conditions"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or is set on the only condition passed"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "list_id",
+                                                "message": "the list_id is not valid"
+                                            },
+                                            {
+                                                "field": "name",
+                                                "message": "the name is not valid"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_contactdb-segments",
+            "summary": "Retrieve all segments",
+            "tags": [
+                "Contacts API - Segments"
+            ],
+            "description": "**This endpoint allows you to retrieve all of your segments.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "List All Segments response",
+                                "type": "object",
+                                "properties": {
+                                    "segments": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/contactdb_segments"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "segments"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "segments": [
+                                            {
+                                                "id": 1234,
+                                                "name": "Age segments < 25",
+                                                "conditions": [
+                                                    {
+                                                        "field": "age",
+                                                        "value": "25",
+                                                        "operator": "lt"
+                                                    }
+                                                ],
+                                                "recipient_count": 8
+                                            },
+                                            {
+                                                "id": 2345,
+                                                "name": "email address - gmail",
+                                                "conditions": [
+                                                    {
+                                                        "field": "email",
+                                                        "value": "@gmail.com",
+                                                        "operator": "contains"
+                                                    }
+                                                ],
+                                                "recipient_count": 0
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "contactdb_segments_{segment_id}": {
+        "parameters": [
+            {
+                "name": "segment_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_contactdb-segments-segment_id",
+            "summary": "Retrieve a segment",
+            "tags": [
+                "Contacts API - Segments"
+            ],
+            "description": "**This endpoint allows you to retrieve a single segment with the given ID.**",
+            "parameters": [
+                {
+                    "name": "segment_id",
+                    "in": "query",
+                    "description": "The ID of the segment you want to request.",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/contactdb_segments"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 1,
+                                        "name": "Last Name Miller",
+                                        "list_id": 4,
+                                        "conditions": [
+                                            {
+                                                "field": "last_name",
+                                                "value": "Miller",
+                                                "operator": "eq",
+                                                "and_or": ""
+                                            }
+                                        ],
+                                        "recipient_count": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"segment_id\" : \"Returned if segment_id is not valid\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "if segment_id is not valid"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"segment_id\" : \"Returned if segment_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "segment_id not found"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_contactdb-segments-segment_id",
+            "summary": "Update a segment",
+            "tags": [
+                "Contacts API - Segments"
+            ],
+            "description": "**This endpoint allows you to update a segment.**",
+            "parameters": [
+                {
+                    "name": "segment_id",
+                    "in": "query",
+                    "description": "The ID of the segment you are updating.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "list_id": {
+                                    "type": "number",
+                                    "description": "The list ID you would like this segment to be built from."
+                                },
+                                "conditions": {
+                                    "type": "array",
+                                    "description": "The conditions by which this segment should be created.",
+                                    "items": {
+                                        "$ref": "../../components/schemas.json#/contactdb_segments_conditions"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "example": {
+                                "name": "The Millers",
+                                "list_id": 5,
+                                "conditions": [
+                                    {
+                                        "field": "last_name",
+                                        "value": "Miller",
+                                        "operator": "eq",
+                                        "and_or": ""
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/contactdb_segments"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "id": 5,
+                                        "name": "The Millers",
+                                        "list_id": 5,
+                                        "conditions": [
+                                            {
+                                                "field": "last_name",
+                                                "value": "Miller",
+                                                "operator": "eq",
+                                                "and_or": ""
+                                            }
+                                        ],
+                                        "recipient_count": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "request body is not valid json"
+                                            },
+                                            {
+                                                "message": "invalid value is passed into one of the request body parameters"
+                                            },
+                                            {
+                                                "segment_id": "segment_id",
+                                                "message": "segment id is not valid"
+                                            },
+                                            {
+                                                "field": "field",
+                                                "message": "field and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "value",
+                                                "message": "value and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "operator",
+                                                "message": "operator and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or is not set on more than one condition and less than all conditions"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or is set on all conditions"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or is set on the only condition passed"
+                                            },
+                                            {
+                                                "field": "and_or",
+                                                "message": "and_or and set value is not passed into the request body"
+                                            },
+                                            {
+                                                "field": "list_id",
+                                                "message": "the list_id is not valid"
+                                            },
+                                            {
+                                                "field": "name",
+                                                "message": "the name is not valid"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_contactdb-segments-segment_id",
+            "summary": "Delete a segment",
+            "tags": [
+                "Contacts API - Segments"
+            ],
+            "description": "**This endpoint allows you to delete a segment from your recipients database.**\n\nYou also have the option to delete all the contacts from your Marketing Campaigns recipient database who were in this segment.",
+            "parameters": [
+                {
+                    "name": "delete_contacts",
+                    "in": "query",
+                    "description": "True to delete all contacts matching the segment in addition to deleting the segment",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/DELETE_contactdb-lists-list_idBody"
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"segment_id\" : \"Returned if segment_id is not valid\"\n\"delete_contacts\" : \"Returned if delete_contacts is not a valid boolean\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "segment_id",
+                                                "message": "Returned if segment_id is not valid"
+                                            },
+                                            {
+                                                "field": "delete_contacts",
+                                                "message": "Returned if delete_contacts is not a valid boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"segment_id\" : \"Returned if segment_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "segment_id",
+                                                "message": "segment_id does not exist"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "contactdb_segments_{segment_id}_recipients": {
+        "parameters": [
+            {
+                "name": "segment_id",
+                "in": "path",
+                "description": "The ID of the segment from which you want to retrieve recipients.",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_contactdb-segments-segment_id-recipients",
+            "summary": "Retrieve recipients on a segment",
+            "tags": [
+                "Contacts API - Segments"
+            ],
+            "description": "**This endpoint allows you to retrieve all of the recipients in a segment with the given ID.**",
+            "parameters": [
+                {
+                    "name": "page",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "List Recipients On a Segment response",
+                                "type": "object",
+                                "properties": {
+                                    "recipients": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/contactdb_recipient"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "recipients"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "recipients": [
+                                            {
+                                                "created_at": 1422313607,
+                                                "email": "jones@example.com",
+                                                "first_name": null,
+                                                "id": "YUBh",
+                                                "last_clicked": null,
+                                                "last_emailed": null,
+                                                "last_name": "Jones",
+                                                "last_opened": null,
+                                                "updated_at": 1422313790,
+                                                "custom_fields": [
+                                                    {
+                                                        "id": 23,
+                                                        "name": "pet",
+                                                        "value": "Indiana",
+                                                        "type": "text"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "\"page\" : \"Returned if page is not a valid integer\"\n\"page\" : \"Returned if page is less than 1\"\n\"page_size\" : \"Returned if page_size is not a valid integer\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/global_error_response_schema"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": null,
+                                                "message": "authorization required"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "\"segment_id\" : \"Returned if segment_id is not valid\"\n\"segment_id\" : \"Returned if segment_id does not exist\"",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

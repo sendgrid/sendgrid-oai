@@ -1,0 +1,922 @@
+{
+    "mail_settings": {
+        "get": {
+            "operationId": "GET_mail_settings",
+            "summary": "Retrieve all mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to retrieve a list of all mail settings.**\n\nEach setting will be returned with an `enabled` status set to `true` or `false` and a short description that explains what the setting does.",
+            "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "The number of settings to return.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Where in the list of results to begin displaying settings.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "description": "The list of all mail settings.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "title": {
+                                                    "type": "string",
+                                                    "description": "The title of the mail setting."
+                                                },
+                                                "enabled": {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if this mail setting is currently enabled."
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "The name of the mail setting."
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "A description of the mail setting."
+                                                }
+                                            },
+                                            "required": [
+                                                "title",
+                                                "enabled",
+                                                "name",
+                                                "description"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "result"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "title": "Address Whitelist",
+                                                "enabled": false,
+                                                "name": "address_whitelist",
+                                                "description": "Address / domains that should never have email suppressed."
+                                            },
+                                            {
+                                                "title": "Bounce Purge",
+                                                "enabled": false,
+                                                "name": "bounce_purge",
+                                                "description": "Allows you to automatically purge bounce records from SendGrid after a specified number of days."
+                                            },
+                                            {
+                                                "title": "Event Notification",
+                                                "enabled": true,
+                                                "name": "event_notify",
+                                                "description": "Controls notifications for events, such as bounces, clicks, and opens."
+                                            },
+                                            {
+                                                "title": "Footer",
+                                                "enabled": false,
+                                                "name": "footer",
+                                                "description": "Allows you to add a custom footer to outgoing email."
+                                            },
+                                            {
+                                                "title": "Forward Bounce",
+                                                "enabled": true,
+                                                "name": "forward_bounce",
+                                                "description": "Allows you to forward bounces to a specific email address."
+                                            },
+                                            {
+                                                "title": "Forward Spam",
+                                                "enabled": false,
+                                                "name": "forward_spam",
+                                                "description": "Allows for a copy of spam reports to be forwarded to an email address."
+                                            },
+                                            {
+                                                "title": "Legacy Email Template",
+                                                "enabled": true,
+                                                "name": "template",
+                                                "description": "Allows you to customize your outgoing HTML emails."
+                                            },
+                                            {
+                                                "title": "Plain Content",
+                                                "enabled": false,
+                                                "name": "plain_content",
+                                                "description": "Convert your plain text emails to HTML."
+                                            },
+                                            {
+                                                "title": "Spam Checker",
+                                                "enabled": true,
+                                                "name": "spam_check",
+                                                "description": "Check outbound messages for spam content."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "mail_settings_address_whitelist": {
+        "patch": {
+            "operationId": "PATCH_mail_settings-address_whitelist",
+            "summary": "Update address whitelist mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to update your current email address whitelist settings.**\n\nYou can select whether or not this setting should be enabled by assigning the `enabled` field a `true` or `false` value.\n\nPassing only the `enabled` field to this endpoint will not alter your current `list` of whitelist entries. However, any modifications to your `list` of entries will overwrite the entire list. For this reason, you must included all existing entries you wish to retain in your `list` in addition to any new entries you intend to add. To remove one or more `list` entries, pass a `list` with only the entries you wish to retain.\n\nYou should not add generic domains such as `gmail.com` or `yahoo.com`  in your `list` because your emails will not honor recipients' unsubscribes. This may cause a legal violation of [CAN-SPAM](https://sendgrid.com/docs/glossary/can-spam/) and could damage your sending reputation.\n\nThe Address Whitelist setting allows you to specify email addresses or domains for which mail should never be suppressed.\n\nFor example, if you own the domain `example.com`, and one or more of your recipients use `email@example.com` addresses, placing `example.com` in the address whitelist setting instructs Twilio SendGrid to ignore all bounces, blocks, and unsubscribes logged for that domain. In other words, all bounces, blocks, and unsubscribes will still be sent to `example.com` as if they were sent under normal sending conditions.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "Indicates if your email address whitelist is enabled."
+                                },
+                                "list": {
+                                    "type": "array",
+                                    "description": "Either a single email address that you want whitelisted or a domain, for which all email addresses belonging to this domain will be whitelisted.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "enabled": true,
+                                "list": [
+                                    "email1@example.com",
+                                    "example.com"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_address_whitelabel"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "list": [
+                                            "email1@example.com"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_mail_settings-address_whitelist",
+            "summary": "Retrieve address whitelist mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to retrieve your current email address whitelist settings.**\n\nThe Address Whitelist setting allows you to specify email addresses or domains for which mail should never be suppressed.\n\nFor example, if you own the domain `example.com`, and one or more of your recipients use `email@example.com` addresses, placing `example.com` in the address whitelist setting instructs Twilio SendGrid to ignore all bounces, blocks, and unsubscribes logged for that domain. In other words, all bounces, blocks, and unsubscribes will still be sent to `example.com` as if they were sent under normal sending conditions.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_address_whitelabel"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "list": [
+                                            "example.com",
+                                            "jane_doe@example1.com"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "mail_settings_footer": {
+        "patch": {
+            "operationId": "PATCH_mail_settings-footer",
+            "summary": "Update footer mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to update your current Footer mail settings.**\n\nThe Footer setting will insert a custom footer at the bottom of your text and HTML email message bodies.\n\nYou can insert your HTML or plain text directly using this endpoint, or you can create the footer using the [Mail Settings menu in the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/mail_settings_footer"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_footer"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "html_content": "<p><a href=\"http://example.com\" target=\"_blank\">Ahoy, World!</a></p>\n",
+                                        "plain_content": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_mail_settings-footer",
+            "summary": "Retrieve footer mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to retrieve your current Footer mail settings.**\n\nThe Footer setting will insert a custom footer at the bottom of your text and HTML email message bodies.\n\nYou can insert your HTML or plain text directly using the \"Update footer mail settings\" endpoint, or you can create the footer using the [Mail Settings menu in the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_footer"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "html_content": "<p><a href=\"http://example.com\" target=\"_blank\">Ahoy, World!</a></p>\n",
+                                        "plain_content": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "mail_settings_forward_spam": {
+        "patch": {
+            "operationId": "PATCH_mail_settings-forward_spam",
+            "summary": "Update forward spam mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to update your current Forward Spam mail settings.**\n\nEnabling the Forward Spam setting allows you to specify `email` addresses to which spam reports will be forwarded. You can set multiple addresses by passing this endpoint a comma separated list of emails in a single string.\n\n```\n{\n  \"email\": \"address1@example.com, address2@exapmle.com\",\n  \"enabled\": true\n}\n```\n\nThe Forward Spam setting may also be used to receive emails sent to `abuse@` and `postmaster@` role addresses if you have authenticated your domain.\n\nFor example, if you authenticated `example.com` as your root domain and set a custom return path of `sub` for that domain, you could turn on Forward Spam, and any emails sent to `abuse@sub.example.com` or `postmaster@sub.example.com` would be forwarded to the email address you entered in the `email` field.\n\nYou can authenticate your domain using the \"Authenticate a domain\" endpoint or in the [Sender Authentication section of the Twilio SendGrid App](https://app.sendgrid.com/settings/sender_auth). You can also configure the Forward Spam mail settings in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/mail_settings_forward_spam"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_forward_spam"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "email": "abuse@example.com",
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_mail_settings-forward_spam",
+            "summary": "Retrieve forward spam mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to retrieve your current Forward Spam mail settings.**\n\nEnabling the Forward Spam setting allows you to specify `email` addresses to which spam reports will be forwarded. This endpoint returns any email address(es) you have set to receive forwarded spam and an `enabled` status indicating if the setting is active.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_forward_spam"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "email": "abuse@example.com",
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "mail_settings_template": {
+        "patch": {
+            "operationId": "PATCH_mail_settings-template",
+            "summary": "Update template mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to update your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [Dynamic Transactional Templates](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/).\n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages. For instructions on using legacy templates, see how to [\"Create and Edit Legacy Transactional Templates](https://sendgrid.com/docs/ui/sending-email/create-and-edit-legacy-transactional-templates/). For help migrating to our current template system, see [\"Migrating from Legacy Templates\"](https://sendgrid.com/docs/ui/sending-email/migrating-from-legacy-templates/).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "Indicates if you want to enable the legacy email template mail setting."
+                                },
+                                "html_content": {
+                                    "type": "string",
+                                    "description": "The new HTML content for your legacy email template."
+                                }
+                            },
+                            "example": {
+                                "enabled": true,
+                                "html_content": "<% body %>"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Indicates if the legacy email template mail setting is enabled."
+                                    },
+                                    "html_content": {
+                                        "type": "string",
+                                        "description": "The HTML content of your legacy email template."
+                                    }
+                                },
+                                "required": [
+                                    "enabled",
+                                    "html_content"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": false,
+                                        "html_content": "<p><% body %>Example</p>\n"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_mail_settings-template",
+            "summary": "Retrieve legacy template mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to retrieve your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [Dynamic Transactional Templates](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/).\n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages. For instructions on using legacy templates, see how to [\"Create and Edit Legacy Transactional Templates](https://sendgrid.com/docs/ui/sending-email/create-and-edit-legacy-transactional-templates/). For help migrating to our current template system, see [\"Migrating from Legacy Templates\"](https://sendgrid.com/docs/ui/sending-email/migrating-from-legacy-templates/).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_template"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": false,
+                                        "html_content": "<p><% body %>Example</p>\n"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "mail_settings_bounce_purge": {
+        "patch": {
+            "operationId": "PATCH_mail_settings-bounce_purge",
+            "summary": "Update bounce purge mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to update your current bounce and purge settings.**\n\nThe Bounce Perge setting allows you to set a schedule that Twilio SendGrid will use to automatically delete contacts from your soft and hard bounce suppression lists. The schedule is set in full days by assigning the number of days, an integer, to the `soft_bounces` and/or `hard_bounces` fields.\n\nA hard bounce occurs when an email message has been returned to the sender because the recipient's address is invalid. A hard bounce might occur because the domain name doesn't exist or because the recipient is unknown.\n\nA soft bounce occurs when an email message reaches the recipient's mail server but is bounced back undelivered before it actually reaches the recipient. A soft bounce might occur because the recipient's inbox is full.\n\nYou can also manage this setting in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings). You can manage your bounces manually using the [Bounces API](https://sendgrid.api-docs.io/v3.0/bounces-api) or the [Bounces menu in the Twilio SendGrid App](https://app.sendgrid.com/suppressions/bounces).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/mail_settings_bounce_purge"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_bounce_purge"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": false,
+                                        "hard_bounces": 5,
+                                        "soft_bounces": 5
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_mail_settings-bounce_purge",
+            "summary": "Retrieve bounce purge mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to retrieve your current bounce and purge settings.**\n\nThe Bounce Perge setting allows you to set a schedule that Twilio SendGrid will use to automatically delete contacts from your soft and hard bounce suppression lists.\n\nA hard bounce occurs when an email message has been returned to the sender because the recipient's address is invalid. A hard bounce might occur because the domain name doesn't exist or because the recipient is unknown.\n\nA soft bounce occurs when an email message reaches the recipient's mail server but is bounced back undelivered before it actually reaches the recipient. A soft bounce might occur because the recipient's inbox is full.\n\nYou can also manage this setting in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings). You can manage your bounces manually using the [Bounces API](https://sendgrid.api-docs.io/v3.0/bounces-api) or the [Bounces menu in the Twilio SendGrid App](https://app.sendgrid.com/suppressions/bounces).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_bounce_purge"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": false,
+                                        "soft_bounces": 5,
+                                        "hard_bounces": 5
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "mail_settings_forward_bounce": {
+        "patch": {
+            "operationId": "PATCH_mail_settings-forward_bounce",
+            "summary": "Update forward bounce mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to update your current bounce forwarding mail settings.**\n\nEnabling the Forward Bounce setting allows you to specify an `email` address to which bounce reports will be forwarded.\n\nYou can also configure the Forward Spam mail settings in the [Mail Settings section of the Twilio SendGrid App](https://app.sendgrid.com/settings/mail_settings).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/mail_settings_forward_bounce"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_forward_bounce"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "email": "bounces@example.com",
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "get": {
+            "operationId": "GET_mail_settings-forward_bounce",
+            "summary": "Retrieve forward bounce mail settings",
+            "tags": [
+                "Settings - Mail"
+            ],
+            "description": "**This endpoint allows you to retrieve your current bounce forwarding mail settings.**\n\nEnabling the Forward Bounce setting allows you to specify `email` addresses to which bounce reports will be forwarded. This endpoint returns the email address you have set to receive forwarded bounces and an `enabled` status indicating if the setting is active.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/mail_settings_forward_bounce"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "email": "bounces@example.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_404"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/trait_makoErrorResponse_500"
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}

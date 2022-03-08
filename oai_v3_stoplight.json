@@ -39489,7 +39489,7 @@
                         "url": "/alerts",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],
@@ -39523,7 +39523,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39559,7 +39559,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39599,7 +39599,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39627,7 +39627,7 @@
                 },
                 {
                     "id": "kuh6nzo9sAfXJeSzz",
-                    "name": "shitty response",
+                    "name": "Create an alert",
                     "capture": {},
                     "request": {
                         "authentication": {},
@@ -39636,14 +39636,14 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
                         "postData": {
                             "mimeType": "application/json",
                             "params": [],
-                            "text": "{\n  \"type\": \"bullshit\",\n  \"email_to\": \"example@example.com\",\n  \"frequency\": \"daily\"\n}"
+                            "text": "{\n  \"type\": \"stats_notification\",\n  \"email_to\": \"example@example.com\",\n  \"frequency\": \"daily\"\n}"
                         },
                         "valid": 2,
                         "transformed": false,
@@ -39689,14 +39689,14 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
                         "postData": {
                             "mimeType": "application/json",
                             "params": [],
-                            "text": "{\n  \"hostname\": \"manbearpig.com\",\n  \"url\": \"http://email.manbearpig.com\",\n  \"spam_check\": true,\n  \"send_raw\": false\n}"
+                            "text": "{\n  \"hostname\": \"example.com\",\n  \"url\": \"http://email.example.com\",\n  \"spam_check\": true,\n  \"send_raw\": false\n}"
                         },
                         "authentication": {},
                         "valid": 2,
@@ -39728,7 +39728,7 @@
                         "url": "/user/webhooks/parse/settings",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],
@@ -39766,7 +39766,7 @@
                         "url": "/user/webhooks/parse/settings/{hostname}",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],
@@ -39801,7 +39801,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39841,7 +39841,7 @@
                         "headers": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer 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"
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy"
                             }
                         ],
                         "queryString": [],
@@ -39883,7 +39883,7 @@
                         "url": "/user/webhooks/parse/settings/{hostname}",
                         "headers": [
                             {
-                                "value": "Bearer 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",
+                                "value": "Bearer SG.xxxxxxxx.yyyyyyyy",
                                 "name": "Authorization"
                             }
                         ],

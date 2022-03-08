@@ -1,0 +1,228 @@
+{
+    "suppression_spam_reports": {
+        "get": {
+            "operationId": "GET_suppression-spam_reports",
+            "summary": "Retrieve all spam reports",
+            "tags": [
+                "Spam Reports API"
+            ],
+            "description": "**This endpoint allows you to retrieve all spam reports.**",
+            "parameters": [
+                {
+                    "name": "start_time",
+                    "in": "query",
+                    "description": "The start of the time range when a spam report was created (inclusive). This is a unix timestamp.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "end_time",
+                    "in": "query",
+                    "description": "The end of the time range when a spam report was created (inclusive). This is a unix timestamp.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limit the number of results to be displayed per page.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "Paging offset. The point in the list to begin displaying results.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/spam-reports-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1443651141,
+                                            "email": "user1@example.com",
+                                            "ip": "10.63.202.100"
+                                        },
+                                        {
+                                            "created": 1443651154,
+                                            "email": "user2@example.com",
+                                            "ip": "10.63.202.100"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-spam_reports",
+            "summary": "Delete spam reports",
+            "tags": [
+                "Spam Reports API"
+            ],
+            "description": "**This endpoint allows you to delete your spam reports.**\n\nDeleting a spam report will remove the suppression, meaning email will once again be sent to the previously suppressed address. This should be avoided unless a recipient indicates they wish to receive email from you again. You can use our [bypass filters](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) to deliver messages to otherwise suppressed addresses when exceptions are required.\n\nThere are two options for deleting spam reports: \n\n1. You can delete all spam reports by setting the `delete_all` field to `true` in the request body.\n2. You can delete a list of select spam reports by specifying the email addresses in the `emails` array of the request body.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "delete_all": {
+                                    "type": "boolean",
+                                    "description": "Indicates if you want to delete all email addresses on the spam report list."
+                                },
+                                "emails": {
+                                    "type": "array",
+                                    "description": "A list of specific email addresses that you want to remove from the spam report list.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "delete_all": false,
+                                "emails": [
+                                    "example1@example.com",
+                                    "example2@example.com"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "suppression_spam_reports_{email}": {
+        "parameters": [
+            {
+                "name": "email",
+                "in": "path",
+                "description": "The email address of a specific spam report that you want to retrieve.",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "email"
+                }
+            }
+        ],
+        "get": {
+            "operationId": "GET_suppression-spam_reports-email",
+            "summary": "Retrieve a specific spam report",
+            "tags": [
+                "Spam Reports API"
+            ],
+            "description": "**This endpoint allows you to retrieve a specific spam report by email address.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/spam-reports-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": [
+                                        {
+                                            "created": 1454433146,
+                                            "email": "test1@example.com",
+                                            "ip": "10.89.32.5"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE_suppression-spam_reports-email",
+            "summary": "Delete a specific spam report",
+            "tags": [
+                "Spam Reports API"
+            ],
+            "description": "**This endpoint allows you to delete a specific spam report by email address.**\n\nDeleting a spam report will remove the suppression, meaning email will once again be sent to the previously suppressed address. This should be avoided unless a recipient indicates they wish to receive email from you again. You can use our [bypass filters](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) to deliver messages to otherwise suppressed addresses when exceptions are required.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    }
+}
