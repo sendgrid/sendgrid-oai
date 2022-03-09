@@ -1,6 +1,15 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2022-03-09] Version 1.9.0
+--------------------------
+**Library - Feature**
+- [PR #112](https://github.com/sendgrid/sendgrid-oai/pull/112): Add Beta OpenAPI v3.1 Spec. Thanks to [@astuteape](https://github.com/astuteape)!
+
+**Library - Chore**
+- [PR #111](https://github.com/sendgrid/sendgrid-oai/pull/111): push Datadog Release Metric upon deploy success. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+
 [2022-02-09] Version 1.8.4
 --------------------------
 **Library - Chore**
