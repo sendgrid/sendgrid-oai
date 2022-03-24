@@ -68,10 +68,6 @@ We do, however, welcome any [Issues](https://github.com/sendgrid/sendgrid-oai/is
 
 * **This project contains a Beta version of Twilio SendGrid's OpenAPI v3.1 specification as of Q1 2022. The spec may not be accurate at this stage; it is in active development.**
 
-* **The default branch name for this repository has been changed to `main` as of 07/20/2020.**
-
-Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/oai) for new releases and breaking changes.
-
 All the updates to this project are documented in our [CHANGELOG](CHANGELOG.md).
 
 # How to Contribute
