@@ -1,11 +1,40 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
-[2021-11-30] Version 1.5.0
+[2022-03-09] Version 1.9.0
+--------------------------
+**Library - Feature**
+- [PR #112](https://github.com/sendgrid/sendgrid-oai/pull/112): Add Beta OpenAPI v3.1 Spec. Thanks to [@astuteape](https://github.com/astuteape)!
+
+**Library - Chore**
+- [PR #111](https://github.com/sendgrid/sendgrid-oai/pull/111): push Datadog Release Metric upon deploy success. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+
+[2022-02-09] Version 1.8.4
 --------------------------
 **Library - Chore**
-- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Replace Travis CI with GitHub Actions, Replace Prance OpenAPI validator with Spectral
-- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Support OpenAPI v3.1
+- [PR #106](https://github.com/sendgrid/sendgrid-oai/pull/106): merge test and deploy workflows. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+
+[2022-01-12] Version 1.8.3
+--------------------------
+**Library - Fix**
+- [PR #105](https://github.com/sendgrid/sendgrid-oai/pull/105): add non-SAN cert for sendgrid-java. Thanks to [@beebzz](https://github.com/beebzz)!
+
+
+[2021-12-15] Version 1.8.2
+--------------------------
+**Library - Fix**
+- [PR #104](https://github.com/sendgrid/sendgrid-oai/pull/104): regenerate cert for sendgrid oai. Thanks to [@beebzz](https://github.com/beebzz)!
+
+
+[2021-12-01] Version 1.8.1
+--------------------------
+**Library - Chore**
+- [PR #98](https://github.com/sendgrid/sendgrid-oai/pull/98): Replace Travis-CI with GitHub Actions. Thanks to [@astuteape](https://github.com/astuteape)!
+- [PR #102](https://github.com/sendgrid/sendgrid-oai/pull/102): fix nginx ports. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+- [PR #101](https://github.com/sendgrid/sendgrid-oai/pull/101): update prism for GitHub Actions. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
 
 [2021-09-22] Version 1.8.0
 --------------------------
