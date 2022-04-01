@@ -1,1115 +1,1115 @@
 {
-    "marketing_singlesends": {
-        "post": {
-            "operationId": "POST_marketing-singlesends",
-            "summary": "Create Single Send",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to create a new Single Send.**\n\nPlease note that if you are migrating from the previous version of Single Sends, you no longer need to pass a template ID with your request to this endpoint. Instead, you will pass all template data in the `email_config` object.",
-            "requestBody": {
-                "$ref": "../../components/requestBodies.json#/singlesend_request"
-            },
-            "responses": {
-                "201": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/singlesend_response"
-                            },
-                            "examples": {
-                                "response": {
-                                    "value": {
-                                        "name": "Example API Created Single Send",
-                                        "id": "27c21bbf-a12c-440b-b8bf-c526975328ca",
-                                        "status": "scheduled",
-                                        "created_at": "2020-05-18T17:28:27.272Z",
-                                        "send_at": "2020-06-16T00:19:55.106Z",
-                                        "categories": [
-                                            "unique opens"
-                                        ],
-                                        "email_config": {
-                                            "subject": "",
-                                            "html_content": "",
-                                            "plain_content": "",
-                                            "generate_plain_content": true,
-                                            "editor": "code",
-                                            "suppression_group_id": null,
-                                            "custom_unsubscribe_url": null,
-                                            "sender_id": null,
-                                            "ip_pool": null
-                                        },
-                                        "send_to": {
-                                            "list_ids": [
-                                                "f2fe66a1-43f3-4e3a-87b1-c6a600d805f0"
-                                            ]
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "400": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        },
-        "get": {
-            "operationId": "GET_marketing-singlesends",
-            "summary": "Get All Single Sends",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to retrieve all your Single Sends.**\n\nReturns all of your Single Sends with condensed details about each, including the Single Sends' IDs. For more details about an individual Single Send, pass the Single Send's ID to the `/marketing/singlesends/{id}` endpoint.",
-            "parameters": [
-                {
-                    "name": "page_size",
-                    "in": "query",
-                    "schema": {
-                        "type": "integer"
-                    }
-                },
-                {
-                    "name": "page_token",
-                    "in": "query",
-                    "schema": {
-                        "type": "string"
-                    }
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "result": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "../../components/schemas.json#/singlesend_response_short"
-                                        }
-                                    },
-                                    "_metadata": {
-                                        "$ref": "../../components/schemas.json#/_metadata"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        },
-        "delete": {
-            "operationId": "DELETE_marketing-singlesends",
-            "summary": "Bulk Delete Single Sends",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to delete multiple Single Sends using an array of Single Sends IDs.**\n\nTo first retrieve all your Single Sends' IDs, you can make a GET request to the `/marketing/singlensends` endpoint.\n\nPlease note that a DELETE request is permanent, and your Single Sends will not be recoverable after deletion.",
-            "parameters": [
-                {
-                    "name": "ids",
-                    "in": "query",
-                    "description": "Single Send IDs to delete",
-                    "style": "form",
-                    "explode": false,
-                    "schema": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "minItems": 1,
-                        "maxItems": 50
-                    }
-                }
-            ],
-            "responses": {
-                "204": {
-                    "description": ""
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        }
-    },
-    "marketing_singlesends_{id}": {
-        "parameters": [
-            {
-                "name": "id",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            }
-        ],
-        "post": {
-            "operationId": "POST_marketing-singlesends-id",
-            "summary": "Duplicate Single Send",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to duplicate an existing Single Send using its Single Send ID.**\n\nDuplicating a Single Send is useful when you want to create a Single Send but don't want to start from scratch. Once duplicated, you can update or edit the Single Send by making a PATCH request to the `/marketing/singlesends/{id}` endpoint.\n \nIf you leave the `name` field blank, your duplicate will be assigned the name of the Single Send it was copied from with the text \u201cCopy of \u201d prepended to it. The `name` field length is limited to 100 characters, so the end of the new Single Send name, including \u201cCopy of \u201d, will be trimmed if the name exceeds this limit.",
-            "requestBody": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 100,
-                                    "description": "The name of the duplicate Single Send. If you choose to leave the name field blank, your duplicate will be assigned the name of the Single Send it was copied from with the text 'Copy of ' prepended to it. The end of the new Single Send name, including 'Copy of ', will be trimmed if the name exceeds the character limit."
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "responses": {
-                "201": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/singlesend_response"
-                            }
-                        }
-                    }
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        },
-        "patch": {
-            "operationId": "PATCH_marketing-singlesends-id",
-            "summary": "Update Single Send",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to update a Single Send using a Single Send ID.**\n\nYou only need to pass the fields you want to update. Any blank/missing fields will remain unaltered.",
-            "requestBody": {
-                "$ref": "../../components/requestBodies.json#/singlesend_request"
-            },
-            "responses": {
-                "202": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/singlesend_response"
-                            }
-                        }
-                    }
-                },
-                "400": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        },
-        "get": {
-            "operationId": "GET_marketing-singlesends-id",
-            "summary": "Get Single Send by ID",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to retrieve details about one Single Send using a Single Send ID.**\n\nYou can retrieve all of your Single Sends by making a GET request to the `/marketing/singlesends` endpoint.",
-            "responses": {
-                "200": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/singlesend_response"
-                            },
-                            "examples": {
-                                "response": {
-                                    "value": {
-                                        "name": "single-send-1",
-                                        "id": "2f6dec81-43b9-4c67-a890-3a38cb63b54a",
-                                        "status": "scheduled",
-                                        "created_at": "2020-12-13T16:24:42.013Z",
-                                        "send_to": {
-                                            "segment_ids": [
-                                                "dad84de3-bec4-4e04-b132-2cbfd4bb3789",
-                                                "7dce758d-1155-4102-88d2-ca65565ac98b"
-                                            ],
-                                            "all": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        },
-        "delete": {
-            "operationId": "DELETE_marketing-singlesends-id",
-            "summary": "Delete Single Send by ID",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to delete one Single Send using a Single Send ID.**\n\nTo first retrieve all your Single Sends' IDs, you can make a GET request to the `/marketing/singlensends` endpoint.\n\nPlease note that a `DELETE` request is permanent, and your Single Send will not be recoverable after deletion.",
-            "responses": {
-                "204": {
-                    "description": ""
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        }
-    },
-    "marketing_singlesends_search": {
-        "post": {
-            "operationId": "POST_marketing-singlesends-search",
-            "summary": "Get Single Sends Search",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to search for Single Sends based on specified criteria.**\n\nYou can search for Single Sends by passing a combination of values using the `name`, `status`, and `categories` request body fields.\n\nFor example, if you want to search for all Single Sends that are \"drafts\" or \"scheduled\" and also associated with the category \"shoes,\" your request body may look like the example below.\n\n```javascript\n{\n  \"status\": [\n    \"draft\",\n    \"scheduled\"\n  ],\n  \"categories\": [\n    \"shoes\"\n  ],\n}\n```",
-            "parameters": [
-                {
-                    "name": "page_size",
-                    "in": "query",
-                    "schema": {
-                        "type": "integer"
-                    }
-                },
-                {
-                    "name": "page_token",
-                    "in": "query",
-                    "schema": {
-                        "type": "string"
-                    }
-                }
-            ],
-            "requestBody": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "$ref": "../../components/schemas.json#/singlesend_search"
-                        }
-                    }
-                }
-            },
-            "responses": {
-                "200": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "result": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "../../components/schemas.json#/singlesend_response_short"
-                                        }
-                                    },
-                                    "_metadata": {
-                                        "$ref": "../../components/schemas.json#/_metadata"
-                                    }
-                                }
-                            },
-                            "examples": {
-                                "response": {
-                                    "value": {
-                                        "result": [
-                                            {
-                                                "id": "df25ffdf-6a96-458a-9419-6d87d3094c6b",
-                                                "name": "single-send-1",
-                                                "status": "triggered",
-                                                "categories": [
-                                                    "shoes"
-                                                ],
-                                                "is_abtest": true,
-                                                "abtest": null,
-                                                "updated_at": "3263-04-09T09:05:08.193Z",
-                                                "created_at": "4739-10-29T07:11:32.476Z",
-                                                "send_at": "2471-05-31T15:46:18.797Z"
-                                            }
-                                        ],
-                                        "_metadata": {
-                                            "self": "https://a/nwNSrPSWt7d",
-                                            "prev": "https://a/P0Enoayd",
-                                            "next": "https://a/DYEsTUDww9-",
-                                            "count": 1
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        }
-    },
-    "marketing_singlesends_{id}_schedule": {
-        "parameters": [
-            {
-                "name": "id",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            }
-        ],
-        "put": {
-            "operationId": "PUT_marketing-singlesends-id-schedule",
-            "summary": "Schedule Single Send",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to schedule a Single Send for future delivery using a Single Send ID.**\n\nTo schedule a Single Send, you must pass a date string in ISO 8601 time format (yyyy-MM-ddTHH:mm:ssZ)  using the required `send_at` field. For example, the ISO 8601 format for 9:00 AM UTC on May 6, 2020 would be `2020-05-06T09:00:00Z`. You may also pass the string `\"now\"` to send the Single Send immediately.",
-            "requestBody": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "send_at": {
-                                    "type": "string",
-                                    "description": "This is the ISO 8601 time at which to send the Single Send; must be in future, or the string \"now\"",
-                                    "format": "date-time"
-                                }
-                            },
-                            "required": [
-                                "send_at"
-                            ],
-                            "example": {
-                                "send_at": "3752-01-28T23:21:52.575Z"
-                            }
-                        }
-                    }
-                }
-            },
-            "responses": {
-                "201": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "send_at": {
-                                        "type": "string",
-                                        "description": "",
-                                        "format": "date-time"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "enum": [
-                                            "scheduled"
-                                        ]
-                                    }
-                                }
-                            },
-                            "examples": {
-                                "response": {
-                                    "value": {
-                                        "send_at": "3752-01-28T23:21:52.575Z",
-                                        "status": "scheduled"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        },
-        "delete": {
-            "operationId": "DELETE_marketing-singlesends-id-schedule",
-            "summary": "Delete Single Send Schedule",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to cancel a scheduled Single Send using a Single Send ID.**\n\nMaking a DELETE request to this endpoint will cancel the scheduled sending of a Single Send. The request will not delete the Single Send itself. Deleting a Single Send can be done by passing a DELETE request to `/marketing/singlesends/{id}`.",
-            "responses": {
-                "200": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/singlesend_schedule"
-                            }
-                        }
-                    }
-                },
-                "404": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        }
-    },
-    "marketing_singlesends_categories": {
-        "get": {
-            "operationId": "GET_marketing-singlesends-categories",
-            "summary": "Get All Categories",
-            "tags": [
-                "Single Sends"
-            ],
-            "description": "**This endpoint allows you to retrieve all the categories associated with your Single Sends.**\n\nThis endpoint will return your latest 1,000 categories.",
-            "responses": {
-                "200": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "categories": {
-                                        "type": "array",
-                                        "uniqueItems": true,
-                                        "maxItems": 1000,
-                                        "description": "list of latest one thousand unique categories associated with all Single Sends in ascending order",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            },
-                            "examples": {
-                                "response": {
-                                    "value": {
-                                        "categories": [
-                                            "equipment",
-                                            "shoes",
-                                            "sports"
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "500": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "type": "string"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "error_id": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        }
-    }
+	"marketing_singlesends": {
+		"post": {
+			"operationId": "POST_marketing-singlesends",
+			"summary": "Create Single Send",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to create a new Single Send.**\n\nPlease note that if you are migrating from the previous version of Single Sends, you no longer need to pass a template ID with your request to this endpoint. Instead, you will pass all template data in the `email_config` object.",
+			"requestBody": {
+				"$ref": "../../components/requestBodies.json#/singlesend_request"
+			},
+			"responses": {
+				"201": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "../../components/schemas.json#/singlesend_response"
+							},
+							"examples": {
+								"response": {
+									"value": {
+										"name": "Example API Created Single Send",
+										"id": "27c21bbf-a12c-440b-b8bf-c526975328ca",
+										"status": "scheduled",
+										"created_at": "2020-05-18T17:28:27.272Z",
+										"send_at": "2020-06-16T00:19:55.106Z",
+										"categories": [
+											"unique opens"
+										],
+										"email_config": {
+											"subject": "",
+											"html_content": "",
+											"plain_content": "",
+											"generate_plain_content": true,
+											"editor": "code",
+											"suppression_group_id": null,
+											"custom_unsubscribe_url": null,
+											"sender_id": null,
+											"ip_pool": null
+										},
+										"send_to": {
+											"list_ids": [
+												"f2fe66a1-43f3-4e3a-87b1-c6a600d805f0"
+											]
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"400": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		},
+		"get": {
+			"operationId": "GET_marketing-singlesends",
+			"summary": "Get All Single Sends",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to retrieve all your Single Sends.**\n\nReturns all of your Single Sends with condensed details about each, including the Single Sends' IDs. For more details about an individual Single Send, pass the Single Send's ID to the `/marketing/singlesends/{id}` endpoint.",
+			"parameters": [
+				{
+					"name": "page_size",
+					"in": "query",
+					"schema": {
+						"type": "integer"
+					}
+				},
+				{
+					"name": "page_token",
+					"in": "query",
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"responses": {
+				"200": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"result": {
+										"type": "array",
+										"items": {
+											"$ref": "../../components/schemas.json#/singlesend_response_short"
+										}
+									},
+									"_metadata": {
+										"$ref": "../../components/schemas.json#/_metadata"
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		},
+		"delete": {
+			"operationId": "DELETE_marketing-singlesends",
+			"summary": "Bulk Delete Single Sends",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to delete multiple Single Sends using an array of Single Sends IDs.**\n\nTo first retrieve all your Single Sends' IDs, you can make a GET request to the `/marketing/singlensends` endpoint.\n\nPlease note that a DELETE request is permanent, and your Single Sends will not be recoverable after deletion.",
+			"parameters": [
+				{
+					"name": "ids",
+					"in": "query",
+					"description": "Single Send IDs to delete",
+					"style": "form",
+					"explode": false,
+					"schema": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 1,
+						"maxItems": 50
+					}
+				}
+			],
+			"responses": {
+				"204": {
+					"description": ""
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		}
+	},
+	"marketing_singlesends_{id}": {
+		"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"schema": {
+					"type": "string"
+				}
+			}
+		],
+		"post": {
+			"operationId": "POST_marketing-singlesends-id",
+			"summary": "Duplicate Single Send",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to duplicate an existing Single Send using its Single Send ID.**\n\nDuplicating a Single Send is useful when you want to create a Single Send but don't want to start from scratch. Once duplicated, you can update or edit the Single Send by making a PATCH request to the `/marketing/singlesends/{id}` endpoint.\n \nIf you leave the `name` field blank, your duplicate will be assigned the name of the Single Send it was copied from with the text \u201cCopy of \u201d prepended to it. The `name` field length is limited to 100 characters, so the end of the new Single Send name, including \u201cCopy of \u201d, will be trimmed if the name exceeds this limit.",
+			"requestBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string",
+									"minLength": 1,
+									"maxLength": 100,
+									"description": "The name of the duplicate Single Send. If you choose to leave the name field blank, your duplicate will be assigned the name of the Single Send it was copied from with the text 'Copy of ' prepended to it. The end of the new Single Send name, including 'Copy of ', will be trimmed if the name exceeds the character limit."
+								}
+							}
+						}
+					}
+				}
+			},
+			"responses": {
+				"201": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "../../components/schemas.json#/singlesend_response"
+							}
+						}
+					}
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		},
+		"patch": {
+			"operationId": "PATCH_marketing-singlesends-id",
+			"summary": "Update Single Send",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to update a Single Send using a Single Send ID.**\n\nYou only need to pass the fields you want to update. Any blank/missing fields will remain unaltered.",
+			"requestBody": {
+				"$ref": "../../components/requestBodies.json#/singlesend_request"
+			},
+			"responses": {
+				"202": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "../../components/schemas.json#/singlesend_response"
+							}
+						}
+					}
+				},
+				"400": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		},
+		"get": {
+			"operationId": "GET_marketing-singlesends-id",
+			"summary": "Get Single Send by ID",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to retrieve details about one Single Send using a Single Send ID.**\n\nYou can retrieve all of your Single Sends by making a GET request to the `/marketing/singlesends` endpoint.",
+			"responses": {
+				"200": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "../../components/schemas.json#/singlesend_response"
+							},
+							"examples": {
+								"response": {
+									"value": {
+										"name": "single-send-1",
+										"id": "2f6dec81-43b9-4c67-a890-3a38cb63b54a",
+										"status": "scheduled",
+										"created_at": "2020-12-13T16:24:42.013Z",
+										"send_to": {
+											"segment_ids": [
+												"dad84de3-bec4-4e04-b132-2cbfd4bb3789",
+												"7dce758d-1155-4102-88d2-ca65565ac98b"
+											],
+											"all": true
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		},
+		"delete": {
+			"operationId": "DELETE_marketing-singlesends-id",
+			"summary": "Delete Single Send by ID",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to delete one Single Send using a Single Send ID.**\n\nTo first retrieve all your Single Sends' IDs, you can make a GET request to the `/marketing/singlensends` endpoint.\n\nPlease note that a `DELETE` request is permanent, and your Single Send will not be recoverable after deletion.",
+			"responses": {
+				"204": {
+					"description": ""
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		}
+	},
+	"marketing_singlesends_search": {
+		"post": {
+			"operationId": "POST_marketing-singlesends-search",
+			"summary": "Get Single Sends Search",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to search for Single Sends based on specified criteria.**\n\nYou can search for Single Sends by passing a combination of values using the `name`, `status`, and `categories` request body fields.\n\nFor example, if you want to search for all Single Sends that are \"drafts\" or \"scheduled\" and also associated with the category \"shoes,\" your request body may look like the example below.\n\n```javascript\n{\n  \"status\": [\n    \"draft\",\n    \"scheduled\"\n  ],\n  \"categories\": [\n    \"shoes\"\n  ],\n}\n```",
+			"parameters": [
+				{
+					"name": "page_size",
+					"in": "query",
+					"schema": {
+						"type": "integer"
+					}
+				},
+				{
+					"name": "page_token",
+					"in": "query",
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"requestBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"$ref": "../../components/schemas.json#/singlesend_search"
+						}
+					}
+				}
+			},
+			"responses": {
+				"200": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"result": {
+										"type": "array",
+										"items": {
+											"$ref": "../../components/schemas.json#/singlesend_response_short"
+										}
+									},
+									"_metadata": {
+										"$ref": "../../components/schemas.json#/_metadata"
+									}
+								}
+							},
+							"examples": {
+								"response": {
+									"value": {
+										"result": [
+											{
+												"id": "df25ffdf-6a96-458a-9419-6d87d3094c6b",
+												"name": "single-send-1",
+												"status": "triggered",
+												"categories": [
+													"shoes"
+												],
+												"is_abtest": true,
+												"abtest": null,
+												"updated_at": "3263-04-09T09:05:08.193Z",
+												"created_at": "4739-10-29T07:11:32.476Z",
+												"send_at": "2471-05-31T15:46:18.797Z"
+											}
+										],
+										"_metadata": {
+											"self": "https://a/nwNSrPSWt7d",
+											"prev": "https://a/P0Enoayd",
+											"next": "https://a/DYEsTUDww9-",
+											"count": 1
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		}
+	},
+	"marketing_singlesends_{id}_schedule": {
+		"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"schema": {
+					"type": "string"
+				}
+			}
+		],
+		"put": {
+			"operationId": "PUT_marketing-singlesends-id-schedule",
+			"summary": "Schedule Single Send",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to schedule a Single Send for future delivery using a Single Send ID.**\n\nTo schedule a Single Send, you must pass a date string in ISO 8601 time format (yyyy-MM-ddTHH:mm:ssZ)  using the required `send_at` field. For example, the ISO 8601 format for 9:00 AM UTC on May 6, 2020 would be `2020-05-06T09:00:00Z`. You may also pass the string `\"now\"` to send the Single Send immediately.",
+			"requestBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"send_at": {
+									"type": "string",
+									"description": "The ISO 8601 time at which to send the Single Send. This must be in future or the string \"now\". Emails can be scheduled up to 72 hours in advance. However, this scheduling constraint does not apply to campaigns sent via [Marketing Campaigns](https://docs.sendgrid.com/ui/sending-email/how-to-send-email-with-marketing-campaigns/).",
+									"format": "date-time"
+								}
+							},
+							"required": [
+								"send_at"
+							],
+							"example": {
+								"send_at": "3752-01-28T23:21:52.575Z"
+							}
+						}
+					}
+				}
+			},
+			"responses": {
+				"201": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"send_at": {
+										"type": "string",
+										"description": "The ISO 8601 time at which to send the Single Send. This must be in future or the string \"now\". Emails can be scheduled up to 72 hours in advance. However, this scheduling constraint does not apply to campaigns sent via [Marketing Campaigns](https://docs.sendgrid.com/ui/sending-email/how-to-send-email-with-marketing-campaigns/).",
+										"format": "date-time"
+									},
+									"status": {
+										"type": "string",
+										"enum": [
+											"scheduled"
+										]
+									}
+								}
+							},
+							"examples": {
+								"response": {
+									"value": {
+										"send_at": "3752-01-28T23:21:52.575Z",
+										"status": "scheduled"
+									}
+								}
+							}
+						}
+					}
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		},
+		"delete": {
+			"operationId": "DELETE_marketing-singlesends-id-schedule",
+			"summary": "Delete Single Send Schedule",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to cancel a scheduled Single Send using a Single Send ID.**\n\nMaking a DELETE request to this endpoint will cancel the scheduled sending of a Single Send. The request will not delete the Single Send itself. Deleting a Single Send can be done by passing a DELETE request to `/marketing/singlesends/{id}`.",
+			"responses": {
+				"200": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "../../components/schemas.json#/singlesend_schedule"
+							}
+						}
+					}
+				},
+				"404": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		}
+	},
+	"marketing_singlesends_categories": {
+		"get": {
+			"operationId": "GET_marketing-singlesends-categories",
+			"summary": "Get All Categories",
+			"tags": [
+				"Single Sends"
+			],
+			"description": "**This endpoint allows you to retrieve all the categories associated with your Single Sends.**\n\nThis endpoint will return your latest 1,000 categories.",
+			"responses": {
+				"200": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"categories": {
+										"type": "array",
+										"uniqueItems": true,
+										"maxItems": 1000,
+										"description": "list of latest one thousand unique categories associated with all Single Sends in ascending order",
+										"items": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"examples": {
+								"response": {
+									"value": {
+										"categories": [
+											"equipment",
+											"shoes",
+											"sports"
+										]
+									}
+								}
+							}
+						}
+					}
+				},
+				"500": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"errors": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"field": {
+													"type": "string"
+												},
+												"message": {
+													"type": "string"
+												},
+												"error_id": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"security": [
+				{
+					"Authorization": []
+				}
+			]
+		}
+	}
 }
