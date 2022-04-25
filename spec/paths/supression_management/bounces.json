@@ -6,7 +6,7 @@
             "tags": [
                 "Bounces API"
             ],
-            "description": "**This endpoint allows you to retrieve all of your bounces.**",
+            "description": "**This endpoint allows you to retrieve all of your bounces. A maximum of 500 bounces will be returned per query. You can use the `offset` and `limit` parameters to retrieve more or less than 500 results.**",
             "parameters": [
                 {
                     "name": "start_time",
@@ -20,6 +20,22 @@
                     "name": "end_time",
                     "in": "query",
                     "description": "Refers end of the time range in unix timestamp when a bounce was created (inclusive).",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Limit the number of results to be displayed per page.",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "The point in the list to begin displaying results. To retrieve more than 500 results, you can make multiple requests to the API, using the `offset` to begin at the next result in the list.",
                     "schema": {
                         "type": "integer"
                     }

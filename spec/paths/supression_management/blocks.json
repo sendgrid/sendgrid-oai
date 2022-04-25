@@ -6,7 +6,7 @@
             "tags": [
                 "Blocks API"
             ],
-            "description": "**This endpoint allows you to retrieve all email addresses that are currently on your blocks list.**",
+            "description": "**This endpoint allows you to retrieve all email addresses that are currently on your blocks list. A maximum of 500 blocks will be returned per query. You can use the `offset` and `limit` parameters to retrieve more or less than 500 results.**",
             "parameters": [
                 {
                     "name": "start_time",
@@ -35,7 +35,7 @@
                 {
                     "name": "offset",
                     "in": "query",
-                    "description": "The point in the list to begin displaying results.",
+                    "description": "The point in the list to begin displaying results. To retrieve more than 500 results, you can make multiple requests to the API, using the `offset` to begin at the next result in the list.",
                     "schema": {
                         "type": "integer"
                     }

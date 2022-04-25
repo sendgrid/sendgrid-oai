@@ -839,7 +839,7 @@
                             "properties": {
                                 "send_at": {
                                     "type": "string",
-                                    "description": "This is the ISO 8601 time at which to send the Single Send; must be in future, or the string \"now\"",
+                                    "description": "The ISO 8601 time at which to send the Single Send. This must be in future or the string \"now\". Emails can be scheduled up to 72 hours in advance. However, this scheduling constraint does not apply to campaigns sent via [Marketing Campaigns](https://docs.sendgrid.com/ui/sending-email/how-to-send-email-with-marketing-campaigns/).",
                                     "format": "date-time"
                                 }
                             },
@@ -863,7 +863,7 @@
                                 "properties": {
                                     "send_at": {
                                         "type": "string",
-                                        "description": "",
+                                        "description": "The ISO 8601 time at which to send the Single Send. This must be in future or the string \"now\". Emails can be scheduled up to 72 hours in advance. However, this scheduling constraint does not apply to campaigns sent via [Marketing Campaigns](https://docs.sendgrid.com/ui/sending-email/how-to-send-email-with-marketing-campaigns/).",
                                         "format": "date-time"
                                     },
                                     "status": {
