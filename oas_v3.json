@@ -546,6 +546,12 @@
         "/v3/suppression/bounces/{email}": {
             "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces_{email}"
         },
+        "/v3/suppression/bounces/classifications": {
+            "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces_classifications"
+        },
+        "/v3/suppression/bounces/classifications/{classification}": {
+            "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces_classifications_{classification}"
+        },
         "/v3/suppression/blocks": {
             "$ref": "./spec/paths/supression_management/blocks.json#/suppression_blocks"
         },
