@@ -316,10 +316,10 @@
             "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_search_emails"
         },
         "/v3/marketing/segments/2.0": {
-            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2_beta.json#/marketing_segments_2.0"
+            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2.json#/marketing_segments_2.0"
         },
         "/v3/marketing/segments/2.0/{segment_id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2_beta.json#/marketing_segments_2.0_{segment_id}"
+            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2.json#/marketing_segments_2.0_{segment_id}"
         },
         "/v3/marketing/senders": {
             "$ref": "./spec/paths/new_marketing_campaings/senders.json#/marketing_senders"
@@ -697,7 +697,7 @@
             "name": "Custom Fields"
         },
         {
-            "name": "Segmenting Contacts V2 - Beta"
+            "name": "Segmenting Contacts V2"
         },
         {
             "name": "Subuser Statistics"
