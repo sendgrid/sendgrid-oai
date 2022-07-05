@@ -260,9 +260,9 @@
             "operationId": "DELETE_segments-segment_id",
             "summary": "Delete segment",
             "tags": [
-                "Segmenting Contacts V2 - Beta"
+                "Segmenting Contacts V2"
             ],
-            "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+            "description": "**This endpoint allows you to delete a segment by ID.**",
             "responses": {
                 "202": {
                     "description": ""
