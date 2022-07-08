@@ -269,5 +269,56 @@
             "type": "string",
             "default": "Bearer <<YOUR_API_KEY_HERE>>"
         }
+    },
+    "accountProvisioning_accountID": {
+       "name": "accountID",
+       "in": "path",
+       "description": "Twilio SendGrid account ID",
+       "schema": {
+        "type": "string"
+       },
+       "required": true,
+       "example": "sg1a2bcd3ef3fa5c67d9deab91c01de2fa"
+    },
+    "accountProvisioning_username": {
+       "name": "username",
+       "in": "path",
+       "description": "Twilio SendGrid account username",
+       "schema": {
+        "type": "string"
+       },
+       "required": true,
+       "example": "testuser"
+    },
+    "accountProvisioning_countParam": {
+       "name": "limit",
+       "in": "query",
+       "description": "The number of items to return",
+       "schema": {
+        "type": "integer",
+        "default": 10,
+        "maximum": 100
+       },
+       "required": false,
+       "example": 2
+    },
+    "accountProvisioning_lastParam": {
+       "name": "offset",
+       "in": "query",
+       "description": "The last item successfully retrieved",
+       "schema": {
+        "type": "string"
+       },
+       "required": false,
+       "example": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+    },
+    "accountProvisioning_testHeader": {
+       "name": "T-Test-Account",
+       "in": "header",
+       "description": "**OPTIONAL** Custom request header provided ONLY for a [test account](ZG9jOjQ1NTg3NzUx-create-a-new-customer-account#create-a-new-customer-test-account)",
+       "schema": {
+        "type": "string"
+       },
+       "required": false
     }
 }
