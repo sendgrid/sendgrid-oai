@@ -6,7 +6,7 @@
             "tags": [
                 "Stats"
             ],
-            "description": "**This endpoint allows you to retrieve all of your global email statistics between a given date range.**\n\nParent accounts will see aggregated stats for their account and all subuser accounts. Subuser accounts will only see their own stats.",
+            "description": "**This endpoint allows you to retrieve all of your global email statistics between a given date range.**\n\nParent accounts can see either aggregated stats for the parent account or aggregated stats for a subuser specified in the `on-behalf-of` header. Subuser accounts will see only their own stats.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
