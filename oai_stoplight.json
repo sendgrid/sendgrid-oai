@@ -10950,7 +10950,7 @@
                 "tags": [
                     "Domain Authentication"
                 ],
-                "description": "**This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.",
+                "description": "**This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.",
                 "parameters": [
                     {
                         "name": "username",
@@ -11021,7 +11021,7 @@
                 "tags": [
                     "Domain Authentication"
                 ],
-                "description": "**This endpoint allows you to disassociate a specific authenticated domain from a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.",
+                "description": "**This endpoint allows you to disassociate a specific authenticated domain from a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.",
                 "parameters": [
                     {
                         "name": "username",
@@ -11057,11 +11057,11 @@
             ],
             "post": {
                 "operationId": "POST_whitelabel-domains-domain_id-subuser",
-                "summary": "Associate a authenticated domain with a given user.",
+                "summary": "Associate an authenticated domain with a given user.",
                 "tags": [
                     "Domain Authentication"
                 ],
-                "description": "**This endpoint allows you to associate a specific authenticated domain with a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.",
+                "description": "**This endpoint allows you to associate a specific authenticated domain with a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.",
                 "parameters": [
                     {
                         "name": "body",
