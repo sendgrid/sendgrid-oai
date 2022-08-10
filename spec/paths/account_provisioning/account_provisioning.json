@@ -451,46 +451,5 @@
                 }
             }
         }
-    },
-    "legacy_users_{username}": {
-        "parameters": [
-            {
-                "$ref": "../../components/parameters.json#/accountProvisioning_username"
-            }
-        ],
-        "get": {
-            "operationId": "getAccountID",
-            "summary": "Get Account ID",
-            "description": "Retrieve the accountID of the specified username.",
-            "tags": [
-                "Account ID"
-            ],
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "OK",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/accountProvisioning_accountID"
-                            }
-                        }
-                    }
-                },
-                "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
-                },
-                "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
-                },
-                "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
-                }
-            }
-        }
     }
 }

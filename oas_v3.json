@@ -639,9 +639,6 @@
         "/v3/partners/accounts/{accountID}/state": {
             "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_state"
         },
-        "/v3/partners/legacy/users/{username}": {
-            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/legacy_users_{username}"
-        },
         "/v3/partners/offerings": {
             "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/offerings"
         },
@@ -862,7 +859,7 @@
         },
         {
             "name": "Account ID",
-            "description": "Account ID of the provided username"
+            "description": "Twilio SendGrid Account ID"
         },
         {
             "name": "Offering",

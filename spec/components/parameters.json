@@ -280,16 +280,6 @@
        "required": true,
        "example": "sg1a2bcd3ef3fa5c67d9deab91c01de2fa"
     },
-    "accountProvisioning_username": {
-       "name": "username",
-       "in": "path",
-       "description": "Twilio SendGrid account username",
-       "schema": {
-        "type": "string"
-       },
-       "required": true,
-       "example": "testuser"
-    },
     "accountProvisioning_countParam": {
        "name": "limit",
        "in": "query",

@@ -6760,7 +6760,7 @@
         "properties": {
             "account_id": {
                 "type": "string",
-                "description": "The accountID of the provided username"
+                "description": "Twilio SendGrid account ID"
             }
         },
         "required": [
