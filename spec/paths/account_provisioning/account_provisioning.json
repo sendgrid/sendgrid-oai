@@ -80,7 +80,7 @@
                             "example": {
                                 "accounts": [
                                     {
-                                        "id": "sg1a2bcd3ef4ab5c67d8efab91c01de2fa",
+                                        "id": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa",
                                         "email": "test@test.com",
                                         "created_at": "2006-01-02T15:04:05Z",
                                         "updated_at": "2009-01-02T15:04:05Z"
@@ -354,7 +354,7 @@
         "put": {
             "operationId": "updateOfferings",
             "summary": "Update Account Offerings",
-            "description": "Changes a package offering from the specified account. Please note that an account can only have one package offering.",
+            "description": "Changes offerings available to the specified account. Please note that an account can have only one package offering. An account may have additional add-on offerings.",
             "tags": [
                 "Offering"
             ],

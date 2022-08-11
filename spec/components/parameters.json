@@ -278,7 +278,7 @@
         "type": "string"
        },
        "required": true,
-       "example": "sg1a2bcd3ef3fa5c67d9deab91c01de2fa"
+       "example": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
     },
     "accountProvisioning_countParam": {
        "name": "limit",
