@@ -6750,8 +6750,8 @@
         ],
         "example": {
             "id": "",
-            "created_at": "2006-01-02T15:04:05Z",
-            "updated_at": "2009-01-02T15:04:05Z"
+            "created_at": "2022-01-02T15:04:05Z",
+            "updated_at": "2022-03-02T15:04:05Z"
         }
     },
     "accountProvisioning_accountID": {
