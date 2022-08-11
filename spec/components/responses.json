@@ -434,7 +434,7 @@
                     }
                 },
                 "example": {
-                    "error": "Error completing your request."
+                    "error": "Error completing your request. The request was formatted incorrectly or missing required parameters."
                 }
             }
         }
@@ -453,7 +453,7 @@
                     }
                 },
                 "example": {
-                    "error": "Error completing your request."
+                    "error": "Error completing your request. The request was missing valid authentication credentials."
                 }
             }
         }
@@ -472,7 +472,7 @@
                     }
                 },
                 "example": {
-                    "error": "Error completing your request."
+                    "error": "Error completing your request. You are not authorized to make the request."
                 }
             }
         }
@@ -491,7 +491,7 @@
                     }
                 },
                 "example": {
-                    "error": "Error completing your request."
+                    "error": "Error completing your request. The requested resource could not be found."
                 }
             }
         }
