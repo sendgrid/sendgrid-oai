@@ -626,6 +626,24 @@
         },
         "/v3/messages/download/{download_uuid}": {
             "$ref": "./spec/paths/email_activity.json#/messages_download_{download_uuid}"
+        },
+        "/v3/partners/accounts": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts"
+        },
+        "/v3/partners/accounts/{accountID}": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}"
+        },
+       "/v3/partners/accounts/{accountID}/sso": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_sso"
+        },
+        "/v3/partners/accounts/{accountID}/state": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_state"
+        },
+        "/v3/partners/offerings": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/offerings"
+        },
+        "/v3/partners/accounts/{accountID}/offerings": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_offerings"
         }
     },
     "components": {
@@ -668,9 +686,6 @@
         },
         {
             "name": "Settings - Inbound Parse"
-        },
-        {
-            "name": "Segmenting Contacts"
         },
         {
             "name": "IP Access Management"
@@ -833,6 +848,22 @@
         },
         {
             "name": "IP Pools"
+        },
+        {
+            "name": "Account",
+            "description": "Account-specific operations"
+        },
+        {
+            "name": "Account State",
+            "description": "Read and update account state"
+        },
+        {
+            "name": "Account ID",
+            "description": "Twilio SendGrid Account ID"
+        },
+        {
+            "name": "Offering",
+            "description": "Offering-specific operations to add or remove offerings on a reseller's customer accounts"
         }
     ],
     "externalDocs": {

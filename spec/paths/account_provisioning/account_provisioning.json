@@ -1,0 +1,455 @@
+{
+    "offerings": {
+        "get": {
+            "operationId": "listOfferings",
+            "summary": "List Offerings",
+            "tags": [
+                "Offering"
+            ],
+            "description": "Retrieves offerings available under the organization.",
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/accountProvisioning_Catalog"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        }
+    },
+    "accounts": {
+        "get": {
+            "operationId": "listAccounts",
+            "summary": "List Accounts",
+            "tags": [
+                "Account"
+            ],
+            "description": "Retrieves all accounts under the organization.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/accountProvisioning_lastParam"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/accountProvisioning_countParam"
+                }
+            ],
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "AccountList",
+                                "type": "object",
+                                "properties": {
+                                    "accounts": {
+                                        "type": "array",
+                                        "description": "List of account objects.",
+                                        "items": {
+                                            "$ref": "../../components/schemas.json#/accountProvisioning_Account"
+                                        }
+                                    },
+                                    "pages": {
+                                        "$ref": "../../components/schemas.json#/accountProvisioning_Pagination"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "accounts": [
+                                    {
+                                        "id": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa",
+                                        "email": "test@test.com",
+                                        "created_at": "2006-01-02T15:04:05Z",
+                                        "updated_at": "2009-01-02T15:04:05Z"
+                                    },
+                                    {
+                                        "id": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa",
+                                        "email": "testing@test.com",
+                                        "created_at": "2006-01-02T15:04:05Z",
+                                        "updated_at": "2009-01-02T15:04:05Z"
+                                    }
+                                ],
+                                "pages": {
+                                    "last": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        },
+        "post": {
+            "operationId": "createAccount",
+            "summary": "Create Account",
+            "description": "Creates a new account, with specified offering, under the organization.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/accountProvisioning_testHeader"
+                }
+            ],
+            "tags": [
+                "Account"
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "CreateAccountParams",
+                            "type": "object",
+                            "properties": {
+                                "profile": {
+                                    "$ref": "../../components/schemas.json#/accountProvisioning_Profile"
+                                },
+                                "offerings": {
+                                    "type": "array",
+                                    "description": "List of offering names to assign to account.",
+                                    "items": {
+                                        "$ref": "../../components/schemas.json#/accountProvisioning_Offering.v1"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "offerings"
+                            ]
+                        },
+                        "example": {
+                            "profile": {
+                                "first_name": "Sender",
+                                "last_name": "Wiz",
+                                "company_name": "Twilio SendGrid",
+                                "company_website": "https://sendgrid.com",
+                                "email": "test@test.com"
+                            },
+                            "offerings": [
+                                {
+                                    "name": "org.ei.free.v1",
+                                    "type": "package",
+                                    "quantity": 1
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "Created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/accountProvisioning_accountID"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        }
+    },
+    "accounts_{accountID}": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/accountProvisioning_accountID"
+            }
+        ],
+        "get": {
+            "operationId": "getAccount",
+            "summary": "Get Account",
+            "description": "Retrieves information about the specified account.",
+            "tags": [
+                "Account"
+            ],
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/accountProvisioning_Account"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        }
+    },
+    "accounts_{accountID}_state": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/accountProvisioning_accountID"
+            }
+        ],
+        "get": {
+            "operationId": "getAccountState",
+            "summary": "Get Account State",
+            "description": "Retrieve the state of the specified account.",
+            "tags": [
+                "Account State"
+            ],
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/accountProvisioning_StateRead"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        },
+        "put": {
+            "operationId": "updateAccountState",
+            "summary": "Update Account State",
+            "description": "Update the state of the specified account.",
+            "tags": [
+                "Account State"
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/accountProvisioning_StateWrite"
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "State successfully updated"
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        }
+    },
+    "accounts_{accountID}_offerings": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/accountProvisioning_accountID"
+            }
+        ],
+        "get": {
+            "operationId": "getAccountOfferings",
+            "summary": "Get Account Offerings",
+            "description": "Retrieves offering information about the specified account.",
+            "tags": [
+                "Offering"
+            ],
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/accountProvisioning_OfferingList"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        },
+        "put": {
+            "operationId": "updateOfferings",
+            "summary": "Update Account Offerings",
+            "description": "Changes a package offering for the specified account. Please note that an account can have only one package offering. Also associates one or more add-on offerings such as Marketing Campaigns, Dedicated IP Addresses, and Expert Services to the specified account.",
+            "tags": [
+                "Offering"
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "OfferingsToAdd",
+                            "type": "object",
+                            "properties": {
+                                "offerings": {
+                                    "type": "array",
+                                    "description": "List of offerings to assign to account.",
+                                    "items": {
+                                        "$ref": "../../components/schemas.json#/accountProvisioning_Offering.v1"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "offerings"
+                            ]
+                        },
+                        "example": {
+                            "offerings": [
+                                {
+                                    "name": "org.ei.free.v1",
+                                    "type": "package",
+                                    "quantity": 1
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/accountProvisioning_OfferingList"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                }
+            }
+        }
+    },
+    "accounts_{accountID}_sso": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/accountProvisioning_accountID"
+            }
+        ],
+        "post": {
+            "operationId": "sso",
+            "summary": "Single Sign On",
+            "description": "Authenticates and logs in a user to Twilio Sendgrid as a specific admin identity configured for SSO by partner. Any additional teammates or subusers will need to log in directly via app.sendgrid.com",
+            "tags": [ 
+                "Account"
+            ],
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "303": {
+                    "description": "Successful redirect to app.sendgrid.com."
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
+                }
+            }
+        }
+    }
+}

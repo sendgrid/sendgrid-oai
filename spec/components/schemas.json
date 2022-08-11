@@ -6718,5 +6718,243 @@
                 }
             }
         }
+    },
+    "accountProvisioning_Account": {
+        "title": "Account",
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string",
+                "description": "Twilio SendGrid account ID"
+            },
+            "email": {
+                "type": "string",
+                "format": "email",
+                "description": "Email of the account holder"
+            },
+            "created_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp indicating when the account was created. Format is [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339)"
+            },
+            "updated_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp indicating when the account was last updated. Format is [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339)"
+            }
+        },
+        "required": [
+            "id",
+            "created_at",
+            "updated_at"
+        ],
+        "example": {
+            "id": "",
+            "created_at": "2022-01-02T15:04:05Z",
+            "updated_at": "2022-03-02T15:04:05Z"
+        }
+    },
+    "accountProvisioning_accountID": {
+        "title": "AccountID",
+        "type": "object",
+        "properties": {
+            "account_id": {
+                "type": "string",
+                "description": "Twilio SendGrid account ID"
+            }
+        },
+        "required": [
+            "account_id"
+        ],
+        "example": {
+            "account_id": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+        }
+    },
+    "accountProvisioning_Catalog": {
+        "title": "Catalog",
+        "type": "object",
+        "properties": {
+            "catalog": {
+                "type": "array",
+                "items": {
+                    "title": "CatalogEntry",
+                    "type": "object",
+                    "properties": {
+                        "offering": {
+                            "$ref": "#/accountProvisioning_Offering.v1"
+                        },
+                        "entitlements": {
+                            "type": "object",
+                            "description": "Set of entitlements the specified offering comes with",
+                            "properties": {
+                                "email_sends_max_monthly": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Total number of email sends per month"
+                                },
+                                "ip_count": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Number of dedicated IPs offered"
+                                },
+                                "teammates_max_total": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Total number of teammates allowed"
+                                },
+                                "users_max_total": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Total number of subusers allowed"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "required": [
+            "account_id"
+        ],
+        "example": {
+            "account_id": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+        }
+    },
+    "accountProvisioning_Offering": {
+        "$ref": "#/accountProvisioning_Offering.v1"
+    },
+    "accountProvisioning_OfferingList": {
+        "title": "OfferingList",
+        "type": "object",
+        "properties": {
+            "offerings": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/accountProvisioning_Offering.v1"
+                }
+            }
+        }
+    },
+    "accountProvisioning_Pagination": {
+        "title": "Pagination",
+        "type": "object",
+        "properties": {
+            "last": {
+                "type": "string",
+                "description": "The last item returned"
+            },
+            "example": {
+                "last": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+            }
+        }
+    },
+    "accountProvisioning_Profile": {
+        "title": "Profile",
+        "type": "object",
+        "properties": {
+            "first_name": {
+                "type": "string",
+                "description": "First name of the account holder"
+            },
+            "last_name": {
+                "type": "string",
+                "description": "Last name of the account holder"
+            },
+            "company_name": {
+                "type": "string",
+                "description": "Company name of the account holder"
+            },
+            "company_website": {
+                "type": "string",
+                "description": "Company website of the account holder"
+            },
+            "email": {
+                "type": "string",
+                "description": "Email of the account holder"
+            }
+        },
+        "example": {
+            "first_name": "Sender",
+            "last_name": "Wiz",
+            "company_name": "Example Co",
+            "company_website": "https://example.com",
+            "email": "mail@example.com"
+        }
+    },
+    "accountProvisioning_StateRead": {
+        "title": "StateRead",
+        "type": "object",
+        "properties": {
+            "state": {
+                "type": "string",
+                "enum": [ 
+                    "activated",
+                    "deactivated",
+                    "suspended",
+                    "banned",
+                    "indeterminate"
+                ]
+            },
+            "description": "The state of the account (e.g., `activated`, `deactivated`, `suspended`, `banned`, or `indeterminate`)",
+            "required": [ 
+                "state"
+            ],
+            "example": {
+                "state": "activated"
+            }
+        }
+    },
+    "accountProvisioning_StateWrite": {
+        "title": "StateWrite",
+        "type": "object",
+        "properties": {
+            "state": {
+                "type": "string",
+                "enum": [
+                    "activated",
+                    "deactivated"
+                ],
+                "description": "The state of the account (e.g., `activated`, `deactivated`)"
+            }
+        },
+        "required": [
+            "state"
+        ],
+        "example": {
+            "state": "activated"
+        }
+    },
+    "accountProvisioning_Offering.v1": {
+        "title": "Offering",
+        "type": "object",
+        "description":  "An offering is a package (email infrastructure) or add-on (marketing campaigns, dedicated IP addresses, EASE) that an account can acquire. Each offering has a list of entitlements that indicate the benefits the account receives from the acquisition.",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Name of the offering"
+            },
+            "type": {
+                "type": "string",
+                "enum": [
+                    "package",
+                    "addon"
+                ],
+            "description": "Defines the type of offering (e.g., package or addon)."
+            },
+            "quantity": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Quantity of the specified addon to be added. If offering type is `package`, quantity must be 1."
+            }
+        },
+        "required": [
+            "name",
+            "type"
+        ],
+        "example": {
+            "name": "org.ei.free.v1",
+            "type": "package",
+            "quantity": 1
+        }
     }
 }
