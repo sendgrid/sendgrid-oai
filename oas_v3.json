@@ -863,7 +863,7 @@
         },
         {
             "name": "Offering",
-            "description": "Offering-specific operations"
+            "description": "Offering-specific operations to add or remove offerings on a reseller's customer accounts"
         }
     ],
     "externalDocs": {
