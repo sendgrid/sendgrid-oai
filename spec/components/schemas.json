@@ -6893,15 +6893,15 @@
                     "suspended",
                     "banned",
                     "indeterminate"
-                ]
-            },
-            "description": "The state of the account (e.g., `activated`, `deactivated`, `suspended`, `banned`, or `indeterminate`)",
-            "required": [ 
-                "state"
-            ],
-            "example": {
-                "state": "activated"
+                ],
+                "description": "The state of the account (e.g., `activated`, `deactivated`, `suspended`, `banned`, or `indeterminate`)"
             }
+        },
+        "required": [ 
+            "state"
+        ],
+        "example": {
+            "state": "activated"
         }
     },
     "accountProvisioning_StateWrite": {
