@@ -305,7 +305,7 @@
     "accountProvisioning_testHeader": {
        "name": "T-Test-Account",
        "in": "header",
-       "description": "**OPTIONAL** Custom request header provided ONLY for a [test account](ZG9jOjQ1NTg3NzUx-create-a-new-customer-account#create-a-new-customer-test-account)",
+       "description": "**OPTIONAL** Custom request header provided ONLY for a test account",
        "schema": {
         "type": "string"
        },
