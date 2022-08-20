@@ -297,5 +297,78 @@
                 }
             ]
         }
+    },
+    "marketing_segments_2.0_refresh_{segment_id}": {
+        "post": {
+            "operationId": "POST_segments_refresh-segment_id",
+            "summary": "Manually refresh a segment",
+            "description": "Manually refresh a segment by segment ID.",
+            "tags": [
+                "Segmenting Contacts V2"
+            ],
+            "parameters": [
+                {
+                    "name": "segment_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "format": "uuid"
+                    }
+                }
+            ],
+            "requestBody": {
+                "$ref": "../../components/requestBodies.json#/segment_refresh_request_body"
+            },
+            "responses": {
+                "202": {
+                    "description": "The refresh was accepted and a request was sent to process.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/segment_refresh_response"
+                            },
+                            "example": {
+                                "job_id": "1588e03b-50aa-454a-97d1-e1530345a5ec"
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "Endpoint is forbidden to the user because they are a free user."
+                },
+                "404": {
+                    "description": "Segment ID was not found",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/segment_error"
+                            },
+                            "example": {
+                                "error": "Segment does not exist."
+                            }
+                        }
+                    }
+                },
+                "429": {
+                    "description": "The user has reached their limit of 2 requests per segment per day, 1 request per segment per hour, or 10 requests across all segments per day."
+                },
+                "500": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/segment_error"
+                            },
+                            "example": {
+                                "error": "Please check [Our status page](http://status.sendgrid.com/) for updates or [contact support](http://support.sendgrid.com/) if the issue is not listed."
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

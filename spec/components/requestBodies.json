@@ -8,6 +8,16 @@
             }
         }
     },
+    "segment_refresh_request_body": {
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/segment_refresh_request"
+                }
+            }
+        }
+    },
     "design-duplicate-input": {
         "content": {
             "application/json": {
