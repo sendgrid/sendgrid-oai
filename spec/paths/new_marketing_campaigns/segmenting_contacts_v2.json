@@ -363,7 +363,7 @@
                                 "$ref": "../../components/schemas.json#/segment_error"
                             },
                             "example": {
-                                "error": "Please check [Our status page](http://status.sendgrid.com/) for updates or [contact support](http://support.sendgrid.com/) if the issue is not listed."
+                                "error": "Please check [our status page](https://status.sendgrid.com/) for updates or [contact support](https://support.sendgrid.com/) if the issue is not listed."
                             }
                         }
                     }
