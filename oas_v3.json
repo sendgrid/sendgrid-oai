@@ -321,6 +321,9 @@
         "/v3/marketing/segments/2.0/{segment_id}": {
             "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts_v2.json#/marketing_segments_2.0_{segment_id}"
         },
+        "/v3/marketing/segments/2.0/refresh/{segment_id}": {
+            "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts_v2.json#/marketing_segments_2.0_refresh_{segment_id}"
+        },
         "/v3/marketing/senders": {
             "$ref": "./spec/paths/new_marketing_campaigns/senders.json#/marketing_senders"
         },
@@ -633,7 +636,7 @@
         "/v3/partners/accounts/{accountID}": {
             "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}"
         },
-       "/v3/partners/accounts/{accountID}/sso": {
+        "/v3/partners/accounts/{accountID}/sso": {
             "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_sso"
         },
         "/v3/partners/accounts/{accountID}/state": {

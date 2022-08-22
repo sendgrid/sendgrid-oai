@@ -5726,6 +5726,48 @@
             "country": "United States"
         }
     },
+    "segment_refresh_request": {
+        "title": "segment_refresh_request",
+        "required": [
+            "user_time_zone"
+        ],
+        "type": "object",
+        "properties": {
+            "user_time_zone": {
+                "type": "string",
+                "description": "The user's timezone. The timezone is used to reset the refresh count at midnight in the user's local time. Only [IANA time zone format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) is accepted."
+            }
+        },
+        "example": {
+            "user_time_zone": "America/Chicago"
+        }
+    },
+    "segment_refresh_response": {
+        "title": "segment_refresh_response",
+        "type": "object",
+        "properties": {
+            "job_id": {
+                "type": "string",
+                "description": "The ID of the manual refresh job. Used only for internal purposes."
+            }
+        },
+        "example": {
+            "job_id": "1588e03b-50aa-454a-97d1-e1530345a5ec"
+        }
+    },
+    "segment_error": {
+        "title": "error",
+        "required": [
+            "error"
+        ],
+        "type": "object",
+        "properties": {
+            "error": {
+                "type": "string",
+                "description": "A description of the error."
+            }
+        }
+    },
     "segment_status_response": {
         "title": "segment_status_response",
         "type": "object",
@@ -5888,6 +5930,18 @@
             },
             "status": {
                 "$ref": "./schemas.json#/segment_status_response"
+            },
+            "refreshes_used": {
+                "type": "integer",
+                "description": "The number of times a segment has been manually refreshed since start of today in the user's timezone."
+            },
+            "max_refreshes": {
+                "type": "integer",
+                "description": "The maximum number of manual refreshes allowed per day for this segment. Currently, only 2 are allowed."
+            },
+            "last_refreshed_at": {
+                "type": "string",
+                "description": "The ISO8601 timestamp when the segment was last refreshed in UTC time."
             }
         },
         "required": [
@@ -6887,7 +6941,7 @@
         "properties": {
             "state": {
                 "type": "string",
-                "enum": [ 
+                "enum": [
                     "activated",
                     "deactivated",
                     "suspended",
@@ -6897,7 +6951,7 @@
                 "description": "The state of the account (e.g., `activated`, `deactivated`, `suspended`, `banned`, or `indeterminate`)"
             }
         },
-        "required": [ 
+        "required": [
             "state"
         ],
         "example": {
@@ -6927,7 +6981,7 @@
     "accountProvisioning_Offering.v1": {
         "title": "Offering",
         "type": "object",
-        "description":  "An offering is a package (email infrastructure) or add-on (marketing campaigns, dedicated IP addresses, EASE) that an account can acquire. Each offering has a list of entitlements that indicate the benefits the account receives from the acquisition.",
+        "description": "An offering is a package (email infrastructure) or add-on (marketing campaigns, dedicated IP addresses, EASE) that an account can acquire. Each offering has a list of entitlements that indicate the benefits the account receives from the acquisition.",
         "properties": {
             "name": {
                 "type": "string",
@@ -6939,7 +6993,7 @@
                     "package",
                     "addon"
                 ],
-            "description": "Defines the type of offering (e.g., package or addon)."
+                "description": "Defines the type of offering (e.g., package or addon)."
             },
             "quantity": {
                 "type": "integer",
