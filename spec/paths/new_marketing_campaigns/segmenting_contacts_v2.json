@@ -60,8 +60,17 @@
             "tags": [
                 "Segmenting Contacts V2"
             ],
-            "description": "The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `result`\n-----------------:|:--------------------:|:-------------\nempty | false | all segments\nvalues | false | segments filtered by list_ids\nvalues | true | segments filtered by list_ids and segments with no parent list_ids\nempty | true | segments with no parent list_ids",
+            "description": "**This endpoint allows you to retrieve a list of segments.**\n\nThe query param `parent_list_ids` is treated as a filter.  Any match will be returned.  Zero matches will return a response code of 200 with an empty `results` array.\n\n`parent_list_ids` | `no_parent_list_id` | `ids` | `result`\n-----------------:|:--------------------:|:-------------:|:-------------:\nempty | false | empty | all segments values\nlist_ids | false | empty | segments filtered by list_ids values\nlist_ids |true | empty | segments filtered by list_ids and segments with no parent list_ids empty\nempty | true | empty | segments with no parent list_ids\nanything | anything | ids | segments with matching segment ids |",
             "parameters": [
+                {
+                    "name": "ids",
+                    "in": "query",
+                    "description": "A list of segment IDs to retrieve. When this parameter is included, the `no_parent_list_ids` and `parent_list_ids` parameters are ignored and only segments with given IDs are returned.",
+                    "required": false,
+                    "schema": {
+                        "type": "array"
+                    }
+                },
                 {
                     "name": "parent_list_ids",
                     "in": "query",
@@ -74,7 +83,7 @@
                 {
                     "name": "no_parent_list_id",
                     "in": "query",
-                    "description": "If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.",
+                    "description": "If set to `true`, segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present, it defaults to 'false'.",
                     "required": false,
                     "schema": {
                         "type": "boolean",
@@ -251,9 +260,9 @@
             "operationId": "DELETE_segments-segment_id",
             "summary": "Delete segment",
             "tags": [
-                "Segmenting Contacts V2 - Beta"
+                "Segmenting Contacts V2"
             ],
-            "description": "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**",
+            "description": "**This endpoint allows you to delete a segment by ID.**",
             "responses": {
                 "202": {
                     "description": ""

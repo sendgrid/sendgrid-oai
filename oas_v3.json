@@ -286,109 +286,109 @@
             "$ref": "./spec/paths/design_library/designs_api.json#/designs_pre-builts_{id}"
         },
         "/v3/marketing/contacts": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts"
         },
         "/v3/marketing/contacts/count": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_count"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_count"
         },
         "/v3/marketing/contacts/{id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_{id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_{id}"
         },
         "/v3/marketing/contacts/search": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_search"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_search"
         },
         "/v3/marketing/contacts/imports": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_imports"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_imports"
         },
         "/v3/marketing/contacts/imports/{id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_imports_{id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_imports_{id}"
         },
         "/v3/marketing/contacts/exports": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_exports"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_exports"
         },
         "/v3/marketing/contacts/exports/{id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_exports_{id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_exports_{id}"
         },
         "/v3/marketing/contacts/batch": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_batch"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_batch"
         },
         "/v3/marketing/contacts/search/emails": {
-            "$ref": "./spec/paths/new_marketing_campaings/contacts.json#/marketing_contacts_search_emails"
+            "$ref": "./spec/paths/new_marketing_campaigns/contacts.json#/marketing_contacts_search_emails"
         },
         "/v3/marketing/segments/2.0": {
-            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2_beta.json#/marketing_segments_2.0"
+            "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts_v2.json#/marketing_segments_2.0"
         },
         "/v3/marketing/segments/2.0/{segment_id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts_v2_beta.json#/marketing_segments_2.0_{segment_id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts_v2.json#/marketing_segments_2.0_{segment_id}"
         },
         "/v3/marketing/senders": {
-            "$ref": "./spec/paths/new_marketing_campaings/senders.json#/marketing_senders"
+            "$ref": "./spec/paths/new_marketing_campaigns/senders.json#/marketing_senders"
         },
         "/v3/marketing/lists": {
-            "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists"
+            "$ref": "./spec/paths/new_marketing_campaigns/lists.json#/marketing_lists"
         },
         "/v3/marketing/lists/{id}/contacts/count": {
-            "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists_{id}_contacts_count"
+            "$ref": "./spec/paths/new_marketing_campaigns/lists.json#/marketing_lists_{id}_contacts_count"
         },
         "/v3/marketing/lists/{id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists_{id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/lists.json#/marketing_lists_{id}"
         },
         "/v3/marketing/lists/{id}/contacts": {
-            "$ref": "./spec/paths/new_marketing_campaings/lists.json#/marketing_lists_{id}_contacts"
+            "$ref": "./spec/paths/new_marketing_campaigns/lists.json#/marketing_lists_{id}_contacts"
         },
         "/v3/marketing/field_definitions": {
-            "$ref": "./spec/paths/new_marketing_campaings/custom_fields.json#/marketing_field_definitions"
+            "$ref": "./spec/paths/new_marketing_campaigns/custom_fields.json#/marketing_field_definitions"
         },
         "/v3/marketing/field_definitions/{custom_field_id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/custom_fields.json#/marketing_field_definitions_{custom_field_id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/custom_fields.json#/marketing_field_definitions_{custom_field_id}"
         },
         "/v3/marketing/segments": {
-            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts.json#/marketing_segments"
+            "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts.json#/marketing_segments"
         },
         "/v3/marketing/segments/{segment_id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/segmenting_contacts.json#/marketing_segments_{segment_id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts.json#/marketing_segments_{segment_id}"
         },
         "/v3/marketing/singlesends": {
-            "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends"
+            "$ref": "./spec/paths/new_marketing_campaigns/single_sends.json#/marketing_singlesends"
         },
         "/v3/marketing/singlesends/{id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_{id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/single_sends.json#/marketing_singlesends_{id}"
         },
         "/v3/marketing/singlesends/search": {
-            "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_search"
+            "$ref": "./spec/paths/new_marketing_campaigns/single_sends.json#/marketing_singlesends_search"
         },
         "/v3/marketing/singlesends/{id}/schedule": {
-            "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_{id}_schedule"
+            "$ref": "./spec/paths/new_marketing_campaigns/single_sends.json#/marketing_singlesends_{id}_schedule"
         },
         "/v3/marketing/singlesends/categories": {
-            "$ref": "./spec/paths/new_marketing_campaings/single_sends.json#/marketing_singlesends_categories"
+            "$ref": "./spec/paths/new_marketing_campaigns/single_sends.json#/marketing_singlesends_categories"
         },
         "/v3/marketing/test/send_email": {
-            "$ref": "./spec/paths/new_marketing_campaings/send_test_email.json#/marketing_test_send_email"
+            "$ref": "./spec/paths/new_marketing_campaigns/send_test_email.json#/marketing_test_send_email"
         },
         "/v3/marketing/stats/automations": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_automations"
         },
         "/v3/marketing/stats/automations/{id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations_{id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_automations_{id}"
         },
         "/v3/marketing/stats/singlesends": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_singlesends"
         },
         "/v3/marketing/stats/singlesends/{id}": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends_{id}"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_singlesends_{id}"
         },
         "/v3/marketing/stats/automations/{id}/links": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations_{id}_links"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_automations_{id}_links"
         },
         "/v3/marketing/stats/singlesends/{id}/links": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends_{id}_links"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_singlesends_{id}_links"
         },
         "/v3/marketing/stats/singlesends/export": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_singlesends_export"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_singlesends_export"
         },
         "/v3/marketing/stats/automations/export": {
-            "$ref": "./spec/paths/new_marketing_campaings/marketing_campaigns_stats.json#/marketing_stats_automations_export"
+            "$ref": "./spec/paths/new_marketing_campaigns/marketing_campaigns_stats.json#/marketing_stats_automations_export"
         },
         "/v3/senders": {
             "$ref": "./spec/paths/legacy_marketing_campaigns/sender_identities_api.json#/senders"
@@ -546,6 +546,12 @@
         "/v3/suppression/bounces/{email}": {
             "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces_{email}"
         },
+        "/v3/suppression/bounces/classifications": {
+            "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces_classifications"
+        },
+        "/v3/suppression/bounces/classifications/{classification}": {
+            "$ref": "./spec/paths/supression_management/bounces.json#/suppression_bounces_classifications_{classification}"
+        },
         "/v3/suppression/blocks": {
             "$ref": "./spec/paths/supression_management/blocks.json#/suppression_blocks"
         },
@@ -691,7 +697,7 @@
             "name": "Custom Fields"
         },
         {
-            "name": "Segmenting Contacts V2 - Beta"
+            "name": "Segmenting Contacts V2"
         },
         {
             "name": "Subuser Statistics"
