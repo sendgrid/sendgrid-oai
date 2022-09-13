@@ -150,9 +150,6 @@
         "/v3/mail_settings/forward_bounce": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_forward_bounce"
         },
-        "/v3/partner_settings/new_relic": {
-            "$ref": "./spec/paths/settings/partner.json#/partner_settings_new_relic"
-        },
         "/v3/partner_settings": {
             "$ref": "./spec/paths/settings/partner.json#/partner_settings"
         },

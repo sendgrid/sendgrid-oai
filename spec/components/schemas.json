@@ -1,26 +1,4 @@
 {
-    "partner_settings_new_relic": {
-        "title": "Partner Settings: New Relic",
-        "type": "object",
-        "properties": {
-            "enable_subuser_statistics": {
-                "type": "boolean",
-                "description": "Indicates if your subuser statistics will be sent to your New Relic Dashboard."
-            },
-            "enabled": {
-                "type": "boolean",
-                "description": "Indicates if this setting is enabled. "
-            },
-            "license_key": {
-                "type": "string",
-                "description": "The license key provided with your New Relic account."
-            }
-        },
-        "required": [
-            "enabled",
-            "license_key"
-        ]
-    },
     "subscription_tracking_settings": {
         "title": "Settings: Subscription Tracking",
         "type": "object",
