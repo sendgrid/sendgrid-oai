@@ -66,6 +66,36 @@
         "/v3/sso/teammates/{username}": {
             "$ref": "./spec/paths/single_sign_on/teammates.json#/sso_teammates_{username}"
         },
+        "/v3/send_ips/pools": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools"
+        },
+        "/v3/send_ips/pools/{poolid}": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}"
+        },
+        "/v3/send_ips/pools/{poolid}/ips": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}_ips"
+        },
+        "/v3/send_ips/pools/{poolid}/ips:batchAdd": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}_ips_batchAdd"
+        },
+        "/v3/send_ips/pools/{poolid}/ips:batchDelete": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}_ips_batchDelete"
+        },
+        "/v3/send_ips/ips/{ip}/subusers": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}_subusers"
+        },
+        "/v3/send_ips/ips/{ip}/subusers:batchAdd": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}_subusers_batchAdd"
+        },
+        "/v3/send_ips/ips/{ip}/subusers:batchDelete": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}_subusers_batchDelete"
+        },
+        "/v3/send_ips/ips": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips"
+        },
+        "/v3/send_ips/ips/{ip}": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}"
+        },
         "/v3/whitelabel/links": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links"
         },

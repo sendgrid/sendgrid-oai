@@ -6988,5 +6988,36 @@
             "type": "package",
             "quantity": 1
         }
+    },
+    "IPAddressManagementAPIErrorsSchema": {
+        "type": "object",
+        "example-1": {
+            "errors": [
+                {
+                    "field": "after_key",
+                    "message": "must be a numeric value"
+                }
+            ]
+        },
+        "description": "IP Address Management Error Response Schema",
+        "properties": {
+            "errors": {
+                "type": "array",
+                "description": "An array of error objects.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "field": {
+                            "type": "string",
+                            "description": "Indicates which field caused the error. This may be an empty string if no specific field is responsible for the error."
+                        },
+                        "message": {
+                            "type": "string",
+                            "description": "An error-specific message that provides more information about the error's cause."
+                        }
+                    }
+                }
+            }
+        }
     }
 }
