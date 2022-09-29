@@ -507,7 +507,7 @@
                             "errors": [
                                 {
                                     "field": "",
-                                    "message": "missing required scope: scope1, scope2,…"
+                                    "message": "missing required scope: scope1, scope2"
                                 }
                             ]
                         }
@@ -550,7 +550,7 @@
                             "errors": [
                                 {
                                     "field": "",
-                                    "message": "missing required scope: scope1, scope2,…"
+                                    "message": "missing required scope: scope1, scope2"
                                 }
                             ]
                         }
