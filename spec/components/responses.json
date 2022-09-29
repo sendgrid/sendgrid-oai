@@ -495,5 +495,100 @@
                 }
             }
         }
+    },
+    "IPAddressManagementAPI401": {
+        "description": "Unauthorized",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/IPAddressManagementAPIErrorsSchema",
+                    "x-examples": {
+                        "example-1": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "missing required scope: scope1, scope2"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": {
+                    "Missing required scope": {
+                        "value": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "missing required scope: scope1, scope2"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "application/xml": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "field": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "x-examples": {
+                        "example-1": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "missing required scope: scope1, scope2"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "IPAddressManagement500": {
+        "description": "Internal Server Error",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/IPAddressManagementAPIErrorsSchema",
+                    "x-examples": {
+                        "example-1": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "internal server error"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": {
+                    "Generic 500": {
+                        "value": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "internal server error"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
     }
 }
