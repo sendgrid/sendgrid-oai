@@ -24,13 +24,16 @@
                     }
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         }
@@ -100,13 +103,16 @@
                     }
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         },
@@ -181,13 +187,13 @@
                     }
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
                 }
             }
         }
@@ -222,13 +228,16 @@
                     }
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         }
@@ -263,13 +272,16 @@
                     }
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         },
@@ -300,13 +312,13 @@
                     "description": "State successfully updated"
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
                 }
             }
         }
@@ -341,13 +353,16 @@
                     }
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         },
@@ -407,13 +422,13 @@
                     }
                 },
                 "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
                 }
             }
         }
@@ -441,13 +456,13 @@
                     "description": "Successful redirect to app.sendgrid.com."
                 },
                 "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
                 },
                 "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
                 },
                 "404": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorsResponse"
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         }

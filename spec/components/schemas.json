@@ -7005,7 +7005,12 @@
                 "type": "string",
                 "description": "ID representing the error as a unique nubmer."
             }
-        }
+        },
+        "required": [
+            "message",
+            "field",
+            "error_id"
+        ]
     },
     "IPAddressManagementAPIErrorsSchema": {
         "type": "object",
