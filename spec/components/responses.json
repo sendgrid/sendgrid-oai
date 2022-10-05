@@ -421,58 +421,93 @@
         "description": ""
     },
     "accountProvisioning_errorResponse_400": {
-        "description": "The request was formatted incorrectly or missing required parameters.",
+        "description": "The request was formatted incorrectly or missing required parameters",
         "content": {
             "application/json": {
                 "schema": {
                     "title": "Bad Request",
                     "type": "object",
                     "properties": {
-                        "error": {
-                            "type": "string"
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
                         }
-                    }
+                    },
+                    "required": [
+                        "errors"
+                    ]
                 },
                 "example": {
-                    "error": "Error completing your request. The request was formatted incorrectly or missing required parameters."
+                    "errors": [
+                        {
+                            "message": "Field must be a valid email",
+                            "field": "email",
+                            "error_id": "10-40002"
+                        },
+                        {
+                            "message": "Field must be a valid URL",
+                            "field": "company_website",
+                            "error_id": "10-40008"
+                        }
+                    ]
                 }
             }
         }
     },
     "accountProvisioning_errorResponse_401": {
-        "description": "Request lacks valid authentication credentials.",
+        "description": "Request lacks valid authentication credentials",
         "content": {
             "application/json": {
                 "schema": {
                     "title": "Unauthorized",
                     "type": "object",
                     "properties": {
-                        "error": {
-                            "type": "string"
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
                         }
                     }
                 },
                 "example": {
-                    "error": "Error completing your request. The request was missing valid authentication credentials."
+                    "errors": [
+                        {
+                            "message": "Failed to authenticate user",
+                            "field": "",
+                            "error_id": "10-40100"
+                        }
+                    ]
                 }
             }
         }
     },
     "accountProvisioning_errorResponse_403": {
-        "description": "Not authorized to make the request.",
+        "description": "Not authorized to make the request",
         "content": {
             "application/json": {
                 "schema": {
                     "title": "Forbidden",
                     "type": "object",
                     "properties": {
-                        "error": {
-                            "type": "string"
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
                         }
                     }
                 },
                 "example": {
-                    "error": "Error completing your request. You are not authorized to make the request."
+                    "errors": [
+                        {
+                            "message": "The authenticated user is not authorized to perfrom this request",
+                            "field": "",
+                            "error_id": "10-40300"
+                        }
+                    ]
                 }
             }
         }
@@ -485,13 +520,22 @@
                     "title": "Not Found",
                     "type": "object",
                     "properties": {
-                        "error": {
-                            "type": "string"
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
                         }
                     }
                 },
                 "example": {
-                    "error": "Error completing your request. The requested resource could not be found."
+                    "errors": [
+                        {
+                            "message": "No such endpoint",
+                            "field": "",
+                            "error_id": "10-40400"
+                        }
+                    ]
                 }
             }
         }

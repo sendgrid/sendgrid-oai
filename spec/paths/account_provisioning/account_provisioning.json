@@ -31,6 +31,9 @@
                 },
                 "403": {
                     "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         }
@@ -107,6 +110,9 @@
                 },
                 "403": {
                     "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         },
@@ -229,6 +235,9 @@
                 },
                 "403": {
                     "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         }
@@ -270,6 +279,9 @@
                 },
                 "403": {
                     "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         },
@@ -348,6 +360,9 @@
                 },
                 "403": {
                     "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
                 }
             }
         },
@@ -428,7 +443,7 @@
             "operationId": "sso",
             "summary": "Single Sign On",
             "description": "Authenticates and logs in a user to Twilio Sendgrid as a specific admin identity configured for SSO by partner. Any additional teammates or subusers will need to log in directly via app.sendgrid.com",
-            "tags": [ 
+            "tags": [
                 "Account"
             ],
             "security": [

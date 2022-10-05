@@ -6989,6 +6989,29 @@
             "quantity": 1
         }
     },
+    "accountProvisioning_errorSchema": {
+        "title": "Error",
+        "type": "object",
+        "properties": {
+            "message": {
+                "type": "string",
+                "description": "The message representing the error from the API."
+            },
+            "field": {
+                "type": "string",
+                "description": "The field associated with the error."
+            },
+            "error_id": {
+                "type": "string",
+                "description": "ID representing the error as a unique nubmer."
+            }
+        },
+        "required": [
+            "message",
+            "field",
+            "error_id"
+        ]
+    },
     "IPAddressManagementAPIErrorsSchema": {
         "type": "object",
         "example-1": {
