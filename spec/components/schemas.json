@@ -6903,6 +6903,10 @@
             "email": {
                 "type": "string",
                 "description": "Email of the account holder"
+            },
+            "timezone": {
+                "type": "string",
+                "description": "Area/Location as listed in the [IANA Time Zone database](https://www.iana.org/time-zones)"
             }
         },
         "example": {
@@ -6910,7 +6914,8 @@
             "last_name": "Wiz",
             "company_name": "Example Co",
             "company_website": "https://example.com",
-            "email": "mail@example.com"
+            "email": "mail@example.com",
+            "timezone": "Asia/Tokyo"
         }
     },
     "accountProvisioning_StateRead": {
