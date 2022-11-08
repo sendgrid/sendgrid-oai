@@ -157,7 +157,8 @@
                                 "last_name": "Wiz",
                                 "company_name": "Twilio SendGrid",
                                 "company_website": "https://sendgrid.com",
-                                "email": "test@test.com"
+                                "email": "test@test.com",
+                                "timezone": "Asia/Tokyo"
                             },
                             "offerings": [
                                 {
