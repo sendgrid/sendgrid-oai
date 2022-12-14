@@ -6892,6 +6892,10 @@
                 "type": "string",
                 "description": "Email of the account holder"
             },
+            "phone": {
+                "type": "string",
+                "description": "Phone number with a maximum of fifteen digits formatted using the E.164 standard consisting of [+] [country code] [subscriber number including area code]"
+            },
             "timezone": {
                 "type": "string",
                 "description": "Area/Location as listed in the [IANA Time Zone database](https://www.iana.org/time-zones)"

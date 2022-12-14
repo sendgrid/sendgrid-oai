@@ -447,6 +447,11 @@
                             "error_id": "10-40002"
                         },
                         {
+                            "message": "Field must be formatted using the E.164 standard consisting of [+] [country code] [subscriber number including area code] and can have a maximum of fifteen digits.",
+                            "field": "phone",
+                            "error_id": "10-40010"
+                        },
+                        {
                             "message": "Field must be a valid URL",
                             "field": "company_website",
                             "error_id": "10-40008"
