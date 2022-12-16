@@ -2621,7 +2621,19 @@
                 "maxLength": 50
             },
             "custom_fields": {
-                "$ref": "./schemas.json#/custom-fields-by-id"
+                "type": "object",
+                "description": "An object of custom field IDs and the values you want to associate with those custom fields. You can retrieve the IDs of your custom fields from the [Get All Field Definitions endpoint](https://docs.sendgrid.com/api-reference/custom-fields/get-all-field-definitions).",
+                "properties": {
+                    "": {
+                        "type": "string",
+                        "description": "The properties in this object are made up of a key (the custom field ID) and value you want associated with that custom field. For example `{\"w1\": \"coffee\"}`."
+                    }
+                },
+                "example": {
+                    "w1": "coffee",
+                    "w33": "42",
+                    "e2": "blue"
+                }
             }
         },
         "required": [
