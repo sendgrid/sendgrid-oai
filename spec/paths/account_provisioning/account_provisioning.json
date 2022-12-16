@@ -199,50 +199,6 @@
             }
         }
     },
-    "accounts_{accountID}": {
-        "parameters": [
-            {
-                "$ref": "../../components/parameters.json#/accountProvisioning_accountID"
-            }
-        ],
-        "get": {
-            "operationId": "getAccount",
-            "summary": "Get Account",
-            "description": "Retrieves information about the specified account.",
-            "tags": [
-                "Account"
-            ],
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "OK",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/accountProvisioning_Account"
-                            }
-                        }
-                    }
-                },
-                "400": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
-                },
-                "401": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
-                },
-                "403": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
-                },
-                "404": {
-                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
-                }
-            }
-        }
-    },
     "accounts_{accountID}_state": {
         "parameters": [
             {

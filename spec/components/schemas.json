@@ -6771,31 +6771,19 @@
                 "type": "string",
                 "description": "Twilio SendGrid account ID"
             },
-            "email": {
-                "type": "string",
-                "format": "email",
-                "description": "Email of the account holder"
-            },
             "created_at": {
                 "type": "string",
                 "format": "date-time",
                 "description": "Timestamp indicating when the account was created. Format is [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339)"
-            },
-            "updated_at": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Timestamp indicating when the account was last updated. Format is [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339)"
             }
         },
         "required": [
             "id",
-            "created_at",
-            "updated_at"
+            "created_at"
         ],
         "example": {
             "id": "",
-            "created_at": "2022-01-02T15:04:05Z",
-            "updated_at": "2022-03-02T15:04:05Z"
+            "created_at": "2022-01-02T15:04:05Z"
         }
     },
     "accountProvisioning_accountID": {
@@ -6915,6 +6903,10 @@
             "email": {
                 "type": "string",
                 "description": "Email of the account holder"
+            },
+            "phone": {
+                "type": "string",
+                "description": "Phone number with a maximum of fifteen digits formatted using the E.164 standard consisting of [+] [country code] [subscriber number including area code]"
             },
             "timezone": {
                 "type": "string",
