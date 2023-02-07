@@ -243,9 +243,6 @@
         "/v3/subusers/{subuser_name}/ips": {
             "$ref": "./spec/paths/settings/subusers_api.json#/subusers_{subuser_name}_ips"
         },
-        "/v3/subusers/{subuser_name}/monitor": {
-            "$ref": "./spec/paths/settings/subuser_monitor_settings.json#/subusers_{subuser_name}_monitor"
-        },
         "/v3/subusers/{subuser_name}/stats/monthly": {
             "$ref": "./spec/paths/settings/subuser_statistics.json#/subusers_{subuser_name}_stats_monthly"
         },

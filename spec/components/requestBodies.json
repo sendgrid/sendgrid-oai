@@ -45,15 +45,6 @@
             }
         }
     },
-    "monitor": {
-        "content": {
-            "application/json": {
-                "schema": {
-                    "$ref": "./schemas.json#/monitor"
-                }
-            }
-        }
-    },
     "verified-sender-request-schema": {
         "content": {
             "application/json": {

@@ -837,29 +837,6 @@
             }
         ]
     },
-    "monitor": {
-        "title": "Create monitor settings request",
-        "type": "object",
-        "properties": {
-            "email": {
-                "type": "string",
-                "description": "The email address to which Sendgrid should send emails for monitoring.",
-                "format": "email"
-            },
-            "frequency": {
-                "type": "number",
-                "description": "The frequency at which to forward monitoring emails. An email will be sent when your subuser sends this many (e.g., 1,000) emails."
-            }
-        },
-        "required": [
-            "email",
-            "frequency"
-        ],
-        "example": {
-            "email": "example@example.com",
-            "frequency": 50000
-        }
-    },
     "global_error_response_schema": {
         "title": "Global Error Response Schema",
         "type": "object",
