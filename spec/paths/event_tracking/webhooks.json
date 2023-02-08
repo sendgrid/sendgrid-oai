@@ -996,5 +996,6 @@
                 }
             ]
         }
-    }
+    },
+    "user_webhooks_event_test_{id}": {}
 }
