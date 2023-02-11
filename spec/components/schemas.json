@@ -1050,6 +1050,15 @@
                 "type": "boolean",
                 "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
             },
+            "friendly_name": {
+                "type": "string",
+                "description": "A name you assign to differentiate webhooks from one another. The friendly name is for convenience only. You should use the webhook `id` property name for any programmatic tasks.",
+                "nullable": true
+            },
+            "id": {
+                "type": "string",
+                "description": "A unique string used to identify each webhook. The webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property name."
+            },
             "oauth_client_id": {
                 "type": "string",
                 "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token."
@@ -1057,23 +1066,41 @@
             "oauth_token_url": {
                 "type": "string",
                 "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider."
+            },
+            "public_key": {
+                "type": "string",
+                "description": "If you have enabled cryptographic signing of the Twilio SendGrid Event Webhook, your public key will be returned as this property value."
+            },
+            "created_at": {
+                "type": "string",
+                "description": "An ISO 8601 timestamp in UTC timezone when the the Event Webhook was created.",
+                "format": "date-time",
+                "nullable": true
+            },
+            "updated_at": {
+                "type": "string",
+                "description": "An ISO 8601 timestamp in UTC timezone when the the Event Webhook was last modified.",
+                "format": "date-time",
+                "nullable": true
             }
-        },
-        "required": [
-            "enabled",
-            "url",
-            "group_resubscribe",
-            "delivered",
-            "group_unsubscribe",
-            "spam_report",
-            "bounce",
-            "deferred",
-            "unsubscribe",
-            "processed",
-            "open",
-            "click",
-            "dropped"
-        ]
+        }
+    },
+    "event-webhooks-all-response": {
+        "title": "Webhooks: Event Webhook Response",
+        "type": "object",
+        "properties": {
+            "max_allowed": {
+                "type": "number",
+                "description": "The maximum number of Event Webhooks you can have enabled under your current Twilio SendGrid plan. See the [Twilio SendGrid pricing page](https://sendgrid.com/pricing) for more information about the features available with each plan."
+            },
+            "webhooks": {
+                "type": "array",
+                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to post.",
+                "items": {
+                    "$ref": "#/event-webhook-response"
+                }
+            }
+        }
     },
     "user_profile": {
         "title": "User: Profile",
