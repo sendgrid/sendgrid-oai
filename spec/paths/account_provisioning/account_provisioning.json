@@ -208,7 +208,7 @@
         "delete": {
             "operationId": "deleteAcount",
             "summary": "Delete Account",
-            "description": "Delete a specific account under your organiation by account ID.",
+            "description": "Delete a specific account under your organization by account ID.",
             "tags": [
                 "Account"
             ],
