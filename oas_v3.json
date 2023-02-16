@@ -657,6 +657,9 @@
         "/v3/partners/accounts": {
             "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts"
         },
+        "/v3/partners/accounts/{accountID}": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}"
+        },
         "/v3/partners/accounts/{accountID}/sso": {
             "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_sso"
         },
