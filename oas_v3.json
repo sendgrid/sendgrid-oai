@@ -516,9 +516,6 @@
         "/v3/user/webhooks/event/settings/{id}": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_{id}"
         },
-        "/v3/user/webhooks/event/settings/signed": {
-            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_signed"
-        },
         "/v3/user/webhooks/event/settings/signed/{id}": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_signed_{id}"
         },
