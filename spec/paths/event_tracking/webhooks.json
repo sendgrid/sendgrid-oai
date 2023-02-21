@@ -93,6 +93,98 @@
         }
     },
     "user_webhooks_event_settings": {
+        "post": {
+            "operationId": "POST-webhooks-event-settings",
+            "summary": "Create a new Event Webhook",
+            "tags": [
+                "Webhooks"
+            ],
+            "description": "Create a webhook",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/event-webhook-request"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/event-webhook-response"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Error message."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Bad URL": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "'<url>' is not a valid url"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "Exists": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Webhook at '<url>' already exists. Please provide a unique URL."
+                                            }
+                                        ]
+                                    }
+                                },
+                                "Max webhooks reached": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "You have reached the maximum number of webhooks per your current billing plan."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
         "get": {
             "operationId": "GET_user-webhooks-event-settings",
             "summary": "Retrieve Event Webhook settings",
@@ -329,11 +421,226 @@
                     "Authorization": []
                 }
             ]
+        },
+        "patch": {
+            "operationId": "PATCH_user-webhooks-event-settings_ID",
+            "summary": "Update event notification settings for a specific Event Webhook.",
+            "tags": [
+                "Webhooks"
+            ],
+            "description": "**This endpoint allows you to update your current event webhook settings.**\n\nIf an event type is marked as `true`, then the event webhook will include information about that event.\n\nSendGrid\u2019s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.\n\nCommon uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "The ID of the Event Webhook you want to retrieve.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../components/schemas.json#/event-webhook-request"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/event-webhook-response"
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "enabled": true,
+                                        "url": "mollit laborum",
+                                        "group_resubscribe": false,
+                                        "delivered": true,
+                                        "group_unsubscribe": true,
+                                        "spam_report": true,
+                                        "bounce": true,
+                                        "deferred": true,
+                                        "unsubscribe": true,
+                                        "processed": true,
+                                        "open": true,
+                                        "click": false,
+                                        "dropped": true,
+                                        "oauth_client_id": "anim sunt",
+                                        "oauth_token_url": "ex"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Error message."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Account Change": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "This webhook cannot be modified based on your current billing plan."
+                                            }
+                                        ]
+                                    }
+                                },
+                                "Exists": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Webhook at '<url>' already exists. Please provide a unique URL."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not found",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Error message."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Invalid ID": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Invalid ID provided."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "delete": {
+            "operationId": "DELETE-webhooks-event-settings_ID",
+            "summary": "Delete a specific Event Webhook.",
+            "tags": [
+                "Webhooks"
+            ],
+            "description": "**This endpoint allows you to delete one of your Event Webhooks.**",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "The ID of the Event Webhook you want to retrieve.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "Success"
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Error message."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Not found": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Invalid id provided."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
         }
     },
     "user_webhooks_event_settings_signed": {
         "get": {
-            "operationId": "GET_user-webhooks-event-settings-signed",
+            "operationId": "GET_user-webhooks-event-settings-signed_ID",
             "summary": "Retrieve Signed Webhook Public Key",
             "tags": [
                 "Webhooks"
@@ -650,6 +957,117 @@
                                     "value": {
                                         "id": "12345",
                                         "public_key": "anim quis in sint"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "errors": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Error message."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Not found": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "message": "Invalid id provided."
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        },
+        "patch": {
+            "operationId": "PATCH_user-webhooks-event-settings-signed-ID",
+            "summary": "Enable/Disable Signed Webhook",
+            "tags": [
+                "Webhooks"
+            ],
+            "description": "**This endpoint allows you to enable or disable signing of the Event Webhook.**\n\nThis endpoint takes a single boolean request parameter, `enabled`. You may either enable or disable signing of the Event Webhook using this endpoint. Once enabled, you can retrieve your public key using the `/webhooks/event/settings/signed` endpoint.\n\nFor more information about cryptographically signing the Event Webhook, see [Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "The ID of the Event Webhook you want to retrieve.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "description": "Indicates whether the cryptographic signing should be enabled or disabled for the specified webhook.",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "required": [
+                                "enabled"
+                            ],
+                            "example": {
+                                "enabled": true
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "public_key": {
+                                        "type": "string",
+                                        "description": "The public key you can use to verify the Twilio SendGrid signature."
+                                    }
+                                },
+                                "required": [
+                                    "public_key"
+                                ]
+                            },
+                            "examples": {
+                                "response": {
+                                    "value": {
+                                        "public_key": "voluptate id Excepteur proident"
                                     }
                                 }
                             }

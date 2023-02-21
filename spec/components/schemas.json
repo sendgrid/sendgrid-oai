@@ -4115,7 +4115,7 @@
             "dropped"
         ]
     },
-    "webhooks-event-webhook-request": {
+    "event-webhook-request": {
         "title": "Webhooks: Event Webhook Request",
         "type": "object",
         "properties": {
@@ -4171,9 +4171,18 @@
                 "type": "boolean",
                 "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
             },
+            "friendly_name": {
+                "type": "string",
+                "description": "A name you assign to differentiate webhooks from one another. The friendly name is for convenience only. You should use the webhook `id` property name for any programmatic tasks.",
+                "nullable": true
+            },
             "oauth_client_id": {
                 "type": "string",
                 "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_token_url field."
+            },
+            "oauth_client_secret": {
+                "type": "string",
+                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again.  When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
             },
             "oauth_token_url": {
                 "type": "string",
