@@ -199,6 +199,43 @@
             }
         }
     },
+    "accounts_{accountID}": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/accountProvisioning_accountID"
+            }
+        ],
+        "delete": {
+            "operationId": "deleteAcount",
+            "summary": "Delete Account",
+            "description": "Delete a specific account under your organization by account ID.",
+            "tags": [
+                "Account"
+            ],
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "Account successfully deleted."
+                },
+                "400": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_400"
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_401"
+                },
+                "403": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_403"
+                },
+                "404": {
+                    "$ref": "../../components/responses.json#/accountProvisioning_errorResponse_404"
+                }
+            }
+        }
+    },
     "accounts_{accountID}_state": {
         "parameters": [
             {
