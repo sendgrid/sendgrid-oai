@@ -1,97 +1,4 @@
 {
-    "user_webhooks_event_settings_all": {
-        "get": {
-            "operationId": "GET_user-webhooks-event-settings-all",
-            "summary": "Retrieve all of your event webhooks.",
-            "tags": [
-                "Webhooks"
-            ],
-            "description": "TODO",
-            "parameters": [
-                {
-                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Success",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "../../components/schemas.json#/event-webhooks-all-response"
-                            },
-                            "examples": {
-                                "Two Webhooks": {
-                                    "value": {
-                                        "max_allowed": 5,
-                                        "webhooks": [
-                                            {
-                                                "enabled": false,
-                                                "url": "https://transactional.example.com",
-                                                "group_resubscribe": false,
-                                                "delivered": true,
-                                                "group_unsubscribe": false,
-                                                "spam_report": true,
-                                                "bounce": true,
-                                                "deferred": true,
-                                                "unsubscribe": true,
-                                                "processed": true,
-                                                "open": true,
-                                                "click": true,
-                                                "dropped": true,
-                                                "friendly_name": "Signed",
-                                                "id": "12345",
-                                                "oauth_client_id": "est fugiat",
-                                                "oauth_token_url": "Duis in laborum sunt",
-                                                "public_key": "dsjfklasdjfaj;sdf",
-                                                "created_at": "2023-01-01T12:00:00Z",
-                                                "updated_at": "2023-02-15T10:00:00Z"
-                                            },
-                                            {
-                                                "enabled": false,
-                                                "url": "https://transactional.example.com",
-                                                "group_resubscribe": false,
-                                                "delivered": true,
-                                                "group_unsubscribe": false,
-                                                "spam_report": true,
-                                                "bounce": true,
-                                                "deferred": true,
-                                                "unsubscribe": true,
-                                                "processed": true,
-                                                "open": true,
-                                                "click": true,
-                                                "dropped": true,
-                                                "friendly_name": "UnSigned",
-                                                "id": "12345",
-                                                "oauth_client_id": "est fugiat",
-                                                "oauth_token_url": "Duis in laborum sunt",
-                                                "public_key": "dsjfklasdjfaj;sdf",
-                                                "created_at": "2023-01-01T12:00:00Z",
-                                                "updated_at": "2023-01-01T12:00:00Z"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "Zero Webhooks": {
-                                    "value": {
-                                        "max_allowed": 5,
-                                        "webhooks": [
-                                            {}
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "Authorization": []
-                }
-            ]
-        }
-    },
     "user_webhooks_event_settings": {
         "post": {
             "operationId": "POST-webhooks-event-settings",
@@ -171,6 +78,99 @@
                                             {
                                                 "message": "You have reached the maximum number of webhooks per your current billing plan."
                                             }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "Authorization": []
+                }
+            ]
+        }
+    },
+    "user_webhooks_event_settings_all": {
+        "get": {
+            "operationId": "GET_user-webhooks-event-settings-all",
+            "summary": "Retrieve all of your event webhooks.",
+            "tags": [
+                "Webhooks"
+            ],
+            "description": "TODO",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/event-webhooks-all-response"
+                            },
+                            "examples": {
+                                "Two Webhooks": {
+                                    "value": {
+                                        "max_allowed": 5,
+                                        "webhooks": [
+                                            {
+                                                "enabled": false,
+                                                "url": "https://transactional.example.com",
+                                                "group_resubscribe": false,
+                                                "delivered": true,
+                                                "group_unsubscribe": false,
+                                                "spam_report": true,
+                                                "bounce": true,
+                                                "deferred": true,
+                                                "unsubscribe": true,
+                                                "processed": true,
+                                                "open": true,
+                                                "click": true,
+                                                "dropped": true,
+                                                "friendly_name": "Signed",
+                                                "id": "12345",
+                                                "oauth_client_id": "est fugiat",
+                                                "oauth_token_url": "Duis in laborum sunt",
+                                                "public_key": "dsjfklasdjfaj;sdf",
+                                                "created_at": "2023-01-01T12:00:00Z",
+                                                "updated_at": "2023-02-15T10:00:00Z"
+                                            },
+                                            {
+                                                "enabled": false,
+                                                "url": "https://transactional.example.com",
+                                                "group_resubscribe": false,
+                                                "delivered": true,
+                                                "group_unsubscribe": false,
+                                                "spam_report": true,
+                                                "bounce": true,
+                                                "deferred": true,
+                                                "unsubscribe": true,
+                                                "processed": true,
+                                                "open": true,
+                                                "click": true,
+                                                "dropped": true,
+                                                "friendly_name": "UnSigned",
+                                                "id": "12345",
+                                                "oauth_client_id": "est fugiat",
+                                                "oauth_token_url": "Duis in laborum sunt",
+                                                "public_key": "dsjfklasdjfaj;sdf",
+                                                "created_at": "2023-01-01T12:00:00Z",
+                                                "updated_at": "2023-01-01T12:00:00Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "Zero Webhooks": {
+                                    "value": {
+                                        "max_allowed": 5,
+                                        "webhooks": [
+                                            {}
                                         ]
                                     }
                                 }
