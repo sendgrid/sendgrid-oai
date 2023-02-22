@@ -16,7 +16,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "../../components/schemas.json#/event-webhook-request"
+                            "$ref": "../../components/schemas.json#/event-webhook-requestBody"
                         }
                     }
                 }
@@ -27,7 +27,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "../../components/schemas.json#/event-webhook-response"
+                                "$ref": "../../components/schemas.json#/event-webhook-responseBody"
                             }
                         }
                     }
@@ -112,7 +112,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "../../components/schemas.json#/event-webhooks-all-response"
+                                "$ref": "../../components/schemas.json#/event-webhook-all-responseBody"
                             },
                             "examples": {
                                 "Two Webhooks": {
@@ -214,7 +214,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "../../components/schemas.json#/event-webhook-response"
+                                "$ref": "../../components/schemas.json#/event-webhook-responseBody"
                             },
                             "examples": {
                                 "One of Multiple Webhooks": {
@@ -336,7 +336,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "../../components/schemas.json#/event-webhook-request"
+                            "$ref": "../../components/schemas.json#/event-webhook-requestBody"
                         }
                     }
                 }
@@ -347,7 +347,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "../../components/schemas.json#/event-webhook-response"
+                                "$ref": "../../components/schemas.json#/event-webhook-responseBody"
                             },
                             "examples": {
                                 "response": {

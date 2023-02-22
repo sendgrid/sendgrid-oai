@@ -994,7 +994,97 @@
             "utm_campaign": "website"
         }
     },
-    "event-webhook-response": {
+    "event-webhook-requestBody": {
+        "title": "Webhooks: Event Webhook Request",
+        "type": "object",
+        "properties": {
+            "enabled": {
+                "type": "boolean",
+                "description": "Indicates if the event webhook is enabled."
+            },
+            "url": {
+                "type": "string",
+                "description": "The URL that you want the event webhook to POST to."
+            },
+            "group_resubscribe": {
+                "type": "boolean",
+                "description": "Recipient resubscribes to specific group by updating preferences. You need to enable Subscription Tracking for getting this type of event."
+            },
+            "delivered": {
+                "type": "boolean",
+                "description": "Message has been successfully delivered to the receiving server."
+            },
+            "group_unsubscribe": {
+                "type": "boolean",
+                "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
+            },
+            "spam_report": {
+                "type": "boolean",
+                "description": "Recipient marked a message as spam."
+            },
+            "bounce": {
+                "type": "boolean",
+                "description": "Receiving server could not or would not accept message."
+            },
+            "deferred": {
+                "type": "boolean",
+                "description": "Recipient's email server temporarily rejected message."
+            },
+            "unsubscribe": {
+                "type": "boolean",
+                "description": "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
+            },
+            "processed": {
+                "type": "boolean",
+                "description": "Message has been received and is ready to be delivered."
+            },
+            "open": {
+                "type": "boolean",
+                "description": "Recipient has opened the HTML message. You need to enable Open Tracking for getting this type of event."
+            },
+            "click": {
+                "type": "boolean",
+                "description": "Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event."
+            },
+            "dropped": {
+                "type": "boolean",
+                "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
+            },
+            "friendly_name": {
+                "type": "string",
+                "description": "A name you assign to differentiate webhooks from one another. The friendly name is for convenience only. You should use the webhook `id` property name for any programmatic tasks.",
+                "nullable": true
+            },
+            "oauth_client_id": {
+                "type": "string",
+                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_token_url field."
+            },
+            "oauth_client_secret": {
+                "type": "string",
+                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again.  When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
+            },
+            "oauth_token_url": {
+                "type": "string",
+                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the oauth_client_id field."
+            }
+        },
+        "required": [
+            "enabled",
+            "url",
+            "group_resubscribe",
+            "delivered",
+            "group_unsubscribe",
+            "spam_report",
+            "bounce",
+            "deferred",
+            "unsubscribe",
+            "processed",
+            "open",
+            "click",
+            "dropped"
+        ]
+    },
+    "event-webhook-responseBody": {
         "title": "Webhooks: Event Webhook Response",
         "type": "object",
         "properties": {
@@ -1085,7 +1175,7 @@
             }
         }
     },
-    "event-webhooks-all-response": {
+    "event-webhook-all-responseBody": {
         "title": "Webhooks: Event Webhook Response",
         "type": "object",
         "properties": {
@@ -1097,7 +1187,7 @@
                 "type": "array",
                 "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to post.",
                 "items": {
-                    "$ref": "#/event-webhook-response"
+                    "$ref": "#/event-webhook-responseBody"
                 }
             }
         }
@@ -2809,26 +2899,6 @@
             }
         }
     },
-    "webhook": {
-        "title": "webhook",
-        "type": "object",
-        "properties": {
-            "url": {
-                "type": "string",
-                "description": "The URL to invoke in the webhook"
-            },
-            "nonce": {
-                "type": "string",
-                "description": "The one time nonce to use when \"signature\" is \"hmac-sha1\"",
-                "minLength": 8,
-                "maxLength": 32
-            }
-        },
-        "required": [
-            "url",
-            "nonce"
-        ]
-    },
     "list": {
         "title": "list",
         "type": "object",
@@ -4028,181 +4098,6 @@
                 "email": "john_doe@example.com",
                 "name": "John Doe"
             }
-        ]
-    },
-    "event-webhook-update-oauth-request": {
-        "title": "Webhooks: Event Webhook Update with OAuth Request",
-        "type": "object",
-        "properties": {
-            "enabled": {
-                "type": "boolean",
-                "description": "Indicates if the event webhook is enabled."
-            },
-            "url": {
-                "type": "string",
-                "description": "The URL that you want the event webhook to POST to."
-            },
-            "group_resubscribe": {
-                "type": "boolean",
-                "description": "Recipient resubscribes to specific group by updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "delivered": {
-                "type": "boolean",
-                "description": "Message has been successfully delivered to the receiving server."
-            },
-            "group_unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "spam_report": {
-                "type": "boolean",
-                "description": "Recipient marked a message as spam."
-            },
-            "bounce": {
-                "type": "boolean",
-                "description": "Receiving server could not or would not accept message."
-            },
-            "deferred": {
-                "type": "boolean",
-                "description": "Recipient's email server temporarily rejected message."
-            },
-            "unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "processed": {
-                "type": "boolean",
-                "description": "Message has been received and is ready to be delivered."
-            },
-            "open": {
-                "type": "boolean",
-                "description": "Recipient has opened the HTML message. You need to enable Open Tracking for getting this type of event."
-            },
-            "click": {
-                "type": "boolean",
-                "description": "Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event."
-            },
-            "dropped": {
-                "type": "boolean",
-                "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
-            },
-            "oauth_client_id": {
-                "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_token_url field."
-            },
-            "oauth_client_secret": {
-                "type": "string",
-                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again.  When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
-            },
-            "oauth_token_url": {
-                "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the oauth_client_id field."
-            }
-        },
-        "required": [
-            "enabled",
-            "url",
-            "group_resubscribe",
-            "delivered",
-            "group_unsubscribe",
-            "spam_report",
-            "bounce",
-            "deferred",
-            "unsubscribe",
-            "processed",
-            "open",
-            "click",
-            "dropped"
-        ]
-    },
-    "event-webhook-request": {
-        "title": "Webhooks: Event Webhook Request",
-        "type": "object",
-        "properties": {
-            "enabled": {
-                "type": "boolean",
-                "description": "Indicates if the event webhook is enabled."
-            },
-            "url": {
-                "type": "string",
-                "description": "The URL that you want the event webhook to POST to."
-            },
-            "group_resubscribe": {
-                "type": "boolean",
-                "description": "Recipient resubscribes to specific group by updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "delivered": {
-                "type": "boolean",
-                "description": "Message has been successfully delivered to the receiving server."
-            },
-            "group_unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "spam_report": {
-                "type": "boolean",
-                "description": "Recipient marked a message as spam."
-            },
-            "bounce": {
-                "type": "boolean",
-                "description": "Receiving server could not or would not accept message."
-            },
-            "deferred": {
-                "type": "boolean",
-                "description": "Recipient's email server temporarily rejected message."
-            },
-            "unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "processed": {
-                "type": "boolean",
-                "description": "Message has been received and is ready to be delivered."
-            },
-            "open": {
-                "type": "boolean",
-                "description": "Recipient has opened the HTML message. You need to enable Open Tracking for getting this type of event."
-            },
-            "click": {
-                "type": "boolean",
-                "description": "Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event."
-            },
-            "dropped": {
-                "type": "boolean",
-                "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
-            },
-            "friendly_name": {
-                "type": "string",
-                "description": "A name you assign to differentiate webhooks from one another. The friendly name is for convenience only. You should use the webhook `id` property name for any programmatic tasks.",
-                "nullable": true
-            },
-            "oauth_client_id": {
-                "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_token_url field."
-            },
-            "oauth_client_secret": {
-                "type": "string",
-                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again.  When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
-            },
-            "oauth_token_url": {
-                "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the oauth_client_id field."
-            }
-        },
-        "required": [
-            "enabled",
-            "url",
-            "group_resubscribe",
-            "delivered",
-            "group_unsubscribe",
-            "spam_report",
-            "bounce",
-            "deferred",
-            "unsubscribe",
-            "processed",
-            "open",
-            "click",
-            "dropped"
         ]
     },
     "reply_to_email_object": {
