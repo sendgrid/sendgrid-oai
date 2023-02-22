@@ -756,6 +756,10 @@
                         "schema": {
                             "type": "object",
                             "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "The ID of the Event Webhook you want to retrieve."
+                                },
                                 "url": {
                                     "type": "string",
                                     "description": "The URL where you would like the test notification to be sent."
@@ -795,7 +799,6 @@
             ]
         }
     },
-    "user_webhooks_event_test_{id}": {},
     "user_webhooks_parse_settings": {
         "get": {
             "operationId": "GET_user-webhooks-parse-settings",
