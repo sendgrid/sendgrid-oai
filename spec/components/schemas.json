@@ -1048,7 +1048,7 @@
             },
             "dropped": {
                 "type": "boolean",
-                "description": "Set this property to `true` to receive dropped events. Dropped events occur when your message is not delivered by Twilio SendGrid. Dropped events are accomponied by a `reason` property, which indicates why the message was dropped. Reasons for a dropped message include: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
+                "description": "Set this property to `true` to receive dropped events. Dropped events occur when your message is not delivered by Twilio SendGrid. Dropped events are accomponied by a `reason` property, which indicates why the message was dropped. Reasons for a dropped message include: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota."
             },
             "friendly_name": {
                 "type": "string",
@@ -1085,69 +1085,68 @@
         ]
     },
     "event-webhook-responseBody": {
-        "title": "Webhooks: Event Webhook Response",
+        "title": "Event Webhook Response Body",
         "type": "object",
         "properties": {
             "enabled": {
                 "type": "boolean",
-                "description": "Indicates if the event webhook is enabled."
+                "description": "Indicates if the Event Webhook is enabled."
             },
             "url": {
                 "type": "string",
-                "description": "The URL that you want the event webhook to POST to."
+                "description": "The URL that the Event Webhook will POST to."
             },
             "group_resubscribe": {
                 "type": "boolean",
-                "description": "Recipient resubscribes to specific group by updating preferences. You need to enable Subscription Tracking for getting this type of event."
+                "description": "Indicates if the webhook is configured to send group resubscribe events. Group resubscribes occur when recipients resubscribe to a specific [unsubscribe group](https://docs.sendgrid.com/ui/sending-email/create-and-manage-unsubscribe-groups) by updating their subscription preferences. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
             },
             "delivered": {
                 "type": "boolean",
-                "description": "Message has been successfully delivered to the receiving server."
+                "description": "Indicates if the webhook is configured to send delivered events. Delivered events occur when a message has been successfully delivered to the receiving server."
             },
             "group_unsubscribe": {
                 "type": "boolean",
-                "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
+                "description": "Indicates if the webhook is configured to send group unsubscribe events. Group unsubscribes occur when recipients unsubscribe from a specific [unsubscribe group](https://docs.sendgrid.com/ui/sending-email/create-and-manage-unsubscribe-groups) either by direct link or by updating their subscription preferences. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
             },
             "spam_report": {
                 "type": "boolean",
-                "description": "Recipient marked a message as spam."
+                "description": "Indicates if the webhook is configured to send spam report events. Spam reports occur when recipients mark a message as spam."
             },
             "bounce": {
                 "type": "boolean",
-                "description": "Receiving server could not or would not accept message."
+                "description": "Indicates if the webhook is configured to send bounce events. A bounce occurs when a receiving server could not or would not accept a message."
             },
             "deferred": {
                 "type": "boolean",
-                "description": "Recipient's email server temporarily rejected message."
+                "description": "Indicates if the webhook is configured to send deferred events. Deferred events occur when a recipient's email server temporarily rejects a message."
             },
             "unsubscribe": {
                 "type": "boolean",
-                "description": "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
+                "description": "Indicates if the webhook is configured to send unsubscribe events. Unsubscribes occur when recipients click on a message's subscription management link. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
             },
             "processed": {
                 "type": "boolean",
-                "description": "Message has been received and is ready to be delivered."
+                "description": "Indicates if the webhook is configured to send processed events. Processed events occur when a message has been received by Twilio SendGrid and is ready to be delivered."
             },
             "open": {
                 "type": "boolean",
-                "description": "Recipient has opened the HTML message. You need to enable Open Tracking for getting this type of event."
+                "description": "Indicates if the webhook is configured to send open events. Open events occur when a recipient has opened the HTML message. You must [enable Open Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#open-tracking) to receive this type of event."
             },
             "click": {
                 "type": "boolean",
-                "description": "Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event."
+                "description": "Indicates if the webhook is configured to send click events. Click events occur when a recipient clicks on a link within the message. You must [enable Click Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#click-tracking) to receive this type of event."
             },
             "dropped": {
                 "type": "boolean",
-                "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
+                "description": "Indicates if the webhook is configured to send dropped events. Dropped events occur when your message is not delivered by Twilio SendGrid. Dropped events are accomponied by a `reason` property, which indicates why the message was dropped. Reasons for a dropped message include: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota."
             },
             "friendly_name": {
                 "type": "string",
-                "description": "A name you assign to differentiate webhooks from one another. The friendly name is for convenience only. You should use the webhook `id` property name for any programmatic tasks.",
-                "nullable": true
+                "description": "An optional friendly name assigned to the Event Webhook to help you differentiate it. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks."
             },
             "id": {
                 "type": "string",
-                "description": "A unique string used to identify each webhook. The webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property name."
+                "description": "A unique string used to identify the webhook. A webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property."
             },
             "oauth_client_id": {
                 "type": "string",
@@ -1159,7 +1158,7 @@
             },
             "public_key": {
                 "type": "string",
-                "description": "If you have enabled cryptographic signing of the Twilio SendGrid Event Webhook, your public key will be returned as this property value."
+                "description": "The public key assigned to your webhook for signature verification. This property is available only if you have enabled cryptographic signing for the Webhook."
             },
             "created_at": {
                 "type": "string",
@@ -1176,7 +1175,7 @@
         }
     },
     "event-webhook-all-responseBody": {
-        "title": "Webhooks: Event Webhook Response",
+        "title": "Event Webhook Response Body: All Webhooks",
         "type": "object",
         "properties": {
             "max_allowed": {
@@ -1185,7 +1184,7 @@
             },
             "webhooks": {
                 "type": "array",
-                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to post.",
+                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to POST.",
                 "items": {
                     "$ref": "#/event-webhook-responseBody"
                 }
