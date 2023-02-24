@@ -1004,8 +1004,7 @@
             },
             "url": {
                 "type": "string",
-                "description": "The URL that you want the Event Webhook to POST to.",
-                "format": "uri"
+                "description": "The URL that you want the Event Webhook to POST to."
             },
             "group_resubscribe": {
                 "type": "boolean",
@@ -1098,8 +1097,7 @@
             },
             "url": {
                 "type": "string",
-                "description": "The URL that the Event Webhook will POST to.",
-                "format": "uri"
+                "description": "The URL that the Event Webhook will POST to."
             },
             "group_resubscribe": {
                 "type": "boolean",
