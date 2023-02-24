@@ -1004,7 +1004,8 @@
             },
             "url": {
                 "type": "string",
-                "description": "The URL that you want the Event Webhook to POST to."
+                "description": "The URL that you want the Event Webhook to POST to.",
+                "format": "uri"
             },
             "group_resubscribe": {
                 "type": "boolean",
@@ -1057,15 +1058,18 @@
             },
             "oauth_client_id": {
                 "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this property, you must also include the `oauth_token_url` property."
+                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this property, you must also include the `oauth_token_url` property.",
+                "nullable": true
             },
             "oauth_client_secret": {
                 "type": "string",
-                "description": "The `oauth_client_secret` is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties."
+                "description": "The `oauth_client_secret` is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
+                "nullable": true
             },
             "oauth_token_url": {
                 "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the `oauth_client_id` property."
+                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the `oauth_client_id` property.",
+                "nullable": true
             }
         },
         "required": [
@@ -1094,7 +1098,8 @@
             },
             "url": {
                 "type": "string",
-                "description": "The URL that the Event Webhook will POST to."
+                "description": "The URL that the Event Webhook will POST to.",
+                "format": "uri"
             },
             "group_resubscribe": {
                 "type": "boolean",
@@ -1142,7 +1147,8 @@
             },
             "friendly_name": {
                 "type": "string",
-                "description": "An optional friendly name assigned to the Event Webhook to help you differentiate it. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks."
+                "description": "An optional friendly name assigned to the Event Webhook to help you differentiate it. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks.",
+                "nullable": true
             },
             "id": {
                 "type": "string",
@@ -1150,27 +1156,28 @@
             },
             "oauth_client_id": {
                 "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token."
+                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token.",
+                "nullable": true
             },
             "oauth_token_url": {
                 "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider."
+                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider.",
+                "nullable": true
             },
             "public_key": {
                 "type": "string",
-                "description": "The public key assigned to your webhook for signature verification. This property is available only if you have enabled cryptographic signing for the Webhook."
+                "description": "The public key assigned to your webhook for signature verification. This property is available only if you have enabled cryptographic signing for the Webhook.",
+                "nullable": true
             },
-            "created_at": {
+            "created_date": {
                 "type": "string",
                 "description": "An ISO 8601 timestamp in UTC timezone when the the Event Webhook was created.",
-                "format": "date-time",
-                "nullable": true
+                "format": "date-time"
             },
-            "updated_at": {
+            "updated_date": {
                 "type": "string",
                 "description": "An ISO 8601 timestamp in UTC timezone when the the Event Webhook was last modified.",
-                "format": "date-time",
-                "nullable": true
+                "format": "date-time"
             }
         }
     },

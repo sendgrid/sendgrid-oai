@@ -6,7 +6,7 @@
             "tags": [
                 "Webhooks"
             ],
-            "description": "Create a webhook",
+            "description": "**This endpoint allows you to create a new Event Webhook.**\n\nWhen creating a webhook, you will provide a URL where you want the webhook to POST events, and you will select which events you want to receive. See the \"[Event Webhook Reference](https://docs.sendgrid.com/for-developers/tracking-events/event#delivery-events)\" for details about each event.\n\n### Webhook identifiers\n\nWhen your webhook is succesfully created, you will receive a webhook `id` in the response returned by this endpoint. You can use that ID to [update the webhook's settings](https://docs.sendgrid.com/api-reference/webhooks/update-event-notification-settings), [delete the webhook](#), [enable or disable signature verification for the webhook](https://docs.sendgrid.com/for-developers/tracking-events/event#delivery-events), and [retrieve the webhook's public key](https://docs.sendgrid.com/api-reference/webhooks/retrieve-signed-webhook-public-key) when signature verification is enabled.\n\nYou may also assign an optional friendly name to each of your webhooks. The friendly name is for convenience only and should not be used to programmatically differentiate your webhooks because it does not need to be unique. Use the webhook ID to reliably differentiate among your webhooks.\n\n### Signature verification\n\nEnabling signature verification for your webhook is a separate process and cannot be done at the time of creation with this endpoint. You can use the webhook ID to [enable or disable signature verification with the endpoint dedicated for that operation](https://docs.sendgrid.com/api-reference/webhooks/enable-disable-signed-webhook).\n\n### OAuth\n\nYou may share one OAuth configuration across all your webhooks or create unique credentials for each.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -17,6 +17,49 @@
                     "application/json": {
                         "schema": {
                             "$ref": "../../components/schemas.json#/event-webhook-requestBody"
+                        },
+                        "examples": {
+                            "Request With OAuth Configured": {
+                                "summary": "POST request body to create an Event Webhook with OAuth configured.",
+                                "value": {
+                                    "enabled": true,
+                                    "url": "https://example.com/webhook-endpoint",
+                                    "group_resubscribe": true,
+                                    "delivered": false,
+                                    "group_unsubscribe": true,
+                                    "spam_report": true,
+                                    "bounce": true,
+                                    "deferred": true,
+                                    "unsubscribe": true,
+                                    "processed": false,
+                                    "open": true,
+                                    "click": true,
+                                    "dropped": true,
+                                    "friendly_name": "Enagement Webhook",
+                                    "oauth_client_id": "a835e7210bbb47edbfa71bdfc909b2d7",
+                                    "oauth_client_secret": "335a9b0c65324fd2a62e2953d4b158",
+                                    "oauth_token_url": "https://oauthservice.example.com"
+                                }
+                            },
+                            "Request Without OAuth Configured": {
+                                "summary": "POST request body to create an Event Webhook without OAuth configured.",
+                                "value": {
+                                    "enabled": true,
+                                    "url": "https://example.com/webhook-endpoint",
+                                    "group_resubscribe": true,
+                                    "delivered": false,
+                                    "group_unsubscribe": true,
+                                    "spam_report": true,
+                                    "bounce": true,
+                                    "deferred": true,
+                                    "unsubscribe": true,
+                                    "processed": false,
+                                    "open": true,
+                                    "click": true,
+                                    "dropped": true,
+                                    "friendly_name": ""
+                                }
+                            }
                         }
                     }
                 }
@@ -28,6 +71,32 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "../../components/schemas.json#/event-webhook-responseBody"
+                            },
+                            "examples": {
+                                "Success With OAuth Configured": {
+                                    "summary": "Success response body for a webhook with OAuth configured.",
+                                    "value": {
+                                        "enabled": true,
+                                        "url": "https://example.com/webhook-endpoint",
+                                        "group_resubscribe": true,
+                                        "delivered": false,
+                                        "group_unsubscribe": true,
+                                        "spam_report": true,
+                                        "bounce": true,
+                                        "deferred": true,
+                                        "unsubscribe": true,
+                                        "processed": false,
+                                        "open": true,
+                                        "click": true,
+                                        "dropped": true,
+                                        "friendly_name": "Enagement Webhook",
+                                        "oauth_client_id": "a835e7210bbb47edbfa71bdfc909b2d7",
+                                        "oauth_token_url": "https://oauthservice.example.com",
+                                        "id": "77d4a5da-7015-11ed-a1eb-0242ac120002",
+                                        "created_date": "2023-01-01T12:00:00Z",
+                                        "updated_date": "2023-02-15T10:00:00Z"
+                                    }
+                                }
                             }
                         }
                     }
@@ -58,7 +127,7 @@
                                     "value": {
                                         "errors": [
                                             {
-                                                "message": "'<url>' is not a valid url"
+                                                "message": "'https://example.com' is not a valid url"
                                             }
                                         ]
                                     }
@@ -67,7 +136,7 @@
                                     "value": {
                                         "errors": [
                                             {
-                                                "message": "Webhook at '<url>' already exists. Please provide a unique URL."
+                                                "message": "Webhook at 'https://example.com' already exists. Please provide a unique URL."
                                             }
                                         ]
                                     }
