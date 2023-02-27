@@ -540,7 +540,7 @@
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to delete one of your Event Webhooks.**",
+            "description": "**This endpoint allows you to delete a specific Event Webhook by ID.**\n\nUnlike the \"[Get a Specific Event Webhook](#)\" and \"[Update a Specific Webhook](#)\" endpoints, you must pass an ID to this endpoint or SendGrid will return an error. This behavior prevents customers from unintentionally deleting a webhook. You can retrieve your webhooks' IDs using the \"[Get All Event Webhooks](#)\" endpoint.\n\n### Enable or disable the webhook\n\nThis endpoint will permanently delete the webhook you specify. If you instead want to disable a webhook, you can set the `enabled` property to `false` with the \"[Update a Specific Webhook](#)\" endpoint.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -562,7 +562,7 @@
             ],
             "responses": {
                 "204": {
-                    "description": "Success"
+                    "description": "No Content"
                 },
                 "404": {
                     "description": "",
