@@ -165,11 +165,11 @@
     "user_webhooks_event_settings_all": {
         "get": {
             "operationId": "GET_user-webhooks-event-settings-all",
-            "summary": "Retrieve all of your event webhooks.",
+            "summary": "Retrieve all of your Event Webhooks.",
             "tags": [
                 "Webhooks"
             ],
-            "description": "TODO",
+            "description": "**This endpoint allows you to retrieve all of your Event Webhooks.**\n\nEach webhook will be returned as an object in the `webhooks` array with the webhook's configuration details and ID. You can use a webhook's ID to [update the webhook's settings](https://docs.sendgrid.com/api-reference/webhooks/update-event-notification-settings), [delete the webhook](#), [enable or disable signature verification for the webhook](https://docs.sendgrid.com/for-developers/tracking-events/event#delivery-events), and [retrieve the webhook's public key](https://docs.sendgrid.com/api-reference/webhooks/retrieve-signed-webhook-public-key) when signature verification is enabled.\n\n###Event settings\n\nEach webhook's settings include the events that will be POSTed by the webhook and the URL where they will be sent. See the \"[Event Webhook Reference](https://docs.sendgrid.com/for-developers/tracking-events/event#delivery-events)\" for details about each event.\n\n### Signature verification\n\nThe `public_key` property will be returned only for webhooks with signature verification enabled.\n\n### OAuth\n\nYou may share one OAuth configuration across all your webhooks or create unique credentials for each. The OAuth properties will be returned only for webhooks with OAuth configured.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
