@@ -610,11 +610,11 @@
     "user_webhooks_event_settings_signed_{id}": {
         "get": {
             "operationId": "GET_user-webhooks-event-settings-signed-id",
-            "summary": "Retrieve Signed Webhook Public Key",
+            "summary": "Retrieve the public key for a specific signed Event Webhook by ID.",
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to retrieve your signed webhook's public key.**\n\nOnce you have enabled signing of the Event Webhook, you will need the public key provided to verify the signatures on requests coming from Twilio SendGrid. You can retrieve the public key from this endpoint at any time.\n\nFor more information about cryptographically signing the Event Webhook, see [Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).",
+            "description": "**This endpoint allows you to retrieve the public key for a specific Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will return the public key for your oldest webhook by `created_date`. This means you can retrieve a public key for your only webhook if you do not have more than one available. If you have multiple webhooks, you can retrieve their IDs using the \"[Get All Event Webhooks](#)\" endpoint.\n\nOnce you have enabled signature verification for a webhook, you will need the public key provided to verify the signatures on requests coming from Twilio SendGrid. You can use the webhook ID to [enable or disable signature verification with the endpoint dedicated for that operation](https://docs.sendgrid.com/api-reference/webhooks/enable-disable-signed-webhook).\n\nFor more information about cryptographically signing the Event Webhook, see \"[Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).\"",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -636,32 +636,33 @@
             ],
             "responses": {
                 "200": {
-                    "description": "",
+                    "description": "Success",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "A unique string used to identify the webhook. A webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property."
+                                    },
                                     "public_key": {
                                         "type": "string",
                                         "description": "The public key you can use to verify the Twilio SendGrid signature."
                                     }
-                                },
-                                "required": [
-                                    "public_key"
-                                ]
+                                }
                             },
                             "examples": {
                                 "No ID": {
                                     "value": {
                                         "id": "",
-                                        "public_key": "anim quis in sint"
+                                        "public_key": "123publickeyabc"
                                     }
                                 },
                                 "ID": {
                                     "value": {
-                                        "id": "12345",
-                                        "public_key": "anim quis in sint"
+                                        "id": "77d4a5da-7015-11ed-a1eb-0242ac120002",
+                                        "public_key": "123publickeyabc"
                                     }
                                 }
                             }
