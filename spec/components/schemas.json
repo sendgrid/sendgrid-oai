@@ -1087,8 +1087,7 @@
             "dropped"
         ]
     },
-    "event-webhook-responseBody": {
-        "title": "Event Webhook Response Body",
+    "event-webhook-base-response-props": {
         "type": "object",
         "properties": {
             "enabled": {
@@ -1152,21 +1151,6 @@
                 "type": "string",
                 "description": "A unique string used to identify the webhook. A webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property."
             },
-            "oauth_client_id": {
-                "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token.",
-                "nullable": true
-            },
-            "oauth_token_url": {
-                "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider.",
-                "nullable": true
-            },
-            "public_key": {
-                "type": "string",
-                "description": "The public key assigned to your webhook for signature verification. This property is available only if you have enabled cryptographic signing for the Webhook.",
-                "nullable": true
-            },
             "created_date": {
                 "type": "string",
                 "description": "An ISO 8601 timestamp in UTC timezone when the the Event Webhook was created.",
@@ -1179,6 +1163,53 @@
             }
         }
     },
+    "event-webhook-oauth-response-props": {
+        "type": "object",
+        "properties": {
+            "oauth_client_id": {
+                "type": "string",
+                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token.",
+                "nullable": true
+            },
+            "oauth_token_url": {
+                "type": "string",
+                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider.",
+                "nullable": true
+            }
+        }
+    },
+    "event-webhook-signed-response-prop": {
+        "type": "object",
+        "properties": {
+            "public_key": {
+                "type": "string",
+                "description": "When signature verification is enabled for a webhook, this property will contain the public key you can use to verify the Twilio SendGrid signature."
+            }
+        }
+    },
+    "event-webhook-unsigned-responseBody": {
+        "allOf": [
+            {
+                "$ref": "#/event-webhook-base-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-oauth-response-props"
+            }
+        ]
+    },
+    "event-webhook-signed-responseBody": {
+        "allOf": [
+            {
+                "$ref": "#/event-webhook-base-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-oauth-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-signed-response-prop"
+            }
+        ]
+    },
     "event-webhook-all-responseBody": {
         "title": "Event Webhook Response Body: All Webhooks",
         "type": "object",
@@ -1189,9 +1220,9 @@
             },
             "webhooks": {
                 "type": "array",
-                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to POST.",
+                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to POST, the URL where it will POST those events, and the webhook's ID.",
                 "items": {
-                    "$ref": "#/event-webhook-responseBody"
+                    "$ref": "#/event-webhook-signed-responseBody"
                 }
             }
         }
