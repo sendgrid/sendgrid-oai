@@ -383,11 +383,11 @@
         },
         "patch": {
             "operationId": "PATCH_user-webhooks-event-settings_ID",
-            "summary": "Update event notification settings for a specific Event Webhook.",
+            "summary": "Update a specific Event Webhook by ID.",
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to update your current event webhook settings.**\n\nIf an event type is marked as `true`, then the event webhook will include information about that event.\n\nSendGrid\u2019s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.\n\nCommon uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.",
+            "description": "**This endpoint allows you to update a specifc Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will update and return your oldest webhook by `created_date`. This means you can update your only webhook's settings if you do not have more than one available. If you have multiple webhooks, you can retrieve their IDs using the \"[Get All Event Webhooks](#)\" endpoint.\n\n### Enable or disable the webhook\n\nYou can set the `enabled` property to `true` to enable the webhook or `false` to disable it. Disabling a webhook will not delete it from your account, but it will prevent the webhook from sending events to your designated URL.\n\n###URL\n\nA webhook's URL is the endpoint where you want the webhook to POST events. No more than one webhook may be configured to send to the same URL. SendGrid will return an error if you attempt to set a URL for a webhook that is already in use by the user on another webhook.\n\n### Event settings\n\nIf an event type is marked as `true`, the event webhook will send information about that event. See the \"[Event Webhook Reference](https://docs.sendgrid.com/for-developers/tracking-events/event#delivery-events)\" for details about each event type.\n\n### Webhook identifiers\n\nYou may assign an optional friendly name to each of your webhooks. The friendly name is for convenience only and should not be used to programmatically differentiate your webhooks because it does not need to be unique.\n\n### OAuth\n\nYou can configure OAuth for your webhook by passing the required values to this endpoint in the `oauth_client_id`, `oauth_client_secret`, and `oauth_token_url` properties. To disable OAuth, pass an empty string to this endpoint for each of the OAuth properties. You may share one OAuth configuration across all your webhooks or create unique credentials for each. See our [webhook security documentation](https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook-security-features#oauth-20) for more detailed information about OAuth and the Event Webhook.\n\n### Signature verification\n\nEnabling signature verification for your webhook is a separate process and cannot be done with this endpoint. You can use the webhook ID to [enable or disable signature verification with the endpoint dedicated for that operation](https://docs.sendgrid.com/api-reference/webhooks/enable-disable-signed-webhook).",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -399,6 +399,11 @@
                     "required": true,
                     "schema": {
                         "type": "string"
+                    },
+                    "examples": {
+                        "ID Example": {
+                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
+                        }
                     }
                 }
             ],
@@ -547,6 +552,11 @@
                     "required": true,
                     "schema": {
                         "type": "string"
+                    },
+                    "examples": {
+                        "ID Example": {
+                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
+                        }
                     }
                 }
             ],
@@ -616,6 +626,11 @@
                     "required": true,
                     "schema": {
                         "type": "string"
+                    },
+                    "examples": {
+                        "ID Example": {
+                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
+                        }
                     }
                 }
             ],
