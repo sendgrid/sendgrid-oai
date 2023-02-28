@@ -257,12 +257,12 @@
     },
     "user_webhooks_event_settings_{id}": {
         "get": {
-            "operationId": "GET_user-webhooks-event-settings_ID",
-            "summary": "Retrieve settings for a specific Event Webhook.",
+            "operationId": "GET-webhooks-event-settings-ID",
+            "summary": "Get the settings for a single Event Webhook.",
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to retrieve a specifc Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will return your oldest webhook by `created_date`. This means you can retrieve details about your only webhook if you do not have more than one available.\n\n### Event settings\n\nYour webhook will be returned with all of its settings, which include the events that will be POSTed by the webhook and the URL where they will be sent. If an event type is marked as `true`, the event webhook will send information about that event. See the \"[Event Webhook Reference](https://docs.sendgrid.com/for-developers/tracking-events/event#delivery-events)\" for details about each event type.\n\n### Signature verification\n\nThe `public_key` property will be returned only for webhooks with signature verification enabled.\n\n### OAuth\n\nYou may share one OAuth configuration across all your webhooks or create unique credentials for each. The OAuth properties will be returned only for webhooks with OAuth configured.",
+            "description": "**This endpoint allows you to retrieve a single Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will return your oldest webhook by `created_date`. This means you can retrieve details about your only webhook if you do not have more than one available.\n\n### Event settings\n\nYour webhook will be returned with all of its settings, which include the events that will be included in the POST request by the webhook and the URL where they will be sent. If an event type is marked as `true`, the event webhook will send information about that event type. See the \"[Event Webhook Reference](https://docs.sendgrid.com/for-developers/tracking-events/event#delivery-events)\" for details about each event type.\n\n### Signature verification\n\nThe `public_key` property will be returned only for webhooks with signature verification enabled.\n\n### OAuth\n\nYou may share one OAuth configuration across all your webhooks or create unique credentials for each. The OAuth properties will be returned only for webhooks with OAuth configured.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -319,6 +319,7 @@
                                         "open": true,
                                         "click": true,
                                         "dropped": true,
+                                        "id": "77d4a5da-7015-11ed-a1eb-0242ac120002",
                                         "oauth_client_id": "a835e7210bbb47edbfa71bdfc909b2d7",
                                         "oauth_token_url": "https://oauthservice.example.com",
                                         "public_key": "123publickeyabc"
