@@ -995,16 +995,16 @@
         }
     },
     "event-webhook-requestBody": {
-        "title": "Event Webhook Request Body",
+        "title": "Create and Update Event Webhook Request Body",
         "type": "object",
         "properties": {
             "enabled": {
                 "type": "boolean",
-                "description": "Enable or disable the webhook by setting this property to `true` or `false`, respectively."
+                "description": "Set this property to `true` to enable the Event Webhook or `false` to disable it."
             },
             "url": {
                 "type": "string",
-                "description": "The URL that you want the Event Webhook to POST to."
+                "description": "Set this property to the URL where you want the Event Webhook to send event data."
             },
             "group_resubscribe": {
                 "type": "boolean",
@@ -1036,7 +1036,7 @@
             },
             "processed": {
                 "type": "boolean",
-                "description": "Set this property to `true` to receive processed events. Processed events occur when a message has been received by Twilio SendGrid and is ready to be delivered."
+                "description": "Set this property to `true` to receive processed events. Processed events occur when a message has been received by Twilio SendGrid and the message is ready to be delivered."
             },
             "open": {
                 "type": "boolean",
@@ -1052,22 +1052,22 @@
             },
             "friendly_name": {
                 "type": "string",
-                "description": "An optional friendly name may be assigned to each of your Event Webhooks to help you differentiate them. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks.",
+                "description": "Optionally set this propety to a friendly name for the Event Webhook. A friendly name may be assigned to each of your webhooks to help you differentiate them. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks.",
                 "nullable": true
             },
             "oauth_client_id": {
                 "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this property, you must also include the `oauth_token_url` property.",
+                "description": "Set this property to the OAuth client ID that SendGrid will pass to your OAuth server or service provider to generate an OAuth access token. When passing data in this property, you must also include the `oauth_token_url` property.",
                 "nullable": true
             },
             "oauth_client_secret": {
                 "type": "string",
-                "description": "The `oauth_client_secret` is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
+                "description": "Set this propety to the OAuth client secret that SendGrid will pass to your OAuth server or service provider to generate an OAuth access token. This secret is needed only once to create an access token. SendGrid will store the secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
                 "nullable": true
             },
             "oauth_token_url": {
                 "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the `oauth_client_id` property.",
+                "description": "Set this property to the URL where SendGrid will send the OAuth client ID and client secret to generate an OAuth access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the `oauth_client_id` property.",
                 "nullable": true
             }
         },
@@ -1096,7 +1096,7 @@
             },
             "url": {
                 "type": "string",
-                "description": "The URL that the Event Webhook will POST to."
+                "description": "The URL where SendGrid will send event data."
             },
             "group_resubscribe": {
                 "type": "boolean",
@@ -1168,12 +1168,12 @@
         "properties": {
             "oauth_client_id": {
                 "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token.",
+                "description": "The OAuth client ID SendGrid sends to your OAuth server or service provider to generate an OAuth access token.",
                 "nullable": true
             },
             "oauth_token_url": {
                 "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider.",
+                "description": "The URL where SendGrid sends the OAuth client ID and client secret to generate an access token. This should be your OAuth server or service provider.",
                 "nullable": true
             }
         }
@@ -1183,7 +1183,7 @@
         "properties": {
             "public_key": {
                 "type": "string",
-                "description": "When signature verification is enabled for a webhook, this property will contain the public key you can use to verify the Twilio SendGrid signature."
+                "description": "The public key you can use to verify the SendGrid signature."
             }
         }
     },
@@ -1220,7 +1220,7 @@
             },
             "webhooks": {
                 "type": "array",
-                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to POST, the URL where it will POST those events, and the webhook's ID.",
+                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to send in the POST request, the URL where it will send those events, and the webhook's ID.",
                 "items": {
                     "$ref": "#/event-webhook-signed-responseBody"
                 }
