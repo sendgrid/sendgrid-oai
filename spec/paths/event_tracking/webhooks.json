@@ -713,11 +713,11 @@
         },
         "patch": {
             "operationId": "PATCH_user-webhooks-event-settings-signed-ID",
-            "summary": "Enable/Disable Signed Webhook",
+            "summary": "Toggle signature verifitication  for a specific Event Webhook",
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to enable or disable signing of the Event Webhook.**\n\nThis endpoint takes a single boolean request parameter, `enabled`. You may either enable or disable signing of the Event Webhook using this endpoint. Once enabled, you can retrieve your public key using the `/webhooks/event/settings/signed` endpoint.\n\nFor more information about cryptographically signing the Event Webhook, see [Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).",
+            "description": "**This endpoint allows you to enable or disable signature verification for a specific Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will enable signature verification for your oldest webhook by `created_date`. This means you can enable signing for your only webhook if you do not have more than one available. If you have multiple webhooks, you can retrieve their IDs using the \"[Get All Event Webhooks](#)\" endpoint.\n\nThis endpoint accepts a single boolean request property, `enabled`, that can be set `true` or `false` to enable or disable signature verification. This endpoint will return the public key required to verify Twilio SendGrid signatures if it is enabled or an empty string if signing is disabled. You can also retrieve your public key using the \"[Get a Specific Event Webhook's Public Key](#)\" endpoint.\n\nFor more information about cryptographically signing the Event Webhook, see \"[Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).\"",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -729,6 +729,11 @@
                     "required": true,
                     "schema": {
                         "type": "string"
+                    },
+                    "examples": {
+                        "ID Example": {
+                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
+                        }
                     }
                 }
             ],
@@ -737,17 +742,19 @@
                     "application/json": {
                         "schema": {
                             "type": "object",
-                            "description": "Indicates whether the cryptographic signing should be enabled or disabled for the specified webhook.",
                             "properties": {
                                 "enabled": {
-                                    "type": "boolean"
+                                    "type": "boolean",
+                                    "description": "Enable or disable the webhook by setting this property to `true` or `false`, respectively."
                                 }
                             },
                             "required": [
                                 "enabled"
                             ],
-                            "example": {
-                                "enabled": true
+                            "examples": {
+                                "value": {
+                                    "enabled": true
+                                }
                             }
                         }
                     }
@@ -755,25 +762,33 @@
             },
             "responses": {
                 "200": {
-                    "description": "",
+                    "description": "Success",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "A unique string used to identify the webhook. A webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property."
+                                    },
                                     "public_key": {
                                         "type": "string",
                                         "description": "The public key you can use to verify the Twilio SendGrid signature."
                                     }
-                                },
-                                "required": [
-                                    "public_key"
-                                ]
+                                }
                             },
                             "examples": {
-                                "response": {
+                                "Enabled": {
                                     "value": {
-                                        "public_key": "voluptate id Excepteur proident"
+                                        "id": "77d4a5da-7015-11ed-a1eb-0242ac120002",
+                                        "public_key": "123publickeyabc"
+                                    }
+                                },
+                                "Disabled": {
+                                    "value": {
+                                        "id": "77d4a5da-7015-11ed-a1eb-0242ac120002",
+                                        "public_key": ""
                                     }
                                 }
                             }
