@@ -790,12 +790,12 @@
     },
     "user_webhooks_event_test": {
         "post": {
-            "operationId": "POST_user-webhooks-event-test",
-            "summary": "Test Event Notification Settings",
+            "operationId": "POST-webhooks-event-settings-test",
+            "summary": "Test an Event Webhook's settings.",
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to test an Event Webhook.**\n\nThis endpoint will make a POST request with a fake event notification to a URL you provide. This allows you to verify that you have properly configured the webhook before sending real data to your URL.\n\n### Test OAuth configuration\n\n To test your OAuth configuration, you must include the three OAuth properties: `oath_client_id`, `oauth_client_secret`, and `oauth_token_url`. You can retrieve your `oauth_client_id` and `oauth_token_url` from the \"[Get A Specific Event Webhook](#)\" endpoint; however, for security reasons, SendGrid will not provide your `oauth_client_secret`. You must have access to the secret from your own systems.",
+            "description": "**This endpoint allows you to test an Event Webhook.**\n\nThis endpoint will make a POST request with a fake event notification to a URL you provide. This allows you to verify that you have properly configured the webhook before sending real data to your URL.\n\n### Test OAuth configuration\n\n To test your OAuth configuration, you must include the three OAuth properties: `oath_client_id`, `oauth_client_secret`, and `oauth_token_url`. You can retrieve your `oauth_client_id` and `oauth_token_url` from the \"[Get an Event Webhook](https://docs.sendgrid.com/api-reference/webhooks/get-an-event-webhook)\" endpoint; however, for security reasons, SendGrid will not provide your `oauth_client_secret`. You must have access to the secret from your own systems.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
