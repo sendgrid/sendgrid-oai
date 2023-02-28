@@ -418,5 +418,19 @@
             "type": "integer"
         },
         "description": "The `start_added_at` and `end_added_at` parameters are used to set a time window. IP addresses that were added to your account in the specified time window will be returned. The `start_added_at` parameter sets the end of the time window."
+    },
+    "EventWebhook_RequestID": {
+        "name": "id",
+        "in": "path",
+        "description": "The ID of the Event Webhook you want to retrieve.",
+        "required": true,
+        "schema": {
+            "type": "string"
+        },
+        "examples": {
+            "ID Example": {
+                "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
+            }
+        }
     }
 }

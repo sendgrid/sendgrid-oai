@@ -268,18 +268,7 @@
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
                 },
                 {
-                    "name": "id",
-                    "in": "path",
-                    "description": "The ID of the Event Webhook you want to retrieve.",
-                    "required": true,
-                    "schema": {
-                        "type": "string"
-                    },
-                    "examples": {
-                        "ID Example": {
-                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
-                        }
-                    }
+                    "$ref": "../../components/parameters.json#/EventWebhook_RequestID"
                 }
             ],
             "responses": {
@@ -393,18 +382,7 @@
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
                 },
                 {
-                    "name": "id",
-                    "in": "path",
-                    "description": "The ID of the Event Webhook you want to retrieve.",
-                    "required": true,
-                    "schema": {
-                        "type": "string"
-                    },
-                    "examples": {
-                        "ID Example": {
-                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
-                        }
-                    }
+                    "$ref": "../../components/parameters.json#/EventWebhook_RequestID"
                 }
             ],
             "requestBody": {
@@ -546,18 +524,7 @@
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
                 },
                 {
-                    "name": "id",
-                    "in": "path",
-                    "description": "The ID of the Event Webhook you want to retrieve.",
-                    "required": true,
-                    "schema": {
-                        "type": "string"
-                    },
-                    "examples": {
-                        "ID Example": {
-                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
-                        }
-                    }
+                    "$ref": "../../components/parameters.json#/EventWebhook_RequestID"
                 }
             ],
             "responses": {
@@ -620,18 +587,7 @@
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
                 },
                 {
-                    "name": "id",
-                    "in": "path",
-                    "description": "The ID of the Event Webhook you want to retrieve.",
-                    "required": true,
-                    "schema": {
-                        "type": "string"
-                    },
-                    "examples": {
-                        "ID Example": {
-                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
-                        }
-                    }
+                    "$ref": "../../components/parameters.json#/EventWebhook_RequestID"
                 }
             ],
             "responses": {
@@ -723,18 +679,7 @@
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
                 },
                 {
-                    "name": "id",
-                    "in": "path",
-                    "description": "The ID of the Event Webhook you want to retrieve.",
-                    "required": true,
-                    "schema": {
-                        "type": "string"
-                    },
-                    "examples": {
-                        "ID Example": {
-                            "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
-                        }
-                    }
+                    "$ref": "../../components/parameters.json#/EventWebhook_RequestID"
                 }
             ],
             "requestBody": {
