@@ -581,12 +581,12 @@
     },
     "user_webhooks_event_settings_signed_{id}": {
         "get": {
-            "operationId": "GET_user-webhooks-event-settings-signed-id",
-            "summary": "Retrieve the public key for a specific signed Event Webhook by ID.",
+            "operationId": "GET-webhooks-event-settings-signed-ID",
+            "summary": "Get the public key for a single signed Event Webhook by ID.",
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to retrieve the public key for a specific Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will return the public key for your oldest webhook by `created_date`. This means you can retrieve a public key for your only webhook if you do not have more than one available. If you have multiple webhooks, you can retrieve their IDs using the \"[Get All Event Webhooks](#)\" endpoint.\n\nOnce you have enabled signature verification for a webhook, you will need the public key provided to verify the signatures on requests coming from Twilio SendGrid. You can use the webhook ID to [enable or disable signature verification with the endpoint dedicated for that operation](https://docs.sendgrid.com/api-reference/webhooks/enable-disable-signed-webhook).\n\nFor more information about cryptographically signing the Event Webhook, see \"[Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).\"",
+            "description": "**This endpoint allows you to retrieve the public key for a single Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will return the public key for your oldest webhook by `created_date`. This means you can retrieve a public key for your only webhook if you do not have more than one available. If you have multiple webhooks, you can retrieve their IDs using the \"[Get All Event Webhooks](https://docs.sendgrid.com/api-reference/webhooks/get-all-event-webhooks)\" endpoint.\n\nOnce you have enabled signature verification for a webhook, you will need the public key provided to verify the signatures on requests coming from Twilio SendGrid. You can use the webhook ID to [enable or disable signature verification with the endpoint dedicated for that operation](https://docs.sendgrid.com/api-reference/webhooks/toggle-signature-verification-for-an-event-webhook).\n\nFor more information about cryptographically signing the Event Webhook, see \"[Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).\"",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -673,12 +673,12 @@
             ]
         },
         "patch": {
-            "operationId": "PATCH_user-webhooks-event-settings-signed-ID",
-            "summary": "Toggle signature verifitication  for a specific Event Webhook",
+            "operationId": "PATCH-webhooks-event-settings-signed-ID",
+            "summary": "Toggle signature verifitication  for a single Event Webhook by ID",
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to enable or disable signature verification for a specific Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will enable signature verification for your oldest webhook by `created_date`. This means you can enable signing for your only webhook if you do not have more than one available. If you have multiple webhooks, you can retrieve their IDs using the \"[Get All Event Webhooks](#)\" endpoint.\n\nThis endpoint accepts a single boolean request property, `enabled`, that can be set `true` or `false` to enable or disable signature verification. This endpoint will return the public key required to verify Twilio SendGrid signatures if it is enabled or an empty string if signing is disabled. You can also retrieve your public key using the \"[Get a Specific Event Webhook's Public Key](#)\" endpoint.\n\nFor more information about cryptographically signing the Event Webhook, see \"[Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).\"",
+            "description": "**This endpoint allows you to enable or disable signature verification for a single Event Webhook by ID.**\n\nIf you do not pass a webhook ID to this endpoint, it will enable signature verification for your oldest webhook by `created_date`. This means you can enable signing for your only webhook if you do not have more than one available. If you have multiple webhooks, you can retrieve their IDs using the \"[Get All Event Webhooks](https://docs.sendgrid.com/api-reference/webhooks/get-all-event-webhooks)\" endpoint.\n\nThis endpoint accepts a single boolean request property, `enabled`, that can be set `true` or `false` to enable or disable signature verification. This endpoint will return the public key required to verify Twilio SendGrid signatures if it is enabled or an empty string if signing is disabled. You can also retrieve your public key using the \"[Get an Event Webhook's Public Key](https://docs.sendgrid.com/api-reference/webhooks/get-signed-event-webhooks-public-signature)\" endpoint.\n\nFor more information about cryptographically signing the Event Webhook, see \"[Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).\"",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
