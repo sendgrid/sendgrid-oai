@@ -5342,7 +5342,7 @@
         "title": "Single Sign-On Teammate Response",
         "allOf": [
             {
-                "$ref": "./schemas.json#/sso-teammate-common-fields"
+                "$ref": "./schemas.json#/sso-teammate-base-props"
             },
             {
                 "type": "object",
@@ -5359,27 +5359,80 @@
             }
         ]
     },
-    "sso-teammate-request": {
-        "title": "Single Sign-On Teammate Request",
-        "allOf": [
-            {
-                "$ref": "./schemas.json#/sso-teammate-common-fields"
+    "sso-teammate-requestBody": {
+        "title": "Single Sign-On Teammate Request Body",
+        "summary": "Single Sign-on Teammate Request Body for the create, POST, and update, PATCH, Teammate operations.",
+        "type": "object",
+        "properties": {
+            "first_name": {
+                "type": "string",
+                "description": "Set this property to the Teammate\u2019s first name."
             },
-            {
-                "type": "object",
-                "properties": {
-                    "scopes": {
-                        "type": "array",
-                        "description": "The permission scopes assigned to the Teammate.",
-                        "items": {
-                            "type": "string"
+            "last_name": {
+                "type": "string",
+                "description": "Set this property to the Teammate\u2019s last name."
+            },
+            "email": {
+                "type": "string",
+                "format": "email",
+                "description": "Set this property to the Teammate\u2019s email address. This email address will also function as the Teammate\u2019s username and must match the address assigned to the user in your IdP. This address cannot be changed after the Teammate is created."
+            },
+            "is_admin": {
+                "type": "boolean",
+                "description": "Set this property to `true` if the Teammate has admin permissions. You should not include the `scopes` or `persona` properties when setting the `is_admin` property to `true`—an admin will be allocated all scopes. See our [Teammate permissions documenation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of scopes."
+            },
+            "scopes": {
+                "type": "array",
+                "description": "Add or remove permissions from a Teammate using this `scopes` property. See our [Teammate permissions documentation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of available scopes. You should not include this propety in the request when using the `persona` property or when setting the `is_admin` property to `true`—assigning a `persona` or setting `is_admin` to `true` will allocate a group of permissions to the Teammate.",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "has_restricted_subuser_access": {
+                "type": "boolean",
+                "description": "Set this property to `true` to give the Teammate permissions to operate only on behalf of a Subuser. This property value must be `true` if the `subuser_access` property is not empty. The `subuser_access` property determines which Subusers the Teammate may act on behalf of."
+            },
+            "subuser_access": {
+                "type": "array",
+                "description": "Specify which Subusers the Teammate may access and act on behalf of with this property. If this property is populated, you must set the `has_restricted_subuser_access` property to `true`.",
+                "items": {
+                    "type": "object",
+                    "description": "An array of Subusers to which the Teammate should have access.",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "description": "Set this property to the ID of a Subuser to which the Teammate should have access."
+                        },
+                        "permission_type": {
+                            "type": "string",
+                            "description": "Grant the level of access the Teammate should have to the specified Subuser with this property. Currently this property value is limited to `admin`.",
+                            "enum": [
+                                "admin"
+                            ]
                         }
-                    }
-                },
-                "required": [
-                    "scopes"
+                    },
+                    "required": [
+                        "id",
+                        "permission_type"
+                    ]
+                }
+            },
+            "persona": {
+                "type": "string",
+                "description": "A persona represents a group of permissions often required by a type of Teammate such as a developer or marketer. Assigning a persona allows you to allocate a group of pre-defined permissions rather than assigning each scope individually. Currently available personas include: `accountant`, `developer`, `marketer`, and `observer`. See the [Teammate permissions documentation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a full list of the scopes assigned to each persona.",
+                "enum": [
+                    "accountant",
+                    "developer",
+                    "marketer",
+                    "observer"
                 ]
             }
+        },
+        "required": [
+            "first_name",
+            "last_name",
+            "email",
+            "has_restricted_subuser_access"
         ]
     },
     "sso-teammates-patch-response": {
@@ -5492,7 +5545,7 @@
             "enabled": false
         }
     },
-    "sso-teammate-common-fields": {
+    "sso-teammate-base-props": {
         "title": "Single Sing-On Teammate Common Fields",
         "type": "object",
         "properties": {
@@ -5512,10 +5565,6 @@
             "is_admin": {
                 "type": "boolean",
                 "description": "Indicates if the Teammate has admin permissions."
-            },
-            "is_read_only": {
-                "type": "boolean",
-                "description": "Indicates if the Teammate has read_only permissions."
             }
         },
         "required": [

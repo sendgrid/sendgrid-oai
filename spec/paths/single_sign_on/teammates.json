@@ -11,7 +11,32 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "../../components/schemas.json#/sso-teammate-request"
+                            "$ref": "../../components/schemas.json#/sso-teammate-requestBody"
+                        },
+                        "examples": {
+                            "Create Teammate with Subuser Access": {
+                                "value": {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "email": "jane_doe@example.com",
+                                    "has_restricted_subuser_access": true,
+                                    "subuser_access": [
+                                        {
+                                            "id": 12345,
+                                            "permission_type": "admin"
+                                        }
+                                    ]
+                                }
+                            },
+                            "Create Admin Teammate": {
+                                "value": {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "email": "jane_doe@example.com",
+                                    "is_admin": true,
+                                    "has_restricted_subuser_access": false
+                                }
+                            }
                         }
                     }
                 }
@@ -62,7 +87,7 @@
             {
                 "name": "username",
                 "in": "path",
-                "description": "This email address must be the same address assigned to the teammate in your IdP",
+                "description": "Set this parameter to the Teammate's email address. This address must be the same address assigned to the Teammate in your IdP.",
                 "required": true,
                 "schema": {
                     "type": "string",
@@ -81,37 +106,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "first_name": {
-                                    "type": "string"
-                                },
-                                "last_name": {
-                                    "type": "string"
-                                },
-                                "scopes": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "is_admin": {
-                                    "type": "boolean"
-                                }
-                            },
-                            "example": {
-                                "first_name": "Jane",
-                                "last_name": "Doe",
-                                "email": "jane_doe@example.com",
-                                "scopes": [
-                                    "mail.batch.create",
-                                    "mail.batch.delete",
-                                    "mail.batch.read",
-                                    "mail.batch.update",
-                                    "mail.send"
-                                ],
-                                "is_admin": false
-                            }
+                            "$ref": "../../components/schemas.json#/sso-teammate-requestBody"
                         }
                     }
                 }
