@@ -1072,19 +1072,7 @@
             }
         },
         "required": [
-            "enabled",
-            "url",
-            "group_resubscribe",
-            "delivered",
-            "group_unsubscribe",
-            "spam_report",
-            "bounce",
-            "deferred",
-            "unsubscribe",
-            "processed",
-            "open",
-            "click",
-            "dropped"
+            "url"
         ]
     },
     "event-webhook-base-response-props": {
