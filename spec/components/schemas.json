@@ -5401,7 +5401,7 @@
                     "properties": {
                         "id": {
                             "type": "integer",
-                            "description": "Set this property to the ID of a Subuser to which the Teammate should have access."
+                            "description": "Set this property to the ID of a Subuser to which the Teammate should have access. You can retrieve Subuser IDs from the [Subusers API](https://docs.sendgrid.com/api-reference/subusers-api/)."
                         },
                         "permission_type": {
                             "type": "string",
