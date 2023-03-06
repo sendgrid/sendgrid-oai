@@ -107,6 +107,31 @@
                     "application/json": {
                         "schema": {
                             "$ref": "../../components/schemas.json#/sso-teammate-requestBody"
+                        },
+                        "examples": {
+                            "Update Teammate with Subuser Access": {
+                                "value": {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "email": "jane_doe@example.com",
+                                    "has_restricted_subuser_access": true,
+                                    "subuser_access": [
+                                        {
+                                            "id": 12345,
+                                            "permission_type": "admin"
+                                        }
+                                    ]
+                                }
+                            },
+                            "Make Teammate an Admin": {
+                                "value": {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "email": "jane_doe@example.com",
+                                    "is_admin": true,
+                                    "has_restricted_subuser_access": false
+                                }
+                            }
                         }
                     }
                 }
