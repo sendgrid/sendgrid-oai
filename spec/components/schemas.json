@@ -5338,23 +5338,23 @@
             "entity_id"
         ]
     },
-    "sso-teammate-requestBody": {
+    "sso-teammates-requestBody": {
         "title": "Single Sign-On Teammate Request Body",
         "summary": "Single Sign-on Teammate Request Body for the create, POST, and update, PATCH, Teammate operations.",
         "type": "object",
         "properties": {
             "first_name": {
                 "type": "string",
-                "description": "Set this property to the Teammate\u2019s first name."
+                "description": "Set this property to the Teammate's first name."
             },
             "last_name": {
                 "type": "string",
-                "description": "Set this property to the Teammate\u2019s last name."
+                "description": "Set this property to the Teammate's last name."
             },
             "email": {
                 "type": "string",
                 "format": "email",
-                "description": "Set this property to the Teammate\u2019s email address. This email address will also function as the Teammate\u2019s username and must match the address assigned to the user in your IdP. This address cannot be changed after the Teammate is created."
+                "description": "Set this property to the Teammate's email address. This email address will also function as the Teammate's username and must match the address assigned to the user in your IdP. This address cannot be changed after the Teammate is created."
             },
             "is_admin": {
                 "type": "boolean",
@@ -5607,34 +5607,6 @@
             "enable_text": false,
             "enabled": false
         }
-    },
-    "sso-teammate-base-props": {
-        "title": "Single Sing-On Teammate Common Fields",
-        "type": "object",
-        "properties": {
-            "first_name": {
-                "type": "string",
-                "description": "The Teammate\u2019s first name."
-            },
-            "last_name": {
-                "type": "string",
-                "description": "The Teammate\u2019s last name."
-            },
-            "email": {
-                "type": "string",
-                "format": "email",
-                "description": "The Teammate\u2019s email address. This email address will also function as the Teammate\u2019s username and must match the address assigned to the user in your IdP. This address cannot be changed after the Teammate is created."
-            },
-            "is_admin": {
-                "type": "boolean",
-                "description": "Indicates if the Teammate has admin permissions."
-            }
-        },
-        "required": [
-            "first_name",
-            "last_name",
-            "email"
-        ]
     },
     "spam-reports-response": {
         "title": "Spam Reports Response",

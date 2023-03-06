@@ -11,7 +11,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "../../components/schemas.json#/sso-teammate-requestBody"
+                            "$ref": "../../components/schemas.json#/sso-teammates-requestBody"
                         },
                         "examples": {
                             "Create Teammate with Subuser Access": {
@@ -395,7 +395,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "../../components/schemas.json#/sso-teammate-requestBody"
+                            "$ref": "../../components/schemas.json#/sso-teammates-requestBody"
                         },
                         "examples": {
                             "Update Teammate with Subuser Access": {
