@@ -5402,8 +5402,7 @@
         },
         "required": [
             "first_name",
-            "last_name",
-            "has_restricted_subuser_access"
+            "last_name"
         ]
     },
     "sso-teammates-POST-requestBody": {
