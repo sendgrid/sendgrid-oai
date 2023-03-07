@@ -11,7 +11,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "../../components/schemas.json#/sso-teammates-requestBody"
+                            "$ref": "../../components/schemas.json#/sso-teammates-POST-requestBody"
                         },
                         "examples": {
                             "Create Teammate with Subuser Access": {
@@ -337,16 +337,7 @@
                                             "2fa_required",
                                             "di.bounce_block_classification.read"
                                         ],
-                                        "has_restricted_subuser_access": true,
-                                        "subuser_access": [
-                                            {
-                                                "id": 12345,
-                                                "username": "subuser1@example.com",
-                                                "email": "subuser1@example.com",
-                                                "disabled": false,
-                                                "permission_type": "admin"
-                                            }
-                                        ]
+                                        "has_restricted_subuser_access": false
                                     }
                                 }
                             }
@@ -395,14 +386,13 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "../../components/schemas.json#/sso-teammates-requestBody"
+                            "$ref": "../../components/schemas.json#/sso-teammates-PATCH-requestBody"
                         },
                         "examples": {
                             "Update Teammate with Subuser Access": {
                                 "value": {
                                     "first_name": "Jane",
                                     "last_name": "Doe",
-                                    "email": "jane_doe@example.com",
                                     "has_restricted_subuser_access": true,
                                     "subuser_access": [
                                         {
@@ -416,7 +406,6 @@
                                 "value": {
                                     "first_name": "Jane",
                                     "last_name": "Doe",
-                                    "email": "jane_doe@example.com",
                                     "is_admin": true,
                                     "has_restricted_subuser_access": false
                                 }
@@ -732,16 +721,7 @@
                                             "2fa_required",
                                             "di.bounce_block_classification.read"
                                         ],
-                                        "has_restricted_subuser_access": true,
-                                        "subuser_access": [
-                                            {
-                                                "id": 12345,
-                                                "username": "subuser1@example.com",
-                                                "email": "subuser1@example.com",
-                                                "disabled": false,
-                                                "permission_type": "admin"
-                                            }
-                                        ]
+                                        "has_restricted_subuser_access": false
                                     }
                                 }
                             }

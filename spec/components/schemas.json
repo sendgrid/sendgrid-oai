@@ -5338,9 +5338,7 @@
             "entity_id"
         ]
     },
-    "sso-teammates-requestBody": {
-        "title": "Single Sign-On Teammate Request Body",
-        "summary": "Single Sign-on Teammate Request Body for the create, POST, and update, PATCH, Teammate operations.",
+    "sso-teammates-base-request-props": {
         "type": "object",
         "properties": {
             "first_name": {
@@ -5351,14 +5349,19 @@
                 "type": "string",
                 "description": "Set this property to the Teammate's last name."
             },
-            "email": {
-                "type": "string",
-                "format": "email",
-                "description": "Set this property to the Teammate's email address. This email address will also function as the Teammate's username and must match the address assigned to the user in your IdP. This address cannot be changed after the Teammate is created."
-            },
             "is_admin": {
                 "type": "boolean",
                 "description": "Set this property to `true` if the Teammate has admin permissions. You should not include the `scopes` or `persona` properties when setting the `is_admin` property to `true`—an admin will be allocated all scopes. See our [Teammate permissions documenation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of scopes."
+            },
+            "persona": {
+                "type": "string",
+                "description": "A persona represents a group of permissions often required by a type of Teammate such as a developer or marketer. Assigning a persona allows you to allocate a group of pre-defined permissions rather than assigning each scope individually. Currently available personas include: `accountant`, `developer`, `marketer`, and `observer`. See the [Teammate permissions documentation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a full list of the scopes assigned to each persona.",
+                "enum": [
+                    "accountant",
+                    "developer",
+                    "marketer",
+                    "observer"
+                ]
             },
             "scopes": {
                 "type": "array",
@@ -5369,7 +5372,7 @@
             },
             "has_restricted_subuser_access": {
                 "type": "boolean",
-                "description": "Set this property to `true` to give the Teammate permissions to operate only on behalf of a Subuser. This property value must be `true` if the `subuser_access` property is not empty. The `subuser_access` property determines which Subusers the Teammate may act on behalf of."
+                "description": "Set this property to `true` to give the Teammate permissions to operate only on behalf of a Subuser. This property value must be `true` if the `subuser_access` property is not empty. The `subuser_access` property determines which Subusers the Teammate may act on behalf of. If this property is set to `true`, you cannot specify individual `scopes`, assing a `persona`, or set `is_admin` to `true`—a Teammate cannot specify scopes for the parent account and have restricted Subuser access."
             },
             "subuser_access": {
                 "type": "array",
@@ -5395,24 +5398,40 @@
                         "permission_type"
                     ]
                 }
-            },
-            "persona": {
-                "type": "string",
-                "description": "A persona represents a group of permissions often required by a type of Teammate such as a developer or marketer. Assigning a persona allows you to allocate a group of pre-defined permissions rather than assigning each scope individually. Currently available personas include: `accountant`, `developer`, `marketer`, and `observer`. See the [Teammate permissions documentation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a full list of the scopes assigned to each persona.",
-                "enum": [
-                    "accountant",
-                    "developer",
-                    "marketer",
-                    "observer"
-                ]
             }
         },
         "required": [
             "first_name",
             "last_name",
-            "email",
             "has_restricted_subuser_access"
         ]
+    },
+    "sso-teammates-POST-requestBody": {
+        "title": "Single Sign-On Teammate Create Request Body",
+        "summary": "Single Sign-on Teammate Request Body for the create, POST, Teammate operations.",
+        "allOf": [
+            {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "Set this property to the Teammate's email address. This email address will also function as the Teammate's username and must match the address assigned to the user in your IdP. This address cannot be changed after the Teammate is created."
+                    }
+                },
+                "required": [
+                    "email"
+                ]
+            },
+            {
+                "$ref": "#/sso-teammates-base-request-props"
+            }
+        ]
+    },
+    "sso-teammates-PATCH-requestBody": {
+        "title": "Single Sign-On Teammate Update Request Body",
+        "summary": "Single Sign-on Teammate Request Body for update, PATCH, Teammate operations.",
+        "$ref": "#/sso-teammates-base-request-props"
     },
     "sso-teammates-base-response-props": {
         "type": "object",
