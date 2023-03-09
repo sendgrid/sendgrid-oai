@@ -1052,7 +1052,7 @@
             },
             "friendly_name": {
                 "type": "string",
-                "description": "Optionally set this propety to a friendly name for the Event Webhook. A friendly name may be assigned to each of your webhooks to help you differentiate them. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks.",
+                "description": "Optionally set this property to a friendly name for the Event Webhook. A friendly name may be assigned to each of your webhooks to help you differentiate them. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks.",
                 "nullable": true
             },
             "oauth_client_id": {
@@ -1062,7 +1062,7 @@
             },
             "oauth_client_secret": {
                 "type": "string",
-                "description": "Set this propety to the OAuth client secret that SendGrid will pass to your OAuth server or service provider to generate an OAuth access token. This secret is needed only once to create an access token. SendGrid will store the secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
+                "description": "Set this property to the OAuth client secret that SendGrid will pass to your OAuth server or service provider to generate an OAuth access token. This secret is needed only once to create an access token. SendGrid will store the secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
                 "nullable": true
             },
             "oauth_token_url": {
@@ -1141,12 +1141,13 @@
             },
             "created_date": {
                 "type": "string",
-                "description": "An ISO 8601 timestamp in UTC timezone when the the Event Webhook was created.",
-                "format": "date-time"
+                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was created. If you created your webhook before the availability of multiple event webhooks, the `created_date` will be `null`. This means that any event webhook with a `null` created date is your first and oldest webhook.",
+                "format": "date-time",
+                "nullable": true
             },
             "updated_date": {
                 "type": "string",
-                "description": "An ISO 8601 timestamp in UTC timezone when the the Event Webhook was last modified.",
+                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was last modified.",
                 "format": "date-time"
             }
         }
