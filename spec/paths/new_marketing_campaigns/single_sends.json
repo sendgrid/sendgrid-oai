@@ -6,7 +6,7 @@
             "tags": [
                 "Single Sends"
             ],
-            "description": "**This endpoint allows you to create a new Single Send.**\n\nPlease note that if you are migrating from the previous version of Single Sends, you no longer need to pass a template ID with your request to this endpoint. Instead, you will pass all template data in the `email_config` object.",
+            "description": "**This endpoint allows you to create a new Single Send.**\n\nPlease note that if you are migrating from the previous version of Single Sends, you no longer need to pass a template ID with your request to this endpoint. Instead, you will pass all template data in the `email_config` object.\n\nThis endpoint will create a draft of the Single Send but will not send it or schedule it to be sent. You must use the [**Schedule Single Send**](https://docs.sendgrid.com/api-reference/single-sends/schedule-single-send) endpoint to send your message.",
             "requestBody": {
                 "$ref": "../../components/requestBodies.json#/singlesend_request"
             },
@@ -25,7 +25,7 @@
                                         "id": "27c21bbf-a12c-440b-b8bf-c526975328ca",
                                         "status": "scheduled",
                                         "created_at": "2020-05-18T17:28:27.272Z",
-                                        "send_at": "2020-06-16T00:19:55.106Z",
+                                        "send_at": "",
                                         "categories": [
                                             "unique opens"
                                         ],
@@ -408,7 +408,7 @@
             "tags": [
                 "Single Sends"
             ],
-            "description": "**This endpoint allows you to update a Single Send using a Single Send ID.**\n\nYou only need to pass the fields you want to update. Any blank/missing fields will remain unaltered.",
+            "description": "**This endpoint allows you to update a Single Send using a Single Send ID.**\n\nYou only need to pass the properties you want to update. Any blank or missing properties will remain unaltered.\n\nThis endpoint will not send your email or schedule it to be sent. You must use the [**Schedule Single Send**](https://docs.sendgrid.com/api-reference/single-sends/schedule-single-send) endpoint to send your message.",
             "requestBody": {
                 "$ref": "../../components/requestBodies.json#/singlesend_request"
             },
@@ -830,7 +830,7 @@
             "tags": [
                 "Single Sends"
             ],
-            "description": "**This endpoint allows you to schedule a Single Send for future delivery using a Single Send ID.**\n\nTo schedule a Single Send, you must pass a date string in ISO 8601 time format (yyyy-MM-ddTHH:mm:ssZ)  using the required `send_at` field. For example, the ISO 8601 format for 9:00 AM UTC on May 6, 2020 would be `2020-05-06T09:00:00Z`. You may also pass the string `\"now\"` to send the Single Send immediately.",
+            "description": "**This endpoint allows you to send a Single Send immediately or schedule it to be sent at a later time.**\n\nTo send your message immediately, set the `send_at` property value to the string `now`. To schedule the Single Send for future delivery, set the `send_at` value to your desired send time in [ISO 8601 date time format](https://www.iso.org/iso-8601-date-and-time-format.html) (yyyy-MM-ddTHH:mm:ssZ).",
             "requestBody": {
                 "content": {
                     "application/json": {
@@ -839,7 +839,7 @@
                             "properties": {
                                 "send_at": {
                                     "type": "string",
-                                    "description": "The ISO 8601 time at which to send the Single Send. This must be in future or the string \"now\". Emails can be scheduled up to 72 hours in advance. However, this scheduling constraint does not apply to campaigns sent via [Marketing Campaigns](https://docs.sendgrid.com/ui/sending-email/how-to-send-email-with-marketing-campaigns/).",
+                                    "description": "The ISO 8601 time at which to send the Single Send. This must be in future or the string `now`. Emails can be scheduled up to 72 hours in advance. However, this scheduling constraint does not apply to campaigns sent via [Marketing Campaigns](https://docs.sendgrid.com/ui/sending-email/how-to-send-email-with-marketing-campaigns/).",
                                     "format": "date-time"
                                 }
                             },
