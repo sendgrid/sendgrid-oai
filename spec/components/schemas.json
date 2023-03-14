@@ -1470,7 +1470,7 @@
         "example": {
             "enabled": false,
             "soft_bounces": 1234,
-            "hard_bounces": null
+            "hard_bounces": 1234
         }
     },
     "transactional_template_version_output": {
@@ -1960,7 +1960,7 @@
         },
         "example": {
             "enabled": false,
-            "email": null
+            "email": "email@example.com"
         }
     },
     "mail_batch_id": {
