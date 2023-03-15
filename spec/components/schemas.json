@@ -5420,11 +5420,11 @@
             },
             "is_admin": {
                 "type": "boolean",
-                "description": "Set this property to `true` if the Teammate has admin permissions. You should not include the `scopes` or `persona` properties when setting the `is_admin` property to `true`—an admin will be allocated all scopes. See our [Teammate permissions documenation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of scopes."
+                "description": "Set this property to `true` if the Teammate has admin permissions. You should not include the `scopes` or `persona` properties when setting the `is_admin` property to `true`—an admin will be allocated all scopes. See [**Teammate Permissions**](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of scopes."
             },
             "persona": {
                 "type": "string",
-                "description": "A persona represents a group of permissions often required by a type of Teammate such as a developer or marketer. Assigning a persona allows you to allocate a group of pre-defined permissions rather than assigning each scope individually. Currently available personas include: `accountant`, `developer`, `marketer`, and `observer`. See the [Teammate permissions documentation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a full list of the scopes assigned to each persona.",
+                "description": "A persona represents a group of permissions often required by a type of Teammate such as a developer or marketer. Assigning a persona allows you to allocate a group of pre-defined permissions rather than assigning each scope individually. See [**Teammate Permissions**](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a full list of the scopes assigned to each persona.",
                 "enum": [
                     "accountant",
                     "developer",
@@ -5434,14 +5434,14 @@
             },
             "scopes": {
                 "type": "array",
-                "description": "Add or remove permissions from a Teammate using this `scopes` property. See our [Teammate permissions documentation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of available scopes. You should not include this propety in the request when using the `persona` property or when setting the `is_admin` property to `true`—assigning a `persona` or setting `is_admin` to `true` will allocate a group of permissions to the Teammate.",
+                "description": "Add or remove permissions from a Teammate using this `scopes` property. See [**Teammate Permissions**](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of available scopes. You should not include this propety in the request when using the `persona` property or when setting the `is_admin` property to `true`—assigning a `persona` or setting `is_admin` to `true` will allocate a group of permissions to the Teammate.",
                 "items": {
                     "type": "string"
                 }
             },
             "has_restricted_subuser_access": {
                 "type": "boolean",
-                "description": "Set this property to `true` to give the Teammate permissions to operate only on behalf of a Subuser. This property value must be `true` if the `subuser_access` property is not empty. The `subuser_access` property determines which Subusers the Teammate may act on behalf of. If this property is set to `true`, you cannot specify individual `scopes`, assing a `persona`, or set `is_admin` to `true`—a Teammate cannot specify scopes for the parent account and have restricted Subuser access."
+                "description": "Set this property to `true` to give the Teammate permissions to operate only on behalf of a Subuser. This property value must be `true` if the `subuser_access` property is not empty. The `subuser_access` property determines which Subusers the Teammate may act on behalf of. If this property is set to `true`, you cannot specify individual `scopes`, assign a `persona`, or set `is_admin` to `true`—a Teammate cannot specify scopes for the parent account and have restricted Subuser access."
             },
             "subuser_access": {
                 "type": "array",
@@ -5456,7 +5456,7 @@
                         },
                         "permission_type": {
                             "type": "string",
-                            "description": "Grant the level of access the Teammate should have to the specified Subuser with this property. Currently this property value is limited to `admin`.",
+                            "description": "Grant the level of access the Teammate should have to the specified Subuser with this property. Currently, this property value is limited to `admin`.",
                             "enum": [
                                 "admin"
                             ]
@@ -5527,7 +5527,7 @@
             },
             "scopes": {
                 "type": "array",
-                "description": "The permissions or scopes currently assigned to the Teammate. See our [Teammate permissions documentation](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of available scopes.",
+                "description": "The permissions or scopes currently assigned to the Teammate. See [**Teammate Permissions**](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions) for a complete list of available scopes.",
                 "items": {
                     "type": "string"
                 }
