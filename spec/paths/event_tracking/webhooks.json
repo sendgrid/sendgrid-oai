@@ -277,7 +277,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "../../components/schemas.json#/event-webhook-signed-responseBody"
+                                "$ref": "../../components/schemas.json#/event-webhook-noDates-responseBody"
                             },
                             "examples": {
                                 "One of Multiple Webhooks": {

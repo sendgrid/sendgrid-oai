@@ -1138,7 +1138,12 @@
             "id": {
                 "type": "string",
                 "description": "A unique string used to identify the webhook. A webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property."
-            },
+            }
+        }
+    },
+    "event-webhook-date-response-props": {
+        "type": "object",
+        "properties": {
             "created_date": {
                 "type": "string",
                 "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was created. If you created your webhook before the availability of multiple event webhooks, the `created_date` will be `null`. This means that any event webhook with a `null` created date is your first and oldest webhook.",
@@ -1182,11 +1187,30 @@
                 "$ref": "#/event-webhook-base-response-props"
             },
             {
+                "$ref": "#/event-webhook-date-response-props"
+            },
+            {
                 "$ref": "#/event-webhook-oauth-response-props"
             }
         ]
     },
     "event-webhook-signed-responseBody": {
+        "allOf": [
+            {
+                "$ref": "#/event-webhook-base-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-date-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-oauth-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-signed-response-prop"
+            }
+        ]
+    },
+    "event-webhook-noDates-responseBody": {
         "allOf": [
             {
                 "$ref": "#/event-webhook-base-response-props"
