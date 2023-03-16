@@ -5476,7 +5476,7 @@
     },
     "sso-teammates-POST-requestBody": {
         "title": "Single Sign-On Teammate Create Request Body",
-        "summary": "Single Sign-on Teammate Request Body for the create, POST, Teammate operations.",
+        "summary": "The request body accepted by the POST endpoint that creates a new webhook.",
         "allOf": [
             {
                 "type": "object",
@@ -5539,7 +5539,7 @@
         "properties": {
             "has_restricted_subuser_access": {
                 "type": "boolean",
-                "description": "When this property is set to `true`, the Teammate has permissions to operate only on behalf of a Subuser. This property value will be `true` when the `subuser_access` property is not empty. The `subuser_access` property determines which Subusers the Teammate may act on behalf of."
+                "description": "When this property is set to `true`, the Teammate has permissions to operate only on behalf of a Subuser. This property value is `true` when the `subuser_access` property is not empty. The `subuser_access` property determines which Subusers the Teammate may act on behalf of."
             },
             "subuser_access": {
                 "type": "array",
