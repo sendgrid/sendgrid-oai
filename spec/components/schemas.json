@@ -1075,34 +1075,6 @@
             "url"
         ]
     },
-    "event-webhook-legacy-test-requestBody": {
-        "title": "Send Event Webhook Test Request No ID",
-        "type": "object",
-        "properties": {
-            "url": {
-                "type": "string",
-                "description": "The URL where you would like the test notification to be sent."
-            },
-            "oauth_client_id": {
-                "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_client_secret and oauth_token_url fields."
-            },
-            "oauth_client_secret": {
-                "type": "string",
-                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again.  When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
-            },
-            "oauth_token_url": {
-                "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider.  When passing data in this field, you must also include the oauth_client_id and oauth_client_secret fields."
-            }
-        },
-        "example": {
-            "url": "mollit non ipsum magna",
-            "oauth_client_id": "nisi",
-            "oauth_client_secret": "veniam commodo ex sunt",
-            "oauth_token_url": "dolor Duis"
-        }
-    },
     "event-webhook-test-requestBody": {
         "title": "Send Event Webhook Test Request",
         "type": "object",
