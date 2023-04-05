@@ -199,7 +199,7 @@
                                     },
                                     "group_unsubscribe": {
                                         "type": "boolean",
-                                        "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
+                                        "description": "Recipient unsubscribes from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
                                     },
                                     "spam_report": {
                                         "type": "boolean",
@@ -847,7 +847,7 @@
                                     "value": {
                                         "errors": [
                                             {
-                                                "message": "Invalid ID provided."
+                                                "message": "Invalid id provided."
                                             }
                                         ]
                                     }
@@ -1289,7 +1289,7 @@
         },
         "patch": {
             "operationId": "PATCH-webhooks-event-settings-signed-ID",
-            "summary": "Toggle signature verifitication  for a single Event Webhook by ID",
+            "summary": "Toggle signature verifitication for a single Event Webhook by ID",
             "tags": [
                 "Webhooks"
             ],
@@ -1406,7 +1406,7 @@
     "user_webhooks_event_test": {
         "post": {
             "operationId": "POST-webhooks-event-settings-test",
-            "summary": "Test an Event Webhook's settings.",
+            "summary": "Test an Event Webhook's settings",
             "tags": [
                 "Webhooks"
             ],
