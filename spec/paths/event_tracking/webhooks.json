@@ -795,7 +795,7 @@
             "tags": [
                 "Webhooks"
             ],
-            "description": "**This endpoint allows you to test an Event Webhook.**\n\n> Retry logic for this endpoint differs from other endpoints, which use a rolling 24-hour retry.\n\nThis endpoint will make a POST request with a fake event notification to a URL you provide. This allows you to verify that you have properly configured the webhook before sending real data to your URL.\n\n### Test OAuth configuration\n\nTo test your OAuth configuration, you must include the necessary OAuth properties: `oauth_client_id`, `oauth_client_secret`, and `oauth_token_url`.\n\nIf the webhook you are testing already has OAuth credentials saved, you will provide only the `oauth_client_id` and `oauth_token_url`—we will pull the secret for you. If you are testing a new set of OAuth credentials that have not been saved with SendGrid, you must provide all three property values.\n\nYou can retrieve a previously saved `oauth_client_id` and `oauth_token_url` from the [**Get an Event Webhook**](https://docs.sendgrid.com/api-reference/webhooks/get-an-event-webhook) endpoint; however, for security reasons, SendGrid will not provide your `oauth_client_secret`.",
+            "description": "**This endpoint allows you to test an Event Webhook.**\n\n> Retry logic for this endpoint differs from other endpoints, which use a rolling 24-hour retry.\n\nThis endpoint will make a POST request with a fake event notification to a URL you provide. This allows you to verify that you have properly configured the webhook before sending real data to your URL.\n\n### Test OAuth configuration\n\nTo test your OAuth configuration, you must include the necessary OAuth properties: `oauth_client_id`, `oauth_client_secret`, and `oauth_token_url`.\n\nIf the webhook you are testing already has OAuth credentials saved, you will provide only the `oauth_client_id` and `oauth_token_url`—we will pull the secret for you. If you are testing a new set of OAuth credentials that have not been saved with SendGrid, you must provide all three property values.\n\nYou can retrieve a previously saved `oauth_client_id` and `oauth_token_url` from the [**Retrieve Event Webhook Settings**](https://docs.sendgrid.com/api-reference/webhooks/retrieve-event-webhook-settings) endpoint; however, for security reasons, SendGrid will not provide your `oauth_client_secret`.",
             "parameters": [
                 {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
@@ -805,42 +805,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string",
-                                    "description": "The ID of the Event Webhook you want to retrieve."
-                                },
-                                "url": {
-                                    "type": "string",
-                                    "description": "The URL where you would like the test notification to be sent."
-                                },
-                                "oauth_client_id": {
-                                    "type": "string",
-                                    "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this property, you must also include the `oauth_token_url` property.",
-                                    "nullable": true
-                                },
-                                "oauth_client_secret": {
-                                    "type": "string",
-                                    "description": "The `oauth_client_secret` is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
-                                    "nullable": true
-                                },
-                                "oauth_token_url": {
-                                    "type": "string",
-                                    "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the `oauth_client_id` property.",
-                                    "nullable": true
-                                }
-                            },
-                            "required": [
-                                "url"
-                            ],
-                            "example": {
-                                "id": "77d4a5da-7015-11ed-a1eb-0242ac120002",
-                                "url": "https://emailengagment.example.com",
-                                "oauth_client_id": "a835e7210bbb47edbfa71bdfc909b2d7",
-                                "oauth_client_secret": "335a9b0c65324fd2a62e2953d4b158",
-                                "oauth_token_url": "https://oauthservice.example.com"
-                            }
+                            "$ref": "../../components/schemas.json#/event-webhook-legacy-test-requestBody"
                         }
                     }
                 }
