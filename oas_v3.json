@@ -507,9 +507,6 @@
         "/v3/templates/{template_id}/versions/{version_id}/activate": {
             "$ref": "./spec/paths/templates/transactional_templates_versions.json#/templates_{template_id}_versions_{version_id}_activate"
         },
-        "/v3/user/webhooks/event/settings/signed": {
-            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_signed"
-        },
         "/v3/user/webhooks/event/settings": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings"
         },
