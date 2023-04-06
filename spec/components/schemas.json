@@ -994,86 +994,318 @@
             "utm_campaign": "website"
         }
     },
-    "event-webhook-response": {
-        "title": "Webhooks: Event Webhook Response",
+    "event-webhook-requestBody": {
+        "title": "Create and Update Event Webhook Request Body",
         "type": "object",
         "properties": {
             "enabled": {
                 "type": "boolean",
-                "description": "Indicates if the event webhook is enabled."
+                "description": "Set this property to `true` to enable the Event Webhook or `false` to disable it."
             },
             "url": {
                 "type": "string",
-                "description": "The URL that you want the event webhook to POST to."
+                "description": "Set this property to the URL where you want the Event Webhook to send event data."
             },
             "group_resubscribe": {
                 "type": "boolean",
-                "description": "Recipient resubscribes to specific group by updating preferences. You need to enable Subscription Tracking for getting this type of event."
+                "description": "Set this property to `true` to receive group resubscribe events. Group resubscribes occur when recipients resubscribe to a specific [unsubscribe group](https://docs.sendgrid.com/ui/sending-email/create-and-manage-unsubscribe-groups) by updating their subscription preferences. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
             },
             "delivered": {
                 "type": "boolean",
-                "description": "Message has been successfully delivered to the receiving server."
+                "description": "Set this property to `true` to receive delivered events. Delivered events occur when a message has been successfully delivered to the receiving server."
             },
             "group_unsubscribe": {
                 "type": "boolean",
-                "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
+                "description": "Set this property to `true` to receive group unsubscribe events. Group unsubscribes occur when recipients unsubscribe from a specific [unsubscribe group](https://docs.sendgrid.com/ui/sending-email/create-and-manage-unsubscribe-groups) either by direct link or by updating their subscription preferences. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
             },
             "spam_report": {
                 "type": "boolean",
-                "description": "Recipient marked a message as spam."
+                "description": "Set this property to `true` to receive spam report events. Spam reports occur when recipients mark a message as spam."
             },
             "bounce": {
                 "type": "boolean",
-                "description": "Receiving server could not or would not accept message."
+                "description": "Set this property to `true` to receive bounce events. A bounce occurs when a receiving server could not or would not accept a message."
             },
             "deferred": {
                 "type": "boolean",
-                "description": "Recipient's email server temporarily rejected message."
+                "description": "Set this property to `true` to receive deferred events. Deferred events occur when a recipient's email server temporarily rejects a message."
             },
             "unsubscribe": {
                 "type": "boolean",
-                "description": "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
+                "description": "Set this property to `true` to receive unsubscribe events. Unsubscribes occur when recipients click on a message's subscription management link. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
             },
             "processed": {
                 "type": "boolean",
-                "description": "Message has been received and is ready to be delivered."
+                "description": "Set this property to `true` to receive processed events. Processed events occur when a message has been received by Twilio SendGrid and the message is ready to be delivered."
             },
             "open": {
                 "type": "boolean",
-                "description": "Recipient has opened the HTML message. You need to enable Open Tracking for getting this type of event."
+                "description": "Set this property to `true` to receive open events. Open events occur when a recipient has opened the HTML message. You must [enable Open Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#open-tracking) to receive this type of event."
             },
             "click": {
                 "type": "boolean",
-                "description": "Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event."
+                "description": "Set this property to `true` to receive click events. Click events occur when a recipient clicks on a link within the message. You must [enable Click Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#click-tracking) to receive this type of event."
             },
             "dropped": {
                 "type": "boolean",
-                "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
+                "description": "Set this property to `true` to receive dropped events. Dropped events occur when your message is not delivered by Twilio SendGrid. Dropped events are accomponied by a `reason` property, which indicates why the message was dropped. Reasons for a dropped message include: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota."
+            },
+            "friendly_name": {
+                "type": "string",
+                "description": "Optionally set this property to a friendly name for the Event Webhook. A friendly name may be assigned to each of your webhooks to help you differentiate them. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks.",
+                "nullable": true
             },
             "oauth_client_id": {
                 "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token."
+                "description": "Set this property to the OAuth client ID that SendGrid will pass to your OAuth server or service provider to generate an OAuth access token. When passing data in this property, you must also include the `oauth_token_url` property.",
+                "nullable": true
+            },
+            "oauth_client_secret": {
+                "type": "string",
+                "description": "Set this property to the OAuth client secret that SendGrid will pass to your OAuth server or service provider to generate an OAuth access token. This secret is needed only once to create an access token. SendGrid will store the secret, allowing you to update your client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
+                "nullable": true
             },
             "oauth_token_url": {
                 "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider."
+                "description": "Set this property to the URL where SendGrid will send the OAuth client ID and client secret to generate an OAuth access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the `oauth_client_id` property.",
+                "nullable": true
             }
         },
         "required": [
-            "enabled",
-            "url",
-            "group_resubscribe",
-            "delivered",
-            "group_unsubscribe",
-            "spam_report",
-            "bounce",
-            "deferred",
-            "unsubscribe",
-            "processed",
-            "open",
-            "click",
-            "dropped"
+            "url"
         ]
+    },
+    "event-webhook-legacy-test-requestBody": {
+        "title": "Send Event Webhook Test Request No ID",
+        "type": "object",
+        "properties": {
+            "url": {
+                "type": "string",
+                "description": "The URL where you would like the test notification to be sent."
+            },
+            "oauth_client_id": {
+                "type": "string",
+                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_client_secret and oauth_token_url fields."
+            },
+            "oauth_client_secret": {
+                "type": "string",
+                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
+            },
+            "oauth_token_url": {
+                "type": "string",
+                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the oauth_client_id and oauth_client_secret fields."
+            }
+        },
+        "example": {
+            "url": "https://emailengagment.example.com",
+            "oauth_client_id": "a835e7210bbb47edbfa71bdfc909b2d7",
+            "oauth_client_secret": "335a9b0c65324fd2a62e2953d4b158",
+            "oauth_token_url": "https://oauthservice.example.com"
+        }
+    },
+    "event-webhook-test-requestBody": {
+        "title": "Send Event Webhook Test Request",
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string",
+                "description": "The ID of the Event Webhook you want to retrieve."
+            },
+            "url": {
+                "type": "string",
+                "description": "The URL where you would like the test notification to be sent."
+            },
+            "oauth_client_id": {
+                "type": "string",
+                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this property, you must also include the `oauth_token_url` property.",
+                "nullable": true
+            },
+            "oauth_client_secret": {
+                "type": "string",
+                "description": "The `oauth_client_secret` is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the `oauth_client_id` and `oauth_token_url` properties.",
+                "nullable": true
+            },
+            "oauth_token_url": {
+                "type": "string",
+                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the `oauth_client_id` property.",
+                "nullable": true
+            }
+        },
+        "required": [
+            "url"
+        ],
+        "example": {
+            "id": "77d4a5da-7015-11ed-a1eb-0242ac120002",
+            "url": "https://emailengagment.example.com",
+            "oauth_client_id": "a835e7210bbb47edbfa71bdfc909b2d7",
+            "oauth_client_secret": "335a9b0c65324fd2a62e2953d4b158",
+            "oauth_token_url": "https://oauthservice.example.com"
+        }
+    },
+    "event-webhook-base-response-props": {
+        "type": "object",
+        "properties": {
+            "enabled": {
+                "type": "boolean",
+                "description": "Indicates if the Event Webhook is enabled."
+            },
+            "url": {
+                "type": "string",
+                "description": "The URL where SendGrid will send event data."
+            },
+            "group_resubscribe": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send group resubscribe events. Group resubscribes occur when recipients resubscribe to a specific [unsubscribe group](https://docs.sendgrid.com/ui/sending-email/create-and-manage-unsubscribe-groups) by updating their subscription preferences. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
+            },
+            "delivered": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send delivered events. Delivered events occur when a message has been successfully delivered to the receiving server."
+            },
+            "group_unsubscribe": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send group unsubscribe events. Group unsubscribes occur when recipients unsubscribe from a specific [unsubscribe group](https://docs.sendgrid.com/ui/sending-email/create-and-manage-unsubscribe-groups) either by direct link or by updating their subscription preferences. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
+            },
+            "spam_report": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send spam report events. Spam reports occur when recipients mark a message as spam."
+            },
+            "bounce": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send bounce events. A bounce occurs when a receiving server could not or would not accept a message."
+            },
+            "deferred": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send deferred events. Deferred events occur when a recipient's email server temporarily rejects a message."
+            },
+            "unsubscribe": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send unsubscribe events. Unsubscribes occur when recipients click on a message's subscription management link. You must [enable Subscription Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#subscription-tracking) to receive this type of event."
+            },
+            "processed": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send processed events. Processed events occur when a message has been received by Twilio SendGrid and is ready to be delivered."
+            },
+            "open": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send open events. Open events occur when a recipient has opened the HTML message. You must [enable Open Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#open-tracking) to receive this type of event."
+            },
+            "click": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send click events. Click events occur when a recipient clicks on a link within the message. You must [enable Click Tracking](https://docs.sendgrid.com/ui/account-and-settings/tracking#click-tracking) to receive this type of event."
+            },
+            "dropped": {
+                "type": "boolean",
+                "description": "Indicates if the webhook is configured to send dropped events. Dropped events occur when your message is not delivered by Twilio SendGrid. Dropped events are accomponied by a `reason` property, which indicates why the message was dropped. Reasons for a dropped message include: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota."
+            },
+            "friendly_name": {
+                "type": "string",
+                "description": "An optional friendly name assigned to the Event Webhook to help you differentiate it. The friendly name is for convenience only. You should use the webhook `id` property for any programmatic tasks.",
+                "nullable": true
+            },
+            "id": {
+                "type": "string",
+                "description": "A unique string used to identify the webhook. A webhook's ID is generated programmatically and cannot be changed after creation. You can assign a natural language identifier to your webhook using the `friendly_name` property."
+            }
+        }
+    },
+    "event-webhook-date-response-props": {
+        "type": "object",
+        "properties": {
+            "created_date": {
+                "type": "string",
+                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was created. If you created your webhook before the availability of multiple event webhooks, the `created_date` will be `null`. This means that any event webhook with a `null` created date is your first and oldest webhook.",
+                "format": "date-time",
+                "nullable": true
+            },
+            "updated_date": {
+                "type": "string",
+                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was last modified.",
+                "format": "date-time"
+            }
+        }
+    },
+    "event-webhook-oauth-response-props": {
+        "type": "object",
+        "properties": {
+            "oauth_client_id": {
+                "type": "string",
+                "description": "The OAuth client ID SendGrid sends to your OAuth server or service provider to generate an OAuth access token.",
+                "nullable": true
+            },
+            "oauth_token_url": {
+                "type": "string",
+                "description": "The URL where SendGrid sends the OAuth client ID and client secret to generate an access token. This should be your OAuth server or service provider.",
+                "nullable": true
+            }
+        }
+    },
+    "event-webhook-signed-response-prop": {
+        "type": "object",
+        "properties": {
+            "public_key": {
+                "type": "string",
+                "description": "The public key you can use to verify the SendGrid signature."
+            }
+        }
+    },
+    "event-webhook-unsigned-responseBody": {
+        "allOf": [
+            {
+                "$ref": "#/event-webhook-base-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-date-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-oauth-response-props"
+            }
+        ]
+    },
+    "event-webhook-signed-responseBody": {
+        "allOf": [
+            {
+                "$ref": "#/event-webhook-base-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-date-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-oauth-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-signed-response-prop"
+            }
+        ]
+    },
+    "event-webhook-noDates-responseBody": {
+        "allOf": [
+            {
+                "$ref": "#/event-webhook-base-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-oauth-response-props"
+            },
+            {
+                "$ref": "#/event-webhook-signed-response-prop"
+            }
+        ]
+    },
+    "event-webhook-all-responseBody": {
+        "title": "Event Webhook Response Body: All Webhooks",
+        "type": "object",
+        "properties": {
+            "max_allowed": {
+                "type": "number",
+                "description": "The maximum number of Event Webhooks you can have enabled under your current Twilio SendGrid plan. See the [Twilio SendGrid pricing page](https://sendgrid.com/pricing) for more information about the features available with each plan."
+            },
+            "webhooks": {
+                "type": "array",
+                "description": "An array of Event Webhook objects. Each object represents one of your webhooks and contains its configuration settings, including which events it is set to send in the POST request, the URL where it will send those events, and the webhook's ID.",
+                "items": {
+                    "$ref": "#/event-webhook-signed-responseBody"
+                }
+            }
+        }
     },
     "user_profile": {
         "title": "User: Profile",
@@ -2782,26 +3014,6 @@
             }
         }
     },
-    "webhook": {
-        "title": "webhook",
-        "type": "object",
-        "properties": {
-            "url": {
-                "type": "string",
-                "description": "The URL to invoke in the webhook"
-            },
-            "nonce": {
-                "type": "string",
-                "description": "The one time nonce to use when \"signature\" is \"hmac-sha1\"",
-                "minLength": 8,
-                "maxLength": 32
-            }
-        },
-        "required": [
-            "url",
-            "nonce"
-        ]
-    },
     "list": {
         "title": "list",
         "type": "object",
@@ -4002,172 +4214,6 @@
                 "email": "john_doe@example.com",
                 "name": "John Doe"
             }
-        ]
-    },
-    "event-webhook-update-oauth-request": {
-        "title": "Webhooks: Event Webhook Update with OAuth Request",
-        "type": "object",
-        "properties": {
-            "enabled": {
-                "type": "boolean",
-                "description": "Indicates if the event webhook is enabled."
-            },
-            "url": {
-                "type": "string",
-                "description": "The URL that you want the event webhook to POST to."
-            },
-            "group_resubscribe": {
-                "type": "boolean",
-                "description": "Recipient resubscribes to specific group by updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "delivered": {
-                "type": "boolean",
-                "description": "Message has been successfully delivered to the receiving server."
-            },
-            "group_unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "spam_report": {
-                "type": "boolean",
-                "description": "Recipient marked a message as spam."
-            },
-            "bounce": {
-                "type": "boolean",
-                "description": "Receiving server could not or would not accept message."
-            },
-            "deferred": {
-                "type": "boolean",
-                "description": "Recipient's email server temporarily rejected message."
-            },
-            "unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "processed": {
-                "type": "boolean",
-                "description": "Message has been received and is ready to be delivered."
-            },
-            "open": {
-                "type": "boolean",
-                "description": "Recipient has opened the HTML message. You need to enable Open Tracking for getting this type of event."
-            },
-            "click": {
-                "type": "boolean",
-                "description": "Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event."
-            },
-            "dropped": {
-                "type": "boolean",
-                "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
-            },
-            "oauth_client_id": {
-                "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_token_url field."
-            },
-            "oauth_client_secret": {
-                "type": "string",
-                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again.  When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
-            },
-            "oauth_token_url": {
-                "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the oauth_client_id field."
-            }
-        },
-        "required": [
-            "enabled",
-            "url",
-            "group_resubscribe",
-            "delivered",
-            "group_unsubscribe",
-            "spam_report",
-            "bounce",
-            "deferred",
-            "unsubscribe",
-            "processed",
-            "open",
-            "click",
-            "dropped"
-        ]
-    },
-    "webhooks-event-webhook-request": {
-        "title": "Webhooks: Event Webhook Request",
-        "type": "object",
-        "properties": {
-            "enabled": {
-                "type": "boolean",
-                "description": "Indicates if the event webhook is enabled."
-            },
-            "url": {
-                "type": "string",
-                "description": "The URL that you want the event webhook to POST to."
-            },
-            "group_resubscribe": {
-                "type": "boolean",
-                "description": "Recipient resubscribes to specific group by updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "delivered": {
-                "type": "boolean",
-                "description": "Message has been successfully delivered to the receiving server."
-            },
-            "group_unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient unsubscribe from specific group, by either direct link or updating preferences. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "spam_report": {
-                "type": "boolean",
-                "description": "Recipient marked a message as spam."
-            },
-            "bounce": {
-                "type": "boolean",
-                "description": "Receiving server could not or would not accept message."
-            },
-            "deferred": {
-                "type": "boolean",
-                "description": "Recipient's email server temporarily rejected message."
-            },
-            "unsubscribe": {
-                "type": "boolean",
-                "description": "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
-            },
-            "processed": {
-                "type": "boolean",
-                "description": "Message has been received and is ready to be delivered."
-            },
-            "open": {
-                "type": "boolean",
-                "description": "Recipient has opened the HTML message. You need to enable Open Tracking for getting this type of event."
-            },
-            "click": {
-                "type": "boolean",
-                "description": "Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event."
-            },
-            "dropped": {
-                "type": "boolean",
-                "description": "You may see the following drop reasons: Invalid SMTPAPI header, Spam Content (if spam checker app enabled), Unsubscribed Address, Bounced Address, Spam Reporting Address, Invalid, Recipient List over Package Quota"
-            },
-            "oauth_client_id": {
-                "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_token_url field."
-            },
-            "oauth_token_url": {
-                "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the oauth_client_id field."
-            }
-        },
-        "required": [
-            "enabled",
-            "url",
-            "group_resubscribe",
-            "delivered",
-            "group_unsubscribe",
-            "spam_report",
-            "bounce",
-            "deferred",
-            "unsubscribe",
-            "processed",
-            "open",
-            "click",
-            "dropped"
         ]
     },
     "reply_to_email_object": {
