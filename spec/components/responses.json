@@ -419,5 +419,225 @@
     },
     "trait_errors_500": {
         "description": ""
+    },
+    "accountProvisioning_errorResponse_400": {
+        "description": "The request was formatted incorrectly or missing required parameters",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "title": "Bad Request",
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
+                        }
+                    },
+                    "required": [
+                        "errors"
+                    ]
+                },
+                "example": {
+                    "errors": [
+                        {
+                            "message": "Field must be a valid email",
+                            "field": "email",
+                            "error_id": "10-40002"
+                        },
+                        {
+                            "message": "Field must be formatted using the E.164 standard consisting of [+] [country code] [subscriber number including area code] and can have a maximum of fifteen digits.",
+                            "field": "phone",
+                            "error_id": "10-40010"
+                        },
+                        {
+                            "message": "Field must be a valid URL",
+                            "field": "company_website",
+                            "error_id": "10-40008"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "accountProvisioning_errorResponse_401": {
+        "description": "Request lacks valid authentication credentials",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "title": "Unauthorized",
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "errors": [
+                        {
+                            "message": "Failed to authenticate user",
+                            "field": "",
+                            "error_id": "10-40100"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "accountProvisioning_errorResponse_403": {
+        "description": "Not authorized to make the request",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "title": "Forbidden",
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "errors": [
+                        {
+                            "message": "The authenticated user is not authorized to perfrom this request",
+                            "field": "",
+                            "error_id": "10-40300"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "accountProvisioning_errorResponse_404": {
+        "description": "Not Found",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "title": "Not Found",
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "./schemas.json#/accountProvisioning_errorSchema"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "errors": [
+                        {
+                            "message": "No such endpoint",
+                            "field": "",
+                            "error_id": "10-40400"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "IPAddressManagementAPI401": {
+        "description": "Unauthorized",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/IPAddressManagementAPIErrorsSchema",
+                    "x-examples": {
+                        "example-1": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "missing required scope: scope1, scope2"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": {
+                    "Missing required scope": {
+                        "value": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "missing required scope: scope1, scope2"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "application/xml": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "field": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "x-examples": {
+                        "example-1": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "missing required scope: scope1, scope2"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "IPAddressManagement500": {
+        "description": "Internal Server Error",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/IPAddressManagementAPIErrorsSchema",
+                    "x-examples": {
+                        "example-1": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "internal server error"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": {
+                    "Generic 500": {
+                        "value": {
+                            "errors": [
+                                {
+                                    "field": "",
+                                    "message": "internal server error"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,422 @@
+{
+    "IPAddressManagementAPI400_PoolID_TypeError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "poolid",
+                    "message": "must be a numeric value"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_PoolID_ValueError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "poolid",
+                    "message": "not found"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Limit_ValueError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "limit",
+                    "message": "should be > 0 and <= 100"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_AfterKey_TypeError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "after_key",
+                    "message": "must be a numeric value"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_AfterKey_ValueError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "after_key",
+                    "message": "must be >= 0"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_JSONParseError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "",
+                    "message": "failed to parse the request body as a JSON payload"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Name_MissingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "name",
+                    "message": "not found in the request body"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Name_DotSpaceError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "name",
+                    "message": "cannot start with a dot or a space"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Name_LengthError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "name",
+                    "message": "needs to be between 2 to 64 characters long"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Name_ExistsError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "name",
+                    "message": "already exists"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Pool_LimitError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "",
+                    "message": "100 pools limit has been reached"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_PoolID_MissingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "poolid",
+                    "message": "not found"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IPs_LimitError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ips",
+                    "message": "the total number of IPs per pool cannot exceed 100. current IP count in ‘pool’ is ‘98’"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IPs_AssignmentError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ips",
+                    "message": "unable to verify IPs assignability: 127.0.0.1, 127.0.0.2"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IPs_LengthError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ips",
+                    "message": "the number of IPs must be between 1 and 100"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IPs_MIssingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ips",
+                    "message": "not found in the request body"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IPs_IPNotInPoolError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ips",
+                    "message": "not found in pool ‘marketing_pool’: 127.0.0.1, 127.0.0.2"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_InvalidIPError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "",
+                    "message": "invalid IP address"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Subusers_EmptyError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "subusers",
+                    "message": "must not be empty"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Subusers_LimitError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "subusers",
+                    "message": "cannot assign more than 1000 subusers per call"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Subusers_CallerIDError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "subusers",
+                    "message": "cannot contain caller’s userID"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Subusers_UnverifiedError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "subusers",
+                    "message": "unverified subusers: 123, 456, 789"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Pool_MissingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "pool",
+                    "message": "not found"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Pool_TypeError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "pool",
+                    "message": "must be numeric"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IsParentAssigned_SubuserError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "is_parent_assigned",
+                    "message": "cannot be used for a sub user account"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IsParentAssigned_ValueError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "is_parent_assigned",
+                    "message": "must be one of the following: true, false"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IsEnabled_ValueError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "is_enabled",
+                    "message": "must be one of the following: true, false"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IsLeased_ValueError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "is_leased",
+                    "message": "must be one of the following: true, false"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_StartAddedAt_TypeError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "start_added_at",
+                    "message": "must be numeric"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_EndAddedAt_TypeError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "end_added_at",
+                    "message": "must be numeric"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_Pool_IsParentAssignedError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "pool",
+                    "message": "cannot be used with ‘is_parent_assigned’"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_AfterKey_InvalidIPError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "after_key",
+                    "message": "invalid IP address"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_BeforeKey_InvalidIPError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "before_key",
+                    "message": "invalid IP address"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_AfterKey_BeforeKey_Error": {
+        "value": {
+            "errors": [
+                {
+                    "field": "after_key",
+                    "message": "cannot be used with ‘before_key’"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IP_MIssingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ip",
+                    "message": "not found"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IP_InvalidError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ip",
+                    "message": "invalid IP address"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IP_NoRemainingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "",
+                    "message": "No IPs remaining"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IsAutoWarmup_MissingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "is_auto_warmup",
+                    "message": "not found in the request body"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IsParentAssigned_MissingError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "is_parent_assigned",
+                    "message": "not found in the request body"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IsAutoWarmup_SubusersError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "subusers",
+                    "message": "these users must have at least one IP that is not in warmup: 123, 456"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_IP_OwnershipError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "ip",
+                    "message": "unable to verify IP ownership"
+                }
+            ]
+        }
+    },
+    "IPAddressManagementAPI400_MissingRequiredFieldError": {
+        "value": {
+            "errors": [
+                {
+                    "field": "",
+                    "message": "at least one of the following is required: is_enabled, is_auto_warmup, is_parent_assigned"
+                }
+            ]
+        }
+    }
+}
