@@ -1213,7 +1213,7 @@
         "properties": {
             "created_date": {
                 "type": "string",
-                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was created. If you created your webhook before the availability of multiple event webhooks, the `created_date` will be `null`. This means that any event webhook with a `null` created date is your first and oldest webhook.",
+                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was created. If you created your Webhook before SendGrid supported multiple Event Webhook endpoint configurations, the `created_date` will be `null`. This means that any event webhook with a `null` created date is your first and oldest webhook.",
                 "format": "date-time",
                 "nullable": true
             },
