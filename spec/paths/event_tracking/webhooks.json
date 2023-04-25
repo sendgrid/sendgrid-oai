@@ -106,21 +106,50 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "message": {
-                                                    "type": "string",
-                                                    "description": "Error message."
+                                "anyOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "errors": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "Error message."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "errors": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "description": "The ID of a Webhook that exists on your account that is already configured to send events to the endpoint URL you provided."
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "Error message."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The URL that is already configured as a Webhook endpoint for one of your existing Webhooks."
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                }
+                                ]
                             },
                             "examples": {
                                 "Bad URL": {
@@ -136,7 +165,9 @@
                                     "value": {
                                         "errors": [
                                             {
-                                                "message": "Webhook at 'https://example.com' already exists. Please provide a unique URL."
+                                                "id": "123abc456def890ghi",
+                                                "message": "Webhook at 'https://example.com' already exists. Please provide a unique URL.",
+                                                "url": "https://example.com"
                                             }
                                         ]
                                     }
@@ -782,21 +813,50 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "errors": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "message": {
-                                                    "type": "string",
-                                                    "description": "Error message."
+                                "anyOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "errors": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "Error message."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "errors": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "description": "The ID of a Webhook that exists on your account that is already configured to send events to the endpoint URL you provided."
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "Error message."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The URL that is already configured as a Webhook endpoint for one of your existing Webhooks."
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                }
+                                ]
                             },
                             "examples": {
                                 "Account Change": {
@@ -812,7 +872,9 @@
                                     "value": {
                                         "errors": [
                                             {
-                                                "message": "Webhook at '<url>' already exists. Please provide a unique URL."
+                                                "id": "123abc456def890ghi",
+                                                "message": "Webhook at 'https://example.com' already exists. Please provide a unique URL.",
+                                                "url": "https://example.com"
                                             }
                                         ]
                                     }
