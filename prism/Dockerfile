@@ -1,9 +1,10 @@
 FROM node
 
-ADD https://github.com/stoplightio/prism/releases/download/v2.0.17/prism_linux_amd64 prism
-ADD https://raw.githubusercontent.com/sendgrid/sendgrid-oai/eb7a825bf06dfec7da2622735c5334c0d35da9fa/oai_stoplight.json oai_stoplight.json
+ADD https://github.com/stoplightio/prism/releases/download/v4.12.0/prism-cli-linux prism
+ADD https://raw.githubusercontent.com/sendgrid/sendgrid-oai/main/oas_v3.json oas_v3.json
+RUN svn export https://github.com/sendgrid/sendgrid-oai/trunk/spec spec
 RUN chmod +x prism
 
 EXPOSE 4010
 
-CMD ["./prism", "--port", "4010", "mock", "--spec", "oai_stoplight.json"]
+CMD ["./prism", "--port", "4010", "mock", "oas_v3.json"]
