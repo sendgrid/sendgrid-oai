@@ -1075,34 +1075,6 @@
             "url"
         ]
     },
-    "event-webhook-legacy-test-requestBody": {
-        "title": "Send Event Webhook Test Request No ID",
-        "type": "object",
-        "properties": {
-            "url": {
-                "type": "string",
-                "description": "The URL where you would like the test notification to be sent."
-            },
-            "oauth_client_id": {
-                "type": "string",
-                "description": "The client ID Twilio SendGrid sends to your OAuth server or service provider to generate an OAuth access token. When passing data in this field, you must also include the oauth_client_secret and oauth_token_url fields."
-            },
-            "oauth_client_secret": {
-                "type": "string",
-                "description": "This secret is needed only once to create an access token. SendGrid will store this secret, allowing you to update your Client ID and Token URL without passing the secret to SendGrid again. When passing data in this field, you must also include the oauth_client_id and oauth_token_url fields."
-            },
-            "oauth_token_url": {
-                "type": "string",
-                "description": "The URL where Twilio SendGrid sends the Client ID and Client Secret to generate an access token. This should be your OAuth server or service provider. When passing data in this field, you must also include the oauth_client_id and oauth_client_secret fields."
-            }
-        },
-        "example": {
-            "url": "https://emailengagment.example.com",
-            "oauth_client_id": "a835e7210bbb47edbfa71bdfc909b2d7",
-            "oauth_client_secret": "335a9b0c65324fd2a62e2953d4b158",
-            "oauth_token_url": "https://oauthservice.example.com"
-        }
-    },
     "event-webhook-test-requestBody": {
         "title": "Send Event Webhook Test Request",
         "type": "object",
@@ -1213,7 +1185,7 @@
         "properties": {
             "created_date": {
                 "type": "string",
-                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was created. If you created your Webhook before SendGrid supported multiple Event Webhook endpoint configurations, the `created_date` will be `null`. This means that any event webhook with a `null` created date is your first and oldest webhook.",
+                "description": "An ISO 8601 timestamp in UTC timezone when the Event Webhook was created. If a Webhook's `created_date` is `null`, it is a [legacy Event Webook](https://www.twilio.com/en-us/changelog/event-webhooks), which means it is your oldest Webhook.",
                 "format": "date-time",
                 "nullable": true
             },
