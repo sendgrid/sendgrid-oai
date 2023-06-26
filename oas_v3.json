@@ -66,6 +66,36 @@
         "/v3/sso/teammates/{username}": {
             "$ref": "./spec/paths/single_sign_on/teammates.json#/sso_teammates_{username}"
         },
+        "/v3/send_ips/pools": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools"
+        },
+        "/v3/send_ips/pools/{poolid}": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}"
+        },
+        "/v3/send_ips/pools/{poolid}/ips": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}_ips"
+        },
+        "/v3/send_ips/pools/{poolid}/ips:batchAdd": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}_ips_batchAdd"
+        },
+        "/v3/send_ips/pools/{poolid}/ips:batchDelete": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/pools_{poolid}_ips_batchDelete"
+        },
+        "/v3/send_ips/ips/{ip}/subusers": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}_subusers"
+        },
+        "/v3/send_ips/ips/{ip}/subusers:batchAdd": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}_subusers_batchAdd"
+        },
+        "/v3/send_ips/ips/{ip}/subusers:batchDelete": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}_subusers_batchDelete"
+        },
+        "/v3/send_ips/ips": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips"
+        },
+        "/v3/send_ips/ips/{ip}": {
+            "$ref": "./spec/paths/deliverability/ip_address_management.json#/ips_{ip}"
+        },
         "/v3/whitelabel/links": {
             "$ref": "./spec/paths/deliverability/link_branding.json#/whitelabel_links"
         },
@@ -150,9 +180,6 @@
         "/v3/mail_settings/forward_bounce": {
             "$ref": "./spec/paths/settings/mail.json#/mail_settings_forward_bounce"
         },
-        "/v3/partner_settings/new_relic": {
-            "$ref": "./spec/paths/settings/partner.json#/partner_settings_new_relic"
-        },
         "/v3/partner_settings": {
             "$ref": "./spec/paths/settings/partner.json#/partner_settings"
         },
@@ -215,9 +242,6 @@
         },
         "/v3/subusers/{subuser_name}/ips": {
             "$ref": "./spec/paths/settings/subusers_api.json#/subusers_{subuser_name}_ips"
-        },
-        "/v3/subusers/{subuser_name}/monitor": {
-            "$ref": "./spec/paths/settings/subuser_monitor_settings.json#/subusers_{subuser_name}_monitor"
         },
         "/v3/subusers/{subuser_name}/stats/monthly": {
             "$ref": "./spec/paths/settings/subuser_statistics.json#/subusers_{subuser_name}_stats_monthly"
@@ -320,6 +344,9 @@
         },
         "/v3/marketing/segments/2.0/{segment_id}": {
             "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts_v2.json#/marketing_segments_2.0_{segment_id}"
+        },
+        "/v3/marketing/segments/2.0/refresh/{segment_id}": {
+            "$ref": "./spec/paths/new_marketing_campaigns/segmenting_contacts_v2.json#/marketing_segments_2.0_refresh_{segment_id}"
         },
         "/v3/marketing/senders": {
             "$ref": "./spec/paths/new_marketing_campaigns/senders.json#/marketing_senders"
@@ -483,17 +510,23 @@
         "/v3/user/webhooks/event/settings": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings"
         },
+        "/v3/user/webhooks/event/settings/all": {
+            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_all"
+        },
+        "/v3/user/webhooks/event/settings/{id}": {
+            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_{id}"
+        },
+        "/v3/user/webhooks/event/settings/signed/{id}": {
+            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_signed_{id}"
+        },
+        "/v3/user/webhooks/event/test": {
+            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_test"
+        },
         "/v3/user/webhooks/parse/settings": {
             "$ref": "./spec/paths/inbound_parse/settings.json#/user_webhooks_parse_settings"
         },
         "/v3/user/webhooks/parse/stats": {
             "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_parse_stats"
-        },
-        "/v3/user/webhooks/event/settings/signed": {
-            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_settings_signed"
-        },
-        "/v3/user/webhooks/event/test": {
-            "$ref": "./spec/paths/event_tracking/webhooks.json#/user_webhooks_event_test"
         },
         "/v3/tracking_settings": {
             "$ref": "./spec/paths/event_tracking/settings_tracking.json#/tracking_settings"
@@ -626,6 +659,24 @@
         },
         "/v3/messages/download/{download_uuid}": {
             "$ref": "./spec/paths/email_activity.json#/messages_download_{download_uuid}"
+        },
+        "/v3/partners/accounts": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts"
+        },
+        "/v3/partners/accounts/{accountID}": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}"
+        },
+        "/v3/partners/accounts/{accountID}/sso": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_sso"
+        },
+        "/v3/partners/accounts/{accountID}/state": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_state"
+        },
+        "/v3/partners/offerings": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/offerings"
+        },
+        "/v3/partners/accounts/{accountID}/offerings": {
+            "$ref": "./spec/paths/account_provisioning/account_provisioning.json#/accounts_{accountID}_offerings"
         }
     },
     "components": {
@@ -668,9 +719,6 @@
         },
         {
             "name": "Settings - Inbound Parse"
-        },
-        {
-            "name": "Segmenting Contacts"
         },
         {
             "name": "IP Access Management"
@@ -833,6 +881,22 @@
         },
         {
             "name": "IP Pools"
+        },
+        {
+            "name": "Account",
+            "description": "Account-specific operations"
+        },
+        {
+            "name": "Account State",
+            "description": "Read and update account state"
+        },
+        {
+            "name": "Account ID",
+            "description": "Twilio SendGrid Account ID"
+        },
+        {
+            "name": "Offering",
+            "description": "Offering-specific operations to add or remove offerings on a reseller's customer accounts"
         }
     ],
     "externalDocs": {

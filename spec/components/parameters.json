@@ -2,9 +2,18 @@
     "trait_onBehalfOfSubuser_on-behalf-of": {
         "name": "on-behalf-of",
         "in": "header",
+        "description": "The `on-behalf-of` header allows you to make API calls from a parent account on behalf of the parent's Subusers or customer accounts. You will use the parent account's API key when using this header. When making a call on behalf of a customer account, the property value should be \"account-id\" followed by the customer account's ID (e.g., `on-behalf-of: account-id <account-id>`). When making a call on behalf of a Subuser, the property value should be the Subuser's username (e.g., `on-behalf-of: <subuser-username>`). See [**On Behalf Of**](https://docs.sendgrid.com/api-reference/how-to-use-the-sendgrid-v3-api/on-behalf-of) for more information.",
+        "required": false,
         "schema": {
-            "type": "string",
-            "default": "The subuser's username. This header generates the API call as if the subuser account was making the call."
+            "type": "string"
+        },
+        "examples": {
+            "Account": {
+                "value": "on-behalf-of: account-id abc123def456hij789klm0"
+            },
+            "Subuser": {
+                "value": "on-behalf-of: TransactionalSubuser"
+            }
         }
     },
     "trait_baseParams_aggregated_by": {
@@ -268,6 +277,169 @@
         "schema": {
             "type": "string",
             "default": "Bearer <<YOUR_API_KEY_HERE>>"
+        }
+    },
+    "accountProvisioning_accountID": {
+        "name": "accountID",
+        "in": "path",
+        "description": "Twilio SendGrid account ID",
+        "schema": {
+            "type": "string"
+        },
+        "required": true,
+        "example": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+    },
+    "accountProvisioning_countParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "The number of items to return",
+        "schema": {
+            "type": "integer",
+            "default": 10,
+            "maximum": 100
+        },
+        "required": false,
+        "example": 2
+    },
+    "accountProvisioning_lastParam": {
+        "name": "offset",
+        "in": "query",
+        "description": "The last item successfully retrieved",
+        "schema": {
+            "type": "string"
+        },
+        "required": false,
+        "example": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+    },
+    "accountProvisioning_testHeader": {
+        "name": "T-Test-Account",
+        "in": "header",
+        "description": "**OPTIONAL** Custom request header provided ONLY for a test account",
+        "schema": {
+            "type": "string"
+        },
+        "required": false
+    },
+    "IPAddressManagement_poolid": {
+        "name": "poolid",
+        "in": "path",
+        "required": true,
+        "schema": {
+            "type": "string"
+        },
+        "description": "Specifies the unique ID for an IP Pool."
+    },
+    "IPAddressManagement_path_ip": {
+        "name": "ip",
+        "in": "path",
+        "schema": {
+            "type": "string"
+        },
+        "description": "The `ip` path parameter specifies an IP address to make the request against.",
+        "required": true
+    },
+    "IPAddressManagement_limit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "integer"
+        },
+        "description": "Specifies the number of results to be returned by the API. This parameter can be used in combination with the `before_key` or `after_key` parameters to iterate through paginated results."
+    },
+    "IPAddressManagement_after_key": {
+        "name": "after_key",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "integer"
+        },
+        "description": "Specifies which items to be returned by the API. When the `after_key` is specified, the API will return items beginning from the first item after the item specified. This parameter can be used in combination with `limit` to iterate through paginated results."
+    },
+    "IPAddressManagement_query_ip": {
+        "name": "ip",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "string"
+        },
+        "description": "Specifices an IP address. The `ip` query parameter can be used to filter results by IP address."
+    },
+    "IPAddressManagement_before_key": {
+        "name": "before_key",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "string"
+        },
+        "description": "Specifies which items to be returned by the API. When the `before_key` is specified, the API will return items beginning from the first item before the item specified. This parameter can be used in combination with `limit` to iterate through paginated results."
+    },
+    "IPAddressManagement_is_leased": {
+        "name": "is_leased",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "boolean"
+        },
+        "description": "Indicates whether an IP address is leased from Twilio SendGrid. If `false`, the IP address is not a Twilio SendGrid IP; it is a customer's own IP that has been added to their Twilio SendGrid account."
+    },
+    "IPAddressManagement_is_enabled": {
+        "name": "is_enabled",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "boolean"
+        },
+        "description": "Indicates if the IP address is billed and able to send email. This parameter applies to non-Twilio SendGrid APIs that been added to your Twilio SendGrid account. This parameter's value is `null` for Twilio SendGrid IP addresses."
+    },
+    "IPAddressManagement_is_parent_assigned": {
+        "name": "is_parent_assigned",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "boolean"
+        },
+        "description": "Indicates if a parent on the account is able to send email from the IP address. When set to `true`, only enabled IP addresses will be returned."
+    },
+    "IPAddressManagement_pool": {
+        "name": "pool",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "string"
+        },
+        "description": "Specifies the unique ID for an IP Pool. When included, only IP addresses belonging to the specified Pool will be returned."
+    },
+    "IPAddressManagement_start_added_at": {
+        "name": "start_added_at",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "integer"
+        },
+        "description": "The `start_added_at` and `end_added_at` parameters are used to set a time window. IP addresses that were added to your account in the specified time window will be returned. The `start_added_at` parameter sets the beginning of the time window."
+    },
+    "IPAddressManagement_end_added_at": {
+        "name": "end_added_at",
+        "in": "query",
+        "required": false,
+        "schema": {
+            "type": "integer"
+        },
+        "description": "The `start_added_at` and `end_added_at` parameters are used to set a time window. IP addresses that were added to your account in the specified time window will be returned. The `start_added_at` parameter sets the end of the time window."
+    },
+    "EventWebhook_RequestID": {
+        "name": "id",
+        "in": "path",
+        "description": "The ID of the Event Webhook you want to retrieve.",
+        "required": true,
+        "schema": {
+            "type": "string"
+        },
+        "examples": {
+            "ID Example": {
+                "value": "77d4a5da-7015-11ed-a1eb-0242ac120002"
+            }
         }
     }
 }

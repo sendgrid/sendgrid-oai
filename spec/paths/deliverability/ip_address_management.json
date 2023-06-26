@@ -1,0 +1,1784 @@
+{
+    "pools": {
+        "parameters": [],
+        "get": {
+            "summary": "GET all IP Pools that have Associated IPs",
+            "operationId": "get-v3-send_ips-pools",
+            "description": "This operation returns a list of your IP Pools and a sample of each Pools' associated IP addresses.\n\nA maximum of 10 IPs will be returned per IP Pool by default. To retrieve additional IP addresses associated with a Pool, use the \"Get IPs Assigned to an IP Pool\" operation. Each user may have a maximum of 100 IP Pools.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_limit"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_after_key"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_query_ip"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "The name of the IP Pool."
+                                                },
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "The unique ID of the IP Pool."
+                                                },
+                                                "ips_preview": {
+                                                    "type": "array",
+                                                    "maxItems": 10,
+                                                    "description": "A sample list of IP addresses associated with the IP Pool. The sample is limited to 10 results.",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "total_ip_count": {
+                                                    "type": "integer",
+                                                    "description": "The total number of IP addresses in the IP Pool. An IP Pool can have a maximum of 100 associated IP addresses."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "_metadata": {
+                                        "type": "object",
+                                        "properties": {
+                                            "next_params": {
+                                                "type": "object",
+                                                "description": "A collection of fields that can be used to work the endpoint.",
+                                                "properties": {
+                                                    "after_key": {
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "Specifies which items to be returned by the API. When the `after_key` is specified, the API will return items beginning from the first item after the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `after_key` cannot be used in combination with the `before_key` parameter."
+                                                    },
+                                                    "ip": {
+                                                        "type": "string",
+                                                        "description": "The IP address specified in the request. This parameter will be returned only if it was specified in the request."
+                                                    },
+                                                    "limit": {
+                                                        "type": "string",
+                                                        "description": "The `limit` specified in the request. This parameter will be included only if it was specified in the request. This is not the default limit enforced by the API."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "name": "transactional_pool",
+                                                "id": "12345",
+                                                "ips_preview": [
+                                                    "127.0.0.1",
+                                                    "127.0.0.2"
+                                                ],
+                                                "total_ip_count": 2
+                                            },
+                                            {
+                                                "name": "marketing_pool",
+                                                "id": "67890",
+                                                "ips_preview": [
+                                                    "127.0.0.3",
+                                                    "127.0.0.4",
+                                                    "127.0.0.5"
+                                                ],
+                                                "total_ip_count": 3
+                                            }
+                                        ],
+                                        "_metadata": {
+                                            "next_params": {
+                                                "after_key": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema",
+                                "x-examples": {
+                                    "example-1": {
+                                        "errors": [
+                                            {
+                                                "field": "after_key",
+                                                "message": "must be a numeric value"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "400 limit error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Limit_ValueError"
+                                },
+                                "400 after_key type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_AfterKey_TypeError"
+                                },
+                                "400 after_key value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_AfterKey_ValueError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            }
+        },
+        "post": {
+            "summary": "Create an IP Pool with a Name and IP Assignments",
+            "operationId": "post-v3-send_ips-pools",
+            "responses": {
+                "201": {
+                    "description": "Created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name assigned to the IP Pool."
+                                    },
+                                    "id": {
+                                        "type": "string",
+                                        "description": "The unique ID of the IP Pool."
+                                    },
+                                    "ips": {
+                                        "type": "array",
+                                        "description": "An array of IP addresses assigned to the IP Pool. All assignments must succeed.",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "201": {
+                                    "value": {
+                                        "name": "transactional_pool",
+                                        "id": "12345",
+                                        "ips": [
+                                            "127.0.0.1",
+                                            "127.0.0.2"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "JSON parse error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_JSONParseError"
+                                },
+                                "name not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_MissingError"
+                                },
+                                "name begins with dot or space": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_DotSpaceError"
+                                },
+                                "name invalid length": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_LengthError"
+                                },
+                                "name already exists": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_ExistsError"
+                                },
+                                "pool limit reached": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Pool_LimitError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation will create a named IP Pool and associate specified IP addresses with the newly created Pool. This operation requires all IP assignments to succeed. If any IP assignments fail, this endpoint will return an error and the Pool will not be created.\n\nEach IP Pool may have a maximum of 100 assigned IP addresses.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name to assign to the IP Pool. An IP Pool name cannot begin with a space or period."
+                                },
+                                "ips": {
+                                    "type": "array",
+                                    "description": "An array of IP addresses to assign to the IP Pool. All assignments must succeed.",
+                                    "maxItems": 100,
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "name": "transactional_pool",
+                                    "ips": [
+                                        "127.0.0.1",
+                                        "127.0.0.2"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "pools_{poolid}": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_poolid"
+            }
+        ],
+        "get": {
+            "summary": "Get Details for an IP Pool",
+            "operationId": "get-v3-send_ips-pools-poolid",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the IP Pool."
+                                    },
+                                    "id": {
+                                        "type": "string",
+                                        "description": "The unique ID of the IP Pool."
+                                    },
+                                    "ips_preview": {
+                                        "type": "array",
+                                        "description": "A sample list of IP addresses associated with the IP Pool. The sample is limited to 10 results.",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "total_ip_count": {
+                                        "description": "The total number of IP addresses in the IP Pool. An IP Pool can have a maximum of 100 associated IP addresses.",
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "name": "marketing_pool",
+                                        "id": "12345",
+                                        "ips_preview": [
+                                            "127.0.0.1",
+                                            "127.0.0.2"
+                                        ],
+                                        "total_ip_count": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "400 poolid type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_TypeError"
+                                },
+                                "400 poolid value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_ValueError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation will return the details for a specified IP Pool, including the Pool's name, ID, a sample list of the IPs associated with the Pool, and the total number of IPs belonging to the Pool.\n\nA maximum of 10 IPs will be returned per IP Pool by default. To retrieve additional IP addresses associated with a Pool, use the \"Get IPs Assigned to an IP Pool\" operation."
+        },
+        "put": {
+            "summary": "Update an IP Pool Name",
+            "operationId": "put-v3-send_ips-pools-poolid",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name assigned to the IP Pool."
+                                    },
+                                    "id": {
+                                        "type": "string",
+                                        "description": "The unique ID of the IP Pool."
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "name": "marketing_pool",
+                                        "id": "12345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "JSON parse error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_JSONParseError"
+                                },
+                                "name not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_MissingError"
+                                },
+                                "name begins with dot or space": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_DotSpaceError"
+                                },
+                                "name invalid length": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_LengthError"
+                                },
+                                "poolid type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_TypeError"
+                                },
+                                "poolid not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_MissingError"
+                                },
+                                "name already exists": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Name_ExistsError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation will rename an IP Pool. An IP Pool name cannot start with a dot/period (.) or space.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name to assign to the IP Pool. An IP Pool name cannot begin with a space or period."
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "name": "marketing_pool"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete IP Pool",
+            "operationId": "delete-v3-send_ips-pools-poolid",
+            "responses": {
+                "204": {
+                    "description": "No Content"
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "poolid type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_TypeError"
+                                },
+                                "poolid not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_MissingError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation deletes an IP Pool and unassigns all IP addresses associated with the Pool. IP addresses associated with the deleted Pool will remain in your account."
+        }
+    },
+    "pools_{poolid}_ips": {
+        "get": {
+            "summary": "Get IPs Assigned to an IP Pool",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "ip": {
+                                                    "type": "string",
+                                                    "description": "An IP address assigned to the IP Pool."
+                                                },
+                                                "pools": {
+                                                    "type": "array",
+                                                    "description": "IP Pools the IP address is assigned to.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "The unique ID of the IP Pool."
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "description": "The name of the IP Pool."
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "_metadata": {
+                                        "type": "object",
+                                        "properties": {
+                                            "next_params": {
+                                                "type": "object",
+                                                "description": "A collection of fields that can be used to work the endpoint.",
+                                                "properties": {
+                                                    "after_key": {
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "Specifies which items to be returned by the API. When the `after_key` is specified, the API will return items beginning from the first item after the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `after_key` cannot be used in combination with the `before_key` parameter."
+                                                    },
+                                                    "limit": {
+                                                        "type": "string",
+                                                        "description": "The `limit` specified in the request. This parameter will be included only if it was specified in the request. This is not the default limit enforced by the API."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "ip": "127.0.0.1",
+                                                "pools": [
+                                                    {
+                                                        "id": "12345",
+                                                        "name": "transactional_pool"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "_metadata": {
+                                            "next_params": {
+                                                "after_key": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "400 poolid type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_TypeError"
+                                },
+                                "400 poolid value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_ValueError"
+                                },
+                                "400 limit value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Limit_ValueError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "operationId": "get-v3-send_ips",
+            "description": "This operation returns the IP Pools that the specified IP address is assigned to.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_limit"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_after_key"
+                }
+            ]
+        },
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_poolid"
+            }
+        ]
+    },
+    "pools_{poolid}_ips_batchAdd": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_poolid"
+            }
+        ],
+        "post": {
+            "summary": "Add a Batch of IPs to an IP Pool",
+            "operationId": "post-v3-send_ips-pools-poolid-ips:batchAdd",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the IP Pool."
+                                    },
+                                    "id": {
+                                        "type": "string",
+                                        "description": "The unique ID of the IP Pool."
+                                    },
+                                    "ips": {
+                                        "type": "array",
+                                        "description": "An array of IP addresses assigned to the IP Pool.",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "name": "marketing_pool",
+                                        "id": "12345",
+                                        "ips": [
+                                            "127.0.0.1",
+                                            "127.0.0.2",
+                                            "127.0.0.3",
+                                            "127.0.0.4"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "poolid type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_TypeError"
+                                },
+                                "poolid not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_MissingError"
+                                },
+                                "ips not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IPs_MIssingError"
+                                },
+                                "ips invalid length": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IPs_LengthError"
+                                },
+                                "ips unassigned": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IPs_AssignmentError"
+                                },
+                                "ips limit exceeded": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IPs_LimitError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation appends a batch of IPs to an IP Pool. This operation requires all IP assignments to succeed. If any IP assignments fail, this endpoint will return an error.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ips": {
+                                    "type": "array",
+                                    "description": "An array of IP addresses to assign to the specified IP Pool. All assignments must succeed.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "ips"
+                            ]
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "ips": [
+                                        "127.0.0.1",
+                                        "127.0.0.2",
+                                        "127.0.0.3",
+                                        "127.0.0.4"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "pools_{poolid}_ips_batchDelete": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_poolid"
+            }
+        ],
+        "post": {
+            "summary": "Delete a Batch of IPs from an IP Pool",
+            "operationId": "post-v3-send_ips-pools-poolid-ips:batchDelete",
+            "responses": {
+                "204": {
+                    "description": "No Content"
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "poolid type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_TypeError"
+                                },
+                                "poolid not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_PoolID_MissingError"
+                                },
+                                "ips not found": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "string",
+                                                "message": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "JSON parse error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_JSONParseError"
+                                },
+                                "ips invalid length": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IPs_LengthError"
+                                },
+                                "ips not found in pool": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IPs_IPNotInPoolError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation removes a batch of IPs from an IP Pool. All IPs associated with the Pool will be unassigned from the deleted Pool. However, this operation does not remove the IPs from your account.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ips": {
+                                    "type": "array",
+                                    "description": "An array of IP addresses to remove from the specified IP Pool.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "ips"
+                            ]
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "ips": [
+                                        "127.0.0.1",
+                                        "127.0.0.2",
+                                        "127.0.0.3",
+                                        "127.0.0.4"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "ips_{ip}_subusers": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_path_ip"
+            }
+        ],
+        "get": {
+            "summary": "Get a List of Subusers Assigned to an IP",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "description": "An array of Subuser IDs that have been assigned the specified IP address.",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "_metadata": {
+                                        "type": "object",
+                                        "properties": {
+                                            "next_params": {
+                                                "type": "object",
+                                                "description": "A collection of fields that can be used to work the endpoint.",
+                                                "properties": {
+                                                    "after_key": {
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "Specifies which items to be returned by the API. When the `after_key` is specified, the API will return items beginning from the first item after the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `after_key` cannot be used in combination with the `before_key` parameter."
+                                                    },
+                                                    "limit": {
+                                                        "type": "string",
+                                                        "description": "The `limit` specified in the request. This parameter will be included only if it was specified in the request. This is not the default limit enforced by the API."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "result": [
+                                            "12345",
+                                            "67890"
+                                        ],
+                                        "_metadata": {
+                                            "next_params": {
+                                                "after_key": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "invalid ip": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_InvalidIPError"
+                                },
+                                "limit value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Limit_ValueError"
+                                },
+                                "after_key type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_AfterKey_TypeError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "operationId": "get-v3-send_ips-ips-ip-subusers",
+            "description": "This operation returns a list of Subuser IDs that have been assigned the specified IP address. To retrieve more information about the returned Subusers, use the [Subusers API](https://docs.sendgrid.com/api-reference/subusers-api/list-all-subusers).\n\nYou can use the `after_key` and `limit` query parameters to iterate through paginated results. The maximum limit is 100, meaning you may retrieve up to 100 Subusers per request. If the `after_key` in the API response is not null, there are more Subusers assigned to the IP address than those returned in the request. You can repeat the request with the non-null `after_key` value and the same limit to retrieve the next group of Subusers.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_after_key"
+                },
+                {
+                    "schema": {
+                        "type": "integer",
+                        "maximum": 100
+                    },
+                    "in": "query",
+                    "name": "limit",
+                    "description": "Specifies the number of results to be returned by the API. This parameter can be used in combination with the `after_key` parameters to iterate through paginated results. The maximum limit is 100."
+                }
+            ]
+        }
+    },
+    "ips_{ip}_subusers_batchAdd": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_path_ip"
+            }
+        ],
+        "post": {
+            "summary": "Assign a Batch of Subusers to an IP",
+            "operationId": "post-v3-send_ips-ips-ip-subusers:batchAdd",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ip": {
+                                        "type": "string",
+                                        "description": "The IP address the Subusers were assigned to."
+                                    },
+                                    "subusers": {
+                                        "type": "array",
+                                        "description": "An array of Subuser IDs that were assigned to the specified IP address.",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "ip": "127.0.0.1",
+                                        "subusers": [
+                                            "12345",
+                                            "67890"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "invalid ip address": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_InvalidIPError"
+                                },
+                                "JSON parse error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_JSONParseError"
+                                },
+                                "subusers empty": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_EmptyError"
+                                },
+                                "subuser caller id error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_CallerIDError"
+                                },
+                                "subusers unverified": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_UnverifiedError"
+                                },
+                                "subusers limit exceeded": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_LimitError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation appends a batch of Subusers to a specified IP address. This endpoint requires all Subuser assignments to succeed. If a Subuser assignment fails, this endpoint will return an error.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "subusers": {
+                                    "type": "array",
+                                    "description": "An array of Subuser IDs to be assigned to the specified IP address. All Subuser assignments must succeed.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "subusers"
+                            ]
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "subusers": [
+                                        "12345",
+                                        "67890"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "ips_{ip}_subusers_batchDelete": {
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_path_ip"
+            }
+        ],
+        "post": {
+            "summary": "Delete a Batch of Subusers from an IP",
+            "operationId": "post-v3-send_ips-ips-ip-subusers:batchDelete",
+            "responses": {
+                "204": {
+                    "description": "No Content"
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "invalid ip address": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_InvalidIPError"
+                                },
+                                "JSON parse error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_JSONParseError"
+                                },
+                                "subusers empty": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_EmptyError"
+                                },
+                                "subusers limit exceeded": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_LimitError"
+                                },
+                                "subusers caller id error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_CallerIDError"
+                                },
+                                "subusers unverified": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_UnverifiedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation removes a batch of Subusers from a specified IP address.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "subusers": {
+                                    "type": "array",
+                                    "description": "An array of Subuser IDs to be removed from the specified IP address.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "subusers"
+                            ]
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "subusers": [
+                                        "12345",
+                                        "67890"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "ips": {
+        "get": {
+            "summary": "Get a List of all IP Addresses on your Account",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "result": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "ip": {
+                                                    "type": "string",
+                                                    "description": "An IP address on your account."
+                                                },
+                                                "pools": {
+                                                    "type": "array",
+                                                    "description": "An array of IP Pools the IP address is assigned to.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "description": "The name of the IP Pool."
+                                                            },
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "The unique ID of the IP Pool."
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "is_auto_warmup": {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address). This parameter is returned only if the IP address is set to automatically warm up."
+                                                },
+                                                "is_parent_assigned": {
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Indicates if a parent on the account is able to send email from the IP address. This parameter will be returned only if the request was made by the parent account."
+                                                },
+                                                "updated_at": {
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ],
+                                                    "description": "A timestamp indicating when the IP was last updated."
+                                                },
+                                                "is_enabled": {
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Indicates if the IP address is billed and able to send email. This parameter applies to non-Twilio SendGrid APIs that been added to your Twilio SendGrid account. This parameter's value is `null` for Twilio SendGrid IP addresses."
+                                                },
+                                                "is_leased": {
+                                                    "type": "boolean",
+                                                    "description": "Indicates whether an IP address is leased from Twilio SendGrid. If `false`, the IP address is not a Twilio SendGrid IP; it is a customer's own IP that has been added to their Twilio SendGrid account."
+                                                },
+                                                "added_at": {
+                                                    "type": "integer",
+                                                    "description": "A timestamp representing when the IP address was added to your account."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "_metadata": {
+                                        "type": "object",
+                                        "properties": {
+                                            "after_key": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Specifies which items to be returned by the API. When the `after_key` is specified, the API will return items beginning from the first item after the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `after_key` cannot be used in combination with the `before_key` parameter."
+                                            },
+                                            "before_key": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Specifies which items to be returned by the API. When the `before_key` is specified, the API will return items beginning from the first item before the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `before_key` cannot be used in combination with the `after_key` parameter."
+                                            },
+                                            "ip": {
+                                                "type": "string",
+                                                "description": "The IP address specified in the request with the `ip` query parameter. This parameter is returned only when an IP is included in the request."
+                                            },
+                                            "is_leased": {
+                                                "type": "boolean",
+                                                "description": "Indicates whether an IP address is leased from Twilio SendGrid. If `false`, the IP address is not a Twilio SendGrid IP; it is a customer's own IP that has been added to their Twilio SendGrid account. This parameter is returned only if the IP address is leased."
+                                            },
+                                            "is_enabled": {
+                                                "type": "boolean",
+                                                "description": "Indicates if the IP address is billed and able to send email. This parameter applies to non-Twilio SendGrid APIs that been added to your Twilio SendGrid account. This parameter's value is `null` for Twilio SendGrid IP addresses. This parameter is returned only if the IP address is enabled."
+                                            },
+                                            "is_parent_assigned": {
+                                                "type": "boolean",
+                                                "description": "Indicates if a parent on the account is able to send email from the IP address. This parameter is returned only if the IP address is parent assigned."
+                                            },
+                                            "pool": {
+                                                "type": "string",
+                                                "description": "The IP Pool ID specified in the request with the `pool` query parameter. This paramerter is returned only when an IP Pool is included in the request."
+                                            },
+                                            "start_added_at": {
+                                                "type": "string",
+                                                "description": "The beginning of the time window specified in the request with the `start_added_at` query parameter. This parameter is returned only when the `start_added_at` parameter is included in the request."
+                                            },
+                                            "end_added_at": {
+                                                "type": "string",
+                                                "description": "The end of the time window specified in the request with the `end_added_at` query parameter. This parameter is returned only when the `end_added_at` parameter is included in the request."
+                                            },
+                                            "limit": {
+                                                "type": "string",
+                                                "description": "The number of items returned in the request. This parameter is returned only when a `limit` is set using the `limit` query parameter in the request."
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "result": [
+                                            {
+                                                "ip": "127.0.0.1",
+                                                "pools": [
+                                                    {
+                                                        "name": "marketing_pool",
+                                                        "id": "12345"
+                                                    }
+                                                ],
+                                                "is_auto_warmup": true,
+                                                "is_parent_assigned": true,
+                                                "updated_at": null,
+                                                "is_enabled": true,
+                                                "is_leased": true,
+                                                "added_at": 1664390835
+                                            }
+                                        ],
+                                        "_metadata": {
+                                            "after_key": null,
+                                            "before_key": null,
+                                            "ip": "127.0.0.1",
+                                            "is_leased": true,
+                                            "is_enabled": true,
+                                            "is_parent_assigned": true,
+                                            "pool": "marketing_pool",
+                                            "start_added_at": "1664390835",
+                                            "end_added_at": "1664390835"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "limit length error": {
+                                    "value": {
+                                        "errors": [
+                                            {
+                                                "field": "limit",
+                                                "message": "should be > 0 and ≤ 5000"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "pool not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Pool_MissingError"
+                                },
+                                "pool type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Pool_TypeError"
+                                },
+                                "is_parent_assigned subuser error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IsParentAssigned_SubuserError"
+                                },
+                                "is_parent_assigned value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IsParentAssigned_ValueError"
+                                },
+                                "is_enabled value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IsEnabled_ValueError"
+                                },
+                                "is_leased value error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IsLeased_ValueError"
+                                },
+                                "start_added_at type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_StartAddedAt_TypeError"
+                                },
+                                "end_added_at type error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_EndAddedAt_TypeError"
+                                },
+                                "pool parent_assigned": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Pool_IsParentAssignedError"
+                                },
+                                "after_key invalid ip": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_AfterKey_InvalidIPError"
+                                },
+                                "after_key and before_key included": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_AfterKey_BeforeKey_Error"
+                                },
+                                "before_key invalid ip": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_BeforeKey_InvalidIPError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "operationId": "get-v3-send_ips-ips",
+            "description": "This operation returns a list of all IP addresses associated with your account. A sample of IP details is returned with each IP, including which Pools the IP is associated with, whether the IP is set to warm up automatically, and when the IP was last updated.\n\n### Limitations\n\nThe `is_parent_assigned` parameter and `pool` parameter cannot be used at the same time. By definition, an IP cannot be assigned to a Pool if it is not first enabled. You can use either the `before_key` or `after_key` in combination with the `limit` parameter to iterate through paginated results but not both.",
+            "parameters": [
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_query_ip"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_limit"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_after_key"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_before_key"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_is_leased"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_is_enabled"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_is_parent_assigned"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_pool"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_start_added_at"
+                },
+                {
+                    "$ref": "../../components/parameters.json#/IPAddressManagement_end_added_at"
+                }
+            ]
+        },
+        "post": {
+            "summary": "Add a Twilio SendGrid IP Address",
+            "operationId": "post-v3-send_ips-ips",
+            "responses": {
+                "201": {
+                    "description": "Created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ip": {
+                                        "type": "string",
+                                        "description": "The IP address that was added to your account."
+                                    },
+                                    "is_auto_warmup": {
+                                        "type": "boolean",
+                                        "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address).  This parameter is returned only if the IP address is set to automatically warm up."
+                                    },
+                                    "is_parent_assigned": {
+                                        "type": "boolean",
+                                        "description": "Indicates if a parent on the account is able to send email from the IP address."
+                                    },
+                                    "subusers": {
+                                        "type": "array",
+                                        "description": "An array of Subuser IDs the IP address was assigned to.",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "201": {
+                                    "value": {
+                                        "ip": "127.0.0.1",
+                                        "is_auto_warmup": true,
+                                        "is_parent_assigned": true,
+                                        "subusers": [
+                                            "12345"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "JSON parse error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_JSONParseError"
+                                },
+                                "no ips remaining": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IP_NoRemainingError"
+                                },
+                                "is_auto_warmup not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IsAutoWarmup_MissingError"
+                                },
+                                "is_parent_assigned not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IsParentAssigned_MissingError"
+                                },
+                                "subusers unverified": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_UnverifiedError"
+                                },
+                                "subusers limit exceeded": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_LimitError"
+                                },
+                                "subusers caller id error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_Subusers_CallerIDError"
+                                },
+                                "subusers is_auto_warmup error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IsAutoWarmup_SubusersError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation adds a Twilio SendGrid IP address to your account. You can also assign up to 100 Subusers to the IP address at creation.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "is_auto_warmup": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address)."
+                                },
+                                "is_parent_assigned": {
+                                    "type": "boolean",
+                                    "description": "Indicates if a parent on the account is able to send email from the IP address."
+                                },
+                                "subusers": {
+                                    "type": "array",
+                                    "maxItems": 100,
+                                    "description": "An array of Subuser IDs the IP address will be assigned to.",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "is_auto_warmup",
+                                "is_parent_assigned"
+                            ]
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "is_auto_warmup": true,
+                                    "is_parent_assigned": true,
+                                    "subusers": [
+                                        "12345"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "ips_{ip}": {
+        "get": {
+            "summary": "Get Details for an IP Address",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ip": {
+                                        "type": "string",
+                                        "description": "The IP address specified in the request."
+                                    },
+                                    "is_parent_assigned": {
+                                        "type": "boolean",
+                                        "description": "Indicates if a parent on the account is able to send email from the IP address. This parameter is returned only if the IP address is parent assigned."
+                                    },
+                                    "is_auto_warmup": {
+                                        "type": "boolean",
+                                        "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address). This parameter is returned only if the IP address is set to automatically warm up."
+                                    },
+                                    "pools": {
+                                        "type": "array",
+                                        "description": "An array of IP Pools the IP address is assigned to.",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "The ID of the IP Pool."
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "The name of the IP Pool."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "added_at": {
+                                        "type": "integer",
+                                        "description": "A timestamp indicating when the IP address was added to your account."
+                                    },
+                                    "updated_at": {
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "description": "A timestamp indicating when the IP was last updated."
+                                    },
+                                    "is_enabled": {
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Indicates if the IP address is billed and able to send email. This parameter applies to non-Twilio SendGrid APIs that been added to your Twilio SendGrid account. This parameter's value is `null` for Twilio SendGrid IP addresses."
+                                    },
+                                    "is_leased": {
+                                        "type": "boolean",
+                                        "description": "Indicates whether an IP address is leased from Twilio SendGrid. If `false`, the IP address is not a Twilio SendGrid IP; it is a customer's own IP that has been added to their Twilio SendGrid account."
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "ip": "127.0.0.1",
+                                        "is_parent_assigned": true,
+                                        "is_auto_warmup": true,
+                                        "pools": [
+                                            {
+                                                "id": "12345",
+                                                "name": "transactional_pool"
+                                            }
+                                        ],
+                                        "added_at": 1664390835,
+                                        "updated_at": null,
+                                        "is_enabled": true,
+                                        "is_leased": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "ip invalid": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IP_InvalidError"
+                                },
+                                "ip not found": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IP_MIssingError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "operationId": "get-v3-send_ips-ips-ip",
+            "description": "This operation returns details for a specified IP address. Details include whether the IP is assigned to a parent account, set to warm up automatically, which Pools the IP is associated with, when the IP was added and modified, whether the IP is leased, and whether the IP is enabled. Note that this operation will not return Subuser information associated with the IP. To retrieve Subuser information, use the \"Get a List of Subusers Assigned to an IP\" endpoint."
+        },
+        "parameters": [
+            {
+                "$ref": "../../components/parameters.json#/IPAddressManagement_path_ip"
+            }
+        ],
+        "patch": {
+            "summary": "Update Details for an IP Address",
+            "operationId": "patch-v3-send_ips-ips-ip",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ip": {
+                                        "type": "string",
+                                        "description": "The IP address that was updated."
+                                    },
+                                    "is_auto_warmup": {
+                                        "type": "boolean",
+                                        "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address). This parameter is returned only if the IP address is set to automatically warm up."
+                                    },
+                                    "is_parent_assigned": {
+                                        "type": "boolean",
+                                        "description": "Indicates if a parent on the account is able to send email from the IP address. This parameter is returned only if the IP address is parent assigned."
+                                    },
+                                    "is_enabled": {
+                                        "type": "boolean",
+                                        "description": "An array of Subuser IDs the IP address was assigned to. This parameter is returned only if the IP address is enabled."
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "200": {
+                                    "value": {
+                                        "ip": "127.0.0.1",
+                                        "is_auto_warmup": true,
+                                        "is_parent_assigned": true,
+                                        "is_enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../../components/schemas.json#/IPAddressManagementAPIErrorsSchema"
+                            },
+                            "examples": {
+                                "invalid ip address": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IP_InvalidError"
+                                },
+                                "ip unverified ownership": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_IP_OwnershipError"
+                                },
+                                "JSON parse error": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_JSONParseError"
+                                },
+                                "missing required field": {
+                                    "$ref": "../../components/examples.json#/IPAddressManagementAPI400_MissingRequiredFieldError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "../../components/responses.json#/IPAddressManagementAPI401"
+                },
+                "500": {
+                    "$ref": "../../components/responses.json#/IPAddressManagement500"
+                }
+            },
+            "description": "This operation updates an IP address's settings, including whether the IP is set to warm up automatically, if the IP is  assigned by a parent account, and whether the IP is enabled or disabled. The request body must include at least one of the `is_auto_warmup`, `is_parent_assigned`, or `is_enabled` fields.",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "is_auto_warmup": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address)."
+                                },
+                                "is_parent_assigned": {
+                                    "type": "boolean",
+                                    "description": "Indicates if a parent on the account is able to send email from the IP address."
+                                },
+                                "is_enabled": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the IP address is billed and able to send email. This parameter applies to non-Twilio SendGrid APIs that been added to your Twilio SendGrid account. This parameter's value is `null` for Twilio SendGrid IP addresses."
+                                }
+                            }
+                        },
+                        "examples": {
+                            "example-1": {
+                                "value": {
+                                    "is_auto_warmup": true,
+                                    "is_parent_assigned": true,
+                                    "is_enabled": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

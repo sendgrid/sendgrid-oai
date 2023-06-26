@@ -41,6 +41,14 @@
                     }
                 },
                 {
+                    "name": "email",
+                    "in": "query",
+                    "description": "This parameter allows you to filter results by email address. Only invalid addresses matching an address passed in this parameter will be returned.",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
                     "$ref": "../../components/parameters.json#/trait_onBehalfOfSubuser_on-behalf-of"
                 }
             ],

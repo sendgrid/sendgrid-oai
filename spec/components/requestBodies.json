@@ -8,6 +8,16 @@
             }
         }
     },
+    "segment_refresh_request_body": {
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "./schemas.json#/segment_refresh_request"
+                }
+            }
+        }
+    },
     "design-duplicate-input": {
         "content": {
             "application/json": {
@@ -31,15 +41,6 @@
             "application/json": {
                 "schema": {
                     "$ref": "./schemas.json#/create-integration-request"
-                }
-            }
-        }
-    },
-    "monitor": {
-        "content": {
-            "application/json": {
-                "schema": {
-                    "$ref": "./schemas.json#/monitor"
                 }
             }
         }
