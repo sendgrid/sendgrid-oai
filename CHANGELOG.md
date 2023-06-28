@@ -1,6 +1,18 @@
 # Change Log
 All the notable changes to this project will be documented in this file.
 
+[2023-06-28] Version 1.9.1
+--------------------------
+**Library - Chore**
+- [PR #119](https://github.com/sendgrid/sendgrid-oai/pull/119): sync sendgrid-oai. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+**Library - Docs**
+- [PR #115](https://github.com/sendgrid/sendgrid-oai/pull/115): add suppression bounces classifications, segmenting contacts out of beta, formatting, typos. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+**Library - Test**
+- [PR #113](https://github.com/sendgrid/sendgrid-oai/pull/113): Adding misc as PR type. Thanks to [@rakatyal](https://github.com/rakatyal)!
+
+
 [2022-03-09] Version 1.9.0
 --------------------------
 **Library - Feature**
