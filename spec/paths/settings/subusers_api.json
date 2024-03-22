@@ -22,7 +22,9 @@
                     "description": "The number of results you would like to get in each request.",
                     "schema": {
                         "type": "integer"
-                    }
+                    },
+                    "default": 100,
+                    "maximum": 1000
                 },
                 {
                     "name": "offset",
@@ -30,6 +32,27 @@
                     "description": "The number of subusers to skip.",
                     "schema": {
                         "type": "integer"
+                    }
+                },
+                {
+                    "name": "region",
+                    "in": "query",
+                    "description": "The region that you would like to filter by.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "enum": [
+                        "all",
+                        "eu",
+                        "global"
+                    ]
+                },
+                {
+                    "name": "include_region",
+                    "in": "query",
+                    "description": "True if you would like to include the region associated with each subuser in the response.",
+                    "schema": {
+                        "type": "boolean"
                     }
                 }
             ],
@@ -51,13 +74,15 @@
                                             "disabled": false,
                                             "email": "example@example.com",
                                             "id": 1234,
-                                            "username": "example_subuser"
+                                            "username": "example_subuser",
+                                            "region": "eu"
                                         },
                                         {
                                             "disabled": false,
                                             "email": "example2@example.com",
                                             "id": 1234,
-                                            "username": "example_subuser2"
+                                            "username": "example_subuser2",
+                                            "region": "global"
                                         }
                                     ]
                                 }
@@ -123,10 +148,23 @@
                                 "ips": {
                                     "type": "array",
                                     "description": "The IP addresses that should be assigned to this subuser.",
+                                    "maxItems": 100,
                                     "items": {
                                         "type": "string",
                                         "format": "ipv4"
                                     }
+                                },
+                                "region": {
+                                    "type": "string",
+                                    "description": "The region that you would like to pin this subuser to. This field is optional, if not provided the new subuser will be pinned to the global region.",
+                                    "enum": [
+                                        "eu",
+                                        "global"
+                                    ]
+                                },
+                                "include_region": {
+                                    "type": "boolean",
+                                    "description": "True if you would like to include the region associated with the subuser in the response."
                                 }
                             },
                             "required": [
@@ -142,7 +180,9 @@
                                 "ips": [
                                     "1.1.1.1",
                                     "2.2.2.2"
-                                ]
+                                ],
+                                "region": "eu",
+                                "include_region": true
                             }
                         }
                     }
@@ -166,7 +206,8 @@
                                         "authorization_token": "",
                                         "credit_allocation": {
                                             "type": "unlimited"
-                                        }
+                                        },
+                                        "region": "eu"
                                     }
                                 }
                             }
@@ -531,6 +572,7 @@
                         "schema": {
                             "type": "array",
                             "description": "The IP addresses you would like to assign to the subuser.",
+                            "maxItems": 100,
                             "items": {
                                 "type": "string",
                                 "format": "ipv4"

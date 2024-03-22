@@ -464,6 +464,14 @@
                 "type": "string",
                 "description": "The email address to contact this subuser.",
                 "format": "email"
+            },
+            "region": {
+                "type": "string",
+                "description": "The region that this subuser is pinned to.",
+                "enum": [
+                    "global",
+                    "eu"
+                ]
             }
         },
         "required": [
@@ -476,7 +484,8 @@
             "disabled": false,
             "email": "example@example.com",
             "id": 1234,
-            "username": "example_subuser"
+            "username": "example_subuser",
+            "region": "eu"
         }
     },
     "mail_settings_address_whitelabel": {
@@ -2213,6 +2222,14 @@
                         "type": "string"
                     }
                 }
+            },
+            "region": {
+                "type": "string",
+                "description": "The region for this subuser.",
+                "enum": [
+                    "eu",
+                    "global"
+                ]
             }
         },
         "required": [
